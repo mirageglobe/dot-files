@@ -47,16 +47,15 @@ launchinit:											## loads basic init tools
 
 checktools:											## check state of machine
 	@echo ":: check tools ::"
-	command -v pip
-	command -v python
-	command -v ruby
+	command -v curl
 	command -v jq
+	command -v python
+	command -v pip
+	command -v ruby
+	command -v yarn
 	# bin - rg fx tree pstree
 	# yarn - standard prettier
 	# python - 
-	@echo ":: check package managers ::"
-	command -v curl
-	command -v ruby
 	# @echo ":: installing whalebrew ::"
 	# command -v whalebrew || curl -L "https://github.com/whalebrew/whalebrew/releases/download/0.1.0/whalebrew-$$(uname -s)-$$(uname -m)" -o /usr/local/bin/whalebrew; chmod +x /usr/local/bin/whalebrew
 	@echo ":: listapps :: note that pip (python2 will be deprecated. install as pip3) ::"
