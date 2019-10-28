@@ -47,12 +47,12 @@ launchinit:											## loads basic init tools
 
 checktools:											## check state of machine
 	@echo ":: check tools ::"
-	command -v curl
-	command -v jq
-	command -v python
-	command -v pip
-	command -v ruby
-	command -v yarn
+	command -V curl
+	command -V jq
+	command -V python
+	command -V pip
+	command -V ruby
+	command -V yarn
 	# bin - rg fx tree pstree
 	# yarn - standard prettier
 	# python - 
