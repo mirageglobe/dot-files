@@ -261,9 +261,7 @@ alias _fox="echo '
   _tree <directory>             # list 1 level tree
   _diff <file a> <file b>       # show diff between 2 or more files (use --brief for simple)
   _fzf                          # fzf load only 50 percent of screen
-  _v                            # vim
 
-  _mp3 <youtube url>            # youtube download --extract-audio --audio-format mp3
   _emo_shrug                    # emoji shrug
 
 :: notes ::
@@ -298,7 +296,6 @@ alias _nowtime="fn_jmgl_now_time;"
 alias _tree="tree -C -L 1"
 alias _diff="diff -y --color"
 alias _fzf="fzf --height=50%"
-alias _v="vim"
 
 alias _emo_shrug="echo '¯\_(ツ)_/¯'";
 
