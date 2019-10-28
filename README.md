@@ -14,3 +14,9 @@ wget -V
 # to curl the make file
 curl -D - https://raw.githubusercontent.com/mirageglobe/dot-files/master/Makefile >> Makefile
 ```
+
+
+# references
+
+ref - https://github.com/tonsky/FiraCode
+ref - https://www.nerdfonts.com/font-downloads
