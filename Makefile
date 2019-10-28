@@ -12,10 +12,7 @@
 # === targets ===
 
 # menu shortcuts targets
-MENU := launchinit
-
-# menu tools targets
-MENU := initapps initbrew initcasks initcompletion initenv initfonts initlang initpm initgames inittex maclist macupdate
+MENU := launchinit checktools inittools initenv initcompletion inittex initfonts macupdate
 
 # menu helpers targets
 MENU := now-datetime now-date now-time now-epoch version vinit vpatch vminor vmajor todo help
@@ -49,6 +46,7 @@ launchinit:											## loads basic init tools
 	open https://www.noisli.com/
 
 checktools:											## check state of machine
+	@echo ":: check tools ::"
 	command -v pip
 	command -v python
 	command -v ruby
@@ -56,6 +54,11 @@ checktools:											## check state of machine
 	# bin - rg fx tree pstree
 	# yarn - standard prettier
 	# python - 
+	@echo ":: check package managers ::"
+	command -v curl
+	command -v ruby
+	# @echo ":: installing whalebrew ::"
+	# command -v whalebrew || curl -L "https://github.com/whalebrew/whalebrew/releases/download/0.1.0/whalebrew-$$(uname -s)-$$(uname -m)" -o /usr/local/bin/whalebrew; chmod +x /usr/local/bin/whalebrew
 	@echo ":: listapps :: note that pip (python2 will be deprecated. install as pip3) ::"
 	yarn global list
 	gem list
@@ -84,23 +87,15 @@ initenv:												## ensure that environment is setup with folders/files (need
 
 initfonts:											## update/install fonts (need run once)
 	@echo ":: updating fonts ::"
-	-brew cask install \
-		font-firacode-nerd-font \
-		font-hasklig-nerd-font \
-		font-inconsolata-nerd-font \
-		font-iosevka-nerd-font \
-		font-monoid-nerd-font \
-		font-noto-nerd-font \
-		font-robotomono-nerd-font \
-		font-tinos-nerd-font \
-
-initpm:													## ensure that package managers are setup
-	# works for all os
-	@echo ":: ensure that package managers are present ::"
-	command -v curl
-	command -v ruby
-	# @echo ":: installing whalebrew ::"
-	# command -v whalebrew || curl -L "https://github.com/whalebrew/whalebrew/releases/download/0.1.0/whalebrew-$$(uname -s)-$$(uname -m)" -o /usr/local/bin/whalebrew; chmod +x /usr/local/bin/whalebrew
+	# -brew cask install \
+	# 	font-firacode-nerd-font \
+	# 	font-hasklig-nerd-font \
+	# 	font-inconsolata-nerd-font \
+	# 	font-iosevka-nerd-font \
+	# 	font-monoid-nerd-font \
+	# 	font-noto-nerd-font \
+	# 	font-robotomono-nerd-font \
+	# 	font-tinos-nerd-font \
 
 inittex:												## ensure all latex deps are installed
 	@echo ":: installing latex deps ::"
@@ -116,11 +111,9 @@ macupdate:											## update/check brew/gems/pip (sudo for gem)
 	pip install --upgrade pip														# upgrade pip self
 	pip install -U $$(pip freeze | awk -F'[/=]' '{print $$1}')
 	pip3 install -U $$(pip3 freeze | awk -F'[/=]' '{print $$1}')
-	sudo gem update
-	sudo tlmgr update --self														# update texmaker packager
-	sudo tlmgr update --all															# update texmaker packages
-	brew cleanup
-	brew cask outdated
+	gem update
+	tlmgr update --self																	# update texmaker packager
+	tlmgr update --all																	# update texmaker packages
 
 ##@ Helpers
 
