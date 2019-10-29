@@ -167,7 +167,7 @@ Plug 'tpope/vim-fugitive'                             " git in vim
 Plug 'lifepillar/vim-mucomplete'                      " enables code completion without tab; similar to supertab
 " Plug 'maralla/completor.vim'                          " yet another async code completion cool
 Plug 'sheerun/vim-polyglot'                           " syntax superfast on demand loader for over 100 languages
-Plug 'vim-vdebug/vdebug'                              " vim debugger that interfaces with xdebug
+" Plug 'vim-vdebug/vdebug'                              " vim debugger that interfaces with xdebug
 
 " Plug 'hashivim/vim-terraform'                         " enable syntax for hashicorp
 " Plug 'hashivim/vim-consul'                            " enable syntax for hashicorp
