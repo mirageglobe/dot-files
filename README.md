@@ -18,5 +18,5 @@ curl -D - https://raw.githubusercontent.com/mirageglobe/dot-files/master/Makefil
 
 # references
 
-ref - https://github.com/tonsky/FiraCode
-ref - https://www.nerdfonts.com/font-downloads
+- https://github.com/tonsky/FiraCode
+- https://www.nerdfonts.com/font-downloads
