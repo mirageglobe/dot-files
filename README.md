@@ -12,8 +12,8 @@ wget -V
 ```
 
 ```
-# to curl the make file
-curl -D - https://raw.githubusercontent.com/mirageglobe/dot-files/master/Makefile >> Makefile
+# to curl the makefile
+curl -D - https://raw.githubusercontent.com/mirageglobe/dot-files/master/Makefile > ~/Makefile
 ```
 
 # references
