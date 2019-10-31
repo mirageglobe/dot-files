@@ -1,4 +1,5 @@
 # dot-files
+
 public dot-files to make life easier
 
 # to use
@@ -14,7 +15,6 @@ wget -V
 # to curl the make file
 curl -D - https://raw.githubusercontent.com/mirageglobe/dot-files/master/Makefile >> Makefile
 ```
-
 
 # references
 
