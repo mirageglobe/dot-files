@@ -5,6 +5,7 @@
 # reference - https://www.gnu.org/software/make/manual/html_node/Standard-Targets.html
 
 # notes
+#
 # - use $$ for escaping variable
 # - use - to ignore errors (make)
 # - use @ to not print the command
