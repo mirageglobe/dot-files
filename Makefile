@@ -54,11 +54,10 @@ checktools:											## check state of machine
 	-command -V pip
 	-command -V ruby
 	-command -V yarn
-	# bin - rg fx tree pstree
+	-command -V rg | echo "checkout https://github.com/BurntSushi/ripgrep/releases/latest"
+	# bin - fx tree pstree
 	# yarn - standard prettier
 	# python - 
-	# @echo ":: installing whalebrew ::"
-	# command -v whalebrew || curl -L "https://github.com/whalebrew/whalebrew/releases/download/0.1.0/whalebrew-$$(uname -s)-$$(uname -m)" -o /usr/local/bin/whalebrew; chmod +x /usr/local/bin/whalebrew
 	@echo ":: listapps :: note that pip (python2 will be deprecated. install as pip3) ::"
 	yarn global list
 	gem list
@@ -80,9 +79,9 @@ initenv:												## ensure that environment is setup with folders/files (need
 	@echo ":: ensure environment is pristine ::"
 	@echo ":: creating vim folders and setting vimrc ::"
 	mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
-	cp dot.vimrc.template ~/.vimrc
+	# cp dot.vimrc.template ~/.vimrc
 	@echo ":: copying bashrc template ::"
-	cp ~/.bashrc ~/.bashrc.bak
+	# cp ~/.bashrc ~/.bashrc.bak
 	cp dot.mac.bashrc.template ~/.bashrc
 
 initfonts:											## update/install fonts (need run once)
@@ -143,16 +142,6 @@ vminor:													## show bumped version + minor (non breaking) - use : git ta
 
 vmajor:													## show bumped version + major (breaking) - git tag $(make vmajor)
 	@semver $$(git describe --tags --abbrev=0) -i major
-
-todo:														## basic todo for this project
-	@printf "add python lint security : bandit \n"
-	@printf "add ruby lint : use ruby -wc \n"
-	@printf "add rails lint : use traceroute \n"
-	@printf "add php lint : php -l \n"
-	@printf "add php lint : phpstan \n"
-	@printf "add php lint : php_codesniffer \n"
-	@printf "add php standard lint : php_cs-fixer \n"
-	@printf "add php debugger : xdebug \n"
 
 help:														## display this help
 	@awk 'BEGIN { FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"; } \

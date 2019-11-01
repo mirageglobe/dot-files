@@ -16,6 +16,17 @@ wget -V
 curl -D - https://raw.githubusercontent.com/mirageglobe/dot-files/master/Makefile > ~/Makefile
 ```
 
+# to do
+
+- add python lint security : bandit
+- add ruby lint : use ruby -wc
+- add rails lint : use traceroute
+- add php lint : php -l
+- add php lint : phpstan
+- add php lint : php_codesniffer
+- add php standard lint : php_cs-fixer
+- add php debugger : xdebug
+
 # references
 
 - https://github.com/tonsky/FiraCode
