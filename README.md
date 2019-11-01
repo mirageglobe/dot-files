@@ -1,6 +1,6 @@
 # dot-files
 
-public dot-files to make life easier
+public dot-files to make life easier. 
 
 # to use
 
@@ -16,8 +16,13 @@ wget -V
 curl -D - https://raw.githubusercontent.com/mirageglobe/dot-files/master/Makefile > ~/Makefile
 ```
 
+# to contribute
+
+- ensure nothing sensitive is committed to this repo
+
 # to do
 
+- include fira and noto font
 - add python lint security : bandit
 - add ruby lint : use ruby -wc
 - add rails lint : use traceroute
