@@ -13,7 +13,7 @@
 # === targets ===
 
 # menu shortcuts targets
-MENU := launchinit checktools inittools initenv initcompletion inittex initfonts macupdate
+MENU := launchinit checktools inittools initenv initcompletion inittex macupdate
 
 # menu helpers targets
 MENU := now-datetime now-date now-time now-epoch version vinit vpatch vminor vmajor todo help
@@ -70,49 +70,39 @@ inittools:											## ensure that all languages and package managers are in pr
 	pip3 install ansible || pip3 install -U ansible			# cloud ansible
 	gem install terraform_landscape											# adding terraform extensions
 
-initcompletion:									## update bash completion scripts
-	@echo ":: updating git completion ::"
+initupdate:									## update bash completion scripts
+	@echo ":: updating completion ::"
 	curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash > dot.bash-completion.git.bash
+	@echo ":: fetching fonts ::"
+	# recommended - brew cask install font-firacode-nerd-font font-hasklig-nerd-font font-inconsolata-nerd-font font-iosevka-nerd-font font-monoid-nerd-font font-noto-nerd-font font-robotomono-nerd-font font-tinos-nerd-font
 
 initenv:												## ensure that environment is setup with folders/files (need run once)
 	# works for all os
 	@echo ":: ensure environment is pristine ::"
-	@echo ":: creating vim folders and setting vimrc ::"
+	@echo ":: creating vim folders (if not exists) and setting vimrc ::"
 	mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
 	# cp dot.vimrc.template ~/.vimrc
 	@echo ":: copying bashrc template ::"
 	# cp ~/.bashrc ~/.bashrc.bak
-	cp dot.mac.bashrc.template ~/.bashrc
-
-initfonts:											## update/install fonts (need run once)
-	@echo ":: updating fonts ::"
-	# -brew cask install \
-	# 	font-firacode-nerd-font \
-	# 	font-hasklig-nerd-font \
-	# 	font-inconsolata-nerd-font \
-	# 	font-iosevka-nerd-font \
-	# 	font-monoid-nerd-font \
-	# 	font-noto-nerd-font \
-	# 	font-robotomono-nerd-font \
-	# 	font-tinos-nerd-font \
+	# cp dot.mac.bashrc.template ~/.bashrc
 
 inittex:												## ensure all latex deps are installed
 	@echo ":: installing latex deps ::"
-	sudo tlmgr update --self														# update texmaker packager
-	sudo tlmgr update --all															# update texmaker packages
-	sudo tlmgr install collection-fontsrecommended			# update tex fonts
-	sudo tlmgr install lualatex-math
-	sudo tlmgr install fontspec													# fontspec used by xelatex and lualatex
+	tlmgr update --self														# update texmaker packager
+	tlmgr update --all														# update texmaker packages
+	tlmgr install collection-fontsrecommended			# update tex fonts
+	tlmgr install lualatex-math
+	tlmgr install fontspec												# fontspec used by xelatex and lualatex
 
 macupdate:											## update/check brew/gems/pip (sudo for gem)
 	@echo ":: updating mac homebrew/yarn/pip/gem/tlmgr ::"
-	yarn global upgrade
-	pip install --upgrade pip														# upgrade pip self
-	pip install -U $$(pip freeze | awk -F'[/=]' '{print $$1}')
-	pip3 install -U $$(pip3 freeze | awk -F'[/=]' '{print $$1}')
-	gem update
-	tlmgr update --self																	# update texmaker packager
-	tlmgr update --all																	# update texmaker packages
+	-yarn global upgrade
+	-pip install --upgrade pip										# upgrade pip self
+	-pip install -U $$(pip freeze | awk -F'[/=]' '{print $$1}')
+	-pip3 install -U $$(pip3 freeze | awk -F'[/=]' '{print $$1}')
+	-gem update
+	-tlmgr update --self													# update texmaker packager
+	-tlmgr update --all														# update texmaker packages
 
 ##@ Helpers
 
