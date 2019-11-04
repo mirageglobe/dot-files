@@ -53,9 +53,6 @@ export AWS_SECRET_ACCESS_KEY=default
 # ref - https://www.cyberciti.biz/tips/howto-linux-unix-bash-shell-setup-prompt.html
 printf "%s" "[+] prompt "
 
-# export PS1="\W @ \h [\u] $ "
-# export PS1="\u@\h \W\[\033[32m\]\$(parse_git_branch)\[\033[00m\] $ "
-
 export PROMPT_THEME=default
 export PROMPT_SETTING=""
 export PROMPT_GIT=1
@@ -92,8 +89,12 @@ if [[ "$PROMPT_GIT" ]]; then
 fi
 
 # ==> setting final prompt on prompt
+# export PS1="\W @ \h [\u] $ "
 # export PS1="\W$PROMPT_SETTING\e[0;35m \$ \e[m"
-export PS1=" \e[35m\$UID\e[0m:: \e[1;34m\$(fn_jmgl_sys_get_current_folder)\e[0m:: \e[32m\$(parse_git_branch)\e[0m\$ "
+# export PS1="\u@\h \W\[\033[32m\]\$(parse_git_branch)\[\033[00m\] \$ "
+# export PS1=" \e[35m\$UID\e[0m:: \e[1;34m\$(fn_jmgl_sys_get_current_folder)\e[0m:: \e[32m\$(parse_git_branch)\e[0m\$ "
+# export PS1=" \$UID:: \$(fn_jmgl_sys_get_current_folder):: \$(parse_git_branch)\$ "
+export PS1=" \[\e[1;35m\]\$UID:: \[\e[1;34m\]\$(fn_jmgl_sys_get_current_folder):: \[\e[1;32m\]\$(parse_git_branch)\[\e[1;0m\] \$ "
 
 # ===
 # === apps and tools required settings
