@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# usage: watch [command] [sleep duration]
+if [ -z $1 ]; then 
+  echo "usage : watch [command] [sleep duration]";
+  exit 0;
+fi
+
+while :; do 
+  clear
+  date
+  echo ""
+  bash -c "$1"
+  echo ""
+  echo "[ctrl-c to exit]"
+  sleep ${2:-1}
+done

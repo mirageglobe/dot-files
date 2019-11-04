@@ -59,10 +59,12 @@ checktools:											## check state of machine
 	# yarn - standard prettier
 	# python - 
 	@echo ":: listapps :: note that pip (python2 will be deprecated. install as pip3) ::"
-	yarn global list
-	gem list
-	pip list
-	pip3 list
+	-yarn global list
+	-gem list
+	-pip list
+	-pip3 list
+	@echo ":: color test ::"
+	for i in {0..255}; do tput setaf $i; printf %4d $i; done; tput sgr0; echo
 
 inittools:											## ensure that all languages and package managers are in pristine state
 	pip3 install --upgrade pip setuptools								# package manager for python

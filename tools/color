@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+# diff -u $1 $2 | sed "s/^-/$(tput setaf 1)&/; s/^+/$(tput setaf 2)&/; s/^@/$(tput setaf 6)&/; s/$/$(tput sgr0)/"
+diff -y $1 $2 | sed "s/^</$(tput setaf 1)&/; s/^>/$(tput setaf 2)&/; s/$/$(tput sgr0)/"
