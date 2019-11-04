@@ -14,6 +14,9 @@ wget -V
 ```
 # to curl the makefile
 curl -D - https://raw.githubusercontent.com/mirageglobe/dot-files/master/Makefile > ~/Makefile
+
+# to curl font
+curl -fLo "<FONT NAME> Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/<FONT_PATH>/complete/<FONT_NAME>%20Nerd%20Font%20Complete.otf
 ```
 
 # to contribute
@@ -22,8 +25,12 @@ curl -D - https://raw.githubusercontent.com/mirageglobe/dot-files/master/Makefil
 
 # to do
 
-- include fira and noto font
-- include bat source
+- fira source (https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/FiraCode.zip)
+- noto source (https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/Noto.zip)
+- bat source (https://github.com/sharkdp/bat/releases/latest)
+- rg source (https://github.com/BurntSushi/ripgrep/releases/latest)
+- terminess (https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/Terminus.zip)
+- hasklug  (https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/Hasklig.zip)
 - include path builder for tooling
 - include tool repo update
 - include tool copy to folder
@@ -40,3 +47,4 @@ curl -D - https://raw.githubusercontent.com/mirageglobe/dot-files/master/Makefil
 
 - https://github.com/tonsky/FiraCode
 - https://www.nerdfonts.com/font-downloads
+
