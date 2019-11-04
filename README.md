@@ -23,6 +23,10 @@ curl -D - https://raw.githubusercontent.com/mirageglobe/dot-files/master/Makefil
 # to do
 
 - include fira and noto font
+- include bat source
+- include path builder for tooling
+- include tool repo update
+- include tool copy to folder
 - add python lint security : bandit
 - add ruby lint : use ruby -wc
 - add rails lint : use traceroute
