@@ -48,23 +48,25 @@ launchinit:											## loads basic init tools
 
 checktools:											## check state of machine
 	@printf ":: check tools ::\n\n"
-	-command -V curl
+	-command -V curl | echo "curl not found"
 	-command -V jq
 	-command -V python
 	-command -V pip
 	-command -V ruby
 	-command -V yarn
-	-command -V rg | echo "see https://github.com/BurntSushi/ripgrep/releases/latest"
+	-command -V wget | echo "wget not found"
+	-command -V bat | echo "bat not found"
+	-command -V rg | echo "rg not found : see https://github.com/BurntSushi/ripgrep/releases/latest"
 	# bin - fx tree pstree
 	# yarn - standard prettier
 	# python - 
 	@printf "\n"
-	@printf ":: node yarn packages ::\n\n" && yarn global list && printf "\n";
-	@printf ":: ruby gem packages ::\n" && gem list && printf "\n";
-	@printf ":: python 2 pip packages ::\n\n" && pip list && printf "\n";
-	@printf ":: python 3 pip3 packages ::\n\n" && pip3 list && printf "\n";
-	@printf ":: color test ::\n\n" && printf "number of colors : " && tput colors && printf "\n";
-	@printf ":: summary :: \n\n- note that pip (python2 will be deprecated. install as pip3)\n\n";
+	-printf ":: node yarn packages ::\n\n" && yarn global list && printf "\n";
+	-printf ":: ruby gem packages ::\n" && gem list && printf "\n";
+	-printf ":: python 2 pip packages ::\n\n" && pip list && printf "\n";
+	-printf ":: python 3 pip3 packages ::\n\n" && pip3 list && printf "\n";
+	-printf ":: color test ::\n\n" && printf "number of colors : " && tput colors && printf "\n";
+	-printf ":: summary :: \n\n- note that pip (python2 will be deprecated. install as pip3)\n\n";
 
 inittools:											## ensure that all languages and package managers are in pristine state
 	pip3 install --upgrade pip setuptools								# package manager for python
