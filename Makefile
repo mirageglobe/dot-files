@@ -1,5 +1,5 @@
 
-# === info ===
+# === info
 
 # attribution - by jimmy mg lim ::  www.mirageglobe.com :: github.com/mirageglobe
 # reference - https://www.gnu.org/software/make/manual/html_node/Standard-Targets.html
@@ -10,7 +10,7 @@
 # - use - to ignore errors (make)
 # - use @ to not print the command
 
-# === targets ===
+# === targets
 
 # menu shortcuts targets
 MENU := launchinit checktools inittools initenv initcompletion inittex macupdate
@@ -22,7 +22,7 @@ MENU := now-datetime now-date now-time now-epoch version vinit vpatch vminor vma
 # info - phony is used to make sure there is no similar file(s) such as <target> that cause the make recipe not to work
 .PHONY: all clean test $(MENU)
 
-# === variables ===
+# === variables
 
 # set default target
 .DEFAULT_GOAL := help
@@ -34,12 +34,12 @@ MENU := now-datetime now-date now-time now-epoch version vinit vpatch vminor vma
 # ref - https://www.gnu.org/software/make/manual/html_node/One-Shell.html
 .ONESHELL:
 
-# === main ===
+# === main
 
 ##@ Menu
 
 launchinit:											## loads basic init tools
-	@echo ":: loading basic shell tools ::"
+	@printf ":: loading basic shell tools ::\n"
 	open https://mail.google.com
 	open https://www.reddit.com/
 	open https://devhints.io
@@ -47,24 +47,24 @@ launchinit:											## loads basic init tools
 	open https://www.noisli.com/
 
 checktools:											## check state of machine
-	@echo ":: check tools ::"
+	@printf ":: check tools ::\n\n"
 	-command -V curl
 	-command -V jq
 	-command -V python
 	-command -V pip
 	-command -V ruby
 	-command -V yarn
-	-command -V rg | echo "checkout https://github.com/BurntSushi/ripgrep/releases/latest"
+	-command -V rg | echo "see https://github.com/BurntSushi/ripgrep/releases/latest"
 	# bin - fx tree pstree
 	# yarn - standard prettier
 	# python - 
-	@echo ":: listapps :: note that pip (python2 will be deprecated. install as pip3) ::"
-	-yarn global list
-	-gem list
-	-pip list
-	-pip3 list
-	@echo ":: color test ::"
-	for i in {0..255}; do tput setaf $i; printf %4d $i; done; tput sgr0; echo
+	@printf "\n"
+	@printf ":: node yarn packages ::\n\n" && yarn global list && printf "\n";
+	@printf ":: ruby gem packages ::\n" && gem list && printf "\n";
+	@printf ":: python 2 pip packages ::\n\n" && pip list && printf "\n";
+	@printf ":: python 3 pip3 packages ::\n\n" && pip3 list && printf "\n";
+	@printf ":: color test ::\n\n" && printf "number of colors : " && tput colors && printf "\n";
+	@printf ":: summary :: \n\n- note that pip (python2 will be deprecated. install as pip3)\n\n";
 
 inittools:											## ensure that all languages and package managers are in pristine state
 	pip3 install --upgrade pip setuptools								# package manager for python
@@ -73,23 +73,23 @@ inittools:											## ensure that all languages and package managers are in pr
 	gem install terraform_landscape											# adding terraform extensions
 
 initupdate:									## update bash completion scripts
-	@echo ":: updating completion ::"
+	@printf ":: updating completion ::\n"
 	curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash > dot.bash-completion.git.bash
-	@echo ":: fetching fonts ::"
+	@printf ":: fetching fonts ::\n"
 	# recommended - brew cask install font-firacode-nerd-font font-hasklig-nerd-font font-inconsolata-nerd-font font-iosevka-nerd-font font-monoid-nerd-font font-noto-nerd-font font-robotomono-nerd-font font-tinos-nerd-font
 
 initenv:												## ensure that environment is setup with folders/files (need run once)
 	# works for all os
-	@echo ":: ensure environment is pristine ::"
-	@echo ":: creating vim folders (if not exists) and setting vimrc ::"
+	@printf ":: ensure environment is pristine ::\n"
+	@printf ":: creating vim folders (if not exists) and setting vimrc ::\n"
 	mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
 	# cp dot.vimrc.template ~/.vimrc
-	@echo ":: copying bashrc template ::"
+	@printf ":: copying bashrc template ::\n"
 	# cp ~/.bashrc ~/.bashrc.bak
 	# cp dot.mac.bashrc.template ~/.bashrc
 
 inittex:												## ensure all latex deps are installed
-	@echo ":: installing latex deps ::"
+	@printf ":: installing latex deps ::\n"
 	tlmgr update --self														# update texmaker packager
 	tlmgr update --all														# update texmaker packages
 	tlmgr install collection-fontsrecommended			# update tex fonts
@@ -97,7 +97,7 @@ inittex:												## ensure all latex deps are installed
 	tlmgr install fontspec												# fontspec used by xelatex and lualatex
 
 macupdate:											## update/check brew/gems/pip (sudo for gem)
-	@echo ":: updating mac homebrew/yarn/pip/gem/tlmgr ::"
+	@printf ":: updating mac homebrew/yarn/pip/gem/tlmgr ::\n"
 	-yarn global upgrade
 	-pip install --upgrade pip										# upgrade pip self
 	-pip install -U $$(pip freeze | awk -F'[/=]' '{print $$1}')
@@ -141,7 +141,8 @@ help:														## display this help
 		/^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5); } \
 		END { printf "\n"; }' $(MAKEFILE_LIST)
 
-# Notes :
+# === notes
 
 # $(MAKEFILE_LIST) is an environment variable (name of Makefile) thats available during Make.
 # FS = awks field separator. use it in the beginning of execution. i.e. FS = ","
+
