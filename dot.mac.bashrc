@@ -441,6 +441,26 @@ alias _fox_aws_secret_access_key="aws configure get aws_secret_access_key --prof
 alias _fox_aws_profile_ls="fn_jmgl_aws_profile_show"
 alias _fox_aws_profile_load="fn_jmgl_aws_profile_load"
 
+# ==> alias general
+
+# ## ==> graphing using dot
+
+# # sample.dot
+# digraph test {
+#      a -> b -> c;
+#      b -> d;
+#  }
+
+fn_fox_general_graph() {
+  if [ -z "$var" ]; then
+    echo "usage : _fox_graph <file>"
+  else
+    cat $1 | docker run -i tsub/graph-easy;
+  fi
+}
+
+alias _fox_graph="fn_fox_general_graph"
+
 # ===
 # === bash loader end
 # ===
