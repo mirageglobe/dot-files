@@ -175,16 +175,6 @@ fn_jmgl_showmaclaunch() {
   launchctl list | grep -v "com.apple";
 }
 
-# wip_listening() {
-#   if [ $# -eq 0 ]; then
-#     sudo lsof -iTCP -sTCP:LISTEN -n -P
-#       elif [ $# -eq 1 ]; then
-#       sudo lsof -iTCP -sTCP:LISTEN -n -P | grep -i --color $1
-#   else
-#     echo "Usage: listening [pattern]"
-#   fi
-# }
-
 alias _fox_sys="echo '
 :: help systems and network ::
 
