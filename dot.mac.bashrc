@@ -94,7 +94,7 @@ fi
 # export PS1="\u@\h \W\[\033[32m\]\$(parse_git_branch)\[\033[00m\] \$ "
 # export PS1=" \e[35m\$UID\e[0m:: \e[1;34m\$(fn_jmgl_sys_get_current_folder)\e[0m:: \e[32m\$(parse_git_branch)\e[0m\$ "
 # export PS1=" \$UID:: \$(fn_jmgl_sys_get_current_folder):: \$(parse_git_branch)\$ "
-export PS1=" \[\e[0;35m\]\$UID\[\e[1;0m\]:: \[\e[1;34m\]\$(fn_jmgl_sys_get_current_folder)\[\e[1;0m\]::\[\e[1;32m\] \$(parse_git_branch)\[\e[1;0m\] \$ "
+export PS1=" \[\e[0;35m\]\$UID\[\e[1;0m\]:: \[\e[1;34m\]\$(fn_jmgl_sys_get_current_folder)\[\e[1;0m\]::\[\e[0;32m\] \$(parse_git_branch)\[\e[1;0m\] \$ "
 
 # ===
 # === apps and tools required settings
