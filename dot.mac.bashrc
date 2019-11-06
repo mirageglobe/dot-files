@@ -452,7 +452,7 @@ alias _fox_aws_profile_load="fn_jmgl_aws_profile_load"
 #  }
 
 fn_fox_general_graph() {
-  if [ -z "$var" ]; then
+  if [ -z "$1" ]; then
     echo "usage : _fox_graph <file>"
   else
     cat $1 | docker run -i tsub/graph-easy;
