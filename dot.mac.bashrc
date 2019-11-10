@@ -285,7 +285,7 @@ alias _nowdate="fn_jmgl_now_date;"
 alias _nowtime="fn_jmgl_now_time;"
 
 alias _tree="tree -C -L 1"
-alias _diff="diff -y --color"
+alias _diff="diff -y"
 alias _fzf="fzf --height=50%"
 
 alias _emo_shrug="echo '¯\_(ツ)_/¯'";

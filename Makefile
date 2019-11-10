@@ -34,6 +34,12 @@ MENU := now-datetime now-date now-time now-epoch version vinit vpatch vminor vma
 # ref - https://www.gnu.org/software/make/manual/html_node/One-Shell.html
 .ONESHELL:
 
+# === functions
+
+define fn_check_command
+	command -V $(1) || echo $(1) : $(2)
+endef
+
 # === main
 
 ##@ Menu
@@ -48,15 +54,15 @@ launch:													## loads basic init tools
 
 check:													## check local system / environment
 	@printf ":: check tools ::\n\n"
-	-command -V curl | echo "curl not found"
-	-command -V jq | echo "jq not found"
-	-command -V python | echo "python not found"
-	-command -V pip | echo "pip not found"
-	-command -V ruby | echo "ruby not found"
-	-command -V yarn | echo "yarn not found"
-	-command -V wget | echo "wget not found"
-	-command -V bat | echo "bat not found"
-	-command -V rg | echo "rg not found : see https://github.com/BurntSushi/ripgrep/releases/latest"
+	@$(call fn_check_command, curl,)
+	@$(call fn_check_command, jq,)
+	@$(call fn_check_command, python,)
+	@$(call fn_check_command, pip,)
+	@$(call fn_check_command, ruby,)
+	@$(call fn_check_command, yarn,)
+	@$(call fn_check_command, wget,)
+	@$(call fn_check_command, bat,"see https://github.com/sharkdp/bat/releases/latest")
+	@$(call fn_check_command, rg,"see https://github.com/BurntSushi/ripgrep/releases/latest")
 	# bin - fx tree pstree
 	# yarn - standard prettier
 	# python - 
