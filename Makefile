@@ -13,7 +13,7 @@
 # === targets
 
 # menu shortcuts targets
-MENU := launchinit checktools inittools initenv initcompletion inittex macupdate
+MENU := launch check macupdate tex-init tools-init
 
 # menu helpers targets
 MENU := now-datetime now-date now-time now-epoch version vinit vpatch vminor vmajor todo help
@@ -38,7 +38,7 @@ MENU := now-datetime now-date now-time now-epoch version vinit vpatch vminor vma
 
 ##@ Menu
 
-launchinit:											## loads basic init tools
+launch:													## loads basic init tools
 	@printf ":: loading basic shell tools ::\n"
 	open https://mail.google.com
 	open https://www.reddit.com/
@@ -46,14 +46,14 @@ launchinit:											## loads basic init tools
 	open https://www.nerdfonts.com/
 	open https://www.noisli.com/
 
-checktools:											## check state of machine
+check:													## check local system / environment
 	@printf ":: check tools ::\n\n"
 	-command -V curl | echo "curl not found"
-	-command -V jq
-	-command -V python
-	-command -V pip
-	-command -V ruby
-	-command -V yarn
+	-command -V jq | echo "jq not found"
+	-command -V python | echo "python not found"
+	-command -V pip | echo "pip not found"
+	-command -V ruby | echo "ruby not found"
+	-command -V yarn | echo "yarn not found"
 	-command -V wget | echo "wget not found"
 	-command -V bat | echo "bat not found"
 	-command -V rg | echo "rg not found : see https://github.com/BurntSushi/ripgrep/releases/latest"
@@ -68,37 +68,11 @@ checktools:											## check state of machine
 	-printf ":: color test ::\n\n" && printf "number of colors : " && tput colors && printf "\n";
 	-printf ":: summary :: \n\n- note that pip (python2 will be deprecated. install as pip3)\n\n";
 
-inittools:											## ensure that all languages and package managers are in pristine state
-	pip3 install --upgrade pip setuptools								# package manager for python
-	# tools : frameworks  ============================================================
-	pip3 install ansible || pip3 install -U ansible			# cloud ansible
-	gem install terraform_landscape											# adding terraform extensions
-
-initupdate:									## update bash completion scripts
-	@printf ":: updating completion ::\n"
-	curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash > dot.bash-completion.git.bash
-	@printf ":: fetching fonts ::\n"
-	# recommended - brew cask install font-firacode-nerd-font font-hasklig-nerd-font font-inconsolata-nerd-font font-iosevka-nerd-font font-monoid-nerd-font font-noto-nerd-font font-robotomono-nerd-font font-tinos-nerd-font
-
-initenv:												## ensure that environment is setup with folders/files (need run once)
-	# works for all os
-	@printf ":: ensure environment is pristine ::\n"
-	@printf ":: creating vim folders (if not exists) and setting vimrc ::\n"
-	mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
-	# cp dot.vimrc.template ~/.vimrc
-	@printf ":: copying bashrc template ::\n"
-	# cp ~/.bashrc ~/.bashrc.bak
-	# cp dot.mac.bashrc.template ~/.bashrc
-
-inittex:												## ensure all latex deps are installed
-	@printf ":: installing latex deps ::\n"
-	tlmgr update --self														# update texmaker packager
-	tlmgr update --all														# update texmaker packages
-	tlmgr install collection-fontsrecommended			# update tex fonts
-	tlmgr install lualatex-math
-	tlmgr install fontspec												# fontspec used by xelatex and lualatex
-
 macupdate:											## update/check brew/gems/pip (sudo for gem)
+	@printf ":: fetching completion to ~/dot.bash-completion.xxx.bash ::\n"
+	curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash > dot.bash-completion.git.bash
+	@printf ":: fetching fonts to desktop ::\n"
+	# recommended - brew cask install font-firacode-nerd-font font-hasklig-nerd-font font-inconsolata-nerd-font font-iosevka-nerd-font font-monoid-nerd-font font-noto-nerd-font font-robotomono-nerd-font font-tinos-nerd-font
 	@printf ":: updating mac homebrew/yarn/pip/gem/tlmgr ::\n"
 	-yarn global upgrade
 	-pip install --upgrade pip										# upgrade pip self
@@ -107,6 +81,30 @@ macupdate:											## update/check brew/gems/pip (sudo for gem)
 	-gem update
 	-tlmgr update --self													# update texmaker packager
 	-tlmgr update --all														# update texmaker packages
+
+tools-init:											## ensure that folder(s), package managers, tools are present
+	# tools : folders  ============================================================
+	@printf ":: ensure environment is pristine ::\n"
+	@printf ":: ensure tools folder(s) exist ::\n"
+	mkdir -pv ~/.tools
+	@printf ":: ensure vim folder(s) exist ::\n"
+	mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
+	@printf ":: notes ::\n"
+	# cp dot.vimrc.template ~/.vimrc
+	# cp ~/.bashrc ~/.bashrc.bak
+	# cp dot.mac.bashrc.template ~/.bashrc
+	pip3 install --upgrade pip setuptools								# package manager for python
+	# tools : frameworks  ============================================================
+	pip3 install ansible || pip3 install -U ansible			# cloud ansible
+	gem install terraform_landscape											# adding terraform extensions
+
+tex-init:												## ensure all latex deps are installed
+	@printf ":: installing latex deps ::\n"
+	tlmgr update --self														# update texmaker packager
+	tlmgr update --all														# update texmaker packages
+	tlmgr install collection-fontsrecommended			# update tex fonts
+	tlmgr install lualatex-math
+	tlmgr install fontspec												# fontspec used by xelatex and lualatex
 
 ##@ Helpers
 
