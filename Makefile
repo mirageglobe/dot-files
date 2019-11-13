@@ -104,7 +104,7 @@ tools-init:											## ensure that folder(s), package managers, tools are pres
 	-pip3 install ansible || pip3 install -U ansible			# cloud ansible
 	-gem install terraform_landscape											# adding terraform extensions
 	@printf ":: summary ::\n"
-	@printf "\t add export PATH="$HOME/.tools:$PATH"
+	@printf "\t add export PATH=\"$HOME/.tools:$PATH\""
 
 tex-init:												## ensure all latex deps are installed
 	@printf ":: installing latex deps ::\n"
