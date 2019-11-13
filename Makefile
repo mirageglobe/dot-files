@@ -99,10 +99,12 @@ tools-init:											## ensure that folder(s), package managers, tools are pres
 	# cp dot.vimrc.template ~/.vimrc
 	# cp ~/.bashrc ~/.bashrc.bak
 	# cp dot.mac.bashrc.template ~/.bashrc
-	pip3 install --upgrade pip setuptools								# package manager for python
+	-pip3 install --upgrade pip setuptools								# package manager for python
 	# tools : frameworks  ============================================================
-	pip3 install ansible || pip3 install -U ansible			# cloud ansible
-	gem install terraform_landscape											# adding terraform extensions
+	-pip3 install ansible || pip3 install -U ansible			# cloud ansible
+	-gem install terraform_landscape											# adding terraform extensions
+	@printf ":: summary ::\n"
+	@printf "\t add export PATH="$HOME/.tools:$PATH"
 
 tex-init:												## ensure all latex deps are installed
 	@printf ":: installing latex deps ::\n"
