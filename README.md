@@ -33,6 +33,7 @@ curl -fLo "<FONT NAME> Nerd Font Complete.otf" https://github.com/ryanoasis/nerd
 - hasklug  (https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/Hasklig.zip)
 - rg grep (https://github.com/BurntSushi/ripgrep/releases/latest)
 - bat cat (https://github.com/sharkdp/bat/releases/latest)
+- aws vault (https://github.com/99designs/aws-vault/releases)
 - include path builder for tooling
 - include tool repo update
 - include tool copy to folder
