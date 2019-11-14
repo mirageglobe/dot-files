@@ -461,6 +461,14 @@ fn_fox_general_graph() {
 
 alias _fox_graph="fn_fox_general_graph"
 
+# ## ==> function get with curl
+
+function _fox_get() {
+  # usage : _fox_get [local location] [remote file]
+  # example _fox_get "~/Desktop" "https://github.com/99designs/aws-vault/releases/download/v4.7.1/aws-vault-darwin-amd64.dmg"
+  pushd $1 && curl -O $2 && popd;
+}
+
 # ===
 # === bash loader end
 # ===
