@@ -102,7 +102,7 @@ COLOR_BLUE="\[\e[1;34m\]"
 COLOR_GREEN="\[\e[0;32m\]"
 COLOR_WHITE="\[\e[1;0m\]"
 
-export PS1=" ${COLOR_PURPLE}${UID}${COLOR_WHITE}:: ${COLOR_BLUE}\$(fn_fox_sys_get_current_folder)${COLOR_WHITE}::${COLOR_GREEN}\$(parse_git_branch)${COLOR_WHITE}\$ "
+export PS1=" ${COLOR_PURPLE}${UID}${COLOR_WHITE}:: ${COLOR_BLUE}\$(fn_fox_sys_get_current_folder)${COLOR_WHITE}::${COLOR_GREEN}\$(parse_git_branch)${COLOR_WHITE} \$ "
 
 # ===
 # === apps and tools required settings
