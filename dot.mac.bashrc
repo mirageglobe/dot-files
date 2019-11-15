@@ -60,7 +60,8 @@ export PROMPT_GIT=1
 # ==> aws prompt method
 # appends the prompt in sequence, according to following conditionals
 # note : this cannot be set as bashrc loads a new process. AWS is only valid in current terminal
-if [[ "$AWS_PROFILE" != "default" ]]; then
+if [ -z "$AWS_PROFILE" ]; then
+# if [[ "$AWS_PROFILE" != "default" ]]; then
   # prompt + aws
   PROMPT_SETTING="$PROMPT_SETTING aws($AWS_PROFILE)"
 fi
@@ -92,9 +93,16 @@ fi
 # export PS1="\W @ \h [\u] $ "
 # export PS1="\W$PROMPT_SETTING\e[0;35m \$ \e[m"
 # export PS1="\u@\h \W\[\033[32m\]\$(parse_git_branch)\[\033[00m\] \$ "
-# export PS1=" \e[35m\$UID\e[0m:: \e[1;34m\$(fn_jmgl_sys_get_current_folder)\e[0m:: \e[32m\$(parse_git_branch)\e[0m\$ "
-# export PS1=" \$UID:: \$(fn_jmgl_sys_get_current_folder):: \$(parse_git_branch)\$ "
-export PS1=" \[\e[0;35m\]\$UID\[\e[1;0m\]:: \[\e[1;34m\]\$(fn_jmgl_sys_get_current_folder)\[\e[1;0m\]::\[\e[0;32m\]\$(parse_git_branch)\[\e[1;0m\] \$ "
+# export PS1=" \e[35m\$UID\e[0m:: \e[1;34m\$(fn_fox_sys_get_current_folder)\e[0m:: \e[32m\$(parse_git_branch)\e[0m\$ "
+# export PS1=" \$UID:: \$(fn_fox_sys_get_current_folder):: \$(parse_git_branch)\$ "
+# export PS1=" ${COLOR_PURPLE}${UID}${COLOR_WHITE}:: ${COLOR_BLUE} \$(fn_fox_sys_get_current_folder)\[\e[1;0m\]::\[\e[0;32m\]\$(parse_git_branch)\[\e[1;0m\] \$ "
+
+COLOR_PURPLE="\[\e[0;35m\]"
+COLOR_BLUE="\[\e[1;34m\]"
+COLOR_GREEN="\[\e[0;32m\]"
+COLOR_WHITE="\[\e[1;0m\]"
+
+export PS1=" ${COLOR_PURPLE}${UID}${COLOR_WHITE}:: ${COLOR_BLUE}\$(fn_fox_sys_get_current_folder)${COLOR_WHITE}::${COLOR_GREEN}\$(parse_git_branch)${COLOR_WHITE} \$ "
 
 # ===
 # === apps and tools required settings
@@ -149,7 +157,7 @@ printf "%s" "[+] aliases "
 
 # ==> alias system and network related
 
-fn_jmgl_network_info() {
+fn_fox_network_info() {
   printf ":: about network (me) ::\n";
   printf "IP \t\t :"
   ifconfig | grep 'inet' | grep '192' | awk '{print $2}'
@@ -161,13 +169,13 @@ fn_jmgl_network_info() {
   # lsof -Pi | grep "LISTEN";
 }
 
-fn_jmgl_network_getip() {
+fn_fox_network_getip() {
 # caveat - shows only range 192.x.x.x networks
 # class c/24 b/16 c/8
   ifconfig | grep 'inet' | grep '192' | awk '{ print $2 }'
 }
 
-fn_jmgl_showmaclaunch() {
+fn_fox_showmaclaunch() {
   printf "\n:: load listening apps/ports (this will take a while) ::\n"
   lsof -Pi | grep "LISTEN\|PID";
   # launchctl list;
@@ -192,39 +200,39 @@ alias _fox_sys="echo '
   ifconfig | grep inet          # get inet
 '"
 
-alias _sys="fn_jmgl_system;fn_jmgl_showmaclaunch;"
+alias _sys="fn_fox_system;fn_fox_showmaclaunch;"
 alias _sysps="printf ':: showing running processes ::\n';ps -a;"
 
-alias _net="fn_jmgl_network_info;"
+alias _net="fn_fox_network_info;"
 alias _netiport="printf ':: investigate listening ports :: \n';sudo lsof -PiTCP -sTCP:LISTEN;"
 alias _netint="printf ':: show network interfaces ::\n'; tcpdump -D;"
 alias _netip="printf ':: show ip on en0 ::\n'; ifconfig en0 | grep inet;"
 
 # ==> alias shell related
 
-fn_jmgl_system() {
+fn_fox_system() {
   printf ":: system information :: \n"
-  printf "date \t\t\t $(fn_jmgl_now_date) \n"
-  printf "date time \t\t $(fn_jmgl_now_datetime) \n"
-  printf "ip (class c) \t\t $(fn_jmgl_network_getip) \n"
+  printf "date \t\t\t $(fn_fox_now_date) \n"
+  printf "date time \t\t $(fn_fox_now_datetime) \n"
+  printf "ip (class c) \t\t $(fn_fox_network_getip) \n"
   printf "terminal encoding \t $(locale charmap) \n"
   printf "\n"
   printf "current user grps \t $(id) \n"
 }
 
-fn_jmgl_now_datetime() {
+fn_fox_aws_profile_load_now_datetime() {
   echo "$(date +\"%Y%m%d-%H%M%S\")";
 }
 
-fn_jmgl_now_date() {
+fn_fox_now_date() {
   echo "$(date +\"%Y%m%d\")";
 }
 
-fn_jmgl_now_time() {
+fn_fox_now_time() {
   echo "$(date +\"%H%M%S\")";
 }
 
-fn_jmgl_sys_get_current_folder() {
+fn_fox_sys_get_current_folder() {
   # printf '%s\n' "${PWD##*/}";
   echo "$(basename $PWD)";
 }
@@ -280,9 +288,9 @@ alias _size10m="find . -type f -size +10M -exec ls -lh {} \;"
 alias _size100m="find . -type f -size +100M -exec ls -lh {} \;"
 
 alias _random="echo ${RANDOM:0:2};"
-alias _now="fn_jmgl_now_datetime;"
-alias _nowdate="fn_jmgl_now_date;"
-alias _nowtime="fn_jmgl_now_time;"
+alias _now="fn_fox_now_datetime;"
+alias _nowdate="fn_fox_now_date;"
+alias _nowtime="fn_fox_now_time;"
 
 alias _tree="tree -C -L 1"
 alias _diff="diff -y"
@@ -343,29 +351,29 @@ alias _git_master="git checkout master;"
 
 # ==> alias docker related
 
-fn_jmgl_docker_imagepurge(){
+fn_fox_docker_imagepurge(){
   # printf ":: removing dangling images :: \n";
   # docker rmi $(docker images --filter "dangling=true" -q --no-trunc);
   docker rmi $(docker images -a -q);
 }
 
-fn_jmgl_docker_runningpurge() {
+fn_fox_docker_runningpurge() {
   printf ":: stopping and removing running docker containers :: \n";
   docker stop $(docker ps -aq);
   docker rm $(docker ps -aq);
 }
 
-fn_jmgl_docker_rmrunning() {
+fn_fox_docker_rmrunning() {
   printf ":: stopping container ::\n";
   docker stop $1; docker rm $1;
 }
 
-fn_jmgl_docker_sh() {
+fn_fox_docker_sh() {
   printf ":: sh into container ::\n";
   docker exec -it $1 sh;
 }
 
-fn_jmgl_docker_bash() {
+fn_fox_docker_bash() {
   printf ":: (ba)sh into container ::\n";
   docker exec -it $1 bash;
 }
@@ -391,22 +399,22 @@ alias _fox_docker="echo '
 
 alias _dc_ps="docker ps -a"
 alias _dc_psless="docker ps | less -S"
-alias _dc_pspurge="fn_jmgl_docker_runningpurge;"
+alias _dc_pspurge="fn_fox_docker_runningpurge;"
 alias _dc_img="docker images"
-alias _dc_imgpurge="fn_jmgl_docker_imagepurge;"
+alias _dc_imgpurge="fn_fox_docker_imagepurge;"
 alias _dc_vol="docker volume ls"
 
 alias _dc_purge="docker system prune"
-alias _dc_ssh="fn_jmgl_docker_bash"
-alias _dc_sh="fn_jmgl_docker_sh"
-alias _dc_bash="fn_jmgl_docker_bash"
+alias _dc_ssh="fn_fox_docker_bash"
+alias _dc_sh="fn_fox_docker_sh"
+alias _dc_bash="fn_fox_docker_bash"
 alias _dc_logs="docker logs"
 
-alias _dc_stop="echo ':: stopping running container ::'; fn_jmgl_docker_rmrunning"
+alias _dc_stop="echo ':: stopping running container ::'; fn_fox_docker_rmrunning"
 
 # ==> alias aws related
 
-fn_jmgl_aws_profile_load() {
+fn_fox_aws_profile_load() {
   printf ":: loading aws profile(s) : $1 ::\n";
   cat ~/.aws/credentials | grep $1; # check if user exists in credentials
   export AWS_DEFAULT_PROFILE=$1;
@@ -418,7 +426,7 @@ fn_jmgl_aws_profile_load() {
   aws configure list;
 }
 
-fn_jmgl_aws_profile_show() {
+fn_fox_aws_profile_show() {
   printf ":: showing aws profile available ::\n\n";
   cat ~/.aws/credentials | grep '\[';
   printf "\n"
@@ -438,8 +446,8 @@ alias _fox_aws="echo '
 
 alias _fox_aws_access_key_id="aws configure get aws_access_key_id --profile "
 alias _fox_aws_secret_access_key="aws configure get aws_secret_access_key --profile "
-alias _fox_aws_profile_ls="fn_jmgl_aws_profile_show"
-alias _fox_aws_profile_load="fn_jmgl_aws_profile_load"
+alias _fox_aws_profile_ls="fn_fox_aws_profile_show"
+alias _fox_aws_profile_load="fn_fox_aws_profile_load"
 
 # ==> alias general
 
