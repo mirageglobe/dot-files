@@ -118,7 +118,7 @@ git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Crese
 
 # ==> added for fzf
 # note that fzf will try to install this to default .bashrc too
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # ==> added for jenv (http://www.jenv.be/)
 # export PATH="$HOME/.jenv/bin:$PATH"

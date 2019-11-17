@@ -13,7 +13,7 @@
 # === targets
 
 # menu shortcuts targets
-MENU := launch check macupdate tex-init tools-init
+MENU := launch check mac-ensure tex-ensure
 
 # menu helpers targets
 MENU := now-datetime now-date now-time now-epoch version vinit vpatch vminor vmajor todo help
@@ -61,6 +61,7 @@ check:													## check local system / environment
 	@$(call fn_check_command, ruby,)
 	@$(call fn_check_command, yarn,)
 	@$(call fn_check_command, wget,)
+	@$(call fn_check_command, vim,)
 	@$(call fn_check_command, bat,"see https://github.com/sharkdp/bat/releases/latest")
 	@$(call fn_check_command, rg,"see https://github.com/BurntSushi/ripgrep/releases/latest")
 	# bin - fx tree pstree
@@ -74,45 +75,75 @@ check:													## check local system / environment
 	-printf ":: color test ::\n\n" && printf "number of colors : " && tput colors && printf "\n";
 	-printf ":: summary :: \n\n- note that pip (python2 will be deprecated. install as pip3)\n\n";
 
-macupdate:											## update/check brew/gems/pip (sudo for gem)
-	@printf ":: fetching completion to ~/dot.bash-completion.xxx.bash ::\n"
-	curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash > dot.bash-completion.git.bash
-	@printf ":: fetching fonts to desktop ::\n"
-	# recommended - brew cask install font-firacode-nerd-font font-hasklig-nerd-font font-inconsolata-nerd-font font-iosevka-nerd-font font-monoid-nerd-font font-noto-nerd-font font-robotomono-nerd-font font-tinos-nerd-font
-	@printf ":: updating mac homebrew/yarn/pip/gem/tlmgr ::\n"
-	-yarn global upgrade
-	-pip install --upgrade pip										# upgrade pip self
-	-pip install -U $$(pip freeze | awk -F'[/=]' '{print $$1}')
-	-pip3 install -U $$(pip3 freeze | awk -F'[/=]' '{print $$1}')
-	-gem update
-	-tlmgr update --self													# update texmaker packager
-	-tlmgr update --all														# update texmaker packages
-
-tools-init:											## ensure that folder(s), package managers, tools are present
+mac-ensure:											## ensure that folder(s), package managers, tools are present
 	# tools : folders  ============================================================
 	@printf ":: ensure environment is pristine ::\n"
-	@printf ":: ensure tools folder(s) exist ::\n"
-	mkdir -pv ~/.tools
-	@printf ":: ensure vim folder(s) exist ::\n"
-	mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
 	@printf ":: notes ::\n"
 	# cp dot.vimrc.template ~/.vimrc
 	# cp ~/.bashrc ~/.bashrc.bak
 	# cp dot.mac.bashrc.template ~/.bashrc
-	-pip3 install --upgrade pip setuptools								# package manager for python
-	# tools : frameworks  ============================================================
-	-pip3 install ansible || pip3 install -U ansible			# cloud ansible
-	-gem install terraform_landscape											# adding terraform extensions
-	@printf ":: summary ::\n"
+	# tools : common  ============================================================
+	@printf ":: ensure tools folder(s) exist ::\n"
+	mkdir -pv ~/.tools
 	@printf "\t add export PATH=\"$HOME/.tools:$PATH\""
+	@printf ":: ensure vim folder(s) exist ::\n"
+	mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
+	# tools : frameworks  ============================================================
+	-pip3 install ansible || pip3 install -U ansible		# cloud ansible
+	-gem install terraform_landscape										# adding terraform extensions
+	# go get -u sigs.k8s.io/kind												# install kind (kubernetes in docker)
+	@printf ":: fetching completion to ~/dot.bash-completion.xxx.bash ::\n"
+	curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash > ~/.tools/dot.bash-completion.git.bash
+	@printf ":: fetching fonts to desktop ::\n"
+	# recommended - brew cask install font-firacode-nerd-font font-hasklig-nerd-font font-inconsolata-nerd-font font-iosevka-nerd-font font-monoid-nerd-font font-noto-nerd-font font-robotomono-nerd-font font-tinos-nerd-font
+	@printf ":: updating mac homebrew/yarn/pip/gem/tlmgr ::\n"
+	# tools : node yarn  ============================================================
+	-yarn global upgrade
+	-yarn global add semver															# dev semver tool for node and other frameworks (try shell only : use https://github.com/fsaintjacques/semver-tool)
+	-yarn global add write-good													# lint english grammer
+	-yarn global add htmlhint														# lint html
+	# yarn global add stylelint														# lint
+	-yarn global add standard														# lint javascript (ale)
+	# yarn global add eslint															# lint javascript (ale)
+	-yarn global add prettier														# lint javascript fixer (ale)
+	-yarn global add jsonlint														# lint json
+	# -yarn global add vue-language-server									# linter vuejs (ale)
+	-yarn global add local-web-server											# server simple local web server - use ws to start
+	# yarn global add http-server													# server simple local web server
+	# yarn global add fauxton															# db ui - couchdb docker container missing fauxton
+	# -yarn global add hotel																# db https://github.com/typicode/hotel
+	# -yarn global add json-server													# db https://github.com/typicode/json-server#database
+	# https://netflix.github.io/pollyjs/#/
+	-yarn global add mountebank													# test mock server
+	-yarn global add nightwatch													# test e2e browser test - default by vuejs
+	-yarn global add bats																# test shell / bash test suite (bats-core)
+	# yarn add --dev cucumber															# test (add for project based) cucumber js
+	-yarn global add pomd																# general a pomodoro for breaks exercises
+	# npm install -g svg2png-cli
+	# npm install -g tty.js
+	# tools : python pip  ============================================================
+	-pip install --upgrade pip													# upgrade pip self
+	-pip3 install --upgrade pip setuptools							# package manager for python
+	-pip install -U $$(pip freeze | awk -F'[/=]' '{print $$1}')
+	-pip3 install -U $$(pip3 freeze | awk -F'[/=]' '{print $$1}')
+	# -pip3 install localstack															# dev stack aws
+	# -pip3 install csvkit																# csv editor / converter
+	# -pip3 install --upgrade flake8												# lint python (ale)
+	# -pip3 install --upgrade autopep8											# lint python based on pep8
+	# -pip3 install weasyprint														# doc easy pdf printer https://weasyprint.org/start/
+	# tools : ruby gem  ============================================================
+	-gem update
+	# -gem install mdl																			# linter markdown
+	# -gem install cucumber																# test cucumber ruby rails
+	@printf ":: summary ::\n"
 
-tex-init:												## ensure all latex deps are installed
-	@printf ":: installing latex deps ::\n"
-	tlmgr update --self														# update texmaker packager
-	tlmgr update --all														# update texmaker packages
-	tlmgr install collection-fontsrecommended			# update tex fonts
+tex-ensure:											## ensure all latex deps are installed
+	@printf ":: ensure tex is present latex deps ::\n"
+	tlmgr update --self																	# update texmaker packager
+	tlmgr update --all																	# update texmaker packages
+	tlmgr install collection-fontsrecommended						# update tex fonts
 	tlmgr install lualatex-math
-	tlmgr install fontspec												# fontspec used by xelatex and lualatex
+	tlmgr install fontspec															# fontspec used by xelatex and lualatex
 
 ##@ Helpers
 
