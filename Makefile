@@ -68,6 +68,7 @@ check:													## check local system / environment
 	# yarn - standard prettier
 	# python - 
 	@printf "\n"
+	-printf ":: brew packages ::\n\n" && brew list && brew cask list && printf "\n";
 	-printf ":: node yarn packages ::\n\n" && yarn global list && printf "\n";
 	-printf ":: ruby gem packages ::\n" && gem list && printf "\n";
 	-printf ":: python 2 pip packages ::\n\n" && pip list && printf "\n";
