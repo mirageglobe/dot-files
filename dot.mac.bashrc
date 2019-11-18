@@ -118,7 +118,7 @@ git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Crese
 
 # ==> added for fzf
 # note that fzf will try to install this to default .bashrc too
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # ==> added for jenv (http://www.jenv.be/)
 # export PATH="$HOME/.jenv/bin:$PATH"
@@ -155,7 +155,24 @@ fi
 
 printf "%s" "[+] aliases "
 
-# ==> alias system and network related
+# ==> system and network related
+
+alias _fox_sys="echo '
+:: help systems and network ::
+
+  _sys                          # show general system information + listening ports + processes
+  _sysps                        # show running processes
+
+  _net                          # show all network information
+  _netiport                     # investigate listing ports
+  _netint                       # show network interfaces
+  _netip                        # show ip of en0
+
+:: others ::
+
+  ifconfig -a | grep ether      # get mac address
+  ifconfig | grep inet          # get inet
+'"
 
 fn_fox_network_info() {
   printf ":: about network (me) ::\n";
@@ -183,23 +200,6 @@ fn_fox_showmaclaunch() {
   launchctl list | grep -v "com.apple";
 }
 
-alias _fox_sys="echo '
-:: help systems and network ::
-
-  _sys                          # show general system information + listening ports + processes
-  _sysps                        # show running processes
-
-  _net                          # show all network information
-  _netiport                     # investigate listing ports
-  _netint                       # show network interfaces
-  _netip                        # show ip of en0
-
-:: others ::
-
-  ifconfig -a | grep ether      # get mac address
-  ifconfig | grep inet          # get inet
-'"
-
 alias _sys="fn_fox_system;fn_fox_showmaclaunch;"
 alias _sysps="printf ':: showing running processes ::\n';ps -a;"
 
@@ -208,34 +208,7 @@ alias _netiport="printf ':: investigate listening ports :: \n';sudo lsof -PiTCP 
 alias _netint="printf ':: show network interfaces ::\n'; tcpdump -D;"
 alias _netip="printf ':: show ip on en0 ::\n'; ifconfig en0 | grep inet;"
 
-# ==> alias shell related
-
-fn_fox_system() {
-  printf ":: system information :: \n"
-  printf "date \t\t\t $(fn_fox_now_date) \n"
-  printf "date time \t\t $(fn_fox_now_datetime) \n"
-  printf "ip (class c) \t\t $(fn_fox_network_getip) \n"
-  printf "terminal encoding \t $(locale charmap) \n"
-  printf "\n"
-  printf "current user grps \t $(id) \n"
-}
-
-fn_fox_aws_profile_load_now_datetime() {
-  echo "$(date +\"%Y%m%d-%H%M%S\")";
-}
-
-fn_fox_now_date() {
-  echo "$(date +\"%Y%m%d\")";
-}
-
-fn_fox_now_time() {
-  echo "$(date +\"%H%M%S\")";
-}
-
-fn_fox_sys_get_current_folder() {
-  # printf '%s\n' "${PWD##*/}";
-  echo "$(basename $PWD)";
-}
+# ## ==> shell
 
 alias _fox="echo '
 :: help common tools ::
@@ -273,6 +246,33 @@ alias _fox="echo '
   - 5xx (server side) - 503 (service unavailable) - 504 (gateway timeout)
 '"
 
+fn_fox_system() {
+  printf ":: system information :: \n"
+  printf "date \t\t\t $(fn_fox_now_date) \n"
+  printf "date time \t\t $(fn_fox_now_datetime) \n"
+  printf "ip (class c) \t\t $(fn_fox_network_getip) \n"
+  printf "terminal encoding \t $(locale charmap) \n"
+  printf "\n"
+  printf "current user grps \t $(id) \n"
+}
+
+fn_fox_aws_profile_load_now_datetime() {
+  echo "$(date +\"%Y%m%d-%H%M%S\")";
+}
+
+fn_fox_now_date() {
+  echo "$(date +\"%Y%m%d\")";
+}
+
+fn_fox_now_time() {
+  echo "$(date +\"%H%M%S\")";
+}
+
+fn_fox_sys_get_current_folder() {
+  # printf '%s\n' "${PWD##*/}";
+  echo "$(basename $PWD)";
+}
+
 alias _ssh="printf ':: loading default-key to agent :: \n';ssh-add;"
 alias _sshkeygen="printf ':: generating standard sshkey :: \n';ssh-keygen -b 2048 -t rsa -f ~/.ssh/id_rsa_standard -C \"( $HOSTNAME : changeme@gmail.com ) \""
 
@@ -298,7 +298,7 @@ alias _fzf="fzf --height=50%"
 
 alias _emo_shrug="echo '¯\_(ツ)_/¯'";
 
-# ==> alias git
+# ## ==> git
 
 alias _fox_git="echo '
 :: help git ::
@@ -349,7 +349,26 @@ alias _git_develop="git checkout develop;"
 alias _git_staging="git checkout staging;"
 alias _git_master="git checkout master;"
 
-# ==> alias docker related
+# ## ==> docker
+
+alias _fox_docker="echo '
+:: help docker ::
+
+  _dc_ps                        # list all process
+  _dc_psless                    # list all process (fit width)
+  _dc_pspurge                   # purge all processes
+  _dc_img                       # list images
+  _dc_imgpurge                  # purge all images
+  _dc_vol                       # list all volumes
+
+  _dc_purge                     # system prune (purge all containers and images)
+  _dc_ssh <container id>        # shell ssh into container (default bash)
+  _dc_sh <container id>         # shell sh into container
+  _dc_bash <container id>       # shell bash into container
+  _dc_logs <container id>       # show docker logs
+
+  _dc_stop <container id>       # stop container
+'"
 
 fn_fox_docker_imagepurge(){
   # printf ":: removing dangling images :: \n";
@@ -378,25 +397,6 @@ fn_fox_docker_bash() {
   docker exec -it $1 bash;
 }
 
-alias _fox_docker="echo '
-:: help docker ::
-
-  _dc_ps                        # list all process
-  _dc_psless                    # list all process (fit width)
-  _dc_pspurge                   # purge all processes
-  _dc_img                       # list images
-  _dc_imgpurge                  # purge all images
-  _dc_vol                       # list all volumes
-
-  _dc_purge                     # system prune (purge all containers and images)
-  _dc_ssh <container id>        # shell ssh into container (default bash)
-  _dc_sh <container id>         # shell sh into container
-  _dc_bash <container id>       # shell bash into container
-  _dc_logs <container id>       # show docker logs
-
-  _dc_stop <container id>       # stop container
-'"
-
 alias _dc_ps="docker ps -a"
 alias _dc_psless="docker ps | less -S"
 alias _dc_pspurge="fn_fox_docker_runningpurge;"
@@ -412,7 +412,18 @@ alias _dc_logs="docker logs"
 
 alias _dc_stop="echo ':: stopping running container ::'; fn_fox_docker_rmrunning"
 
-# ==> alias aws related
+# ## ==> aws
+
+alias _fox_aws="echo '
+:: help aws ::
+
+  _fox_aws_config                                     # show aws account configure
+  _fox_aws_config_init                                # set up aws account using configuration
+  _fox_aws_access_key_id <profile>                    # get aws key id
+  _fox_aws_secret_access_key <profile>                # get aws secret access key
+  _fox_aws_profile_ls                                 # list all profiles
+  _fox_aws_profile_load <profile>                     # load profile
+'"
 
 fn_fox_aws_profile_load() {
   printf ":: loading aws profile(s) : $1 ::\n";
@@ -435,21 +446,12 @@ fn_fox_aws_profile_show() {
   printf "\n"
 }
 
-alias _fox_aws="echo '
-:: help aws ::
-
-  _fox_aws_access_key_id <profile>                    # get aws key id
-  _fox_aws_secret_access_key <profile>                # get aws secret access key
-  _fox_aws_profile_ls                                 # list all profiles
-  _fox_aws_profile_load <profile>                     # load profile
-'"
-
-alias _fox_aws_access_key_id="aws configure get aws_access_key_id --profile "
-alias _fox_aws_secret_access_key="aws configure get aws_secret_access_key --profile "
-alias _fox_aws_profile_ls="fn_fox_aws_profile_show"
-alias _fox_aws_profile_load="fn_fox_aws_profile_load"
-
-# ==> alias general
+alias _fox_aws_config="cat ~/.aws/config; cat ~/.aws/credentials;"
+alias _fox_aws_config_init="mkdir -pv ~/.aws && aws configure;"
+alias _fox_aws_access_key_id="aws configure get aws_access_key_id --profile;"
+alias _fox_aws_secret_access_key="aws configure get aws_secret_access_key --profile;"
+alias _fox_aws_profile_ls="fn_fox_aws_profile_show;"
+alias _fox_aws_profile_load="fn_fox_aws_profile_load;"
 
 # ## ==> graphing using dot
 
@@ -459,7 +461,7 @@ alias _fox_aws_profile_load="fn_fox_aws_profile_load"
 #      b -> d;
 #  }
 
-fn_fox_general_graph() {
+fn_fox_graph() {
   if [ -z "$1" ]; then
     echo "usage : _fox_graph <file>"
   else
@@ -469,13 +471,15 @@ fn_fox_general_graph() {
 
 alias _fox_graph="fn_fox_general_graph"
 
-# ## ==> function get with curl
+# ## ==> get file with curl
 
-function _fox_get() {
+fn_fox_file_get() {
   # usage : _fox_get [local location] [remote file]
   # example _fox_get "~/Desktop" "https://github.com/99designs/aws-vault/releases/download/v4.7.1/aws-vault-darwin-amd64.dmg"
   pushd $1 && curl -O $2 && popd;
 }
+
+alias _fox_file_get="fn_fox_get"
 
 # ===
 # === bash loader end
