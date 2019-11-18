@@ -155,7 +155,7 @@ Plug 'tpope/vim-repeat'                               " enables repeating comman
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'                               " enables super fast fuzzy search with :FZF
-Plug 'tpope/vim-vinegar'                              " enables file drawer with - key
+" Plug 'tpope/vim-vinegar'                              " enables file drawer with - key
 Plug 'airblade/vim-gitgutter'                         " shows git status in gutter
 Plug 'tpope/vim-fugitive'                             " git in vim
 " Plug tpope/vim-rhubarb
@@ -425,6 +425,12 @@ let g:terraform_fmt_on_save=1
 
 " https://stackoverflow.com/questions/3776117/what-is-the-difference-between-the-remap-noremap-nnoremap-and-vnoremap-mapping
 
+" maps base leader key from , to space
+let mapleader = "\<space>"
+
+" general maps
+" nmap <Leader> a# ===<ESC>Vgcc<ESC>^f=;;<esc>a<space>
+
 " read an empty template into current file - type ,ruby
 nnoremap ,c :-1read ~/dot-files/vim-nanotemplate/template.c.c<CR>
 nnoremap ,php :-1read ~/dot-files/vim-nanotemplate/template.php.php<CR>
@@ -435,16 +441,16 @@ nnoremap ,tf :-1read ~/dot-files/vim-nanotemplate/template.terraform.tf<CR>
 
 " note that this remap uses gcc : timpopes auto commenter. method to
 " append ===, comment this, move cursor to first marker, append mode
-nmap ,hh a#<SPACE>===<CR>#<SPACE>===<SPACE><CR>#<SPACE>===<ESC>Vkkgcc<ESC>j^f=;;<ESC>a<SPACE>
-nmap ,hj a# ===<ESC>Vgcc<ESC>^f=;;<esc>a<space>
-nmap ,hk a## ==><ESC>Vgcc<ESC>^f=ll<esc>a<space>
-nmap ,hl a### >=><ESC>Vgcc<ESC>^f=ll<esc>a<space>
+nmap <Leader>hh a#<SPACE>===<CR>#<SPACE>===<SPACE><CR>#<SPACE>===<ESC>Vkkgcc<ESC>j^f=;;<ESC>a<SPACE>
+nmap <Leader>hj a# ===<ESC>Vgcc<ESC>^f=;;<esc>a<space>
+nmap <Leader>hk a## ==><ESC>Vgcc<ESC>^f=ll<esc>a<space>
+nmap <Leader>hl a### >=><ESC>Vgcc<ESC>^f=ll<esc>a<space>
 
-nmap ,h1 a#<ESC>$a<SPACE>
-nmap ,h2 a##<ESC>$a<SPACE>
-nmap ,h3 a###<ESC>$a<SPACE>
+nmap <Leader>h1 a#<ESC>$a<SPACE>
+nmap <Leader>h2 a##<ESC>$a<SPACE>
+nmap <Leader>h3 a###<ESC>$a<SPACE>
 
-nmap ,ref aref - <ESC>$a
+nmap <Leader>ref aref - <ESC>$a
 
 " filetype specific snippets
 " ref - http://vimdoc.sourceforge.net/htmldoc/autocmd.html
