@@ -437,15 +437,16 @@ noremap <Leader><SPACE> :Explore<CR>
 " nmap <Leader> a# ===<ESC>Vgcc<ESC>^f=;;<esc>a<space>
 
 " read an empty template into current file - type ,ruby
-nnoremap ,c :-1read ~/dot-files/vim-nanotemplate/template.c.c<CR>
-nnoremap ,php :-1read ~/dot-files/vim-nanotemplate/template.php.php<CR>
-nnoremap ,py :-1read ~/dot-files/vim-nanotemplate/template.python.py<CR>
-nnoremap ,rb :-1read ~/dot-files/vim-nanotemplate/template.ruby.rb<CR>
-nnoremap ,sh :-1read ~/dot-files/vim-nanotemplate/template.bash.sh<CR>
-nnoremap ,tf :-1read ~/dot-files/vim-nanotemplate/template.terraform.tf<CR>
+nnoremap <Leader>c :-1read ~/dot-files/vim-nanotemplate/template.c.c<CR>
+nnoremap <Leader>php :-1read ~/dot-files/vim-nanotemplate/template.php.php<CR>
+nnoremap <Leader>py :-1read ~/dot-files/vim-nanotemplate/template.python.py<CR>
+nnoremap <Leader>rb :-1read ~/dot-files/vim-nanotemplate/template.ruby.rb<CR>
+nnoremap <Leader>sh :-1read ~/dot-files/vim-nanotemplate/template.bash.sh<CR>
+nnoremap <Leader>tf :-1read ~/dot-files/vim-nanotemplate/template.terraform.tf<CR>
 
 " note that this remap uses gcc : timpopes auto commenter. method to
 " append ===, comment this, move cursor to first marker, append mode
+
 nmap <Leader>hh a#<SPACE>===<CR>#<SPACE>===<SPACE><CR>#<SPACE>===<ESC>Vkkgcc<ESC>j^f=;;<ESC>a<SPACE>
 nmap <Leader>hj a# ===<ESC>Vgcc<ESC>^f=;;<esc>a<space>
 nmap <Leader>hk a## ==><ESC>Vgcc<ESC>^f=ll<esc>a<space>

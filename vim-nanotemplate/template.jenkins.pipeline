@@ -1,0 +1,53 @@
+#!/usr/bin/env groovy
+
+properties([
+    buildDiscarder(
+        logRotator(
+            daysToKeepStr: '5',
+            numToKeepStr: '5'
+        )
+    ),
+    parameters([
+        string(name: 'ACCOUNT_ID', trim: true),
+        string(name: 'REGION', defaultValue: 'eu-west-2', trim: true),
+    ])
+])
+
+node {
+    // prod cluster - ireland (production-consul-cd6cd6cd6cd6) / staging cluster - london (staging-consul-cd8cd8c) / develop cluster - (development-consul-8e8e76s)
+    def AWS_ACCOUNT_ID = "58585858585858"
+    def AWS_REGION = "eu-west-1" // ireland : eu-west-1 / london : eu-west-2
+
+    // docker repo example arn - 5858585858585777.dkr.ecr.eu-west-1.amazonaws.com
+
+    // nexus 
+    def NEXUS_REPO_URI = "nexus.company.com"
+
+    // repo target : change docker_repo_uri to point to desired repo location either aws or nexus
+    def REPO_URI = "${NEXUS_REPO_URI}"
+    def DOCKER_PROJECT = "projectname"
+    def BUILD_ENV = env.BRANCH_NAME
+
+    try {
+        stage ('Rollback') {
+            sh 'echo test'
+            // describe current service : aws ecs describe-services --cluster development-consul-8e8e8e8e8e --services project-backend
+            // def TASK_DEF_PREV = sh(returnStdout: true, script: 'aws ecs describe-services --cluster development-consul-8e8e8e8e8e --services project-backend').trim()
+            def TASK_DEF_PREV = "testval"
+            // sh "PREVIOUS_TASK_DEFINITION=expr `aws ecs describe-services --services project-backend --cluster development-consul-8e8e8e8e | python -c \"import sys, json; print json.load(sys.stdin)['services'][0]['taskDefinition']\" | grep -o -P \"[0-9]+$\"` - 1; echo $PREVIOUS_TASK_DEFINITION"
+            sh 'echo ${TASK_DEF_PREV}'
+            sh 'echo testend'
+        }
+    } catch (ex) {
+        stage('Notify') {
+            slackSend baseUrl: 'https://dekopay.slack.com/services/hooks/jenkins-ci/', color: 'danger', message: "Build of ${DOCKER_PROJECT} failed: ${ex}", tokenCredentialId: 'slack-jenkins-company-com'
+            error(ex)
+        }
+    } finally {
+        stage('Clean Up') {
+            // sh "make stop"
+            cleanWs()
+        }
+    }
+}
+
