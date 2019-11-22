@@ -429,6 +429,7 @@ let g:terraform_fmt_on_save=1
 let mapleader = "\<space>"
 
 " general maps
+noremap <Leader><SPACE> :Explore<CR>
 " nmap <Leader> a# ===<ESC>Vgcc<ESC>^f=;;<esc>a<space>
 
 " read an empty template into current file - type ,ruby
@@ -478,3 +479,10 @@ endif " if exists("did_load_filetypes")
 
 " === snippets end
 
+" === fzf
+
+command! -bang -nargs=* -complete=dir Files
+      \ call fzf#vim#files(<q-args>,
+      \   <bang>0 ? fzf#vim#with_preview('up:60%')
+      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+      \   <bang>0)

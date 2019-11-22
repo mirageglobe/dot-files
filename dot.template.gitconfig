@@ -1,0 +1,8 @@
+[alias]
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+[user]
+	email = mirageglobe@gmail.com
+  name = jimmy lim
+; [includeIf "gitdir:~/work/"]
+;   path = ~/work/.gitconfig
+;   email = jimmy.lim@myworkemail
