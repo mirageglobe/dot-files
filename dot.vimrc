@@ -8,14 +8,15 @@
 " if filereadable(expand("~/dot.vimrc"))
 "   source ~/dot.vimrc
 " endif
-
-" if you are installing on a new machine:
 "
-" install powerline fonts by:
-" - https://github.com/powerline/fonts
-" cd ~
-" git clone https://github.com/powerline/fonts.git
-" cd fonts && sh install.sh
+" === iterm2
+"
+" or nerd fonts and use iterm2 to change font to 
+" Font -> FuraCode Nerd Font [Regular] [12]
+" Use built-in Powerline glyphs -> true
+" Enable subpixel anti-aliasing -> true
+" Use ligatures -> true
+" Anti-aliased -> true
 
 " === vim start
 
@@ -103,20 +104,6 @@ set omnifunc=syntaxcomplete#Complete
 " turn on vims spell checker
 " set spell spelllang=en_us
 set spell spelllang=en_gb
-
-" ==> aliases
-" ref - http://learnvimscriptthehardway.stevelosh.com/chapters/08.html
-" ref - http://learnvimscriptthehardway.stevelosh.com/chapters/03.html
-
-" i = insert / c = command / v = visual / n = normal
-" map = single key map / abbrev = statment map (alias)
-" note : do not use comments AFTER the cabbrev line as it reads in as command
-
-" split vertical and launch terminal
-cabbrev termv vertical terminal
-
-" split horizontal (default) and launch terminal
-cabbrev termh terminal
 
 " === vim end
 
@@ -411,6 +398,23 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:terraform_fmt_on_save=1
 
 " === vim polyglot end
+
+" === aliases and leaderboard shortcuts
+"
+" ref - http://learnvimscriptthehardway.stevelosh.com/chapters/08.html
+" ref - http://learnvimscriptthehardway.stevelosh.com/chapters/03.html
+
+" i = insert / c = command / v = visual / n = normal
+" map = single key map / abbrev = statment map (alias)
+" note : do not use comments AFTER the cabbrev line as it reads in as command
+
+" split vertical and launch terminal
+cabbrev termv vertical terminal
+
+" split horizontal (default) and launch terminal
+cabbrev termh terminal
+
+" === aliases end
 
 " === snippets start
 
