@@ -36,8 +36,17 @@ MENU := now-datetime now-date now-time now-epoch version vinit vpatch vminor vma
 
 # === functions
 
-define fn_check_command
-	command -V $(1) || echo $(1) : $(2)
+define fn_check_command_note
+	command -V $(1) || printf "$(2)"
+endef
+
+define fn_print_header
+	printf "\n==> $(1)\n\n";
+endef
+
+define fn_print_header_command
+	printf "\n==> $(1)\n\n";
+	$(2);
 endef
 
 # === main
@@ -45,7 +54,7 @@ endef
 ##@ Menu
 
 launch:													## loads basic init tools
-	@printf ":: loading basic shell tools ::\n"
+	@$(call fn_print_header,launch basic tools)
 	open https://mail.google.com
 	open https://www.reddit.com/
 	open https://devhints.io
@@ -53,42 +62,40 @@ launch:													## loads basic init tools
 	open https://www.noisli.com/
 
 check:													## check local system / environment
-	@printf ":: check tools ::\n\n"
-	@$(call fn_check_command, curl,)
-	@$(call fn_check_command, jq,)
-	@$(call fn_check_command, python,)
-	@$(call fn_check_command, pip,)
-	@$(call fn_check_command, ruby,)
-	@$(call fn_check_command, yarn,)
-	@$(call fn_check_command, wget,)
-	@$(call fn_check_command, vim,)
-	@$(call fn_check_command, bat,"see https://github.com/sharkdp/bat/releases/latest")
-	@$(call fn_check_command, rg,"see https://github.com/BurntSushi/ripgrep/releases/latest")
+	@$(call fn_print_header,check tools)
+	@$(call fn_check_command_note,curl,)
+	@$(call fn_check_command_note,jq,)
+	@$(call fn_check_command_note,python,)
+	@$(call fn_check_command_note,pip,)
+	@$(call fn_check_command_note,ruby,)
+	@$(call fn_check_command_note,yarn,)
+	@$(call fn_check_command_note,wget,)
+	@$(call fn_check_command_note,vim,)
+	@$(call fn_check_command_note,bat,see https://github.com/sharkdp/bat/releases/latest)
+	@$(call fn_check_command_note,rg,see https://github.com/BurntSushi/ripgrep/releases/latest)
 	# bin - fx tree pstree
-	# yarn - standard prettier
-	# python - 
-	@printf "\n"
-	-printf ":: brew packages ::\n\n" && brew list && brew cask list && printf "\n";
-	-printf ":: node yarn packages ::\n\n" && yarn global list && printf "\n";
-	-printf ":: ruby gem packages ::\n" && gem list && printf "\n";
-	-printf ":: python 2 pip packages ::\n\n" && pip list && printf "\n";
-	-printf ":: python 3 pip3 packages ::\n\n" && pip3 list && printf "\n";
-	-printf ":: color test ::\n\n" && printf "number of colors : " && tput colors && printf "\n";
-	-printf ":: summary :: \n\n- note that pip (python2 will be deprecated. install as pip3)\n\n";
+	@$(call fn_print_header_command,brew info,brew list && brew cask list,)
+	@$(call fn_print_header_command,node yarn info,yarn global list,)
+	@$(call fn_print_header_command,ruby gem info,gem list,)
+	@$(call fn_print_header_command,python 2 info,pip list,)
+	@$(call fn_print_header_command,python 3 info,pip3 list,)
+	@$(call fn_print_header_command,color test,tput colors,)
+	@$(call fn_print_header,summary)
+	@echo "- note that pip (python2 will be deprecated. install as pip3)";
 
 mac-ensure:											## ensure that folder(s), package managers, tools are present
-	# tools : folders  ============================================================
-	@printf ":: ensure environment is pristine ::\n"
-	@printf ":: notes ::\n"
-	# cp dot.vimrc.template ~/.vimrc
-	# cp ~/.bashrc ~/.bashrc.bak
-	# cp dot.mac.bashrc.template ~/.bashrc
-	# tools : common  ============================================================
-	@printf ":: ensure tools folder(s) exist ::\n"
-	mkdir -pv ~/.tools
-	@printf "\t add export PATH=\"$HOME/.tools:$PATH\""
-	@printf ":: ensure vim folder(s) exist ::\n"
-	mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
+	# environment : config										==============================
+	# @$(call fn_print_header,ensure folders are present)
+	# # cp dot.vimrc.template ~/.vimrc
+	# # cp ~/.bashrc ~/.bashrc.bak
+	# # cp dot.mac.bashrc.template ~/.bashrc
+	# tools : common bin											==============================
+	@$(call fn_print_header,ensure tool folder exist)
+	-mkdir -pv ~/.tools
+	@echo "- add export PATH=\"$HOME/.tools:$PATH\""
+	# tools : vim															==============================
+	@$(call fn_print_header,ensure vim folders exist)
+	-mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
 	# tools : frameworks  ============================================================
 	-pip3 install ansible || pip3 install -U ansible		# cloud ansible
 	-gem install terraform_landscape										# adding terraform extensions
@@ -99,6 +106,7 @@ mac-ensure:											## ensure that folder(s), package managers, tools are pres
 	# recommended - brew cask install font-firacode-nerd-font font-hasklig-nerd-font font-inconsolata-nerd-font font-iosevka-nerd-font font-monoid-nerd-font font-noto-nerd-font font-robotomono-nerd-font font-tinos-nerd-font
 	@printf ":: updating mac homebrew/yarn/pip/gem/tlmgr ::\n"
 	# tools : node yarn  ============================================================
+	# yarn - standard prettier
 	-yarn global upgrade
 	-yarn global add semver															# dev semver tool for node and other frameworks (try shell only : use https://github.com/fsaintjacques/semver-tool)
 	-yarn global add write-good													# lint english grammer
