@@ -74,12 +74,12 @@ check:													## check local system / environment
 	@$(call fn_check_command_note,bat,see https://github.com/sharkdp/bat/releases/latest)
 	@$(call fn_check_command_note,rg,see https://github.com/BurntSushi/ripgrep/releases/latest)
 	# bin - fx tree pstree
-	@$(call fn_print_header_command,brew info,brew list && brew cask list,)
-	@$(call fn_print_header_command,node yarn info,yarn global list,)
-	@$(call fn_print_header_command,ruby gem info,gem list,)
-	@$(call fn_print_header_command,python 2 info,pip list,)
-	@$(call fn_print_header_command,python 3 info,pip3 list,)
-	@$(call fn_print_header_command,color test,tput colors,)
+	@$(call fn_print_header_command,brew info,brew list && brew cask list)
+	@$(call fn_print_header_command,node yarn info,yarn global list)
+	@$(call fn_print_header_command,ruby gem info,gem list)
+	@$(call fn_print_header_command,python 2 info,pip list)
+	@$(call fn_print_header_command,python 3 info,pip3 list)
+	@$(call fn_print_header_command,color test,tput colors)
 	@$(call fn_print_header,summary)
 	@echo "- note that pip (python2 will be deprecated. install as pip3)";
 
@@ -92,20 +92,16 @@ mac-ensure:											## ensure that folder(s), package managers, tools are pres
 	# tools : common bin											==============================
 	@$(call fn_print_header,ensure tool folder exist)
 	-mkdir -pv ~/.tools
-	@echo "- add export PATH=\"$HOME/.tools:$PATH\""
+	@echo "- add export PATH=\"$HOME/.tools/bin:$PATH\""
+	@$(call fn_print_header,ensure completion scripts are in tools folder)
+	curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash > ~/.tools/dot.bash-completion.git.bash
+	@$(call fn_print_header,ensure fonts are on desktop)
+	# recommended - brew cask install font-firacode-nerd-font font-hasklig-nerd-font font-inconsolata-nerd-font font-iosevka-nerd-font font-monoid-nerd-font font-noto-nerd-font font-robotomono-nerd-font font-tinos-nerd-font
 	# tools : vim															==============================
 	@$(call fn_print_header,ensure vim folders exist)
 	-mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
-	# tools : frameworks  ============================================================
-	-pip3 install ansible || pip3 install -U ansible		# cloud ansible
-	-gem install terraform_landscape										# adding terraform extensions
-	# go get -u sigs.k8s.io/kind												# install kind (kubernetes in docker)
-	@printf ":: fetching completion to ~/dot.bash-completion.xxx.bash ::\n"
-	curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash > ~/.tools/dot.bash-completion.git.bash
-	@printf ":: fetching fonts to desktop ::\n"
-	# recommended - brew cask install font-firacode-nerd-font font-hasklig-nerd-font font-inconsolata-nerd-font font-iosevka-nerd-font font-monoid-nerd-font font-noto-nerd-font font-robotomono-nerd-font font-tinos-nerd-font
-	@printf ":: updating mac homebrew/yarn/pip/gem/tlmgr ::\n"
-	# tools : node yarn  ============================================================
+	# tools : node yarn												==============================
+	@$(call fn_print_header,ensure node yarn bins are pristine)
 	# yarn - standard prettier
 	-yarn global upgrade
 	-yarn global add semver															# dev semver tool for node and other frameworks (try shell only : use https://github.com/fsaintjacques/semver-tool)
@@ -130,24 +126,30 @@ mac-ensure:											## ensure that folder(s), package managers, tools are pres
 	-yarn global add pomd																# general a pomodoro for breaks exercises
 	# npm install -g svg2png-cli
 	# npm install -g tty.js
-	# tools : python pip  ============================================================
+	# tools : python pip												==============================
 	-pip install --upgrade pip													# upgrade pip self
 	-pip3 install --upgrade pip setuptools							# package manager for python
 	-pip install -U $$(pip freeze | awk -F'[/=]' '{print $$1}')
 	-pip3 install -U $$(pip3 freeze | awk -F'[/=]' '{print $$1}')
+	-pip3 install ansible || pip3 install -U ansible		# cloud ansible
 	# -pip3 install localstack															# dev stack aws
 	# -pip3 install csvkit																# csv editor / converter
 	# -pip3 install --upgrade flake8												# lint python (ale)
 	# -pip3 install --upgrade autopep8											# lint python based on pep8
 	# -pip3 install weasyprint														# doc easy pdf printer https://weasyprint.org/start/
-	# tools : ruby gem  ============================================================
+	# tools : ruby gems													==============================
+	@$(call fn_print_header,ensure ruby gems are pristine)
 	-gem update
+	-gem install terraform_landscape										# adding terraform extensions
 	# -gem install mdl																			# linter markdown
 	# -gem install cucumber																# test cucumber ruby rails
-	@printf ":: summary ::\n"
+	# tools : go bin														==============================
+	@$(call fn_print_header,ensure go bins are pristine)
+	# go get -u sigs.k8s.io/kind												# install kind (kubernetes in docker)
+	@$(call fn_print_header,summary)
 
 tex-ensure:											## ensure all latex deps are installed
-	@printf ":: ensure tex is present latex deps ::\n"
+	@$(call fn_print_header,ensure latex and tlmgr are pristine)
 	tlmgr update --self																	# update texmaker packager
 	tlmgr update --all																	# update texmaker packages
 	tlmgr install collection-fontsrecommended						# update tex fonts
