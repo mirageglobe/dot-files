@@ -41,12 +41,20 @@ define fn_check_command_note
 endef
 
 define fn_print_header
-	printf "\n==> $(1)\n\n";
+	echo "";
+	echo "==> $(1)";
+	echo "";
 endef
 
 define fn_print_header_command
-	printf "\n==> $(1)\n\n";
+	echo "";
+	echo "==> $(1)";
+	echo "";
 	$(2);
+endef
+
+define fn_print_tab
+	printf "%s\t\t%s\t\t%s\n" $(1) $(2) $(3)
 endef
 
 # === main
@@ -60,6 +68,13 @@ launch:													## loads basic init tools
 	open https://devhints.io
 	open https://www.nerdfonts.com/
 	open https://www.noisli.com/
+
+docker:													## common used docker apps
+	@$(call fn_print_header,common docker apps)
+	@$(call fn_print_tab,"tool","commands",)
+	@$(call fn_print_tab, "----","--------",)
+	@$(call fn_print_tab,"browser","docker run --rm -it browsh/browsh",)
+	@echo ""
 
 check:													## check local system / environment
 	@$(call fn_print_header,check tools)
@@ -84,77 +99,80 @@ check:													## check local system / environment
 	@echo "- note that pip (python2 will be deprecated. install as pip3)";
 
 mac-ensure:											## ensure that folder(s), package managers, tools are present
-	# environment : config										==============================
-	# @$(call fn_print_header,ensure folders are present)
-	# # cp dot.vimrc.template ~/.vimrc
-	# # cp ~/.bashrc ~/.bashrc.bak
-	# # cp dot.mac.bashrc.template ~/.bashrc
-	# tools : common bin											==============================
+	@$(call fn_print_header,note)
+	@echo "- python pip, ruby gems, node yarn are required dependancies";
+	@# environment : config									========================================
+	@$(call fn_print_header,ensure folders are present)
+	# cp dot.vimrc.template ~/.vimrc
+	# cp ~/.bashrc ~/.bashrc.bak
+	# cp dot.mac.bashrc.template ~/.bashrc
+	@# tools : common bin										========================================
 	@$(call fn_print_header,ensure tool folder exist)
 	-mkdir -pv ~/.tools
-	@echo "- add export PATH=\"$HOME/.tools/bin:$PATH\""
+	@echo '- add export PATH="$$HOME/.tools/bin:$$PATH"'
 	@$(call fn_print_header,ensure completion scripts are in tools folder)
-	curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash > ~/.tools/dot.bash-completion.git.bash
+	-curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash > ~/.tools/dot.bash-completion.git.bash
 	@$(call fn_print_header,ensure fonts are on desktop)
-	# recommended - brew cask install font-firacode-nerd-font font-hasklig-nerd-font font-inconsolata-nerd-font font-iosevka-nerd-font font-monoid-nerd-font font-noto-nerd-font font-robotomono-nerd-font font-tinos-nerd-font
-	# tools : vim															==============================
+	# recommended
+	# - brew cask install font-firacode-nerd-font font-hasklig-nerd-font font-inconsolata-nerd-font font-iosevka-nerd-font font-monoid-nerd-font font-noto-nerd-font font-robotomono-nerd-font font-tinos-nerd-font
+	@# tools : vim													========================================
 	@$(call fn_print_header,ensure vim folders exist)
 	-mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
-	# tools : node yarn												==============================
+	@# tools : node yarn										========================================
 	@$(call fn_print_header,ensure node yarn bins are pristine)
 	# yarn - standard prettier
 	-yarn global upgrade
-	-yarn global add semver															# dev semver tool for node and other frameworks (try shell only : use https://github.com/fsaintjacques/semver-tool)
-	-yarn global add write-good													# lint english grammer
-	-yarn global add htmlhint														# lint html
-	# yarn global add stylelint														# lint
-	-yarn global add standard														# lint javascript (ale)
-	# yarn global add eslint															# lint javascript (ale)
-	-yarn global add prettier														# lint javascript fixer (ale)
-	-yarn global add jsonlint														# lint json
-	# -yarn global add vue-language-server									# linter vuejs (ale)
-	-yarn global add local-web-server											# server simple local web server - use ws to start
-	# yarn global add http-server													# server simple local web server
-	# yarn global add fauxton															# db ui - couchdb docker container missing fauxton
-	# -yarn global add hotel																# db https://github.com/typicode/hotel
-	# -yarn global add json-server													# db https://github.com/typicode/json-server#database
+	-yarn global add semver														# dev semver tool for node and other frameworks (try shell only : use https://github.com/fsaintjacques/semver-tool)
+	-yarn global add write-good												# lint english grammer
+	-yarn global add htmlhint													# lint html
+	# yarn global add stylelint													# lint
+	-yarn global add standard													# lint javascript (ale)
+	# yarn global add eslint														# lint javascript (ale)
+	-yarn global add prettier													# lint javascript fixer (ale)
+	-yarn global add jsonlint													# lint json
+	# -yarn global add vue-language-server							# linter vuejs (ale)
+	-yarn global add local-web-server									# server simple local web server - use ws to start
+	# yarn global add http-server												# server simple local web server
+	# yarn global add fauxton														# db ui - couchdb docker container missing fauxton
+	# -yarn global add hotel														# db https://github.com/typicode/hotel
+	# -yarn global add json-server											# db https://github.com/typicode/json-server#database
 	# https://netflix.github.io/pollyjs/#/
-	-yarn global add mountebank													# test mock server
-	-yarn global add nightwatch													# test e2e browser test - default by vuejs
-	-yarn global add bats																# test shell / bash test suite (bats-core)
-	# yarn add --dev cucumber															# test (add for project based) cucumber js
-	-yarn global add pomd																# general a pomodoro for breaks exercises
+	-yarn global add mountebank												# test mock server
+	-yarn global add nightwatch												# test e2e browser test - default by vuejs
+	-yarn global add bats															# test shell / bash test suite (bats-core)
+	# yarn add --dev cucumber														# test (per project) cucumber
+	-yarn global add pomd															# general pomodoro
+	# -yarn global add n																# node package manager
 	# npm install -g svg2png-cli
 	# npm install -g tty.js
-	# tools : python pip												==============================
-	-pip install --upgrade pip													# upgrade pip self
-	-pip3 install --upgrade pip setuptools							# package manager for python
+	@# tools : python pip										========================================
+	-pip install --upgrade pip												# upgrade pip self
+	-pip3 install --upgrade pip setuptools						# package manager for python
 	-pip install -U $$(pip freeze | awk -F'[/=]' '{print $$1}')
 	-pip3 install -U $$(pip3 freeze | awk -F'[/=]' '{print $$1}')
-	-pip3 install ansible || pip3 install -U ansible		# cloud ansible
-	# -pip3 install localstack															# dev stack aws
-	# -pip3 install csvkit																# csv editor / converter
-	# -pip3 install --upgrade flake8												# lint python (ale)
-	# -pip3 install --upgrade autopep8											# lint python based on pep8
-	# -pip3 install weasyprint														# doc easy pdf printer https://weasyprint.org/start/
-	# tools : ruby gems													==============================
+	-pip3 install ansible || pip3 install -U ansible	# cloud ansible
+	# -pip3 install localstack													# dev stack aws
+	# -pip3 install csvkit															# csv editor / converter
+	# -pip3 install --upgrade flake8										# lint python (ale)
+	# -pip3 install --upgrade autopep8									# lint python based on pep8
+	# -pip3 install weasyprint													# doc easy pdf printer https://weasyprint.org/start/
+	@# tools : ruby gems										========================================
 	@$(call fn_print_header,ensure ruby gems are pristine)
 	-gem update
-	-gem install terraform_landscape										# adding terraform extensions
-	# -gem install mdl																			# linter markdown
-	# -gem install cucumber																# test cucumber ruby rails
-	# tools : go bin														==============================
+	-gem install terraform_landscape									# adding terraform extensions
+	# -gem install mdl																	# lint markdown
+	# -gem install cucumber															# test cucumber ruby rails
+	@# tools : go bin												========================================
 	@$(call fn_print_header,ensure go bins are pristine)
-	# go get -u sigs.k8s.io/kind												# install kind (kubernetes in docker)
+	# go get -u sigs.k8s.io/kind											# install kind (kubernetes in docker)
 	@$(call fn_print_header,summary)
 
 tex-ensure:											## ensure all latex deps are installed
 	@$(call fn_print_header,ensure latex and tlmgr are pristine)
-	tlmgr update --self																	# update texmaker packager
-	tlmgr update --all																	# update texmaker packages
-	tlmgr install collection-fontsrecommended						# update tex fonts
-	tlmgr install lualatex-math
-	tlmgr install fontspec															# fontspec used by xelatex and lualatex
+	tlmgr update --self																# update texmaker packager
+	tlmgr update --all																# update texmaker packages
+	tlmgr install collection-fontsrecommended					# update tex fonts
+	tlmgr install fontspec lualatex-math							# depend of xelatex lualatex
 
 ##@ Helpers
 
