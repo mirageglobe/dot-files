@@ -13,7 +13,7 @@
 # === targets
 
 # menu shortcuts targets
-MENU := launch check mac-ensure tex-ensure
+MENU := launch check bin-ensure mac-ensure tex-ensure
 
 # menu helpers targets
 MENU := now-datetime now-date now-time now-epoch version vinit vpatch vminor vmajor todo help
@@ -35,6 +35,10 @@ MENU := now-datetime now-date now-time now-epoch version vinit vpatch vminor vma
 .ONESHELL:
 
 # === functions
+
+define fn_check_file_regex
+	cat $(1) || grep "$(2)"
+endef
 
 define fn_check_command_note
 	command -V $(1) || printf "$(2)"
@@ -98,6 +102,19 @@ check:													## check local system / environment
 	@$(call fn_print_header,summary)
 	@echo "- note that pip (python2 will be deprecated. install as pip3)";
 
+bin-ensure:											## ensure that common tools are in .tools folder
+	@# tools : common bin										========================================
+	@$(call fn_print_header,"ensure tool folder exist")
+	-mkdir -pv ~/.tools/bin
+	@echo '- add export PATH="$$HOME/.tools/bin:$$PATH"'
+	@$(call fn_print_header,"ensure scripts are in tools/bin folder")
+	-cp $$HOME/dot-files/tools/* $$HOME/.tools/bin/
+	@$(call fn_print_header,"ensure completion scripts are in tools folder")
+	-curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash > ~/.tools/dot.bash-completion.git.bash
+	@$(call fn_print_header,"ensure fonts are on desktop")
+	# recommended
+	# - brew cask install font-firacode-nerd-font font-hasklig-nerd-font font-inconsolata-nerd-font font-iosevka-nerd-font font-monoid-nerd-font font-noto-nerd-font font-robotomono-nerd-font font-tinos-nerd-font
+
 mac-ensure:											## ensure that folder(s), package managers, tools are present
 	@$(call fn_print_header,note)
 	@echo "- python pip, ruby gems, node yarn are required dependancies";
@@ -106,15 +123,6 @@ mac-ensure:											## ensure that folder(s), package managers, tools are pres
 	# cp dot.vimrc.template ~/.vimrc
 	# cp ~/.bashrc ~/.bashrc.bak
 	# cp dot.mac.bashrc.template ~/.bashrc
-	@# tools : common bin										========================================
-	@$(call fn_print_header,ensure tool folder exist)
-	-mkdir -pv ~/.tools
-	@echo '- add export PATH="$$HOME/.tools/bin:$$PATH"'
-	@$(call fn_print_header,ensure completion scripts are in tools folder)
-	-curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash > ~/.tools/dot.bash-completion.git.bash
-	@$(call fn_print_header,ensure fonts are on desktop)
-	# recommended
-	# - brew cask install font-firacode-nerd-font font-hasklig-nerd-font font-inconsolata-nerd-font font-iosevka-nerd-font font-monoid-nerd-font font-noto-nerd-font font-robotomono-nerd-font font-tinos-nerd-font
 	@# tools : vim													========================================
 	@$(call fn_print_header,ensure vim folders exist)
 	-mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
