@@ -168,9 +168,9 @@ mac-ensure:											## ensure that folder(s), package managers, tools are pres
 	@# tools : ruby gems										========================================
 	@$(call fn_print_header,ensure ruby gems are pristine)
 	-gem update
-	-gem install terraform_landscape									# adding terraform extensions
-	# -gem install mdl																	# lint markdown
-	# -gem install cucumber															# test cucumber ruby rails
+	-gem install --user-install terraform_landscape			# adding terraform extensions
+	# -gem install --user-install mdl											# lint markdown
+	# -gem install --user-install cucumber								# test cucumber ruby rails
 	@# tools : go bin												========================================
 	@$(call fn_print_header,ensure go bins are pristine)
 	# go get -u sigs.k8s.io/kind											# install kind (kubernetes in docker)
