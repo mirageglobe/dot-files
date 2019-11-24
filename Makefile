@@ -106,9 +106,10 @@ bin-ensure:											## ensure that common tools are in .tools folder
 	@# tools : common bin										========================================
 	@$(call fn_print_header,"ensure tool folder exist")
 	-mkdir -pv ~/.tools/bin
-	@echo '- add export PATH="$$HOME/.tools/bin:$$PATH"'
+	-grep -qxF 'export PATH="$$HOME/.tools/bin:$$PATH"' $$HOME/.bashrc || echo '\nexport PATH="$$HOME/.tools/bin:$$PATH"' >> $$HOME/.bashrc
 	@$(call fn_print_header,"ensure scripts are in tools/bin folder")
 	-cp $$HOME/dot-files/tools/* $$HOME/.tools/bin/
+	-curl https://raw.githubusercontent.com/fsaintjacques/semver-tool/master/src/semver > $$HOME/.tools/bin/semver
 	@$(call fn_print_header,"ensure completion scripts are in tools folder")
 	-curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash > $$HOME/.tools/dot.bash-completion.git.bash
 	@$(call fn_print_header,"ensure fonts are on desktop")
@@ -130,7 +131,7 @@ mac-ensure:											## ensure that folder(s), package managers, tools are pres
 	@$(call fn_print_header,ensure node yarn bins are pristine)
 	# yarn - standard prettier
 	-yarn global upgrade
-	-yarn global add semver														# dev semver tool for node and other frameworks (try shell only : use https://github.com/fsaintjacques/semver-tool)
+	# -yarn global add semver														# dev semver tool (see https://github.com/fsaintjacques/semver-tool)
 	-yarn global add write-good												# lint english grammer
 	-yarn global add htmlhint													# lint html
 	# yarn global add stylelint													# lint
