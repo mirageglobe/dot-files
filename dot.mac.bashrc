@@ -7,14 +7,10 @@
 #   source ~/.profile
 # fi
 #
-# if [ -f ~/.bashrc ]; then
-#   source ~/.bashrc
-# fi
+# [ -f ~/.bashrc ] && source ~/.bashrc
 
 # ==> enter following for mac .bashrc
-# if [ -f ~/dot.mac.bashrc ]; then
-#   source ~/dot.mac.bashrc
-# fi
+# [ -f ~/dot.mac.bashrc ] && source ~/dot.mac.bashrc
 
 # ===
 # === bash loader
