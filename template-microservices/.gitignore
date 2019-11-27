@@ -1,0 +1,4 @@
+
+
+/* ignoring src which contains the remote code repo */
+src/*

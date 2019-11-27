@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # usage: watch [command] [sleep duration]
 if [ -z $1 ]; then 
-  echo "usage : watch [command] [sleep duration]";
+  echo "usage : watch <command> <interval seconds>";
+  echo "        watch 'echo me' 5";
   exit 0;
 fi
 

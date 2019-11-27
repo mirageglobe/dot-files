@@ -1,0 +1,65 @@
+#!/usr/bin/env ruby
+
+# ref https://medium.com/welldone-software/an-overview-of-javascript-testing-in-2019-264e19514d0a
+
+# === integration testing ===
+# 
+
+# === functional testing ===
+#
+# design the system/software functional tests (what the software functions should do; aka e2e tests) to test a full route via e2e tests using browserstack / testcafe / selenium 
+
+# === unit testing ===
+
+# rename this as tc_simple_number.rb
+
+# ref https://en.wikibooks.org/wiki/Ruby_Programming/Unit_testing
+# The author of Test::Unit, Nathaniel Talbott, suggests starting the names of test cases with tc_ and the names of test suites with ts_
+# this should be under project-root/test
+#
+# make should have rule - ruby test/ts_all_tests
+
+# source should be project-root/src
+# SOURCE=src
+
+# ==> test suite
+#
+# group of tests
+# name this part as file : ts_all_tests.rb
+#
+# require 'test/unit'
+# require 'test_one'
+# require 'test_two'
+# require 'test_three'
+
+# ==> single unit / class test
+#
+# example class
+# class SimpleNumber
+#
+#   def initialize(num)
+#     raise unless num.is_a?(Numeric)
+#     @x = num
+#   end
+#
+#   def add(y)
+#     @x + y
+#   end
+#
+#   def multiply(y)
+#     @x * y
+#   end
+#
+# end
+
+# require_relative "simple_number"
+# require "test/unit"
+#
+# class TestSimpleNumber < Test::Unit::TestCase
+#
+#   def test_simple
+#     assert_equal(4, SimpleNumber.new(2).add(2) )
+#     assert_equal(6, SimpleNumber.new(2).multiply(3) )
+#   end
+#
+# end
