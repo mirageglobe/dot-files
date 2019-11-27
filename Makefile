@@ -105,13 +105,15 @@ check:													## check local system / environment
 bin-ensure:											## ensure that common tools are in .tools folder
 	@# tools : common bin										========================================
 	@$(call fn_print_header,"ensure tool folder exist")
-	-mkdir -pv ~/.tools/bin
+	-mkdir -pv $$HOME/.tools/sh
+	-mkdir -pv $$HOME/.tools/bin
 	-grep -qxF 'export PATH="$$HOME/.tools/bin:$$PATH"' $$HOME/.bashrc || echo '\nexport PATH="$$HOME/.tools/bin:$$PATH"' >> $$HOME/.bashrc
-	@$(call fn_print_header,"ensure scripts are in tools/bin folder")
-	-cp $$HOME/dot-files/tools/* $$HOME/.tools/bin/
+	-grep -qxF 'export PATH="$$HOME/.tools/sh:$$PATH"' $$HOME/.bashrc || echo '\nexport PATH="$$HOME/.tools/sh:$$PATH"' >> $$HOME/.bashrc
+	@$(call fn_print_header,"ensure tools are in tools/bin folder")
+	-cp $$HOME/dot-files/tools/* $$HOME/.tools/sh/
 	-curl https://raw.githubusercontent.com/fsaintjacques/semver-tool/master/src/semver > $$HOME/.tools/bin/semver
 	@$(call fn_print_header,"ensure completion scripts are in tools folder")
-	-curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash > $$HOME/.tools/dot.bash-completion.git.bash
+	-curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash > $$HOME/.tools/sh/dot.bash-completion.git.bash
 	@$(call fn_print_header,"ensure fonts are on desktop")
 	# recommended
 	# - brew cask install font-firacode-nerd-font font-hasklig-nerd-font font-inconsolata-nerd-font font-iosevka-nerd-font font-monoid-nerd-font font-noto-nerd-font font-robotomono-nerd-font font-tinos-nerd-font
