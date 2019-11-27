@@ -105,6 +105,8 @@ set omnifunc=syntaxcomplete#Complete
 " set spell spelllang=en_us
 set spell spelllang=en_gb
 
+set relativenumber                                    " enables relative number rather than running number
+
 " === vim end
 
 " === plug start
