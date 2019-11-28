@@ -27,14 +27,12 @@ curl -fLo "<FONT NAME> Nerd Font Complete.otf" https://github.com/ryanoasis/nerd
 
 - fira source (https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/FiraCode.zip)
 - noto source (https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/Noto.zip)
-- bat source (https://github.com/sharkdp/bat/releases/latest)
-- rg source (https://github.com/BurntSushi/ripgrep/releases/latest)
 - terminess (https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/Terminus.zip)
 - hasklug  (https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/Hasklig.zip)
-- rg grep (https://github.com/BurntSushi/ripgrep/releases/latest)
-- bat cat (https://github.com/sharkdp/bat/releases/latest)
+- bat cat source (https://github.com/sharkdp/bat/releases/latest)
+- rg grep source (https://github.com/BurntSushi/ripgrep/releases/latest)
 - aws vault (https://github.com/99designs/aws-vault/releases)
-- include path builder for tooling
+- [done] include path builder for tooling
 - include tool repo update
 - include tool copy to folder
 - add python lint security : bandit
