@@ -136,8 +136,7 @@ Plug 'tpope/vim-sensible'                             " enables common standard 
 
 Plug 'tpope/vim-commentary'                           " enables commenting - gcc (to [un]comment line) - gc(to comment with motion)
 Plug 'mhinz/vim-startify'                             " enables fancy startup
-" Plug 'scrooloose/nerdtree'                            " enables full drawer
-Plug 'tpope/vim-surround'                             " enables quoting with cs[' to change quotes from [ to ' - cst to add quotes
+" Plug 'tpope/vim-surround'                             " enables quoting with cs[' to change quotes from [ to ' - cst to add quotes
 Plug 'tpope/vim-repeat'                               " enables repeating command or input with "."
 
 " ==> file management
@@ -217,20 +216,6 @@ let g:netrw_altv = 1
 set statusline+=%{fugitive#statusline()}
 
 " === fugitive end
-
-" === nerdtree start
-
-" nerdtree add shortcut crtl-d toggle
-"map <C-n> :NERDTreeToggle<CR>
-
-" nerdtree add autostart nerdtree if no file
-" autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
-" nerdtree auto close nerdtree if nomore file exists
-" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-" === nerdtree end
 
 " === colorscheme start
 
@@ -418,6 +403,13 @@ cabbrev termh terminal
 
 " === aliases end
 
+" === shortcuts start
+
+" sets co-authored for github
+let @z='ICo-authored-by: y$A <@gmail.com>@Pgua<f x'
+
+" === shortcuts end
+
 " === snippets start
 
 " n = normal mode
@@ -488,8 +480,10 @@ endif " if exists("did_load_filetypes")
 
 " === fzf
 
+" to preview files during :files command
 command! -bang -nargs=* -complete=dir Files
       \ call fzf#vim#files(<q-args>,
       \   <bang>0 ? fzf#vim#with_preview('up:60%')
       \           : fzf#vim#with_preview('right:50%:hidden', '?'),
       \   <bang>0)
+
