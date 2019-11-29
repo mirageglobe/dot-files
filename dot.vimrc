@@ -90,9 +90,18 @@ set splitright                                        " auto split right for scr
 " activate mouse for terminal
 set mouse=a
 
-" system wide clipboard for macosx
-set clipboard=unnamed                                 " https://vim.fandom.com/wiki/Accessing_the_system_clipboard
-" set clipboard=unnamedplus                             " clipboard * and + is the same for macosx and windows
+" https://vim.fandom.com/wiki/Accessing_the_system_clipboard
+" system wide clipboard for macosx : yank to clipboard
+" clipboard * and + is the same for macosx and windows
+" https://stackoverflow.com/questions/677986/vim-copy-selection-to-os-x-clipboard
+" note that this will not work if its -clipboard (not complied with vim)
+
+if has("clipboard")
+  set clipboard=unnamed         " copy to the system clipboard
+  if has("unnamedplus")         " X11 support
+    set clipboard+=unnamedplus
+  endif
+endif
 
 " highlight trailing space and tabs
 set list listchars=tab:»·,trail:·                     " display tabs and trailing spaces visually
