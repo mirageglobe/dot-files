@@ -273,9 +273,12 @@ alias _ssh="printf ':: loading default-key to agent :: \n';ssh-add;"
 alias _sshkeygen="printf ':: generating standard sshkey :: \n';ssh-keygen -b 2048 -t rsa -f ~/.ssh/id_rsa_standard -C \"( $HOSTNAME : changeme@gmail.com ) \""
 
 alias _rs="printf ':: restarting shell :: \n';exec $SHELL -l;"
+
 alias _ls="ls -G"
 alias _ll="ls -lhAG"
 alias _lh="ls -Gd .*"
+alias _lst="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
+alias _lstv="find . | sed -e 's/[^-][^\/]*\// |/g' -e 's/|\([^ ]\)/|-\1/'"
 
 alias _size="du -h"
 alias _sizeall="du -sh"
@@ -288,8 +291,6 @@ alias _now="fn_fox_now_datetime;"
 alias _nowdate="fn_fox_now_date;"
 alias _nowtime="fn_fox_now_time;"
 
-alias _tree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
-alias _lst="find . | sed -e 's/[^-][^\/]*\// |/g' -e 's/|\([^ ]\)/|-\1/'"
 alias _diff="diff -y"
 alias _fzf="fzf --height=50%"
 
