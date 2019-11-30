@@ -288,7 +288,8 @@ alias _now="fn_fox_now_datetime;"
 alias _nowdate="fn_fox_now_date;"
 alias _nowtime="fn_fox_now_time;"
 
-alias _tree="tree -C -L 1"
+alias _tree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
+alias _lst="find . | sed -e 's/[^-][^\/]*\// |/g' -e 's/|\([^ ]\)/|-\1/'"
 alias _diff="diff -y"
 alias _fzf="fzf --height=50%"
 
