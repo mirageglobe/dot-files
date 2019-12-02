@@ -418,7 +418,7 @@ cabbrev termh terminal
 " === shortcuts start
 
 " sets co-authored for github
-let @z='ICo-authored-by: y$A <@gmail.com>@Pgua<f x
+let @z='ICo-authored-by: y$A <@gmail.com>@Pgua<f x'
 
 " yank to clipboard
 map <Leader>y :w !pbcopy<ESC>
