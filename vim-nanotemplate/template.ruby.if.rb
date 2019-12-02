@@ -1,7 +1,7 @@
-if ([placeholder] = [placeholder])
-  puts [placeholder]
+if (<placeholder> = <placeholder>)
+  puts <placeholder>
 elsif
-  puts [placeholder]
+  puts <placeholder>
 else
-  puts [placeholder]
+  puts <placeholder>
 end

@@ -470,31 +470,34 @@ nmap <Leader>ref aref - <ESC>$a
 
 " filetype specific snippets
 " ref - http://vimdoc.sourceforge.net/htmldoc/autocmd.html
+" ref - http://learnvimscriptthehardway.stevelosh.com/chapters/13.html#autocommands-and-abbreviations
 
 if exists("did_load_filetypes")
   
-  " if &filetype ==# 'ruby'
-    " autocmd!
-
+  " if &filetype ==# 'bash'
     " ruby if else elseif
-    autocmd FileType ruby nnoremap ,if :-1read ~/dot-bag/vim-nanotemplate/template.ruby.if.rb<CR>
+    autocmd FileType sh nnoremap <Leader>if :-1read ~/dot-files/vim-nanotemplate/template.bash.if.sh<CR>
+  " endif " if (&ft ==# 'ruby')
+
+  " if &filetype ==# 'ruby'
+    " ruby if else elseif
+    autocmd FileType ruby nnoremap <Leader>if :-1read ~/dot-files/vim-nanotemplate/template.ruby.if.rb<CR>
 
     " ruby switch case
-    autocmd FileType ruby nnoremap ,switch :-1read ~/dot-bag/vim-nanotemplate/template.ruby.switch.rb<CR>
+    autocmd FileType ruby nnoremap <Leader>switch :-1read ~/dot-files/vim-nanotemplate/template.ruby.switch.rb<CR>
 
     " ruby function
-    autocmd FileType ruby nnoremap ,function :-1read ~/dot-bag/vim-nanotemplate/template.ruby.function.rb<CR>
+    autocmd FileType ruby nnoremap <Leader>function :-1read ~/dot-files/vim-nanotemplate/template.ruby.function.rb<CR>
 
     " ruby class
-    autocmd FileType ruby nnoremap ,class :-1read ~/dot-bag/vim-nanotemplate/template.ruby.class.rb<CR>
+    autocmd FileType ruby nnoremap <Leader>class :-1read ~/dot-files/vim-nanotemplate/template.ruby.class.rb<CR>
 
   " endif " if (&ft ==# 'ruby')
-  " ref - http://learnvimscriptthehardway.stevelosh.com/chapters/13.html#autocommands-and-abbreviations
 endif " if exists("did_load_filetypes")
 
 " === snippets end
 
-" === fzf
+" === fzf start
 
 " to preview files during :files command
 command! -bang -nargs=* -complete=dir Files
@@ -503,3 +506,4 @@ command! -bang -nargs=* -complete=dir Files
       \           : fzf#vim#with_preview('right:50%:hidden', '?'),
       \   <bang>0)
 
+" === fzf end

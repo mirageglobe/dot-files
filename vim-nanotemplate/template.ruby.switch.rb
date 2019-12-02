@@ -1,4 +1,4 @@
-case x
+case <placeholder>
 when 1..5
   "It's between 1 and 5"
 when 6
