@@ -475,24 +475,23 @@ nmap <Leader>ref aref - <ESC>$a
 if exists("did_load_filetypes")
   
   " if &filetype ==# 'bash'
-    " ruby if else elseif
-    autocmd FileType sh nnoremap <Leader>if :-1read ~/dot-files/vim-nanotemplate/template.bash.if.sh<CR>
-  " endif " if (&ft ==# 'ruby')
+  " endif " if (&ft ==# 'bash')
+  
+  " bash if else
+  autocmd FileType sh nnoremap <Leader>if :-1read ~/dot-files/vim-nanotemplate/template.bash.if.sh<CR>
 
-  " if &filetype ==# 'ruby'
-    " ruby if else elseif
-    autocmd FileType ruby nnoremap <Leader>if :-1read ~/dot-files/vim-nanotemplate/template.ruby.if.rb<CR>
+  " ruby if else elseif
+  autocmd FileType ruby nnoremap <Leader>if :-1read ~/dot-files/vim-nanotemplate/template.ruby.if.rb<CR>
 
-    " ruby switch case
-    autocmd FileType ruby nnoremap <Leader>switch :-1read ~/dot-files/vim-nanotemplate/template.ruby.switch.rb<CR>
+  " ruby switch case
+  autocmd FileType ruby nnoremap <Leader>switch :-1read ~/dot-files/vim-nanotemplate/template.ruby.switch.rb<CR>
 
-    " ruby function
-    autocmd FileType ruby nnoremap <Leader>function :-1read ~/dot-files/vim-nanotemplate/template.ruby.function.rb<CR>
+  " ruby function
+  autocmd FileType ruby nnoremap <Leader>function :-1read ~/dot-files/vim-nanotemplate/template.ruby.function.rb<CR>
 
-    " ruby class
-    autocmd FileType ruby nnoremap <Leader>class :-1read ~/dot-files/vim-nanotemplate/template.ruby.class.rb<CR>
+  " ruby class
+  autocmd FileType ruby nnoremap <Leader>class :-1read ~/dot-files/vim-nanotemplate/template.ruby.class.rb<CR>
 
-  " endif " if (&ft ==# 'ruby')
 endif " if exists("did_load_filetypes")
 
 " === snippets end
