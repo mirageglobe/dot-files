@@ -23,7 +23,8 @@
 " ==> system optimisations for vim
 
 set lazyredraw                                        " do not redraw when executing macros; buffer instead of constant redraws
-set noshowcmd                                         " speed up turning off display of cmds
+" set noshowcmd                                         " speed up turning off display of cmds
+" set showcmd                                         " speed up turning off display of cmds
 set noshowmode                                        " speed up by turning of showing mode on last line
 " set showmode                                         " show current mode down the bottom
 set regexpengine=1                                    " speed up by using old regex engine
@@ -417,12 +418,6 @@ cabbrev termh terminal
 
 " === shortcuts start
 
-" sets co-authored for github
-let @z='ICo-authored-by: y$A <@gmail.com>@Pgua<f x'
-
-" yank to clipboard
-map <Leader>y :w !pbcopy<ESC>
-map <Leader>p :r !pbcopy<ESC>
 
 " === shortcuts end
 
@@ -430,12 +425,15 @@ map <Leader>p :r !pbcopy<ESC>
 
 " n = normal mode
 
-" map     visual mode
+" map     normal and visual mode
 " nmap    normal mode
+" vmap    visual mode
 " imap    insert mode
 
 " remap   recursive map
 " noremap   non recursive map
+
+" <c-d>   control + d
 
 " https://stackoverflow.com/questions/3776117/what-is-the-difference-between-the-remap-noremap-nnoremap-and-vnoremap-mapping
 
@@ -443,7 +441,17 @@ map <Leader>p :r !pbcopy<ESC>
 let mapleader = "\<space>"
 
 " general maps
-noremap <Leader><SPACE> :Explore<CR>
+nnoremap <Leader><SPACE> :Explore<CR>
+
+" sets co-authored for github
+let @z='ICo-authored-by: y$A <@gmail.com>@Pgua<f x'
+
+" yank to/from clipboard
+vnoremap <Leader>y :w !pbcopy<ESC>
+vnoremap <Leader>p :r !pbcopy<ESC>
+
+nnoremap <Leader>reload :source ~/dot-files/dot.vimrc<ESC>
+
 " nmap <Leader> a# ===<ESC>Vgcc<ESC>^f=;;<esc>a<space>
 
 " read an empty template into current file - type ,ruby
