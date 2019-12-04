@@ -444,7 +444,10 @@ let mapleader = "\<space>"
 nnoremap <Leader><SPACE> :Explore<CR>
 
 " sets co-authored for github
-let @z='ICo-authored-by: y$A <@gmail.com>@Pgua<f x'
+" let @z='ICo-authored-by: y$A <@gmail.com>@Pgua<f x'
+nmap <Leader>@ <ESC>VD <ESC>ICo-authored-by: <CR>
+
+" test sone
 
 " yank to/from clipboard
 vnoremap <Leader>y :w !pbcopy<ESC>
