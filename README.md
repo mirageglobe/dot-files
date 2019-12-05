@@ -43,9 +43,9 @@ curl -fLo "<FONT NAME> Nerd Font Complete.otf" https://github.com/ryanoasis/nerd
 - add php lint : php_codesniffer
 - add php standard lint : php_cs-fixer
 - add php debugger : xdebug
+- look at https://github.com/mozilla/cipherscan/blob/master/cipherscan
 
 # references
 
 - https://github.com/tonsky/FiraCode
 - https://www.nerdfonts.com/font-downloads
-

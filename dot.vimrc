@@ -409,10 +409,10 @@ let g:terraform_fmt_on_save=1
 " note : do not use comments AFTER the cabbrev line as it reads in as command
 
 " split vertical and launch terminal
-cabbrev termv vertical terminal
+" cabbrev termv vertical terminal
 
 " split horizontal (default) and launch terminal
-cabbrev termh terminal
+" cabbrev termh terminal
 
 " === aliases end
 
@@ -447,11 +447,9 @@ nnoremap <Leader><SPACE> :Explore<CR>
 " let @z='ICo-authored-by: y$A <@gmail.com>@Pgua<f x'
 nmap <Leader>@ <ESC>VD <ESC>ICo-authored-by: <CR>
 
-" test sone
-
 " yank to/from clipboard
-vnoremap <Leader>y :w !pbcopy<ESC>
-vnoremap <Leader>p :r !pbcopy<ESC>
+vnoremap <Leader>y :w !pbcopy<CR><ESC>
+nnoremap <Leader>p :r !pbpaste<CR><ESC>
 
 nnoremap <Leader>reload :source ~/dot-files/dot.vimrc<ESC>
 
