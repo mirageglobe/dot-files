@@ -280,6 +280,8 @@ alias _lh="ls -Gd .*"
 alias _lst="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
 alias _lstv="find . | sed -e 's/[^-][^\/]*\// |/g' -e 's/|\([^ ]\)/|-\1/'"
 
+alias _path="echo ${PATH} | tr ':' '\n'"
+
 alias _size="du -h"
 alias _sizeall="du -sh"
 alias _size1m="find . -type f -size +1M -exec ls -lh {} \;"
