@@ -117,6 +117,13 @@ set spell spelllang=en_gb
 
 set relativenumber                                    " enables relative number rather than running number
 
+" set code folding
+set foldmethod=indent   
+set foldnestmax=10
+set nofoldenable
+set foldlevel=2
+
+
 " === vim end
 
 " === plug start
@@ -451,6 +458,10 @@ nmap <Leader>@ <ESC>VD <ESC>ICo-authored-by: <CR>
 vnoremap <Leader>y :w !pbcopy<CR><ESC>
 nnoremap <Leader>p :r !pbpaste<CR><ESC>
 
+" code folding za / zc / zo
+nmap <Leader>z za<ESC>
+
+" reload
 nnoremap <Leader>reload :source ~/dot-files/dot.vimrc<ESC>
 
 " nmap <Leader> a# ===<ESC>Vgcc<ESC>^f=;;<esc>a<space>
