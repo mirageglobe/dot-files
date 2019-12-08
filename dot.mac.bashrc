@@ -49,9 +49,22 @@ export CLICOLOR=true                                  # common (mac only)
 # ref - https://www.cyberciti.biz/tips/howto-linux-unix-bash-shell-setup-prompt.html
 printf "%s" "[+] prompt "
 
-export PROMPT_THEME=default
-export PROMPT_SETTING=""
-export PROMPT_GIT=1
+# export PS1="\W @ \h [\u] $ "
+# export PS1="\W$PROMPT_SETTING\e[0;35m \$ \e[m"
+# export PS1="\u@\h \W\[\033[32m\]\$(fn_get_git_branch)\[\033[00m\] \$ "
+# export PS1=" \e[35m\$UID\e[0m:: \e[1;34m\$(fn_fox_sys_get_current_folder)\e[0m:: \e[32m\$(fn_get_git_branch)\e[0m\$ "
+# export PS1=" \$UID:: \$(fn_fox_sys_get_current_folder):: \$(fn_get_git_branch)\$ "
+# export PS1=" ${C_PURPLE}${UID}${C_END}:: ${C_BLUE}\$(fn_fox_sys_get_current_folder) ${C_END}::${C_GREEN}\$(fn_get_git_branch)${C_END} \$ "
+
+C_PURPLE="\[\e[0;35m\]"
+C_BLUE="\[\e[1;34m\]"
+C_GREEN="\[\e[0;32m\]"
+C_WHITE="\[\e[1;0m\]"
+C_END="\[\e[m\]"
+
+PROMPT_THEME=default
+PROMPT_SETTING=""
+PROMPT_GIT=1
 
 # ==> aws prompt method
 # appends the prompt in sequence, according to following conditionals
@@ -63,7 +76,7 @@ if [ -z "$AWS_PROFILE" ]; then
 fi
 
 # ==> git prompt method
-parse_git_branch() {
+fn_get_git_branch() {
   # git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
   # ref : https://stackoverflow.com/questions/8914435/awk-sed-how-to-remove-parentheses-in-simple-text-file
   # git branch 2> /dev/null | grep "\*" | awk '{ print $2 }' #| awk -v FS="[()]" '{for (i=2;i<=NF;i+=2) print $i }'
@@ -81,24 +94,13 @@ if [[ "$PROMPT_GIT" ]]; then
   # - https://www.cyberciti.biz/faq/bash-shell-change-the-color-of-my-shell-prompt-under-linux-or-unix/
   # - https://www.shellhacks.com/bash-colors/
   #
-  # PROMPT_SETTING="$PROMPT_SETTING\[\033[32m\]\$(parse_git_branch)\[\033[00m\]"
-  PROMPT_SETTING="$PROMPT_SETTING\e[0;32m\$(parse_git_branch)\e[m"
+  # PROMPT_SETTING="$PROMPT_SETTING\[\033[32m\]\$(fn_get_git_branch)\[\033[00m\]"
+  echo "git prompt"
 fi
 
 # ==> setting final prompt on prompt
-# export PS1="\W @ \h [\u] $ "
-# export PS1="\W$PROMPT_SETTING\e[0;35m \$ \e[m"
-# export PS1="\u@\h \W\[\033[32m\]\$(parse_git_branch)\[\033[00m\] \$ "
-# export PS1=" \e[35m\$UID\e[0m:: \e[1;34m\$(fn_fox_sys_get_current_folder)\e[0m:: \e[32m\$(parse_git_branch)\e[0m\$ "
-# export PS1=" \$UID:: \$(fn_fox_sys_get_current_folder):: \$(parse_git_branch)\$ "
-# export PS1=" ${COLOR_PURPLE}${UID}${COLOR_WHITE}:: ${COLOR_BLUE} \$(fn_fox_sys_get_current_folder)\[\e[1;0m\]::\[\e[0;32m\]\$(parse_git_branch)\[\e[1;0m\] \$ "
 
-COLOR_PURPLE="\[\e[0;35m\]"
-COLOR_BLUE="\[\e[1;34m\]"
-COLOR_GREEN="\[\e[0;32m\]"
-COLOR_WHITE="\[\e[1;0m\]"
-
-export PS1=" ${COLOR_PURPLE}${UID}${COLOR_WHITE}:: ${COLOR_BLUE}\$(fn_fox_sys_get_current_folder)${COLOR_WHITE}::${COLOR_GREEN}\$(parse_git_branch)${COLOR_WHITE} \$ "
+export PS1=" ${C_PURPLE}${UID}${C_END}:: ${C_BLUE}\$(fn_fox_sys_get_current_folder)${C_END}::${C_GREEN}\$(fn_get_git_branch)${C_END} \$ "
 
 # ===
 # === apps and tools required settings
