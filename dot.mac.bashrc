@@ -49,12 +49,19 @@ export CLICOLOR=true                                  # common (mac only)
 # ref - https://www.cyberciti.biz/tips/howto-linux-unix-bash-shell-setup-prompt.html
 printf "%s" "[+] prompt "
 
-# export PS1="\W @ \h [\u] $ "
-# export PS1="\W$PROMPT_SETTING\e[0;35m \$ \e[m"
 # export PS1="\u@\h \W\[\033[32m\]\$(fn_get_git_branch)\[\033[00m\] \$ "
-# export PS1=" \e[35m\$UID\e[0m:: \e[1;34m\$(fn_fox_sys_get_current_folder)\e[0m:: \e[32m\$(fn_get_git_branch)\e[0m\$ "
 # export PS1=" \$UID:: \$(fn_fox_sys_get_current_folder):: \$(fn_get_git_branch)\$ "
 # export PS1=" ${C_PURPLE}${UID}${C_END}:: ${C_BLUE}\$(fn_fox_sys_get_current_folder) ${C_END}::${C_GREEN}\$(fn_get_git_branch)${C_END} \$ "
+
+# basic vanilla prompt - black 0;30 - red 0;31 - green 0;32 - brown 0;33 - blue 0,34 - purple 0;35 - cyan 0;36
+# to get lighter version, replace 0 with 1
+#
+# begin color modifications - \e[31m      # where 31 is the color code
+# end color modifications - \e[0m
+# 
+# references
+# - https://www.cyberciti.biz/faq/bash-shell-change-the-color-of-my-shell-prompt-under-linux-or-unix/
+# - https://www.shellhacks.com/bash-colors/
 
 C_PURPLE="\[\e[0;35m\]"
 C_BLUE="\[\e[1;34m\]"
@@ -62,18 +69,17 @@ C_GREEN="\[\e[0;32m\]"
 C_WHITE="\[\e[1;0m\]"
 C_END="\[\e[m\]"
 
-PROMPT_THEME=default
-PROMPT_SETTING=""
-PROMPT_GIT=1
+PROMPT_EXTEND=" ${C_PURPLE}${UID}${C_END}:: ${C_BLUE}\$(fn_fox_sys_get_current_folder)${C_END}::${C_GREEN}\$(fn_get_git_branch)${C_END}"
 
 # ==> aws prompt method
 # appends the prompt in sequence, according to following conditionals
 # note : this cannot be set as bashrc loads a new process. AWS is only valid in current terminal
-if [ -z "$AWS_PROFILE" ]; then
+
+# if [ -z "$AWS_PROFILE" ]; then
 # if [[ "$AWS_PROFILE" != "default" ]]; then
   # prompt + aws
-  PROMPT_SETTING="$PROMPT_SETTING aws($AWS_PROFILE)"
-fi
+  # PROMPT_EXTEND="$PROMPT_EXTEND aws($AWS_PROFILE)"
+# fi
 
 # ==> git prompt method
 fn_get_git_branch() {
@@ -83,24 +89,13 @@ fn_get_git_branch() {
   git branch 2> /dev/null | grep "\*" | awk '{ printf " ";printf $2; }'
 }
 
-if [[ "$PROMPT_GIT" ]]; then
-  # basic vanilla prompt - black 0;30 - red 0;31 - green 0;32 - brown 0;33 - blue 0,34 - purple 0;35 - cyan 0;36
-  # to get lighter version, replace 0 with 1
-  #
-  # begin color modifications - \e[31m      # where 31 is the color code
-  # end color modifications - \e[0m
-  # 
-  # references
-  # - https://www.cyberciti.biz/faq/bash-shell-change-the-color-of-my-shell-prompt-under-linux-or-unix/
-  # - https://www.shellhacks.com/bash-colors/
-  #
-  # PROMPT_SETTING="$PROMPT_SETTING\[\033[32m\]\$(fn_get_git_branch)\[\033[00m\]"
-  echo "git prompt"
-fi
+# echo "==> modification test <=="
+
+# PROMPT_SETTING="$PROMPT_SETTING\[\033[32m\]\$(fn_get_git_branch)\[\033[00m\]"
 
 # ==> setting final prompt on prompt
 
-export PS1=" ${C_PURPLE}${UID}${C_END}:: ${C_BLUE}\$(fn_fox_sys_get_current_folder)${C_END}::${C_GREEN}\$(fn_get_git_branch)${C_END} \$ "
+export PS1="${PROMPT_EXTEND} \$ "
 
 # ===
 # === apps and tools required settings
@@ -113,6 +108,11 @@ export PS1=" ${C_PURPLE}${UID}${C_END}:: ${C_BLUE}\$(fn_fox_sys_get_curren
 # ==> git configurations
 # appending additional git aliases
 git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+git config --global alias.com "checkout master"
+git config --global alias.p "pull"
+git config --global alias.s "stash"
+git config --global alias.sp "stash pop"
+git config --global alias.alias "config --get-regexp alias"
 
 # ==> added for fzf
 # note that fzf will try to install this to default .bashrc too
