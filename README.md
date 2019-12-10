@@ -44,6 +44,7 @@ curl -fLo "<FONT NAME> Nerd Font Complete.otf" https://github.com/ryanoasis/nerd
 - add php standard lint : php_cs-fixer
 - add php debugger : xdebug
 - look at https://github.com/mozilla/cipherscan/blob/master/cipherscan
+- refer to sdkman - for groovy ( curl -s get.sdkman.io | bash )
 
 # references
 

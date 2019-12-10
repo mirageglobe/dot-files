@@ -131,8 +131,10 @@ git config --global alias.com "checkout master"
 # eval "$(jenv init -)"
 
 # ==> added for java
-# export JAVA_HOME=$(/usr/libexec/java_home)
-# printf "%s" "[+] java "
+printf "%s" "[+] java "
+if [ -z $JAVA_HOME ]; then
+  export JAVA_HOME=$(/usr/libexec/java_home)
+fi
 
 # ==> added for android sdk
 # export ANDROID_HOME=/usr/local/opt/android-sdk
@@ -479,7 +481,7 @@ fn_fox_graph() {
   fi
 }
 
-alias _fox_graph="fn_fox_general_graph"
+alias _fox_graph="fn_fox_graph"
 
 # ## ==> get file with curl
 
