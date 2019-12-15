@@ -379,9 +379,6 @@ alias _fox_aws_profile_load="fn_fox_aws_profile_load;"
 alias _fox="echo '
 :: help common tools ::
 
-  _ssh                          # load default key to ssh agent
-  _sshkeygen                    # generates key pair ~/.ssh/id_rsa_standard (2048 bits)
-
   _rs                           # restarting current shell
   _ls                           # list with colour
   _ll                           # list with permissions
@@ -393,6 +390,10 @@ alias _fox="echo '
   _size_1m                      # show files larger than 1mb in current dir
   _size_10m                     # show files larger than 10mb in current dir
   _size_100m                    # show files larger than 100mb in current dir
+
+  _fox_ssh                      # load default key to ssh agent
+  _fox_ssh_keygen               # generates key pair ~/.ssh/id_rsa_standard (2048 bits)
+  _fox_ssh_tunnel               # shows how to tunnel
 
   _fox_now                      # show date-time : echo \$(date +\"%Y%m%d-%H%M%S\");
   _fox_now_date                 # show date : echo \$(date +\"%Y%m%d\");
@@ -436,8 +437,9 @@ fn_fox_sys_get_current_folder() {
   echo "$(basename $PWD)";
 }
 
-alias _ssh="printf ':: loading default-key to agent :: \n';ssh-add;"
-alias _ssh_keygen="printf ':: generating standard sshkey :: \n';ssh-keygen -b 2048 -t rsa -f ~/.ssh/id_rsa_standard -C \"( $HOSTNAME : changeme@gmail.com ) \""
+alias _fox_ssh="printf ':: loading default-key to agent :: \n';ssh-add;"
+alias _fox_ssh_keygen="printf ':: generating standard sshkey :: \n';ssh-keygen -b 2048 -t rsa -f ~/.ssh/id_rsa_standard -C \"( $HOSTNAME : changeme@gmail.com ) \""
+alias _fox_ssh_tunnel="printf ':: ssh tunnelling :: \n:: usage\t\t ssh -L 8080:www.google.com:80 172.10.10.10\n:: example\t\t ssh -L <local.port>:<target>:<target.port> <proxy>\n'; "
 
 alias _rs="printf ':: restarting shell :: \n';exec $SHELL -l;"
 alias _random="echo ${RANDOM:0:2};"
