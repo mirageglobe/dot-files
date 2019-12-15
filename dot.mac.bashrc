@@ -168,13 +168,13 @@ printf "%s" "[+] aliases "
 alias _fox_sys="echo '
 :: help systems and network ::
 
-  _sys                          # show general system information + listening ports + processes
-  _sysps                        # show running processes
+  _fox_sys                      # show general system information + listening ports + processes
+  _fox_sys_ps                   # show running processes
 
-  _net                          # show all network information
-  _netiport                     # investigate listing ports
-  _netint                       # show network interfaces
-  _netip                        # show ip of en0
+  _fox_sys_network              # show all network information
+  _fox_sys_ports                # investigate listing ports
+  _fox_sys_tcp                  # show tcp dump
+  _fox_sys_ip                   # show ip of en0
 
 :: others ::
 
@@ -208,125 +208,31 @@ fn_fox_showmaclaunch() {
   launchctl list | grep -v "com.apple";
 }
 
-alias _sys="fn_fox_system;fn_fox_showmaclaunch;"
-alias _sysps="printf ':: showing running processes ::\n';ps -a;"
+alias _fox_sys="fn_fox_system;fn_fox_showmaclaunch;"
+alias _fox_sys_ps="printf ':: showing running processes ::\n';ps -a;"
 
-alias _net="fn_fox_network_info;"
-alias _netiport="printf ':: investigate listening ports :: \n';sudo lsof -PiTCP -sTCP:LISTEN;"
-alias _netint="printf ':: show network interfaces ::\n'; tcpdump -D;"
-alias _netip="printf ':: show ip on en0 ::\n'; ifconfig en0 | grep inet;"
-
-# ## ==> shell
-
-alias _fox="echo '
-:: help common tools ::
-
-  _ssh                          # load default key to ssh agent
-  _sshkeygen                    # generates key pair ~/.ssh/id_rsa_standard (2048 bits)
-
-  _rs                           # restarting current shell
-  _ls                           # list with colour
-  _ll                           # list with permissions
-  _lh                           # list hidden only
-  _size                         # show current directory size each
-  _sizeall                      # show current directory size total
-  _size1m                       # show files larger than 1mb in current dir
-  _size10m                      # show files larger than 10mb in current dir
-  _size100m                     # show files larger than 100mb in current dir
-
-  _now                          # show date-time : echo \$(date +\"%Y%m%d-%H%M%S\");
-  _nowdate                      # show date : echo \$(date +\"%Y%m%d\");
-  _nowtime                      # show time : echo \$(date +\"%H%M%S\");
-
-  _tree <directory>             # list 1 level tree
-  _diff <file a> <file b>       # show diff between 2 or more files (use --brief for simple)
-  _fzf                          # fzf load only 50 percent of screen
-
-  _emo_shrug                    # emoji shrug
-
-:: notes ::
-
-  status codes
-  - 1xx (info)
-  - 2xx (success) - 200 (ok)
-  - 3xx (redirection)
-  - 4xx (client side) - 404 (not found) - 403 (forbidden) 
-  - 5xx (server side) - 503 (service unavailable) - 504 (gateway timeout)
-'"
-
-fn_fox_system() {
-  printf ":: system information :: \n"
-  printf "date \t\t\t $(fn_fox_now_date) \n"
-  printf "date time \t\t $(fn_fox_now_datetime) \n"
-  printf "ip (class c) \t\t $(fn_fox_network_getip) \n"
-  printf "terminal encoding \t $(locale charmap) \n"
-  printf "\n"
-  printf "current user grps \t $(id) \n"
-}
-
-fn_fox_aws_profile_load_now_datetime() {
-  echo "$(date +\"%Y%m%d-%H%M%S\")";
-}
-
-fn_fox_now_date() {
-  echo "$(date +\"%Y%m%d\")";
-}
-
-fn_fox_now_time() {
-  echo "$(date +\"%H%M%S\")";
-}
-
-fn_fox_sys_get_current_folder() {
-  # printf '%s\n' "${PWD##*/}";
-  echo "$(basename $PWD)";
-}
-
-alias _ssh="printf ':: loading default-key to agent :: \n';ssh-add;"
-alias _sshkeygen="printf ':: generating standard sshkey :: \n';ssh-keygen -b 2048 -t rsa -f ~/.ssh/id_rsa_standard -C \"( $HOSTNAME : changeme@gmail.com ) \""
-
-alias _rs="printf ':: restarting shell :: \n';exec $SHELL -l;"
-
-alias _ls="ls -G"
-alias _ll="ls -lhAG"
-alias _lh="ls -Gd .*"
-alias _lst="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
-alias _lstv="find . | sed -e 's/[^-][^\/]*\// |/g' -e 's/|\([^ ]\)/|-\1/'"
-
-alias _path="echo ${PATH} | tr ':' '\n'"
-
-alias _size="du -h"
-alias _sizeall="du -sh"
-alias _size1m="find . -type f -size +1M -exec ls -lh {} \;"
-alias _size10m="find . -type f -size +10M -exec ls -lh {} \;"
-alias _size100m="find . -type f -size +100M -exec ls -lh {} \;"
-
-alias _random="echo ${RANDOM:0:2};"
-alias _now="fn_fox_now_datetime;"
-alias _nowdate="fn_fox_now_date;"
-alias _nowtime="fn_fox_now_time;"
-
-alias _diff="diff -y"
-alias _fzf="fzf --height=50%"
-
-alias _emo_shrug="echo '¯\_(ツ)_/¯'";
+alias _fox_sys_network="fn_fox_network_info;"
+alias _fox_sys_port="printf ':: investigate listening ports :: \n';sudo lsof -PiTCP -sTCP:LISTEN;"
+alias _fox_sys_tcp="printf ':: show network interfaces ::\n'; tcpdump -D;"
+alias _fox_sys_ip="printf ':: show ip on en0 ::\n'; ifconfig en0 | grep inet;"
 
 # ## ==> git
 
 alias _fox_git="echo '
 :: help git ::
 
-  _gconf                        # show git config
-  _gcm                          # git add comment and commit
-  _gs                           # fetch + show branch + show stash
-  _gch                          # show difference between current and HEAD
+  _git_config                   # show git config
+  _git_com                       # git add comment and commit
+  _git_show                     # fetch + show branch + show stash
+  _git_diff                     # show difference between current and HEAD
 
   _git_ls                       # fetch and list all branches
+  _git_ll                       # show log in pretty format
   _git_develop <branch>         # checkout develop and branch (feature/TICKET-123-myfeature)
   _git_staging <branch>         # checkout staging and branch
   _git_master <branch>          # checkout master and branch (hotfix/TICKET-123-myhotfix)
-  _git_pullall                  # try to checkout master/staging/develop and pull for all
+  _git_pull_all                 # try to checkout master/staging/develop and pull for all
 
-  _gll                          # show log in pretty format
 
 :: others ::
 
@@ -348,14 +254,15 @@ alias _fox_git="echo '
   https://datasift.github.io/gitflow/IntroducingGitFlow.html
 '"
 
-alias _gconf="echo ':: showing gitconfig ::'; cat ~/.gitconfig;"
-alias _gcm="echo ':: git add --all and git commit -m ::'; git add --all && git commit -m"
-alias _gs="git fetch --all --prune; printf '\n'; git branch --all -vv; printf '\n'; git status --show-stash -vv;"
-alias _gch="echo ':: git changes - git diff head^ ::'; git diff head^;"
+alias _git_config="echo ':: showing gitconfig ::'; cat ~/.gitconfig;"
+alias _git_com="echo ':: git add --all and git commit -m ::'; git add --all && git commit -m"
+alias _git_show="git fetch --all --prune; printf '\n'; git branch --all -vv; printf '\n'; git status --show-stash -vv;"
+alias _git_diff="echo ':: git changes - git diff head^ ::'; git diff head^;"
 
-alias _gll="git log --pretty='format:%C(yellow)%h%Creset - %Cgreen%>(12)%ad%Creset %C(bold blue)<%an>%Creset %s' --date=relative;"
 
 alias _git_ls="git fetch --all; git branch --all;"
+alias _git_ll="git log --pretty='format:%C(yellow)%h%Creset - %Cgreen%>(12)%ad%Creset %C(bold blue)<%an>%Creset %s' --date=relative;"
+
 alias _git_pull_all="git checkout master && git pull; git checkout staging && git pull; git checkout develop && git pull;"
 alias _git_develop="git checkout develop;"
 alias _git_staging="git checkout staging;"
@@ -366,20 +273,19 @@ alias _git_master="git checkout master;"
 alias _fox_docker="echo '
 :: help docker ::
 
-  _dc_ps                        # list all process
-  _dc_psless                    # list all process (fit width)
-  _dc_pspurge                   # purge all processes
-  _dc_img                       # list images
-  _dc_imgpurge                  # purge all images
-  _dc_vol                       # list all volumes
+  _fox_docker_ps                    # list all process
+  _fox_docker_ps_less               # list all process (fit width)
+  _fox_docker_ps_purge              # purge all processes
+  _fox_docker_images                # list images
+  _fox_docker_images_purge          # purge all images
+  _fox_docker_volumes               # list all volumes
 
-  _dc_purge                     # system prune (purge all containers and images)
-  _dc_ssh <container id>        # shell ssh into container (default bash)
-  _dc_sh <container id>         # shell sh into container
-  _dc_bash <container id>       # shell bash into container
-  _dc_logs <container id>       # show docker logs
+  _fox_docker_all_purge             # system prune (purge all containers and images)
+  _fox_docker_sh <container id>     # shell sh into container
+  _fox_docker_bash <container id>   # shell bash into container
+  _fox_docker_logs <container id>   # show docker logs
 
-  _dc_stop <container id>       # stop container
+  _fox_docker_stop <container id>   # stop container
 '"
 
 fn_fox_docker_imagepurge(){
@@ -409,20 +315,19 @@ fn_fox_docker_bash() {
   docker exec -it $1 bash;
 }
 
-alias _dc_ps="docker ps -a"
-alias _dc_psless="docker ps | less -S"
-alias _dc_pspurge="fn_fox_docker_runningpurge;"
-alias _dc_img="docker images"
-alias _dc_imgpurge="fn_fox_docker_imagepurge;"
-alias _dc_vol="docker volume ls"
+alias _fox_docker_ps="docker ps -a"
+alias _fox_docker_ps_less="docker ps | less -S"
+alias _fox_docker_ps_purge="fn_fox_docker_runningpurge;"
+alias _fox_docker_images="docker images"
+alias _fox_docker_images_purge="fn_fox_docker_imagepurge;"
+alias _fox_docker_volumes="docker volume ls"
 
-alias _dc_purge="docker system prune"
-alias _dc_ssh="fn_fox_docker_bash"
-alias _dc_sh="fn_fox_docker_sh"
-alias _dc_bash="fn_fox_docker_bash"
-alias _dc_logs="docker logs"
+alias _fox_docker_purge="docker system prune"
+alias _fox_docker_sh="fn_fox_docker_sh"
+alias _fox_docker_bash="fn_fox_docker_bash"
+alias _fox_docker_logs="docker logs"
 
-alias _dc_stop="echo ':: stopping running container ::'; fn_fox_docker_rmrunning"
+alias _fox_docker_stop="echo ':: stopping running container ::'; fn_fox_docker_rmrunning"
 
 # ## ==> aws
 
@@ -436,6 +341,10 @@ alias _fox_aws="echo '
   _fox_aws_profile_ls                                 # list all profiles
   _fox_aws_profile_load <profile>                     # load profile
 '"
+
+fn_fox_aws_profile_load_now_datetime() {
+  echo "$(date +\"%Y%m%d-%H%M%S\")";
+}
 
 fn_fox_aws_profile_load() {
   printf ":: loading aws profile(s) : $1 ::\n";
@@ -465,6 +374,94 @@ alias _fox_aws_secret_access_key="aws configure get aws_secret_access_key --prof
 alias _fox_aws_profile_ls="fn_fox_aws_profile_show;"
 alias _fox_aws_profile_load="fn_fox_aws_profile_load;"
 
+# ## ==> shell
+
+alias _fox="echo '
+:: help common tools ::
+
+  _ssh                          # load default key to ssh agent
+  _sshkeygen                    # generates key pair ~/.ssh/id_rsa_standard (2048 bits)
+
+  _rs                           # restarting current shell
+  _ls                           # list with colour
+  _ll                           # list with permissions
+  _ls_human                     # list hidden only
+  _ls_tree                      #
+  _ls_tree_verbose              #
+  _size                         # show current directory size each
+  _size_all                     # show current directory size total
+  _size_1m                      # show files larger than 1mb in current dir
+  _size_10m                     # show files larger than 10mb in current dir
+  _size_100m                    # show files larger than 100mb in current dir
+
+  _fox_now                      # show date-time : echo \$(date +\"%Y%m%d-%H%M%S\");
+  _fox_now_date                 # show date : echo \$(date +\"%Y%m%d\");
+  _fox_now_time                 # show time : echo \$(date +\"%H%M%S\");
+
+  _diff <file a> <file b>       # show diff between 2 or more files (use --brief for simple)
+  _fzf                          # fzf load only 50 percent of screen
+
+  _emo_shrug                    # emoji shrug
+
+:: notes ::
+
+  status codes
+  - 1xx (info)
+  - 2xx (success) - 200 (ok)
+  - 3xx (redirection)
+  - 4xx (client side) - 404 (not found) - 403 (forbidden)
+  - 5xx (server side) - 503 (service unavailable) - 504 (gateway timeout)
+'"
+
+fn_fox_system() {
+  printf ":: system information :: \n"
+  printf "date \t\t\t $(fn_fox_now_date) \n"
+  printf "date time \t\t $(fn_fox_now_datetime) \n"
+  printf "ip (class c) \t\t $(fn_fox_network_getip) \n"
+  printf "terminal encoding \t $(locale charmap) \n"
+  printf "\n"
+  printf "current user grps \t $(id) \n"
+}
+
+fn_fox_now_date() {
+  echo "$(date +\"%Y%m%d\")";
+}
+
+fn_fox_now_time() {
+  echo "$(date +\"%H%M%S\")";
+}
+
+fn_fox_sys_get_current_folder() {
+  # printf '%s\n' "${PWD##*/}";
+  echo "$(basename $PWD)";
+}
+
+alias _ssh="printf ':: loading default-key to agent :: \n';ssh-add;"
+alias _ssh_keygen="printf ':: generating standard sshkey :: \n';ssh-keygen -b 2048 -t rsa -f ~/.ssh/id_rsa_standard -C \"( $HOSTNAME : changeme@gmail.com ) \""
+
+alias _rs="printf ':: restarting shell :: \n';exec $SHELL -l;"
+alias _random="echo ${RANDOM:0:2};"
+alias _path="echo ${PATH} | tr ':' '\n'"
+alias _diff="diff -y"
+alias _fzf="fzf --height=50%"
+
+alias _ls="ls -G"
+alias _ll="ls -lhAG"
+alias _ls_human="ls -Gd .*"
+alias _ls_tree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
+alias _ls_tree_verbose="find . | sed -e 's/[^-][^\/]*\// |/g' -e 's/|\([^ ]\)/|-\1/'"
+
+alias _fox_size="du -h"
+alias _fox_size_all="du -sh"
+alias _fox_size_1m="find . -type f -size +1M -exec ls -lh {} \;"
+alias _fox_size_10m="find . -type f -size +10M -exec ls -lh {} \;"
+alias _fox_size_100m="find . -type f -size +100M -exec ls -lh {} \;"
+
+alias _fox_now="fn_fox_now_datetime;"
+alias _fox_now_date="fn_fox_now_date;"
+alias _fox_now_time="fn_fox_now_time;"
+
+alias _emo_shrug="echo '¯\_(ツ)_/¯'";
 # ## ==> graphing using dot
 
 # # sample.dot
@@ -475,7 +472,7 @@ alias _fox_aws_profile_load="fn_fox_aws_profile_load;"
 
 fn_fox_graph() {
   if [ -z "$1" ]; then
-    echo "usage : _fox_graph <file>"
+    echo "usage     _fox_graph <file>"
   else
     cat $1 | docker run -i tsub/graph-easy;
   fi
@@ -486,17 +483,23 @@ alias _fox_graph="fn_fox_graph"
 # ## ==> get file with curl
 
 fn_fox_file_get() {
-  # usage : _fox_get [local location] [remote file]
-  # example _fox_get "~/Desktop" "https://github.com/99designs/aws-vault/releases/download/v4.7.1/aws-vault-darwin-amd64.dmg"
-  pushd $1 && curl -O $2 && popd;
+  if [ -z "$1" ]; then
+    echo 'usage     _fox_file_get <local location> <remote file>'
+    echo 'example   _fox_file_get "~/Desktop" "https://github.com/99designs/aws-vault/releases/download/v4.7.1/aws-vault-darwin-amd64.dmg'
+  else
+    pushd $1 && curl -O $2 && popd;
+  fi
 }
 
-alias _fox_file_get="fn_fox_get"
+alias _fox_file_get="fn_fox_file_get"
 
 # ===
 # === bash loader end
 # ===
 
 printf "%s\\n" "::"
-printf "%s\\n\\n" ":: term size $(stty size) :: type 'alias' - to show aliases"
+cat <<-EOF
+:: term size $(stty size) :: type 'alias' - to show aliases
+EOF
+# do not indent, nor add anything after closing EOF
 
