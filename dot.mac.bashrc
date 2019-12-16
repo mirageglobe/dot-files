@@ -471,16 +471,39 @@ alias _emo_shrug="echo '¯\_(ツ)_/¯'";
 #      a -> b -> c;
 #      b -> d;
 #  }
-
 fn_fox_graph() {
+  echo "usage"
+  echo "  _fox_graph"
+  echo "  _fox_graph_ascii <file>"
+  cat << EOF
+
+  # example run using graph-easy
+  docker run -i tsub/graph-easy << EOF
+  digraph parent {
+
+    lt [label="Laptop"]
+    ti [label="The\nInternet"]
+
+    lt -> ti
+
+    subgraph child {
+      lt -> ti
+    }
+  }
+  EOF
+EOF
+}
+
+fn_fox_graph_ascii() {
   if [ -z "$1" ]; then
-    echo "usage     _fox_graph <file>"
+    echo "usage     _fox_graph_ascii <file>"
   else
     cat $1 | docker run -i tsub/graph-easy;
   fi
 }
 
 alias _fox_graph="fn_fox_graph"
+alias _fox_graph_ascii="fn_fox_graph_ascii"
 
 # ## ==> get file with curl
 
