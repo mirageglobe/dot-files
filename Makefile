@@ -131,6 +131,7 @@ mac-ensure:											## ensure that folder(s), package managers, tools are pres
 	-mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
 	@# tools : node yarn										========================================
 	@$(call fn_print_header,ensure node yarn bins are pristine)
+	-curl -o- -L https://yarnpkg.com/install.sh | bash
 	# yarn - standard prettier
 	-yarn global upgrade
 	# -yarn global add semver														# dev semver tool (see https://github.com/fsaintjacques/semver-tool)
