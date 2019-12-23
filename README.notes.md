@@ -21,7 +21,8 @@ fg              foreground progress
 ci'             change in quote
 ca"             change around quote
 b / w           before and after word
-
+cf.             change from cursor to first occurrence "." including "."
+ct.             change from cursor to first occurrence "."
 
 ## intelliJ
 
