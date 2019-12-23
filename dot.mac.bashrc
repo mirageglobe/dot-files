@@ -449,7 +449,7 @@ alias _fzf="fzf --height=50%"
 
 alias _ls="ls -G"
 alias _ll="ls -lhAG"
-alias _ls_human="ls -Gd .*"
+alias _ls_hidden="ls -Gd .*"
 alias _ls_tree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
 alias _ls_tree_verbose="find . | sed -e 's/[^-][^\/]*\// |/g' -e 's/|\([^ ]\)/|-\1/'"
 
