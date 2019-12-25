@@ -85,7 +85,7 @@ PROMPT_EXTEND=" ${C_PURPLE}${UID}${C_END}:: ${C_BLUE}\$(fn_fox_sys_get_cur
 fn_get_git_branch() {
   # git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
   # ref : https://stackoverflow.com/questions/8914435/awk-sed-how-to-remove-parentheses-in-simple-text-file
-  # git branch 2> /dev/null | grep "\*" | awk '{ print $2 }' #| awk -v FS="[()]" '{for (i=2;i<=NF;i+=2) print $i }'
+  # git branch 2> /dev/null | grep "\*" | awk '{ print $2 }' #| awk -v FS="[()]" '{ for (i=2;i<=NF;i+=2) print $i }'
   git branch 2> /dev/null | grep "\*" | awk '{ printf " ";printf $2; }'
 }
 
@@ -95,7 +95,7 @@ fn_get_git_branch() {
 
 # ==> setting final prompt on prompt
 
-export PS1="${PROMPT_EXTEND} \$ "
+export PS1=" ${PROMPT_EXTEND} \$ "
 
 # ===
 # === apps and tools required settings
@@ -135,6 +135,10 @@ printf "%s" "[+] java "
 if [ -z $JAVA_HOME ]; then
   export JAVA_HOME=$(/usr/libexec/java_home)
 fi
+
+# ==> added for python3
+printf "%s" "[+] python "
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
 # ==> added for android sdk
 # export ANDROID_HOME=/usr/local/opt/android-sdk
@@ -185,7 +189,7 @@ alias _fox_sys="echo '
 fn_fox_network_info() {
   printf ":: about network (me) ::\n";
   printf "IP \t\t :"
-  ifconfig | grep 'inet' | grep '192' | awk '{print $2}'
+  ifconfig | grep 'inet' | grep '192' | awk '{ print $2 }'
   # ifconfig | grep inet;
   printf ":: list open files/processes and corresponding ports :: \n";
   sudo lsof -PiTCP -sTCP:LISTEN;
@@ -443,7 +447,7 @@ alias _fox_ssh_tunnel="printf ':: ssh tunnelling :: \n:: usage\t\t ssh -L 8080:w
 
 alias _rs="printf ':: restarting shell :: \n';exec $SHELL -l;"
 alias _random="echo ${RANDOM:0:2};"
-alias _path="echo ${PATH} | tr ':' '\n'"
+alias _path="echo \$PATH | tr ':' '\n'"
 alias _diff="diff -y"
 alias _fzf="fzf --height=50%"
 
