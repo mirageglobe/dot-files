@@ -498,7 +498,7 @@ if exists("did_load_filetypes")
   " endif " if (&ft ==# 'bash')
   
   " bash if else
-  autocmd FileType sh nnoremap <Leader>if :-1read ~/dot-files/vim-nanotemplate/template.bash.if.sh<CR>
+  autocmd FileType conf,sh nnoremap <Leader>if :-1read ~/dot-files/vim-nanotemplate/template.bash.if.sh<CR>
 
   " ruby if else elseif
   autocmd FileType ruby nnoremap <Leader>if :-1read ~/dot-files/vim-nanotemplate/template.ruby.if.rb<CR>
