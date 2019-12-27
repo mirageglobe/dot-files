@@ -441,6 +441,14 @@ fn_fox_sys_get_current_folder() {
   echo "$(basename $PWD)";
 }
 
+fn_fox_lowercase() {
+  echo "$1" | awk '{print tolower($0)}'
+}
+
+fn_fox_file_fix_name() {
+  echo "$1" | awk '{ gsub(" ", "-", $0); print tolower($0) }'
+}
+
 alias _fox_ssh="printf ':: loading default-key to agent :: \n';ssh-add;"
 alias _fox_ssh_keygen="printf ':: generating standard sshkey :: \n';ssh-keygen -b 2048 -t rsa -f ~/.ssh/id_rsa_standard -C \"( $HOSTNAME : changeme@gmail.com ) \""
 alias _fox_ssh_tunnel="printf ':: ssh tunnelling :: \n:: usage\t\t ssh -L 8080:www.google.com:80 172.10.10.10\n:: example\t\t ssh -L <local.port>:<target>:<target.port> <proxy>\n'; "
@@ -456,6 +464,9 @@ alias _ll="ls -lhAG"
 alias _ls_hidden="ls -Gd .*"
 alias _ls_tree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
 alias _ls_tree_verbose="find . | sed -e 's/[^-][^\/]*\// |/g' -e 's/|\([^ ]\)/|-\1/'"
+
+alias _fox_lowercase="fn_fox_lowercase"
+alias _fox_file_fix_name="fn_fox_file_fix_name"
 
 alias _fox_size="du -h"
 alias _fox_size_all="du -sh"
