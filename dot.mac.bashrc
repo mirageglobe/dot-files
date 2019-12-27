@@ -446,7 +446,8 @@ fn_fox_lowercase() {
 }
 
 fn_fox_file_fix_name() {
-  echo "$1" | awk '{ gsub(" ", "-", $0); print tolower($0) }'
+  echo "$1" | awk '{ gsub(" ", "\\ ", $0); gsub("[(]", "\\(", $0); gsub("[)]", "\\)", $0); printf ("mv " $0 " "); }'
+  echo "$1" | awk '{ gsub(" ", "-", $0); gsub("[()]", "", $0); print tolower($0) }'
 }
 
 alias _fox_ssh="printf ':: loading default-key to agent :: \n';ssh-add;"
