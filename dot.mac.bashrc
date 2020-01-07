@@ -348,6 +348,9 @@ alias _fox_aws="echo '
   _fox_aws_secret_access_key <profile>                # get aws secret access key
   _fox_aws_profile_ls                                 # list all profiles
   _fox_aws_profile_load <profile>                     # load profile
+
+  _fox_aws_vault add <profile>                        # add new profile. check ~/.aws/config to verify profile arn
+  _fox_aws_vault list                                 # list all profiles in aws vault
 '"
 
 fn_fox_aws_profile_load_now_datetime() {
