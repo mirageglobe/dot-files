@@ -81,12 +81,17 @@ PROMPT_EXTEND=" ${C_PURPLE}${UID}${C_END}:: ${C_BLUE}\$(fn_fox_sys_get_cur
   # PROMPT_EXTEND="$PROMPT_EXTEND aws($AWS_PROFILE)"
 # fi
 
-# ==> git prompt method
+# ==> prompt check git method
 fn_get_git_branch() {
   # git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
   # ref : https://stackoverflow.com/questions/8914435/awk-sed-how-to-remove-parentheses-in-simple-text-file
   # git branch 2> /dev/null | grep "\*" | awk '{ print $2 }' #| awk -v FS="[()]" '{ for (i=2;i<=NF;i+=2) print $i }'
   git branch 2> /dev/null | grep "\*" | awk '{ printf " ";printf $2; }'
+}
+
+# ==> prompt check aws shell
+fn_check_aws_shell() {
+  # env | grep "AWS_ACCESS_KEY_ID"
 }
 
 # echo "==> modification test <=="
@@ -519,7 +524,8 @@ EOF
 
 fn_fox_graph_ascii() {
   if [ -z "$1" ]; then
-    echo "usage     _fox_graph_ascii <file>"
+    echo "usage"
+    echo "  _fox_graph_ascii <file>"
   else
     cat $1 | docker run -i tsub/graph-easy;
   fi
@@ -532,8 +538,9 @@ alias _fox_graph_ascii="fn_fox_graph_ascii"
 
 fn_fox_file_get() {
   if [ -z "$1" ]; then
-    echo 'usage     _fox_file_get <local location> <remote file>'
-    echo 'example   _fox_file_get "~/Desktop" "https://github.com/99designs/aws-vault/releases/download/v4.7.1/aws-vault-darwin-amd64.dmg'
+    echo "usage"
+    echo "  _fox_file_get <local location> <remote file>"
+    echo '  _fox_file_get "~/Desktop" "https://github.com/99designs/aws-vault/releases/download/v4.7.1/aws-vault-darwin-amd64.dmg'
   else
     pushd $1 && curl -O $2 && popd;
   fi
