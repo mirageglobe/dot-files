@@ -92,6 +92,7 @@ fn_get_git_branch() {
 # ==> prompt check aws shell
 fn_check_aws_shell() {
   # env | grep "AWS_ACCESS_KEY_ID"
+  echo "wip"
 }
 
 # echo "==> modification test <=="
