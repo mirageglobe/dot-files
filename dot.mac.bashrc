@@ -49,10 +49,6 @@ export CLICOLOR=true                                  # common (mac only)
 # ref - https://www.cyberciti.biz/tips/howto-linux-unix-bash-shell-setup-prompt.html
 printf "%s" "[+] prompt "
 
-# export PS1="\u@\h \W\[\033[32m\]\$(fn_get_git_branch)\[\033[00m\] \$ "
-# export PS1=" \$UID:: \$(fn_fox_sys_get_current_folder):: \$(fn_get_git_branch)\$ "
-# export PS1=" ${C_PURPLE}${UID}${C_END}:: ${C_BLUE}\$(fn_fox_sys_get_current_folder) ${C_END}::${C_GREEN}\$(fn_get_git_branch)${C_END} \$ "
-
 # basic vanilla prompt - black 0;30 - red 0;31 - green 0;32 - brown 0;33 - blue 0,34 - purple 0;35 - cyan 0;36
 # to get lighter version, replace 0 with 1
 #
@@ -69,7 +65,7 @@ C_GREEN="\[\e[0;32m\]"
 C_WHITE="\[\e[1;0m\]"
 C_END="\[\e[m\]"
 
-PROMPT_EXTEND=" ${C_PURPLE}${UID}${C_END}:: ${C_BLUE}\$(fn_fox_sys_get_current_folder)${C_END}::${C_GREEN}\$(fn_get_git_branch)${C_END}"
+PROMPT_EXTEND=" ${C_PURPLE}${UID}${C_END}:: ${C_BLUE}\$(fn_fox_sys_get_current_folder)${C_END}::${C_GREEN}\$(fn_prompt_get_git_branch) ${fn_prompt_check_aws_shell} ${C_END}"
 
 # ==> aws prompt method
 # appends the prompt in sequence, according to following conditionals
@@ -82,7 +78,7 @@ PROMPT_EXTEND=" ${C_PURPLE}${UID}${C_END}:: ${C_BLUE}\$(fn_fox_sys_get_cur
 # fi
 
 # ==> prompt check git method
-fn_get_git_branch() {
+fn_prompt_get_git_branch() {
   # git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
   # ref : https://stackoverflow.com/questions/8914435/awk-sed-how-to-remove-parentheses-in-simple-text-file
   # git branch 2> /dev/null | grep "\*" | awk '{ print $2 }' #| awk -v FS="[()]" '{ for (i=2;i<=NF;i+=2) print $i }'
@@ -90,9 +86,12 @@ fn_get_git_branch() {
 }
 
 # ==> prompt check aws shell
-fn_check_aws_shell() {
+fn_prompt_check_aws_shell() {
   # env | grep "AWS_ACCESS_KEY_ID"
-  echo "wip"
+  # if [[ env == *"AWS"* ]]; then
+  #   echo "AWS"
+  # fi
+  env 2> /dev/null | grep "AWS" | awk '{ printf " AWS"; }'
 }
 
 # echo "==> modification test <=="
@@ -101,6 +100,7 @@ fn_check_aws_shell() {
 
 # ==> setting final prompt on prompt
 
+# export PS1="\u@\h \W\[\033[32m\]\$(fn_prompt_get_git_branch)\[\033[00m\] \$ "
 export PS1=" ${PROMPT_EXTEND} \$ "
 
 # ===
