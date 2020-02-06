@@ -59,13 +59,21 @@ printf "%s" "[+] prompt "
 # - https://www.cyberciti.biz/faq/bash-shell-change-the-color-of-my-shell-prompt-under-linux-or-unix/
 # - https://www.shellhacks.com/bash-colors/
 
-C_PURPLE="\[\e[0;35m\]"
+C_BLACK="\[\e[0;30m\]"
 C_BLUE="\[\e[1;34m\]"
 C_GREEN="\[\e[0;32m\]"
+C_PURPLE="\[\e[0;35m\]"
+C_RED="\[\e[0;31m\]"
 C_WHITE="\[\e[1;0m\]"
+C_YELLOW="\[\e[0;33m\]"
 C_END="\[\e[m\]"
 
-PROMPT_EXTEND=" ${C_PURPLE}${UID}${C_END}:: ${C_BLUE}\$(fn_fox_sys_get_current_folder)${C_END}::${C_GREEN}\$(fn_prompt_get_git_branch) ${fn_prompt_check_aws_shell} ${C_END}"
+PROMPT_EXTEND="\
+ ${C_PURPLE}${UID} ${C_END}\
+ ${C_BLUE}\$(fn_fox_sys_get_current_folder) ${C_END}\
+${C_GREEN}\$(fn_prompt_git_branch)${C_END}\
+${C_YELLOW}\$(fn_prompt_aws)${C_END}\
+"
 
 # ==> aws prompt method
 # appends the prompt in sequence, according to following conditionals
@@ -78,20 +86,16 @@ PROMPT_EXTEND=" ${C_PURPLE}${UID}${C_END}:: ${C_BLUE}\$(fn_fox_sys_get_cur
 # fi
 
 # ==> prompt check git method
-fn_prompt_get_git_branch() {
+fn_prompt_git_branch() {
   # git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
   # ref : https://stackoverflow.com/questions/8914435/awk-sed-how-to-remove-parentheses-in-simple-text-file
   # git branch 2> /dev/null | grep "\*" | awk '{ print $2 }' #| awk -v FS="[()]" '{ for (i=2;i<=NF;i+=2) print $i }'
-  git branch 2> /dev/null | grep "\*" | awk '{ printf " ";printf $2; }'
+  git branch 2> /dev/null | grep "\*" | awk '{ printf " "; printf $2; printf " "; }'
 }
 
 # ==> prompt check aws shell
-fn_prompt_check_aws_shell() {
-  # env | grep "AWS_ACCESS_KEY_ID"
-  # if [[ env == *"AWS"* ]]; then
-  #   echo "AWS"
-  # fi
-  env 2> /dev/null | grep "AWS" | awk '{ printf " AWS"; }'
+fn_prompt_aws() {
+  env 2> /dev/null | grep "AWS" | awk '{ printf " aws "; }'
 }
 
 # echo "==> modification test <=="
@@ -101,7 +105,7 @@ fn_prompt_check_aws_shell() {
 # ==> setting final prompt on prompt
 
 # export PS1="\u@\h \W\[\033[32m\]\$(fn_prompt_get_git_branch)\[\033[00m\] \$ "
-export PS1=" ${PROMPT_EXTEND} \$ "
+export PS1=" ${PROMPT_EXTEND} "
 
 # ===
 # === apps and tools required settings
