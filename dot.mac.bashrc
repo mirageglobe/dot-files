@@ -69,10 +69,12 @@ C_YELLOW="\[\e[0;33m\]"
 C_END="\[\e[m\]"
 
 PROMPT_EXTEND="\
- ${C_PURPLE}${UID} ${C_END}\
+${C_BLACK} ${C_END} \
+ ${C_PURPLE}${UID} ${C_END}\
  ${C_BLUE}\$(fn_fox_sys_get_current_folder) ${C_END}\
 ${C_GREEN}\$(fn_prompt_git_branch)${C_END}\
 ${C_YELLOW}\$(fn_prompt_aws)${C_END}\
+${C_BLACK} ${C_END} \
 "
 
 # ==> aws prompt method
@@ -105,7 +107,7 @@ fn_prompt_aws() {
 # ==> setting final prompt on prompt
 
 # export PS1="\u@\h \W\[\033[32m\]\$(fn_prompt_get_git_branch)\[\033[00m\] \$ "
-export PS1=" ${PROMPT_EXTEND} "
+export PS1=" ${PROMPT_EXTEND}\n ${C_BLACK}  ${C_END}"
 
 # ===
 # === apps and tools required settings
