@@ -95,7 +95,7 @@ fn_prompt_git_branch() {
 
 # ==> prompt check aws shell
 fn_prompt_aws() {
-  env 2> /dev/null | grep "AWS" | awk '{ printf " aws "; }'
+  env 2> /dev/null | grep "AWS_REGION" | awk '{ printf " aws "; }'
 }
 
 # echo "==> modification test <=="
