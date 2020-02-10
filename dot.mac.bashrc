@@ -59,7 +59,7 @@ printf "%s" "[+] prompt "
 # - https://www.cyberciti.biz/faq/bash-shell-change-the-color-of-my-shell-prompt-under-linux-or-unix/
 # - https://www.shellhacks.com/bash-colors/
 
-C_BLACK="\[\e[0;30m\]"
+C_BLACK="\[\e[1;30m\]"
 C_BLUE="\[\e[1;34m\]"
 C_GREEN="\[\e[0;32m\]"
 C_PURPLE="\[\e[0;35m\]"
