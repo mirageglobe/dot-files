@@ -59,14 +59,14 @@ printf "%s" "[+] prompt "
 # - https://www.cyberciti.biz/faq/bash-shell-change-the-color-of-my-shell-prompt-under-linux-or-unix/
 # - https://www.shellhacks.com/bash-colors/
 
-C_BLACK="\[\e[0;30m\]"
-C_BLACKL="\[\e[1;30m\]"
-C_BLUE="\[\e[0;34m\]"
+C_BLACK="\[\e[0;30m\]"          # black
+C_BLACKL="\[\e[1;30m\]"         # black (same)
+C_BLUE="\[\e[0;34m\]"           # blue
 C_BLUEL="\[\e[1;34m\]"
 C_GREEN="\[\e[0;32m\]"
 C_GREENL="\[\e[1;32m\]"
-C_PURPLE="\[\e[0;35m\]"
-C_PURPLEL="\[\e[1;35m\]"
+C_PURPLE="\[\e[0;35m\]"         # purple
+C_PURPLEL="\[\e[1;35m\]"        # pink
 C_RED="\[\e[0;31m\]"
 C_REDL="\[\e[1;31m\]"
 C_WHITE="\[\e[0;0m\]"
@@ -76,12 +76,12 @@ C_YELLOWL="\[\e[1;33m\]"
 C_END="\[\e[m\]"
 
 PROMPT_EXTEND="\
-${C_PURPLEL} ${C_END} \
+${C_} ${C_END} \
  ${C_PURPLE}${UID} ${C_END}\
  ${C_BLUE}\$(fn_fox_sys_get_current_folder) ${C_END}\
 ${C_GREEN}\$(fn_prompt_git_branch)${C_END}\
 ${C_YELLOW}\$(fn_prompt_aws)${C_END}\
-${C_PURPLEL} ${C_END} \
+${C_PURPLE} ${C_END} \
 "
 
 # ==> aws prompt method
