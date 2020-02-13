@@ -76,12 +76,12 @@ C_YELLOWL="\[\e[1;33m\]"
 C_END="\[\e[m\]"
 
 PROMPT_EXTEND="\
-${C_} ${C_END} \
- ${C_PURPLE}${UID} ${C_END}\
- ${C_BLUE}\$(fn_fox_sys_get_current_folder) ${C_END}\
+${C_PURPLEL} ${C_END} \
+${C_PURPLE} \${UID} ${C_END}\
+${C_BLUE} \$(fn_fox_sys_get_current_folder) ${C_END}\
 ${C_GREEN}\$(fn_prompt_git_branch)${C_END}\
 ${C_YELLOW}\$(fn_prompt_aws)${C_END}\
-${C_PURPLE} ${C_END} \
+${C_PURPLEL} ${C_END} \
 "
 
 # ==> aws prompt method
