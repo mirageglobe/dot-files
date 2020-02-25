@@ -453,6 +453,7 @@ nnoremap <Leader><SPACE> :Explore<CR>
 " sets co-authored for github
 " let @z='ICo-authored-by: y$A <@gmail.com>@Pgua<f x'
 nmap <Leader>@ <ESC>VD <ESC>ICo-authored-by: <CR>
+nmap <Leader>jd <ESC>ICo-authored-by: John Doe <johndoe@gmail.com><ESC>
 
 " yank to/from clipboard
 vnoremap <Leader>y :w !pbcopy<CR><ESC>
