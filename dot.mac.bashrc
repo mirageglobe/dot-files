@@ -420,6 +420,7 @@ alias _fox="echo '
   _size_1m                      # show files larger than 1mb in current dir
   _size_10m                     # show files larger than 10mb in current dir
   _size_100m                    # show files larger than 100mb in current dir
+  _subnet                       # show subnet for a range _subnet subnet.im/192.168.12.12/30
 
   _fox_ssh                      # load default key to ssh agent
   _fox_ssh_keygen               # generates key pair ~/.ssh/id_rsa_standard (2048 bits)
@@ -491,6 +492,8 @@ alias _ll="ls -lhAG"
 alias _ls_hidden="ls -Gd .*"
 alias _ls_tree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
 alias _ls_tree_verbose="find . | sed -e 's/[^-][^\/]*\// |/g' -e 's/|\([^ ]\)/|-\1/'"
+
+alias _subnet="echo 'use curl subnet.im/192.168.12.12/30'"
 
 alias _fox_lowercase="fn_fox_lowercase"
 alias _fox_file_fix_name="fn_fox_file_fix_name"
