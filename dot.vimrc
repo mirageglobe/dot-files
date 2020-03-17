@@ -172,10 +172,10 @@ Plug 'lifepillar/vim-mucomplete'                      " enables code completion 
 " Plug 'maralla/completor.vim'                          " yet another async code completion cool
 Plug 'sheerun/vim-polyglot'                           " syntax superfast on demand loader for over 100 languages
 " Plug 'vim-vdebug/vdebug'                              " vim debugger that interfaces with xdebug
-Plug 'MarcWeber/vim-addon-mw-utils'                   " snippet tool 
-Plug 'tomtom/tlib_vim'                                " snippet tool
-Plug 'garbas/vim-snipmate'                            " snippet tool
-Plug 'honza/vim-snippets'                             " snippets - optional
+" Plug 'MarcWeber/vim-addon-mw-utils'                   " snippet tool 
+" Plug 'tomtom/tlib_vim'                                " snippet tool
+" Plug 'garbas/vim-snipmate'                            " snippet tool
+" Plug 'honza/vim-snippets'                             " snippets - optional
 
 " Plug 'hashivim/vim-terraform'                         " enable syntax for hashicorp
 " Plug 'hashivim/vim-consul'                            " enable syntax for hashicorp
