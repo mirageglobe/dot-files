@@ -23,8 +23,6 @@
 " ==> system optimisations for vim
 
 set lazyredraw                                        " do not redraw when executing macros; buffer instead of constant redraws
-" set noshowcmd                                         " speed up turning off display of cmds
-" set showcmd                                         " speed up turning off display of cmds
 set noshowmode                                        " speed up by turning of showing mode on last line
 " set showmode                                         " show current mode down the bottom
 set regexpengine=1                                    " speed up by using old regex engine
@@ -39,6 +37,8 @@ set wrap linebreak nolist                             " set soft wrap for text
 " ==> general
 
 set nocompatible                                      " required by vim for extra features
+" set noshowcmd                                         " speed up turning off display of cmds
+set showcmd                                           " speed up turning off display of cmds. need to be after nocompatible
 
 set number                                            " show line numbers
 set history=1000                                      " store lots of :cmdline history
@@ -118,11 +118,10 @@ set spell spelllang=en_gb
 set relativenumber                                    " enables relative number rather than running number
 
 " set code folding
-set foldmethod=indent   
+set foldmethod=indent
 set foldnestmax=10
 set nofoldenable
 set foldlevel=2
-
 
 " === vim end
 
@@ -176,6 +175,7 @@ Plug 'sheerun/vim-polyglot'                           " syntax superfast on dema
 Plug 'MarcWeber/vim-addon-mw-utils'                   " snippet tool 
 Plug 'tomtom/tlib_vim'                                " snippet tool
 Plug 'garbas/vim-snipmate'                            " snippet tool
+Plug 'honza/vim-snippets'                             " snippets - optional
 
 " Plug 'hashivim/vim-terraform'                         " enable syntax for hashicorp
 " Plug 'hashivim/vim-consul'                            " enable syntax for hashicorp
@@ -289,25 +289,25 @@ set noshowmode                                        " hide status of mode (ins
 
 " this is lightlines init; needs to be first function
 let g:lightline = {
-      \ 'component': {
-      \   'lineinfo': ' %3l:%-2v',
-      \   'readonly': '%{&filetype=="help"?"":&readonly?"":""}',
-      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-      \   'fugitive': '%{exists("*fugitive#head")?"":""} %{exists("*fugitive#head")?fugitive#head():""}',
-      \ },
-      \ 'component_visible_condition': {
-      \   'readonly': '(&filetype!="help"&& &readonly)',
-      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
-      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())',
-      \ },
-      \ 'separator': { 
-      \    'left': "",
-      \    'right': "",
-      \ },
-      \ 'subseparator': { 
-      \    'left': "\ue0b1",
-      \    'right': "\ue0b3",
-      \ }
+      \   'component': {
+      \     'lineinfo': ' %3l:%-2v',
+      \     'readonly': '%{&filetype=="help"?"":&readonly?"":""}',
+      \     'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+      \     'fugitive': '%{exists("*fugitive#head")?"":""} %{exists("*fugitive#head")?fugitive#head():""}',
+      \   },
+      \   'component_visible_condition': {
+      \     'readonly': '(&filetype!="help"&& &readonly)',
+      \     'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
+      \     'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())',
+      \   },
+      \   'separator': { 
+      \     'left': "",
+      \     'right': "",
+      \   },
+      \   'subseparator': { 
+      \     'left': "\ue0b1",
+      \     'right': "\ue0b3",
+      \   }
       \ }
 
 " colorscheme for lightline = powerline, wombat, jellybeans, solarized dark, solarized light, PaperColor light, seoul256, one, landscape
@@ -315,11 +315,11 @@ let g:lightline.colorscheme = 'palenight'
 
 " load lightline
 let g:lightline.active = {
-      \ 'left': [
+      \   'left': [
       \     [ 'mode', 'paste' ],
       \     [ 'fugitive', 'readonly', 'filename', 'modified' ],
       \     [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ]
-      \ ]
+      \   ]
       \ }
 
 " ==> lightlineale
@@ -527,3 +527,4 @@ command! -bang -nargs=* -complete=dir Files
       \   <bang>0)
 
 " === fzf end
+
