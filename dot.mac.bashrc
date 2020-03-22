@@ -361,6 +361,7 @@ alias _fox_docker_stop="echo ':: stopping running container ::'; fn_fox_docker_r
 alias _fox_aws="echo '
 :: help aws ::
 
+  _fox_aws_check                                      # use sts to check connectivity
   _fox_aws_config                                     # show aws account configure
   _fox_aws_config_init                                # set up aws account using configuration
   _fox_aws_access_key_id <profile>                    # get aws key id
@@ -397,6 +398,7 @@ fn_fox_aws_profile_show() {
   printf "\n"
 }
 
+alias _fox_aws_check="aws sts get-caller-identity"
 alias _fox_aws_config="cat ~/.aws/config; cat ~/.aws/credentials;"
 alias _fox_aws_config_init="mkdir -pv ~/.aws && aws configure;"
 alias _fox_aws_access_key_id="aws configure get aws_access_key_id --profile;"
