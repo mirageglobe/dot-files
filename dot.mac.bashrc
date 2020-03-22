@@ -448,7 +448,7 @@ alias _fox="echo '
 fn_fox_system() {
   printf ":: system information :: \n"
   printf "date \t\t\t $(fn_fox_now_date) \n"
-  printf "date time \t\t $(fn_fox_now_datetime) \n"
+  printf "time \t\t $(fn_fox_now_time) \n"
   printf "ip (class c) \t\t $(fn_fox_network_getip) \n"
   printf "terminal encoding \t $(locale charmap) \n"
   printf "\n"
@@ -504,7 +504,7 @@ alias _fox_size_1m="find . -type f -size +1M -exec ls -lh {} \;"
 alias _fox_size_10m="find . -type f -size +10M -exec ls -lh {} \;"
 alias _fox_size_100m="find . -type f -size +100M -exec ls -lh {} \;"
 
-alias _fox_now="fn_fox_now_datetime;"
+alias _fox_now="fn_fox_now_date && fn_fox_now_time;"
 alias _fox_now_date="fn_fox_now_date;"
 alias _fox_now_time="fn_fox_now_time;"
 
