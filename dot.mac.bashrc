@@ -126,7 +126,8 @@ export PS1=" ${PROMPT_EXTEND}\n ${C_PURPLEL}  ${C_END}"
 
 # ==> git configurations
 # default push branch to remote
-git config --global --add push.default current
+# git config --global --add push.default current
+cat ~/.gitconfig | grep "default = current" > /dev/null || git config --global --add push.default current
 
 # appending additional git aliases
 git config --global alias.alias "config --get-regexp alias"
