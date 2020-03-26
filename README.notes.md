@@ -74,3 +74,10 @@ reference
 ## intelliJ
 
 crtl+shift+r    run test method
+
++b / w           before and after word
+
+## git
+
+to rebase own branch, where sha is the commit and ~ will include current
+$ git rebase -i <sha>~
