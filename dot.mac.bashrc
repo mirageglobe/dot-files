@@ -269,10 +269,15 @@ alias _fox_git="echo '
   git lg                                              # show fancy git history
   git difftool                                        # runs default difftool
   git branch -r -d <remote:-github/stale-version>     # remove remote branch
-  git reset --soft <git-sha>                          # resets to historic commit
-  git reset --hard <branch>                           # resets current branch to mirror a peer <branch>
-  git reset --hard HEAD~1                             # rollback the commit
+  git reset --soft <git-sha>                          # resets to <sha> commit and preserve changes
+  git reset --hard <branch>                           # reset/destroy current branch to mirror a peer <branch>
+  git reset --hard HEAD~1                             # rollback/destroy the current commit
   git stash list                                      # show current stashes in project
+  git stash pop                                       # apply stash to this branch and remove stash
+  git stash apply                                     # apply stash to this branch
+  git rebase master                                   # apply master branch as base on this branch
+  git rebase -i <sha>~                                # interactive squash this branch from head to <sha>
+  git checkout -                                      # checkout previous checked out branch
 
 :: ref ::
 
