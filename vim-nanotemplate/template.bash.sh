@@ -98,7 +98,7 @@
 # checks if element "$1" is in array "$2"
 # @note: be sure that array is passed in the form:
 #       "${ARR[@]}"
-exists_in () {
+exists_in() {
   # shopt -s nocasematch # Can be useful to disable case-matching
   local e
   for e in "${@:2}"; do [[ "$e" == "$1" ]] && return 0; done
@@ -114,7 +114,6 @@ exists_in () {
 # else
 #     echo FALSE
 # fi
-
 
 # == os checking script
 
@@ -153,4 +152,41 @@ exists_in () {
 #     exit 0;
 #   fi
 # }
+
+
+# == trim array
+
+##!/bin/bash
+
+## trim function
+
+#trim() {
+#  local var
+#  var="$*"
+#  # remove leading whitespace characters
+#  var="${var#"${var%%[![:space:]]*}"}"
+#  # remove trailing whitespace characters
+#  var="${var%"${var##*[![:space:]]}"}"
+#  # echo $var
+#}
+
+## array
+#arr=( \
+#  hello   \  # test
+#  world   \
+#  world2  \
+#)
+
+## trim leading white space
+#arr="${arr##*( )}"
+
+## trim trailing white space
+#arr="${arr%%*( )}"
+
+## loop array
+#for item in ${arr[*]}
+#do
+#  # item=$(trim $item)        # trim leading trailing whitespace
+#  echo $item
+#done
 
