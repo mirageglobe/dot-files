@@ -115,7 +115,9 @@ bin-ensure:											## ensure that common tools are in .tools folder
 	@$(call fn_print_header,"ensure completion scripts are in tools folder")
 	-curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash > $$HOME/.tools/sh/dot.bash-completion.git.bash
 	@$(call fn_print_header,"ensure fonts are on desktop")
-	# recommended
+	@$(call fn_print_header,"summary")
+	ls tools
+	@$(call fn_print_header,"recommended")
 	# - brew cask install font-firacode-nerd-font font-hasklig-nerd-font font-inconsolata-nerd-font font-iosevka-nerd-font font-monoid-nerd-font font-noto-nerd-font font-robotomono-nerd-font font-tinos-nerd-font
 
 mac-ensure:											## ensure that folder(s), package managers, tools are present

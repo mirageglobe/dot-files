@@ -171,9 +171,9 @@ Plug 'lifepillar/vim-mucomplete'                      " enables code completion 
 " Plug 'maralla/completor.vim'                          " yet another async code completion cool
 Plug 'sheerun/vim-polyglot'                           " syntax superfast on demand loader for over 100 languages
 " Plug 'vim-vdebug/vdebug'                              " vim debugger that interfaces with xdebug
-Plug 'MarcWeber/vim-addon-mw-utils'                   " snippet tool 
-Plug 'tomtom/tlib_vim'                                " snippet tool
-Plug 'garbas/vim-snipmate'                            " snippet tool
+" Plug 'MarcWeber/vim-addon-mw-utils'                   " snippet tool 
+" Plug 'tomtom/tlib_vim'                                " snippet tool
+" Plug 'garbas/vim-snipmate'                            " snippet tool
 " Plug 'honza/vim-snippets'                             " snippets - optional
 
 " Plug 'hashivim/vim-terraform'                         " enable syntax for hashicorp
@@ -290,6 +290,7 @@ set noshowmode                                        " hide status of mode (ins
 let g:lightline = {
       \   'component': {
       \     'lineinfo': ' %3l:%-2v',
+      \     'filetype': '%{&filetype}',
       \     'readonly': '%{&filetype=="help"?"":&readonly?"":""}',
       \     'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
       \     'fugitive': '%{exists("*fugitive#head")?"":""} %{exists("*fugitive#head")?fugitive#head():""}',
@@ -494,24 +495,38 @@ nmap <Leader>ref aref - <ESC>$a
 " ref - http://learnvimscriptthehardway.stevelosh.com/chapters/13.html#autocommands-and-abbreviations
 
 if exists("did_load_filetypes")
-  
-  " if &filetype ==# 'bash'
-  " endif " if (&ft ==# 'bash')
-  
-  " bash if else
-  autocmd FileType conf,sh nnoremap <Leader>if :-1read ~/dot-files/vim-nanotemplate/template.bash.if.sh<CR>
 
-  " ruby if else elseif
-  autocmd FileType ruby nnoremap <Leader>if :-1read ~/dot-files/vim-nanotemplate/template.ruby.if.rb<CR>
+  augroup vimnano
 
-  " ruby switch case
-  autocmd FileType ruby nnoremap <Leader>switch :-1read ~/dot-files/vim-nanotemplate/template.ruby.switch.rb<CR>
+    autocmd!
 
-  " ruby function
-  autocmd FileType ruby nnoremap <Leader>function :-1read ~/dot-files/vim-nanotemplate/template.ruby.function.rb<CR>
+    " bash sh files
+    if index(['sh','conf'], &filetype) == -1
 
-  " ruby class
-  autocmd FileType ruby nnoremap <Leader>class :-1read ~/dot-files/vim-nanotemplate/template.ruby.class.rb<CR>
+      autocmd FileType conf,sh nnoremap <Leader>if :-1read ~/dot-files/vim-nanotemplate/tpl.bash.if.sh<CR>
+
+    endif
+
+    " vimrc files
+    if index(['vim'], &filetype) == -1
+
+      autocmd FileType vim nnoremap <Leader>if :-1read ~/dot-files/vim-nanotemplate/tpl.vim.if.vimrc<CR>
+      autocmd FileType vim nnoremap <Leader>fn :-1read ~/dot-files/vim-nanotemplate/tpl.vim.fn.vimrc<CR>
+      autocmd FileType vim nnoremap <Leader>var :-1read ~/dot-files/vim-nanotemplate/tpl.vim.var.vimrc<CR>
+
+    endif
+
+    " ruby files
+    if index(['ruby'], &filetype) == -1
+
+      autocmd FileType ruby nnoremap <Leader>if :-1read ~/dot-files/vim-nanotemplate/tpl.ruby.if.rb<CR>
+      autocmd FileType ruby nnoremap <Leader>swc :-1read ~/dot-files/vim-nanotemplate/tpl.ruby.switch.rb<CR>
+      autocmd FileType ruby nnoremap <Leader>fn :-1read ~/dot-files/vim-nanotemplate/tpl.ruby.fn.rb<CR>
+      autocmd FileType ruby nnoremap <Leader>cls :-1read ~/dot-files/vim-nanotemplate/tpl.ruby.cls.rb<CR>
+
+    endif
+
+  augroup END
 
 endif " if exists("did_load_filetypes")
 
