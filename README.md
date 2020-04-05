@@ -9,9 +9,14 @@ ensure that you have curl or wget. you can check by using the following command 
 ```
 curl -V
 wget -V
+git
 ```
 
 ```
+# quick start - to clone the repo and run the make to see menu
+git clone https://github.com/mirageglobe/dot-files.git
+cd dot-files && make
+
 # to curl the makefile
 curl -D - https://raw.githubusercontent.com/mirageglobe/dot-files/master/Makefile > ~/Makefile
 
@@ -22,6 +27,7 @@ curl -fLo "<FONT NAME> Nerd Font Complete.otf" https://github.com/ryanoasis/nerd
 # to contribute
 
 - ensure nothing sensitive is committed to this repo
+- assume that homebrew is not available and installs are mostly thru compiled binaries or scripts
 
 # to do
 
@@ -34,7 +40,7 @@ curl -fLo "<FONT NAME> Nerd Font Complete.otf" https://github.com/ryanoasis/nerd
 - aws vault (https://github.com/99designs/aws-vault/releases)
 - [done] include path builder for tooling
 - include tool repo update
-- include tool copy to folder
+- [done] include tool copy to folder
 - add python lint security : bandit
 - add ruby lint : use ruby -wc
 - add rails lint : use traceroute
