@@ -433,12 +433,12 @@ let g:terraform_fmt_on_save=1
 
 " n = normal mode
 
-" map     normal and visual mode
-" nmap    normal mode
-" vmap    visual mode
-" imap    insert mode
+" map       normal and visual mode
+" nmap      normal mode
+" vmap      visual mode
+" imap      insert mode
 
-" remap   recursive map
+" remap     recursive map
 " noremap   non recursive map
 
 " <c-d>   control + d
@@ -472,23 +472,15 @@ nnoremap <Leader>reload :source ~/dot-files/dot.vimrc<ESC>
 nnoremap <Leader>c :-1read ~/dot-files/vim-nanotemplate/template.c.c<CR>
 nnoremap <Leader>php :-1read ~/dot-files/vim-nanotemplate/template.php.php<CR>
 nnoremap <Leader>py :-1read ~/dot-files/vim-nanotemplate/template.python.py<CR>
-nnoremap <Leader>rb :-1read ~/dot-files/vim-nanotemplate/template.ruby.rb<CR>
-nnoremap <Leader>sh :-1read ~/dot-files/vim-nanotemplate/template.bash.sh<CR>
 nnoremap <Leader>tf :-1read ~/dot-files/vim-nanotemplate/template.terraform.tf<CR>
 
 " note that this remap uses gcc : timpopes auto commenter. method to
 " append ===, comment this, move cursor to first marker, append mode
 
-nmap <Leader>hh a#<SPACE>===<CR>#<SPACE>===<SPACE><CR>#<SPACE>===<ESC>Vkkgcc<ESC>j^f=;;<ESC>a<SPACE>
-nmap <Leader>hj a# ===<ESC>Vgcc<ESC>^f=;;<esc>a<space>
-nmap <Leader>hk a## ==><ESC>Vgcc<ESC>^f=ll<esc>a<space>
-nmap <Leader>hl a### >=><ESC>Vgcc<ESC>^f=ll<esc>a<space>
-
-nmap <Leader>h1 a#<ESC>$a<SPACE>
-nmap <Leader>h2 a##<ESC>$a<SPACE>
-nmap <Leader>h3 a###<ESC>$a<SPACE>
-
-nmap <Leader>ref aref - <ESC>$a
+nmap <Leader>hh a#<SPACE>===<CR>#<SPACE>===<SPACE><CR>#<SPACE>===<ESC>Vkkgcc<ESC>j^f=;;<ESC>a<SPACE><ESC>
+nmap <Leader>hj a# ===<ESC>Vgcc<ESC>^f=;;<esc>a<space><ESC>
+nmap <Leader>hk a## ==><ESC>Vgcc<ESC>^f=ll<esc>a<space><ESC>
+nmap <Leader>hl a### >=><ESC>Vgcc<ESC>^f=ll<esc>a<space><ESC>
 
 " filetype specific snippets
 " ref - http://vimdoc.sourceforge.net/htmldoc/autocmd.html
@@ -496,13 +488,32 @@ nmap <Leader>ref aref - <ESC>$a
 
 if exists("did_load_filetypes")
 
+  augroup leadershortcut
+
+    autocmd!
+    
+    " markdown files
+    if index(['markdown'], &filetype) == -1
+
+      autocmd FileType markdown nnoremap <Leader>h 0a#<ESC>$<ESC>
+      autocmd FileType markdown nnoremap <Leader>hh 0a##<ESC>$<ESC>
+      autocmd FileType markdown nnoremap <Leader>hhh 0a###<ESC>$<ESC>
+      autocmd FileType markdown nnoremap <Leader>hr o---<ESC>
+      autocmd FileType markdown nnoremap <Leader>ref aref - <ESC>$<ESC>
+      autocmd FileType markdown nnoremap <Leader>code a```<ESC>o```<ESC>k<ESC>o# code block<CR><ESC>
+
+    endif
+
+  augroup END
+
   augroup vimnano
 
     autocmd!
 
     " bash sh files
-    if index(['sh','conf'], &filetype) == -1
+    if index(['conf','sh'], &filetype) == -1
 
+      autocmd FileType conf,sh nnoremap <Leader>help :-1read ~/dot-files/vim-nanotemplate/tpl.bash.sh<CR>
       autocmd FileType conf,sh nnoremap <Leader>if :-1read ~/dot-files/vim-nanotemplate/tpl.bash.if.sh<CR>
 
     endif
@@ -519,6 +530,7 @@ if exists("did_load_filetypes")
     " ruby files
     if index(['ruby'], &filetype) == -1
 
+      autocmd FileType ruby nnoremap <Leader>help :-1read ~/dot-files/vim-nanotemplate/tpl.ruby.rb<CR>
       autocmd FileType ruby nnoremap <Leader>if :-1read ~/dot-files/vim-nanotemplate/tpl.ruby.if.rb<CR>
       autocmd FileType ruby nnoremap <Leader>swc :-1read ~/dot-files/vim-nanotemplate/tpl.ruby.switch.rb<CR>
       autocmd FileType ruby nnoremap <Leader>fn :-1read ~/dot-files/vim-nanotemplate/tpl.ruby.fn.rb<CR>
