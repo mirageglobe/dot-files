@@ -366,7 +366,7 @@ alias _fox_docker_stop="echo ':: stopping running container ::'; fn_fox_docker_r
 
 # ## ==> aws
 
-alias _fox_aws="echo '
+alias _fox_aws_help="echo '
 :: help aws ::
 
   _fox_aws_check                                      # use sts to check connectivity
@@ -432,7 +432,7 @@ alias _fox="echo '
   _size_100m                    # show files larger than 100mb in current dir
   _subnet                       # show subnet for a range _subnet subnet.im/192.168.12.12/30
 
-  _fox_ssh                      # load default key to ssh agent
+  _fox_ssh_load                 # load default key to ssh agent
   _fox_ssh_keygen               # generates key pair ~/.ssh/id_rsa_standard (2048 bits)
   _fox_ssh_tunnel               # shows how to tunnel
 
@@ -487,7 +487,7 @@ fn_fox_file_fix_name() {
   echo "$1" | awk '{ gsub(" ", "-", $0); gsub("[()]", "", $0); print tolower($0) }'
 }
 
-alias _fox_ssh="printf ':: loading default-key to agent :: \n';ssh-add;"
+alias _fox_ssh_load="printf ':: loading default-key to agent :: \n';ssh-add;"
 alias _fox_ssh_keygen="printf ':: generating standard sshkey :: \n';ssh-keygen -b 2048 -t rsa -f ~/.ssh/id_rsa_standard -C \"( $HOSTNAME : changeme@gmail.com ) \""
 alias _fox_ssh_tunnel="printf ':: ssh tunnelling :: \n:: usage\t\t ssh -L 8080:www.google.com:80 172.10.10.10\n:: example\t\t ssh -L <local.port>:<target>:<target.port> <proxy>\n'; "
 
@@ -519,6 +519,7 @@ alias _fox_now_date="fn_fox_now_date;"
 alias _fox_now_time="fn_fox_now_time;"
 
 alias _emo_shrug="echo '¯\_(ツ)_/¯'";
+
 # ## ==> graphing using dot
 
 # # sample.dot
@@ -526,11 +527,17 @@ alias _emo_shrug="echo '¯\_(ツ)_/¯'";
 #      a -> b -> c;
 #      b -> d;
 #  }
-fn_fox_graph() {
+
+fn_fox_graph_help() {
   echo "usage"
   echo "  _fox_graph"
   echo "  _fox_graph_ascii <file>"
   cat << EOF
+
+  usage
+
+    _fox_graph_help
+    _fox_graph_ascii <file>           # test
 
   # example run using graph-easy
   docker run -i tsub/graph-easy << EOF
@@ -545,20 +552,20 @@ fn_fox_graph() {
       lt -> ti
     }
   }
-  EOF
 EOF
 }
 
 fn_fox_graph_ascii() {
   if [ -z "$1" ]; then
     echo "usage"
+    echo ""
     echo "  _fox_graph_ascii <file>"
   else
     cat $1 | docker run -i tsub/graph-easy;
   fi
 }
 
-alias _fox_graph="fn_fox_graph"
+alias _fox_graph_help="fn_fox_graph_help"
 alias _fox_graph_ascii="fn_fox_graph_ascii"
 
 # ## ==> get file with curl
