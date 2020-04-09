@@ -531,25 +531,25 @@ alias _fox_graph_help="fn_fox_graph_help"
 
 fn_fox_graph_help() {
   cat << EOF
+usage
 
-  usage
+  _fox_graph_help
+  _fox_graph_ascii <file>           # test
 
-    _fox_graph_help
-    _fox_graph_ascii <file>           # test
+# example run using graph-easy
+docker run -i tsub/graph-easy << EOF
+digraph parent {
 
-  # example run using graph-easy
-  docker run -i tsub/graph-easy << EOF
-  digraph parent {
+  lt [label="Laptop"]
+  ti [label="The\nInternet"]
 
-    lt [label="Laptop"]
-    ti [label="The\nInternet"]
+  lt -> ti
 
+  subgraph child {
     lt -> ti
-
-    subgraph child {
-      lt -> ti
-    }
   }
+}
+
 EOF
 }
 
@@ -557,9 +557,12 @@ alias _fox_graph_ascii="fn_fox_graph_ascii"
 
 fn_fox_graph_ascii() {
   if [ -z "$1" ]; then
-    echo "usage"
-    echo ""
-    echo "  _fox_graph_ascii <file>"
+    cat << EOM
+usage
+
+  _fox_graph_ascii <file>
+
+EOM
   else
     cat $1 | docker run -i tsub/graph-easy;
   fi
@@ -569,10 +572,13 @@ fn_fox_graph_ascii() {
 
 fn_fox_file_get() {
   if [ -z "$1" ]; then
-    echo "usage"
-    echo ""
-    echo "  _fox_file_get <local location> <remote file>"
-    echo '  _fox_file_get "~/Desktop" "https://github.com/99designs/aws-vault/releases/download/v4.7.1/aws-vault-darwin-amd64.dmg"'
+    cat << EOM
+usage
+
+  _fox_file_get <local location> <remote file>
+  _fox_file_get "~/Desktop" "https://github.com/aws-vault/download/v4.7.1/amd64.dmg"
+
+EOM
   else
     pushd $1 && curl -O $2 && popd;
   fi
