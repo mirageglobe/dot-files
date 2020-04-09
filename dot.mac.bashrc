@@ -26,6 +26,7 @@ printf "%s" ":: load bashrc : "
 # ===
 # === common env variables
 # ===
+
 printf "%s" "[+] envvars "
 
 export NOW=$(date +"%Y%m%d-000000")                   # common
@@ -263,7 +264,6 @@ alias _fox_git="echo '
   _git_master <branch>          # checkout master and branch (hotfix/TICKET-123-myhotfix)
   _git_pull_all                 # try to checkout master/staging/develop and pull for all
 
-
 :: others ::
 
   git lg                                              # show fancy git history
@@ -293,7 +293,6 @@ alias _git_config="echo ':: showing gitconfig ::'; cat ~/.gitconfig;"
 alias _git_com="echo ':: git add --all and git commit -m ::'; git add --all && git commit -m"
 alias _git_show="git fetch --all --prune; printf '\n'; git branch --all -vv; printf '\n'; git status --show-stash -vv;"
 alias _git_diff="echo ':: git changes - git diff head^ ::'; git diff head^;"
-
 
 alias _git_ls="git fetch --all; git branch --all;"
 alias _git_ll="git log --pretty='format:%C(yellow)%h%Creset - %Cgreen%>(12)%ad%Creset %C(bold blue)<%an>%Creset %s' --date=relative;"
@@ -528,10 +527,9 @@ alias _emo_shrug="echo '¯\_(ツ)_/¯'";
 #      b -> d;
 #  }
 
+alias _fox_graph_help="fn_fox_graph_help"
+
 fn_fox_graph_help() {
-  echo "usage"
-  echo "  _fox_graph"
-  echo "  _fox_graph_ascii <file>"
   cat << EOF
 
   usage
@@ -555,6 +553,8 @@ fn_fox_graph_help() {
 EOF
 }
 
+alias _fox_graph_ascii="fn_fox_graph_ascii"
+
 fn_fox_graph_ascii() {
   if [ -z "$1" ]; then
     echo "usage"
@@ -565,16 +565,14 @@ fn_fox_graph_ascii() {
   fi
 }
 
-alias _fox_graph_help="fn_fox_graph_help"
-alias _fox_graph_ascii="fn_fox_graph_ascii"
-
 # ## ==> get file with curl
 
 fn_fox_file_get() {
   if [ -z "$1" ]; then
     echo "usage"
+    echo ""
     echo "  _fox_file_get <local location> <remote file>"
-    echo '  _fox_file_get "~/Desktop" "https://github.com/99designs/aws-vault/releases/download/v4.7.1/aws-vault-darwin-amd64.dmg'
+    echo '  _fox_file_get "~/Desktop" "https://github.com/99designs/aws-vault/releases/download/v4.7.1/aws-vault-darwin-amd64.dmg"'
   else
     pushd $1 && curl -O $2 && popd;
   fi
