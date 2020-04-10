@@ -496,10 +496,13 @@ alias _path="echo \$PATH | tr ':' '\n'"
 alias _diff="diff -y"
 alias _fzf="fzf --height=50%"
 
-alias _ls="ls -G"
+alias _cp="cp -i"
+alias _mv="mv -i"
+alias _rm="rm -i"
+
+alias _ls="ls -Gd .*"
 alias _ll="ls -lhAG"
-alias _ls_hidden="ls -Gd .*"
-alias _ls_tree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
+alias _tree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
 alias _ls_tree_verbose="find . | sed -e 's/[^-][^\/]*\// |/g' -e 's/|\([^ ]\)/|-\1/'"
 
 alias _subnet="echo 'use curl subnet.im/192.168.12.12/30'"
