@@ -1,4 +1,0 @@
-digraph test {
-     a -> b -> c;
-     b -> d;
- }
