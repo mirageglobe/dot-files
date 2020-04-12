@@ -175,18 +175,25 @@ export PATH="$HOME/.gem/ruby/2.6.0/bin:$PATH"
 # === bash completions
 # ===
 
-printf "%s" "[+] bashcompletion "
+printf "%s" "[+] completion "
 
-# ==> added for make completion
-if [ -f ~/dot.bash-completion.make.bash ]; then
-  source ~/dot.bash-completion.make.bash
+# ==> checks if bash version is 5
+if echo ${BASH_VERSION} | grep -q "^5\."; then
+  printf "%s" "bash(v5+) "
+else
+  printf "%s" "bash(v?) "
 fi
+
+# # ==> added for make completion
+# if [ -f ~/dot.bash-completion.make.bash ]; then
+#   source ~/dot.bash-completion.make.bash
+# fi
 
 # ==> added for git completion
 # # this should be added automatically if bash-completion@2 is installed
-if [ -f ~/dot.bash-completion.git.bash ]; then
-  source ~/dot.bash-completion.git.bash
-fi
+# if [ -f ~/dot.bash-completion.git.bash ]; then
+#   source ~/dot.bash-completion.git.bash
+# fi
 
 # ===
 # === aliases (type: "$ alias" to show current aliases)
