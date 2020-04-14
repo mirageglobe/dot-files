@@ -171,6 +171,10 @@ export PATH="$HOME/.gem/ruby/2.6.0/bin:$PATH"
 # export ANDROID_HOME=/usr/local/opt/android-sdk
 # printf "%s" "[+] android "
 
+# ==> added for autojump
+# https://github.com/wting/autojump
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+
 # ===
 # === bash completions
 # ===
