@@ -500,7 +500,7 @@ alias _fox_ssh_tunnel="printf ':: ssh tunnelling :: \n:: usage\t\t ssh -L 8080:w
 alias _rs="printf ':: restarting shell :: \n';exec $SHELL -l;"
 alias _random="echo ${RANDOM:0:2};"
 alias _path="echo \$PATH | tr ':' '\n'"
-alias _diff="diff -y"
+alias _diff="diff -y --color"
 alias _fzf="fzf --height=50%"
 
 alias _cp="cp -i"

@@ -16,7 +16,7 @@
 MENU := launch check bin-ensure mac-ensure tex-ensure
 
 # menu helpers targets
-MENU := now-datetime now-date now-time now-epoch version vinit vpatch vminor vmajor todo help
+MENU := now-datetimeversion vinit vpatch vminor vmajor todo help
 
 # load phony
 # info - phony is used to make sure there is no similar file(s) such as <target> that cause the make recipe not to work
@@ -73,14 +73,14 @@ launch:													## loads basic init tools
 	open https://www.nerdfonts.com/
 	open https://www.noisli.com/
 
-docker:													## common used docker apps
+docker:													## common docker apps
 	@$(call fn_print_header,common docker apps)
 	@$(call fn_print_tab,"tool","commands",)
 	@$(call fn_print_tab, "----","--------",)
 	@$(call fn_print_tab,"browser","docker run --rm -it browsh/browsh",)
 	@echo ""
 
-check:													## check local system / environment
+check:													## check system / environment
 	@$(call fn_print_header,check tools)
 	@$(call fn_check_command_note,curl,)
 	@$(call fn_check_command_note,jq,)
@@ -102,7 +102,7 @@ check:													## check local system / environment
 	@$(call fn_print_header,summary)
 	@echo "- note that pip (python2 will be deprecated. install as pip3)";
 
-bin-ensure:											## ensure that common tools are in .tools folder
+bin-ensure:											## ensure common tools in ~/.tools folder
 	@# tools : common bin										========================================
 	@$(call fn_print_header,"ensure tool folder exist")
 	-mkdir -pv $$HOME/.tools/sh
@@ -121,7 +121,7 @@ bin-ensure:											## ensure that common tools are in .tools folder
 	@$(call fn_print_header,"recommended")
 	# - brew cask install font-firacode-nerd-font font-hasklig-nerd-font font-inconsolata-nerd-font font-iosevka-nerd-font font-monoid-nerd-font font-noto-nerd-font font-robotomono-nerd-font font-tinos-nerd-font
 
-mac-ensure:											## ensure that folder(s), package managers, tools are present
+mac-ensure:											## ensure package mgrs, tools present
 	@$(call fn_print_header,note)
 	@echo "- python pip, ruby gems, node yarn are required dependancies";
 	@# environment : config									========================================
@@ -192,31 +192,29 @@ tex-ensure:											## ensure all latex deps are installed
 
 ##@ Helpers
 
-now-datetime:										## get current date and time
+now-datetime:										## get date and time methods
+	printf "\nget current date and time"
 	echo $$(date +"%Y%m%d-%H:%M:%S")
-
-now-date:												## get current date
+	printf "\nget date"
 	echo $$(date +"%Y%m%d")
-
-now-time:												## get current time
+	printf "\nget time"
 	echo $$(date +"%H:%M:%S")
-
-now-epoch:											## get current epoch
+	printf "\nget epoch - sec after 1970"
 	echo $$(date +"%s")
 
-version: ## show current version
+version:												## semver show version
 	@git describe --tags --abbrev=0
 
-vinit:													## initialise first version
+vinit:													## semver init version 0.1.0
 	@git tag 0.1.0
 
-vpatch:													## show bumped version + patch (fix) - use : git tag $(make vpatch)
+vpatch:													## semver patch (fix); git tag $(make vpatch)
 	@semver $$(git describe --tags --abbrev=0) -i patch
 
-vminor:													## show bumped version + minor (non breaking) - use : git tag $(make vminor)
+vminor:													## semver minor (feature); git tag $(make vminor)
 	@semver $$(git describe --tags --abbrev=0) -i minor
 
-vmajor:													## show bumped version + major (breaking) - git tag $(make vmajor)
+vmajor:													## semver major (breaking); git tag $(make vmajor)
 	@semver $$(git describe --tags --abbrev=0) -i major
 
 help:														## display this help
