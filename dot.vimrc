@@ -495,9 +495,9 @@ if exists("did_load_filetypes")
     " markdown files
     if index(['markdown'], &filetype) == -1
 
-      autocmd FileType markdown nnoremap <Leader>h 0a#<ESC>$<ESC>
-      autocmd FileType markdown nnoremap <Leader>hh 0a##<ESC>$<ESC>
-      autocmd FileType markdown nnoremap <Leader>hhh 0a###<ESC>$<ESC>
+      autocmd FileType markdown nnoremap <Leader>h 0i# <ESC>$<ESC>
+      autocmd FileType markdown nnoremap <Leader>hh 0i## <ESC>$<ESC>
+      autocmd FileType markdown nnoremap <Leader>hhh 0i### <ESC>$<ESC>
       autocmd FileType markdown nnoremap <Leader>hr o---<ESC>
       autocmd FileType markdown nnoremap <Leader>ref aref - <ESC>$<ESC>
       autocmd FileType markdown nnoremap <Leader>code a```<ESC>o```<ESC>k<ESC>o# code block<CR><ESC>
