@@ -522,7 +522,7 @@ alias _fox_lowercase="fn_fox_lowercase"
 alias _fox_file_fix_name="fn_fox_file_fix_name"
 
 alias _fox_size="du -h"
-alias _fox_size_all="du -sh"
+alias _fox_size_all="du -shc ./*"
 alias _fox_size_1m="find . -type f -size +1M -exec ls -lh {} \;"
 alias _fox_size_10m="find . -type f -size +10M -exec ls -lh {} \;"
 alias _fox_size_100m="find . -type f -size +100M -exec ls -lh {} \;"
