@@ -161,12 +161,12 @@ mac-ensure:											## ensure package mgrs, tools present
 	# npm install -g svg2png-cli
 	# npm install -g tty.js
 	@# tools : python pip										========================================
-	-pip install --upgrade pip												# upgrade pip self
+	# -pip install --upgrade pip												# upgrade pip self
 	-pip3 install --upgrade pip setuptools						# package manager for python
-	-pip install -U $$(pip freeze | awk -F'[/=]' '{print $$1}')
+	# -pip install -U $$(pip freeze | awk -F'[/=]' '{print $$1}')
 	-pip3 install -U $$(pip3 freeze | awk -F'[/=]' '{print $$1}')
 	-pip3 install ansible || pip3 install -U ansible	# cloud ansible
-	-pip install sslyze || pip3 install -U sslyze			# ssl check tool
+	-pip3 install sslyze || pip3 install -U sslyze			# ssl check tool
 	# -pip3 install localstack													# dev stack aws
 	# -pip3 install csvkit															# csv editor / converter
 	# -pip3 install --upgrade flake8										# lint python (ale)
