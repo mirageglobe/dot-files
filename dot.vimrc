@@ -513,28 +513,29 @@ if exists("did_load_filetypes")
     " bash sh files
     if index(['conf','sh'], &filetype) == -1
 
-      autocmd FileType conf,sh nnoremap <Leader>help :-1read ~/dot-files/vim-nanotemplate/tpl.bash.sh<CR>
+      autocmd FileType conf,sh nnoremap <Leader>hel :-1read ~/dot-files/vim-nanotemplate/tpl.bash.sh<CR>
       autocmd FileType conf,sh nnoremap <Leader>if :-1read ~/dot-files/vim-nanotemplate/tpl.bash.if.sh<CR>
+      autocmd FileType conf,sh nnoremap <Leader>fun :-1read ~/dot-files/vim-nanotemplate/tpl.bash.fn.sh<CR>
 
     endif
 
     " vimrc files
     if index(['vim'], &filetype) == -1
 
-      autocmd FileType vim nnoremap <Leader>if :-1read ~/dot-files/vim-nanotemplate/tpl.vim.if.vimrc<CR>
-      autocmd FileType vim nnoremap <Leader>fn :-1read ~/dot-files/vim-nanotemplate/tpl.vim.fn.vimrc<CR>
       autocmd FileType vim nnoremap <Leader>var :-1read ~/dot-files/vim-nanotemplate/tpl.vim.var.vimrc<CR>
+      autocmd FileType vim nnoremap <Leader>if :-1read ~/dot-files/vim-nanotemplate/tpl.vim.if.vimrc<CR>
+      autocmd FileType vim nnoremap <Leader>fun :-1read ~/dot-files/vim-nanotemplate/tpl.vim.fun.vimrc<CR>
 
     endif
 
     " ruby files
     if index(['ruby'], &filetype) == -1
 
-      autocmd FileType ruby nnoremap <Leader>help :-1read ~/dot-files/vim-nanotemplate/tpl.ruby.rb<CR>
+      autocmd FileType ruby nnoremap <Leader>hel :-1read ~/dot-files/vim-nanotemplate/tpl.ruby.rb<CR>
       autocmd FileType ruby nnoremap <Leader>if :-1read ~/dot-files/vim-nanotemplate/tpl.ruby.if.rb<CR>
-      autocmd FileType ruby nnoremap <Leader>swc :-1read ~/dot-files/vim-nanotemplate/tpl.ruby.switch.rb<CR>
-      autocmd FileType ruby nnoremap <Leader>fn :-1read ~/dot-files/vim-nanotemplate/tpl.ruby.fn.rb<CR>
-      autocmd FileType ruby nnoremap <Leader>cls :-1read ~/dot-files/vim-nanotemplate/tpl.ruby.cls.rb<CR>
+      autocmd FileType ruby nnoremap <Leader>swi :-1read ~/dot-files/vim-nanotemplate/tpl.ruby.swi.rb<CR>
+      autocmd FileType ruby nnoremap <Leader>fun :-1read ~/dot-files/vim-nanotemplate/tpl.ruby.fun.rb<CR>
+      autocmd FileType ruby nnoremap <Leader>cla :-1read ~/dot-files/vim-nanotemplate/tpl.ruby.cla.rb<CR>
 
     endif
 
