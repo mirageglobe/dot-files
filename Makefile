@@ -90,14 +90,13 @@ check:													## check system / environment
 	@$(call fn_check_command_note,yarn,)
 	@$(call fn_check_command_note,wget,)
 	@$(call fn_check_command_note,vim,)
-	@$(call fn_check_command_note,bat,see https://github.com/sharkdp/bat/releases/latest)
+	@$(call fn_check_command_note,bats,see https://github.com/sharkdp/bat/releases/latest)
 	@$(call fn_check_command_note,rg,see https://github.com/BurntSushi/ripgrep/releases/latest)
 	# bin - fx tree pstree
 	@$(call fn_print_header_command,brew info,brew list && brew cask list)
 	@$(call fn_print_header_command,node yarn info,yarn global list)
 	@$(call fn_print_header_command,ruby gem info,gem list)
-	@$(call fn_print_header_command,python 2 info,pip list)
-	@$(call fn_print_header_command,python 3 info,pip3 list)
+	@$(call fn_print_header_command,python3 info,pip3 list)
 	@$(call fn_print_header_command,color test,tput colors)
 	@$(call fn_print_header,summary)
 	@echo "- note that pip (python2 will be deprecated. install as pip3)";
@@ -134,8 +133,8 @@ mac-ensure:											## ensure package mgrs, tools present
 	-mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
 	@# tools : node yarn										========================================
 	@$(call fn_print_header,ensure node yarn bins are pristine)
+	# ref - https://shift.infinite.red/npm-vs-yarn-cheat-sheet-8755b092e5cc
 	-curl -o- -L https://yarnpkg.com/install.sh | bash
-	# yarn - standard prettier
 	-yarn global upgrade
 	# -yarn global add semver														# dev semver tool (see https://github.com/fsaintjacques/semver-tool)
 	-yarn global add write-good												# lint english grammer
@@ -146,20 +145,28 @@ mac-ensure:											## ensure package mgrs, tools present
 	-yarn global add prettier													# lint javascript fixer (ale)
 	-yarn global add jsonlint													# lint json
 	# -yarn global add vue-language-server							# linter vuejs (ale)
+	# -yarn global add typescript												# javascript framework
+	-yarn global add @vue/cli													# javascript framework
+	-yarn global upgrade --latest @vue/cli
+	# -yarn global add cordova												# android framework
+	# -yarn global add serverless												# serverless framework
 	-yarn global add local-web-server									# server simple local web server - use ws to start
-	# yarn global add http-server												# server simple local web server
-	# yarn global add fauxton														# db ui - couchdb docker container missing fauxton
+	# -yarn global add http-server												# server simple local web server
+	# -yarn global add fauxton														# db ui - couchdb docker container missing fauxton
 	# -yarn global add hotel														# db https://github.com/typicode/hotel
 	# -yarn global add json-server											# db https://github.com/typicode/json-server#database
 	# https://netflix.github.io/pollyjs/#/
 	-yarn global add mountebank												# test mock server
 	-yarn global add nightwatch												# test e2e browser test - default by vuejs
 	-yarn global add bats															# test shell / bash test suite (bats-core)
+	-yarn global upgrade --latest bats
 	# yarn add --dev cucumber														# test (per project) cucumber
-	-yarn global add pomd															# general pomodoro
-	# -yarn global add n																# node package manager
-	# npm install -g svg2png-cli
-	# npm install -g tty.js
+	# -yarn global add pomd															# general pomodoro
+	-yarn global add n																# node version package manager
+	-yarn global upgrade --latest n
+	# -yarn global add svg2png-cli
+	# -yarn global add tty.js
+	# -yarn add @babel/core @babel/cli --dev					# (project) babel version backport
 	@# tools : python pip										========================================
 	# -pip install --upgrade pip												# upgrade pip self
 	-pip3 install --upgrade pip setuptools						# package manager for python
@@ -173,8 +180,10 @@ mac-ensure:											## ensure package mgrs, tools present
 	# -pip3 install --upgrade autopep8									# lint python based on pep8
 	# -pip3 install weasyprint													# doc easy pdf printer https://weasyprint.org/start/
 	@# tools : ruby gems										========================================
-	@$(call fn_print_header,ensure ruby gems are pristine)
-	-gem update
+	@$(call fn_print_header,ensure ruby system gems are pristine)
+	-gem update --system || echo "never use sudo for gem, check ruby path in homebrew"
+	-gem update || echo "never use sudo for gem, check ruby path in homebrew"
+	@$(call fn_print_header,ensure ruby user dir gems are pristine)
 	-gem install --user-install terraform_landscape			# adding terraform extensions
 	# -gem install --user-install mdl											# lint markdown
 	# -gem install --user-install cucumber								# test cucumber ruby rails

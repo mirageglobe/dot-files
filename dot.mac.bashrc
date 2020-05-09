@@ -163,9 +163,11 @@ fi
 printf "%s" "[+] python "
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
-# ==> added for ruby gems
+# ==> added for homebrew ruby
 printf "%s" "[+] ruby "
-export PATH="$HOME/.gem/ruby/2.6.0/bin:$PATH"
+# export PATH="$HOME/.gem/ruby/2.6.0/bin:$PATH"
+export PATH="/usr/local/lib/ruby/gems/2.7.0/bin:$PATH"
+export PATH="/usr/local/opt/ruby/bin:$PATH"
 
 # ==> added for android sdk
 # export ANDROID_HOME=/usr/local/opt/android-sdk
