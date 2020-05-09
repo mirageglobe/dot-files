@@ -32,6 +32,9 @@ MENU := now-datetimeversion vinit vpatch vminor vmajor todo help
 
 # sets all lines in the recipe to be passed in a single shell invocation
 # ref - https://www.gnu.org/software/make/manual/html_node/One-Shell.html
+# warning - supported make > 3.82, ref - https://stackoverflow.com/questions/32153034/oneshell-not-working-properly-in-makefile
+# recommend - use gmake rather than make to ensure oneshell works
+# warning - oneshell is not POSIX standard
 .ONESHELL:
 
 # === functions
