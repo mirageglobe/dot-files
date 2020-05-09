@@ -181,8 +181,8 @@ mac-ensure:											## ensure package mgrs, tools present
 	# -pip3 install weasyprint													# doc easy pdf printer https://weasyprint.org/start/
 	@# tools : ruby gems										========================================
 	@$(call fn_print_header,ensure ruby system gems are pristine)
-	-gem update --system || echo "never use sudo for gem, check ruby path in homebrew"
-	-gem update || echo "never use sudo for gem, check ruby path in homebrew"
+	-gem update --system || echo "never use sudo for gem installation; check ruby path in homebrew"
+	-gem update || echo "never use sudo for gem installation; check ruby path in homebrew"
 	@$(call fn_print_header,ensure ruby user dir gems are pristine)
 	-gem install --user-install terraform_landscape			# adding terraform extensions
 	# -gem install --user-install mdl											# lint markdown
