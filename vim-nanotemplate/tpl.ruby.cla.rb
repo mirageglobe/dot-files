@@ -1,5 +1,3 @@
-# == class
-#
 class Customer
 
   def initialize(id, name, addr)
@@ -16,7 +14,7 @@ class Customer
   end
 
 end
-#
+
 # cust1 = Customer.new("1", "John", "Wisdom Apartments, Ludhiya")
 # cust1.displayresults()
 
@@ -55,4 +53,3 @@ end
 # james = Customer.new
 # james.breathe
 # james.speak
-

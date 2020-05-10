@@ -149,9 +149,14 @@ mac-ensure:											## ensure package mgrs, tools present
 	-yarn global add jsonlint													# lint json
 	# -yarn global add vue-language-server							# linter vuejs (ale)
 	# -yarn global add typescript												# javascript framework
-	-yarn global add @vue/cli													# javascript framework
+	-yarn global add @neutralinojs/neu								# nwjs and electron alternative
+	-yarn global add electron													# desktop webkit
+	-yarn global add @vue/cli													# web framework - vue cli 3.x
 	-yarn global upgrade --latest @vue/cli
-	# -yarn global add cordova												# android framework
+	# yarn global add graphql														# web framework - vue graphql dependency
+	# yarn global add @vue/cli-service-global						# web framework - vue service global
+	# yarn global add @babel/core @babel/cli						# web framework - vue-global-service dependency
+	# -yarn global add cordova														# mobile framework - cross mobile
 	# -yarn global add serverless												# serverless framework
 	-yarn global add local-web-server									# server simple local web server - use ws to start
 	# -yarn global add http-server												# server simple local web server
