@@ -548,6 +548,7 @@ if exists("did_load_filetypes")
       autocmd FileType ruby nnoremap <Leader>pri :-1read ~/dot-files/vim-nanotemplate/tpl.ruby.pri.rb<CR>
       autocmd FileType ruby nnoremap <Leader>reg :-1read ~/dot-files/vim-nanotemplate/tpl.ruby.reg.rb<CR>
       autocmd FileType ruby nnoremap <Leader>swi :-1read ~/dot-files/vim-nanotemplate/tpl.ruby.swi.rb<CR>
+      autocmd FileType ruby nnoremap <Leader>var :-1read ~/dot-files/vim-nanotemplate/tpl.ruby.var.rb<CR>
       autocmd FileType ruby nnoremap <Leader>whi :-1read ~/dot-files/vim-nanotemplate/tpl.ruby.whi.rb<CR>
 
     endif
