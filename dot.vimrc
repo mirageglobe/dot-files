@@ -528,6 +528,13 @@ if exists("did_load_filetypes")
 
     endif
 
+    " html files
+    if index(['html'], &filetype) == -1
+
+      autocmd FileType vim nnoremap <Leader>hel :-1read ~/dot-files/vim-nanotemplate/tpl.html.html<CR>
+
+    endif
+
     " ruby files
     if index(['ruby'], &filetype) == -1
 
