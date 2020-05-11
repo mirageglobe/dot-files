@@ -433,12 +433,12 @@ let g:terraform_fmt_on_save=1
 
 " n = normal mode
 
-" map       normal and visual mode
+" map       normal and visual mode (defaults to remap)
 " nmap      normal mode
 " vmap      visual mode
 " imap      insert mode
 
-" remap     recursive map
+" remap     map recursively (default)
 " noremap   non recursive map
 
 " <c-d>   control + d
@@ -463,15 +463,20 @@ nnoremap <Leader>p :r !pbpaste<CR><ESC>
 " code folding za / zc / zo
 nmap <Leader>z za<ESC>
 
+" split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
 " reload
-nnoremap <Leader>reload :source ~/dot-files/dot.vimrc<ESC>
+nnoremap <Leader>rs :source ~/dot-files/dot.vimrc<ESC>
 
 " nmap <Leader> a# ===<ESC>Vgcc<ESC>^f=;;<esc>a<space>
 
 " read an empty template into current file - type ,ruby
 nnoremap <Leader>c :-1read ~/dot-files/vim-nanotemplate/template.c.c<CR>
 nnoremap <Leader>php :-1read ~/dot-files/vim-nanotemplate/template.php.php<CR>
-nnoremap <Leader>py :-1read ~/dot-files/vim-nanotemplate/template.python.py<CR>
 nnoremap <Leader>tf :-1read ~/dot-files/vim-nanotemplate/template.terraform.tf<CR>
 
 " note that this remap uses gcc : timpopes auto commenter. method to
@@ -490,6 +495,7 @@ if exists("did_load_filetypes")
 
   augroup leadershortcut
 
+    " remove all autocommands for the current group
     autocmd!
     
     " markdown files
@@ -508,6 +514,7 @@ if exists("did_load_filetypes")
 
   augroup vimnano
 
+    " remove all autocommands for the current group
     autocmd!
 
     " bash sh files
