@@ -553,6 +553,14 @@ if exists("did_load_filetypes")
 
     endif
 
+    " python files
+    if index(['python'], &filetype) == -1
+
+      autocmd FileType python nnoremap <Leader>hel :-1read ~/dot-files/vim-nanotemplate/tpl.python.py<CR>
+      autocmd FileType python nnoremap <Leader>arr :-1read ~/dot-files/vim-nanotemplate/tpl.python.arr.py<CR>
+      autocmd FileType python nnoremap <Leader>if :-1read ~/dot-files/vim-nanotemplate/tpl.python.if.py<CR>
+
+    endif
   augroup END
 
 endif " if exists("did_load_filetypes")

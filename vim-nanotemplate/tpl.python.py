@@ -111,5 +111,3 @@
 # 'string'.encode()             # encodes the string to a value
 # ```
 
-
-
