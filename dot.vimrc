@@ -565,6 +565,7 @@ if exists("did_load_filetypes")
 
       autocmd FileType python nnoremap <Leader>hel :-1read ~/dot-files/vim-nanotemplate/tpl.python.py<CR>
       autocmd FileType python nnoremap <Leader>arr :-1read ~/dot-files/vim-nanotemplate/tpl.python.arr.py<CR>
+      autocmd FileType python nnoremap <Leader>cla :-1read ~/dot-files/vim-nanotemplate/tpl.python.cla.py<CR>
       autocmd FileType python nnoremap <Leader>if :-1read ~/dot-files/vim-nanotemplate/tpl.python.if.py<CR>
 
     endif
@@ -576,7 +577,7 @@ endif " if exists("did_load_filetypes")
 
 " === fzf start
 
-" to preview files during :files command
+" to preview files. usage :Files!
 command! -bang -nargs=* -complete=dir Files
       \ call fzf#vim#files(<q-args>,
       \   <bang>0 ? fzf#vim#with_preview('up:60%')

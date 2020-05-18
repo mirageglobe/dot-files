@@ -1,4 +1,5 @@
 class Customer
+  # class Customer < Person           # inheritance
 
   def initialize(id, name, addr)
     # @ sign defines instance variables

@@ -3,17 +3,20 @@
 # usage: watch [command] [sleep duration]
 
 if [ -z $1 ]; then 
-  echo "usage : watch <command> <interval seconds>";
-  echo "        watch 'echo me' 5";
+  echo "usage : watch <interval seconds> <command>";
+  echo "        watch 5 echo me";
   exit 0;
 fi
 
+ival=${1:-1}
+shift
+echo "$@"
+echo $ival
+
 while :; do 
   clear
-  date
-  echo ""
-  bash -c "$1"
-  echo ""
-  echo "[ctrl-c to exit]"
-  sleep ${2:-1}
+  printf "$(date) [ctrl-c to exit] \n\n"
+  # bash -c "$@"
+  "$@"
+  sleep "$ival"
 done
