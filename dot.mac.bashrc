@@ -431,7 +431,7 @@ alias _fox_file="echo '
 alias _fox_file_get="fn_fox_file_get"
 
 alias _fox_file_namefix="fn_fox_file_namefix"
-alias _fox_file_namelower="fn_fox_namelowercase"
+alias _fox_file_namelower="fn_fox_file_namelowercase"
 
 alias _fox_file_size="du -shc ./*"
 alias _fox_file_size_all="du -h"
