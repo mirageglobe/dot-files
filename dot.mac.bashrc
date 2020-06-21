@@ -569,7 +569,7 @@ EOM
 alias _fox_sys="echo '
 :: help ::
 
-  _fox_sys                      # show general system information + listening ports + processes
+  _fox_sys_ls                   # show general system information + listening ports + processes
   _fox_sys_ps                   # show running processes
 
   _fox_sys_network              # show all network information
@@ -583,7 +583,7 @@ alias _fox_sys="echo '
   ifconfig | grep inet          # get inet
 '"
 
-alias _fox_sys="fn_fox_system;fn_fox_showmaclaunch;"
+alias _fox_sys_ls="fn_fox_system;fn_fox_showmaclaunch;"
 alias _fox_sys_ps="printf ':: showing running processes ::\n';ps -a;"
 
 alias _fox_sys_network="fn_fox_network_info;"
