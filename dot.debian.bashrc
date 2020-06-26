@@ -1,19 +1,3 @@
-## enter following for debian
-#
-#if [ -f ~/.profile ]; then
-#  source ~/.profile
-#fi
-#
-#if [ -f ~/.bashrc ]; then
-#  source ~/.bashrc
-#fi
-#
-## Enter following for linux ubuntu or debian .bashrc
-#
-#if [ -f ~/dot-files/dot.debian.bashrc ]; then
-#  source ~/dot-files/dot.debian.bashrc
-#fi
-#
 
 # added for java
 export JAVA_HOME=$(/usr/libexec/java_home)

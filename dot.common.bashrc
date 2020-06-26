@@ -1,17 +1,16 @@
 # ===
-# === first time setup
+# === setup
 # ===
 
-# ==> enter following for .bash_profile
-# if [ -f ~/.profile ]; then
-#   source ~/.profile
-# fi
-#
+# ==> following for .bash_profile
+# [ -f ~/.profile ] && source ~/.profile
 # [ -f ~/.bashrc ] && source ~/.bashrc
 
-# ==> enter following for .bashrc
+# ==> following for .bashrc
 # [ -f ~/dot-files/dot.common.bashrc ] && source ~/dot-files/dot.common.bashrc
 
+printf "%s" ":: common : "
+ 
 # ===
 # === common env variables
 # ===
@@ -23,78 +22,53 @@ export EDITOR=vim                                     # common
 export TERM=xterm-256color                            # common
 
 # ===
-# === setting custom prompt (default)
-# ===
-
-# ref - https://www.cyberciti.biz/tips/howto-linux-unix-bash-shell-setup-prompt.html
-printf "%s" "[+] prompt "
-
-# basic vanilla prompt - black 0;30 - red 0;31 - green 0;32 - brown 0;33 - blue 0,34 - purple 0;35 - cyan 0;36
-# to get lighter version, replace 0 with 1
-#
-# begin color modifications - \e[31m      # where 31 is the color code
-# end color modifications - \e[0m
-# 
-# references
-# - https://www.cyberciti.biz/faq/bash-shell-change-the-color-of-my-shell-prompt-under-linux-or-unix/
-# - https://www.shellhacks.com/bash-colors/
-
-C_BLACK="\[\e[0;30m\]"          # black
-C_BLACKL="\[\e[1;30m\]"         # black (same)
-C_BLUE="\[\e[0;34m\]"           # blue
-C_BLUEL="\[\e[1;34m\]"
-C_GREEN="\[\e[0;32m\]"
-C_GREENL="\[\e[1;32m\]"
-C_PURPLE="\[\e[0;35m\]"         # purple
-C_PURPLEL="\[\e[1;35m\]"        # pink
-C_RED="\[\e[0;31m\]"
-C_REDL="\[\e[1;31m\]"
-C_WHITE="\[\e[0;0m\]"
-C_WHITEL="\[\e[1;0m\]"
-C_YELLOW="\[\e[0;33m\]"
-C_YELLOWL="\[\e[1;33m\]"
-C_END="\[\e[m\]"
-
-PROMPT_EXTEND="\
-${C_PURPLEL} ${C_END} \
-${C_PURPLE} \${UID} ${C_END}\
-${C_BLUE} \$(fn_fox_sys_get_current_folder) ${C_END}\
-${C_GREEN}\$(fn_prompt_git_branch)${C_END}\
-${C_YELLOW}\$(fn_prompt_aws)${C_END}\
-${C_PURPLEL} ${C_END} \
-"
-
-# ==> prompt check git method
-fn_prompt_git_branch() {
-  # git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
-  # ref : https://stackoverflow.com/questions/8914435/awk-sed-how-to-remove-parentheses-in-simple-text-file
-  # git branch 2> /dev/null | grep "\*" | awk '{ print $2 }' #| awk -v FS="[()]" '{ for (i=2;i<=NF;i+=2) print $i }'
-  git branch 2> /dev/null | grep "\*" | awk '{ printf " "; printf $2; printf " "; }'
-}
-
-# ==> prompt check aws shell
-fn_prompt_aws() {
-  env 2> /dev/null | grep "AWS_REGION" | awk '{ printf " aws "; }'
-}
-
-# echo "==> modification test <=="
-
-# PROMPT_SETTING="$PROMPT_SETTING\[\033[32m\]\$(fn_get_git_branch)\[\033[00m\]"
-
-# ==> setting final prompt on prompt
-
-# export PS1="\u@\h \W\[\033[32m\]\$(fn_prompt_get_git_branch)\[\033[00m\] \$ "
-export PS1=" ${PROMPT_EXTEND}\n ${C_PURPLEL}  ${C_END}"
-
-# ===
 # === apps and tools required settings
 # ===
+
+# ==> for android sdk
+# export ANDROID_HOME=/usr/local/opt/android-sdk
+# printf "%s" "[+] android "
+
+# ==> for autojump
+# https://github.com/wting/autojump
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+
+# ==> for homebrew ruby
+printf "%s" "[+] ruby "
+
+# export PATH="$HOME/.gem/ruby/2.6.0/bin:$PATH"
+export PATH="/usr/local/lib/ruby/gems/2.7.0/bin:$PATH"
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+
+# ==> for fzf
+# note that fzf will try to install this to default .bashrc too
+# [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# ==> added for jenv (http://www.jenv.be/)
+# export PATH="$HOME/.jenv/bin:$PATH"
+# eval "$(jenv init -)"
+
+# ==> added for java
+printf "%s" "[+] java "
+if [ -z $JAVA_HOME ]; then
+  export JAVA_HOME=$(/usr/libexec/java_home)
+fi
 
 # ==> added for n (node and yarn package mgr) default install to home folder
 # export N_PREFIX=$HOME/n
 # export PREFIX=$HOME/n
 
-# ==> git configurations
+# ==> added for python3
+printf "%s" "[+] python "
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+
+# ===
+# === git
+# ===
+
+printf "%s" "[+] git "
+
+# ==> for git configurations
 # default push branch to remote
 # git config --global --add push.default current
 cat ~/.gitconfig | grep "default = current" > /dev/null || git config --global --add push.default current
@@ -113,38 +87,6 @@ git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Crese
 git config --global alias.p "pull"
 git config --global alias.s "status"
 git config --global alias.rbm "rebase master"
-
-# ==> added for fzf
-# note that fzf will try to install this to default .bashrc too
-# [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-# ==> added for jenv (http://www.jenv.be/)
-# export PATH="$HOME/.jenv/bin:$PATH"
-# eval "$(jenv init -)"
-
-# ==> added for java
-printf "%s" "[+] java "
-if [ -z $JAVA_HOME ]; then
-  export JAVA_HOME=$(/usr/libexec/java_home)
-fi
-
-# ==> added for python3
-printf "%s" "[+] python "
-export PATH="/usr/local/opt/python/libexec/bin:$PATH"
-
-# ==> added for homebrew ruby
-printf "%s" "[+] ruby "
-# export PATH="$HOME/.gem/ruby/2.6.0/bin:$PATH"
-export PATH="/usr/local/lib/ruby/gems/2.7.0/bin:$PATH"
-export PATH="/usr/local/opt/ruby/bin:$PATH"
-
-# ==> added for android sdk
-# export ANDROID_HOME=/usr/local/opt/android-sdk
-# printf "%s" "[+] android "
-
-# ==> added for autojump
-# https://github.com/wting/autojump
-[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
 # ===
 # === bash completions
