@@ -22,9 +22,6 @@ export NOW=$(date +"%Y%m%d-000000")                   # common
 export EDITOR=vim                                     # common
 export TERM=xterm-256color                            # common
 
-export GREP_OPTIONS='--color=auto'                    # common
-export CLICOLOR=true                                  # common (mac only)
-
 # ===
 # === setting custom prompt (default)
 # ===
