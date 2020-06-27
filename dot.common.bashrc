@@ -376,7 +376,7 @@ EOM
 # ## ==> git
 
 alias _fox_git="echo '
-:: help git ::
+:: help ::
 
   _git_config                   # show git config
   _git_show                     # fetch + show branch + show stash
@@ -527,6 +527,19 @@ fn_fox_showmaclaunch() {
   printf "\n:: apps (excluding apple - com.apple) :: to remove run - launchctl remove <name_from_list_command>\n"
   launchctl list | grep -v "com.apple";
 }
+
+# ## ==> vim
+
+alias _fox_vim="echo '
+:: help ::
+
+:: notes ::
+
+  hjkl                                                        # left - down - up - right
+
+  :%s/<search>/<replace>/g                                    # search replace all
+  :%s/<search>/<replace>/gc                                   # search replace all with confirmation
+'"
 
 # ===
 # === bash loader end
