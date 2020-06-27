@@ -3,7 +3,7 @@
 # ===
 
 # ==> starting loader
-printf "%s" ":: mac : "
+printf "\n%s" ":: mac : "
 
 # ==> mac specific
 # for super fast key repeat rate (keyboard)
@@ -30,7 +30,7 @@ export CLICOLOR=true                                  # common (mac only)
 # ===
 
 # ref - https://www.cyberciti.biz/tips/howto-linux-unix-bash-shell-setup-prompt.html
-printf "%s" "[+] prompt "
+printf "%s" "[+] prompt"
 
 # basic vanilla prompt - black 0;30 - red 0;31 - green 0;32 - brown 0;33 - blue 0,34 - purple 0;35 - cyan 0;36
 # to get lighter version, replace 0 with 1
@@ -95,6 +95,8 @@ fn_prompt_aws() {
 # PROMPT_SETTING="$PROMPT_SETTING\[\033[32m\]\$(fn_get_git_branch)\[\033[00m\]"
 
 # ==> setting final prompt on prompt
+
+printf "\n" ""
 
 # export PS1="\u@\h \W\[\033[32m\]\$(fn_prompt_get_git_branch)\[\033[00m\] \$ "
 export PS1=" ${PROMPT_EXTEND}\n ${C_PURPLEL}  ${C_END}"

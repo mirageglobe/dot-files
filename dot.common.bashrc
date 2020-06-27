@@ -545,9 +545,9 @@ alias _fox_vim="echo '
 # === bash loader end
 # ===
 
-printf "%s\\n" "::"
-cat <<-EOF
-:: term size $(stty size) :: type 'alias' - to show aliases
-EOF
+# printf "%s\\n" "::"
+# cat <<-EOF
+# :: term size $(stty size) :: type 'alias' - to show aliases
+# EOF
 # do not indent, nor add anything after closing EOF
 
