@@ -9,7 +9,7 @@
 # ==> following for .bashrc
 # [ -f ~/dot-files/dot.common.bashrc ] && source ~/dot-files/dot.common.bashrc
 
-printf "%s" ":: common : "
+printf "%s\t" ":: common : "
  
 # ===
 # === common env variables

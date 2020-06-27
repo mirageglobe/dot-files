@@ -3,7 +3,7 @@
 # ===
 
 # ==> starting loader
-printf "\n%s" ":: mac : "
+printf "\n%s\t" ":: mac : "
 
 # ==> mac specific
 # for super fast key repeat rate (keyboard)
