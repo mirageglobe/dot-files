@@ -123,18 +123,22 @@ printf "%s" "[+] aliases "
 alias _fox="echo '
 :: help ::
 
-  _emo_shrug                    # emoji shrug
-  _fzf                          # fzf load only 50 percent of screen
-  _diff <file a> <file b>       # show diff between 2 or more files (use --brief for simple)
-  
   _ls                           # list with colour
   _ll                           # list with permissions
-
-  _rs                           # restarting current shell
-  
-  _subnet                       # show subnet for a range _subnet subnet.im/192.168.12.12/30
   _tree                         # list tree
   _tree_verbose                 # list tree with files
+  
+  _rs                           # reload current shell
+
+  _cp                           # cp with confirmation
+  _mv                           # mv with confirmation
+  _rm                           # rm with confirmation
+
+  _fox_diff <file a> <file b>   # show diff between 2 or more files (use --brief for simple)
+  _fox_emoshrug                 # emoji shrug
+  _fox_fzf                      # fzf load only 50 percent of screen
+  _fox_path                     # shows current path
+  _fox_random                   # gives a random number
 
   _fox_aws                      # aws helpers
   _fox_docker                   # docker helpers
@@ -164,7 +168,7 @@ alias _fox="echo '
 fn_fox_system() {
   printf ":: system information :: \n"
   printf "date \t\t\t $(fn_fox_now_date) \n"
-  printf "time \t\t $(fn_fox_now_time) \n"
+  printf "time \t\t\t $(fn_fox_now_time) \n"
   printf "ip (class c) \t\t $(fn_fox_network_getip) \n"
   printf "terminal encoding \t $(locale charmap) \n"
   printf "\n"
@@ -188,22 +192,22 @@ alias _fox_ssh_load="printf ':: loading default-key to agent :: \n';ssh-add;"
 alias _fox_ssh_keygen="printf ':: generating standard sshkey :: \n';ssh-keygen -b 2048 -t rsa -f ~/.ssh/id_rsa_standard -C \"( $HOSTNAME : changeme@gmail.com ) \""
 alias _fox_ssh_tunnel="printf ':: ssh tunnelling :: \n:: usage\t\t ssh -L 8080:www.google.com:80 172.10.10.10\n:: example\t\t ssh -L <local.port>:<target>:<target.port> <proxy>\n'; "
 
-alias _cp="cp -i"
-alias _mv="mv -i"
-alias _rm="rm -i"
-
-alias _diff="diff -y --color"
-alias _emo_shrug="echo '¯\_(ツ)_/¯'";
-alias _fzf="fzf --height=50%"
-alias _path="echo \$PATH | tr ':' '\n'"
-alias _rs="printf ':: restarting shell :: \n';exec $SHELL -l;"
-alias _random="echo ${RANDOM:0:2};"
-alias _subnet="echo 'use curl subnet.im/192.168.12.12/30'"
-
 alias _ls="ls -Gd .*"
 alias _ll="ls -lhAG"
 alias _tree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
 alias _tree_verbose="find . | sed -e 's/[^-][^\/]*\// |/g' -e 's/|\([^ ]\)/|-\1/'"
+
+alias _cp="cp -i"
+alias _mv="mv -i"
+alias _rm="rm -i"
+
+alias _rs="printf ':: restarting shell :: \n';exec $SHELL -l;"
+
+alias _fox_diff="diff -y --color"
+alias _fox_emoshrug="echo '¯\_(ツ)_/¯'";
+alias _fox_fzf="fzf --height=50%"
+alias _fox_path="echo \$PATH | tr ':' '\n'"
+alias _fox_random="echo ${RANDOM:0:2};"
 
 alias _fox_now="fn_fox_now_date && fn_fox_now_time;"
 alias _fox_now_date="fn_fox_now_date;"
@@ -483,10 +487,11 @@ alias _fox_sys="echo '
   _fox_sys_ls                   # show general system information + listening ports + processes
   _fox_sys_ps                   # show running processes
 
+  _fox_sys_ip                   # show ip of en0
   _fox_sys_network              # show all network information
   _fox_sys_ports                # investigate listing ports
+  _fox_sys_subnet               # show subnet for a range _subnet subnet.im/192.168.12.12/30
   _fox_sys_tcp                  # show tcp dump
-  _fox_sys_ip                   # show ip of en0
 
 :: notes ::
 
@@ -497,16 +502,16 @@ alias _fox_sys="echo '
 alias _fox_sys_ls="fn_fox_system;fn_fox_showmaclaunch;"
 alias _fox_sys_ps="printf ':: showing running processes ::\n';ps -a;"
 
+alias _fox_sys_ip="printf ':: show ip on en0 ::\n'; ifconfig en0 | grep inet;"
 alias _fox_sys_network="fn_fox_network_info;"
 alias _fox_sys_port="printf ':: investigate listening ports :: \n';sudo lsof -PiTCP -sTCP:LISTEN;"
+alias _fox_sys_subnet="echo 'use curl subnet.im/192.168.12.12/30'"
 alias _fox_sys_tcp="printf ':: show network interfaces ::\n'; tcpdump -D;"
-alias _fox_sys_ip="printf ':: show ip on en0 ::\n'; ifconfig en0 | grep inet;"
 
 fn_fox_network_info() {
   printf ":: about network (me) ::\n";
   printf "IP \t\t :"
   ifconfig | grep 'inet' | grep '192' | awk '{ print $2 }'
-  # ifconfig | grep inet;
   printf ":: list open files/processes and corresponding ports :: \n";
   sudo lsof -PiTCP -sTCP:LISTEN;
   # lsof -i | grep "LISTEN";
@@ -515,8 +520,8 @@ fn_fox_network_info() {
 }
 
 fn_fox_network_getip() {
-# caveat - shows only range 192.x.x.x networks
-# class c/24 b/16 c/8
+  # caveat - shows only range 192.x.x.x networks
+  # class c/24 b/16 c/8
   ifconfig | grep 'inet' | grep '192' | awk '{ print $2 }'
 }
 
