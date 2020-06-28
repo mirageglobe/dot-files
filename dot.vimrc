@@ -72,7 +72,8 @@ set cursorline                                        " highlight current line
 
 " if running via macvim
 if has('gui_running')
-  :set guifont=Inconsolata\ Nerd\ Font\ Complete:h13
+  :set guifont=FiraCode\ Nerd\ Font\ Complete:h13
+  " :set guifont=Inconsolata\ Nerd\ Font\ Complete:h13
 endif
 
 " if not using any gui. for example iterm2
@@ -237,6 +238,7 @@ set statusline+=%{fugitive#statusline()}
 " === fugitive end
 
 " === colorscheme start
+" to select, :colorscheme then space followed by tab
 
 set background=dark
 

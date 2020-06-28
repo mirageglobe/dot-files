@@ -357,17 +357,24 @@ alias _fox_file_size_10m="find . -type f -size +10M -exec ls -lh {} \;"
 alias _fox_file_size_100m="find . -type f -size +100M -exec ls -lh {} \;"
 
 fn_fox_file_namefix() {
-  local var1=$1
+  local parsevar=$1
   # substitute brackets
   # substitute hypens
-  printf "%s" "use: \$mv -i $var1 "
-  echo "$var1" | \
-    awk '{ gsub(" ", "\\ ", $0); gsub("[(]", "\\(", $0); gsub("[)]", "\\)", $0); printf ($0); }' | \
-    awk '{ gsub(" ", "-", $0); gsub("[()]", "", $0); print tolower($0) }'
+  printf "%s\n" "use following command: "
+  printf "%s" "mv -i \"$parsevar\" "
+  echo "$parsevar" | \
+    awk '{ \
+      # gsub(" ", "\\ ", $0); \
+      # gsub("[()]", "", $0); \
+      gsub(" ", "-", $0); \
+      gsub("[()]", "", $0); \
+      print tolower($0); \
+    }'
 }
 
 fn_fox_file_namelowercase() {
-  echo "$1" | awk '{print tolower($0)}'
+  local parsevar=$1
+  echo "$parsevar" | awk '{ print tolower($0) }'
 }
 
 fn_fox_file_get() {
