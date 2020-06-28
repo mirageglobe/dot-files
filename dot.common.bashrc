@@ -136,7 +136,8 @@ alias _fox="echo '
 
   _fox_diff <file a> <file b>   # show diff between 2 or more files (use --brief for simple)
   _fox_emoshrug                 # emoji shrug
-  _fox_fzf                      # fzf load only 50 percent of screen
+  _fox_fzf                      # fzf load with preview
+  _fox_fzfvim                   # fzf load with preview and open with vim
   _fox_path                     # shows current path
   _fox_random                   # gives a random number
 
@@ -205,7 +206,8 @@ alias _rs="printf ':: restarting shell :: \n';exec $SHELL -l;"
 
 alias _fox_diff="diff -y --color"
 alias _fox_emoshrug="echo '¯\_(ツ)_/¯'";
-alias _fox_fzf="fzf --height=50%"
+alias _fox_fzf="fzf --height=70% --preview=\"cat {}\" --preview-window=right:50%:wrap"
+alias _fox_fzfvim="fzf --height=70% --preview=\"cat {}\" --preview-window=right:50%:wrap | xargs -o vim"
 alias _fox_path="echo \$PATH | tr ':' '\n'"
 alias _fox_random="echo ${RANDOM:0:2};"
 
@@ -354,13 +356,18 @@ alias _fox_file_size_1m="find . -type f -size +1M -exec ls -lh {} \;"
 alias _fox_file_size_10m="find . -type f -size +10M -exec ls -lh {} \;"
 alias _fox_file_size_100m="find . -type f -size +100M -exec ls -lh {} \;"
 
-fn_fox_file_namelowercase() {
-  echo "$1" | awk '{print tolower($0)}'
+fn_fox_file_namefix() {
+  local var1=$1
+  # substitute brackets
+  # substitute hypens
+  printf "%s" "use: \$mv -i $var1 "
+  echo "$var1" | \
+    awk '{ gsub(" ", "\\ ", $0); gsub("[(]", "\\(", $0); gsub("[)]", "\\)", $0); printf ($0); }' | \
+    awk '{ gsub(" ", "-", $0); gsub("[()]", "", $0); print tolower($0) }'
 }
 
-fn_fox_file_namefix() {
-  echo "$1" | awk '{ gsub(" ", "\\ ", $0); gsub("[(]", "\\(", $0); gsub("[)]", "\\)", $0); printf ("mv " $0 " "); }'
-  echo "$1" | awk '{ gsub(" ", "-", $0); gsub("[()]", "", $0); print tolower($0) }'
+fn_fox_file_namelowercase() {
+  echo "$1" | awk '{print tolower($0)}'
 }
 
 fn_fox_file_get() {
