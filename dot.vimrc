@@ -27,8 +27,8 @@ set noshowmode                                        " speed up by turning of s
 " set showmode                                         " show current mode down the bottom
 set regexpengine=1                                    " speed up by using old regex engine
 set scrolloff=5                                       " setting window to scroll when x lines at end of screen
-set timeoutlen=1000
-set ttimeoutlen=0
+set timeoutlen=1000                                   " speed up scrolling
+set ttimeoutlen=0                                     " speed up scrolling
 set ttyfast                                           " speed up loading and scrolling of vim (boolean)
 set ttyscroll=10                                      " set scrolling speed (1-999; 1 fastest)
 " set nowrap                                            " speed up by setting nowraping
