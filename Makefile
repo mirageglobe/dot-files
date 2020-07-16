@@ -106,13 +106,13 @@ check:													## check system / environment
 
 bin-ensure:											## ensure common tools in ~/.tools folder
 	@# tools : common bin										========================================
-	@$(call fn_print_header,"ensure tool folder exist")
+	@$(call fn_print_header,"ensure .tool folder exist")
 	-mkdir -pv $$HOME/.tools/sh
 	-mkdir -pv $$HOME/.tools/bin
 	-grep -qxF 'export PATH="$$HOME/.tools/bin:$$PATH"' $$HOME/.bashrc || echo '\nexport PATH="$$HOME/.tools/bin:$$PATH"' >> $$HOME/.bashrc
 	-grep -qxF 'export PATH="$$HOME/.tools/sh:$$PATH"' $$HOME/.bashrc || echo '\nexport PATH="$$HOME/.tools/sh:$$PATH"' >> $$HOME/.bashrc
 	@$(call fn_print_header,"ensure tools are in tools/bin folder")
-	-cp $$HOME/dot-files/tools/* $$HOME/.tools/sh/
+	-cp -p tools/* $$HOME/.tools/sh/
 	-curl https://raw.githubusercontent.com/fsaintjacques/semver-tool/master/src/semver > $$HOME/.tools/bin/semver && chmod u+x $$HOME/.tools/bin/semver
 	@$(call fn_print_header,"ensure completion scripts are in tools folder")
 	-curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash > $$HOME/.tools/sh/dot.bash-completion.git.bash

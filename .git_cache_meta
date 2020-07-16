@@ -1,0 +1,188 @@
+chown 1000 .editorconfig
+chgrp 1000 .editorconfig
+touch -c -d "2020-06-26 10:31:11.4172981000" .editorconfig
+chmod 0666 .editorconfig
+chown 1000 .gitignore
+chgrp 1000 .gitignore
+touch -c -d "2020-06-26 10:31:11.4172981000" .gitignore
+chmod 0666 .gitignore
+chown 1000 Makefile
+chgrp 1000 Makefile
+touch -c -d "2020-06-26 10:31:11.4183055000" Makefile
+chmod 0666 Makefile
+chown 1000 README.md
+chgrp 1000 README.md
+touch -c -d "2020-06-26 10:31:11.4183055000" README.md
+chmod 0666 README.md
+chown 1000 dot.common.bashrc
+chgrp 1000 dot.common.bashrc
+touch -c -d "2020-07-15 13:14:35.4377184000" dot.common.bashrc
+chmod 0666 dot.common.bashrc
+chown 1000 dot.completion.git.bash
+chgrp 1000 dot.completion.git.bash
+touch -c -d "2020-06-26 10:31:11.4193107000" dot.completion.git.bash
+chmod 0666 dot.completion.git.bash
+chown 1000 dot.completion.make.bash
+chgrp 1000 dot.completion.make.bash
+touch -c -d "2020-06-26 10:31:11.4203436000" dot.completion.make.bash
+chmod 0666 dot.completion.make.bash
+chown 1000 dot.debian.bashrc
+chgrp 1000 dot.debian.bashrc
+touch -c -d "2020-07-15 13:14:35.4522137000" dot.debian.bashrc
+chmod 0666 dot.debian.bashrc
+chown 1000 dot.gemrc
+chgrp 1000 dot.gemrc
+touch -c -d "2020-06-26 10:31:11.4213072000" dot.gemrc
+chmod 0666 dot.gemrc
+chown 1000 dot.mac.bashrc
+chgrp 1000 dot.mac.bashrc
+touch -c -d "2020-07-15 13:14:35.4671250000" dot.mac.bashrc
+chmod 0666 dot.mac.bashrc
+chown 1000 dot.vimrc
+chgrp 1000 dot.vimrc
+touch -c -d "2020-07-15 13:14:35.4798127000" dot.vimrc
+chmod 0666 dot.vimrc
+chown 1000 tools/color
+chgrp 1000 tools/color
+touch -c -d "2020-06-26 10:31:11.4233066000" tools/color
+chmod 0764 tools/color
+chown 1000 tools/ensure
+chgrp 1000 tools/ensure
+touch -c -d "2020-06-26 10:31:11.4243135000" tools/ensure
+chmod 0764 tools/ensure
+chown 1000 tools/git-cache-meta.sh
+chgrp 1000 tools/git-cache-meta.sh
+touch -c -d "2020-07-16 08:36:36.8167518000" tools/git-cache-meta.sh
+chmod 0764 tools/git-cache-meta.sh
+chown 1000 tools/skv
+chgrp 1000 tools/skv
+touch -c -d "2020-06-26 10:31:11.4253081000" tools/skv
+chmod 0764 tools/skv
+chown 1000 tools/tools.utf8-table.sh
+chgrp 1000 tools/tools.utf8-table.sh
+touch -c -d "2020-06-26 10:31:11.4263103000" tools/tools.utf8-table.sh
+chmod 0764 tools/tools.utf8-table.sh
+chown 1000 tools/watch
+chgrp 1000 tools/watch
+touch -c -d "2020-06-26 10:31:11.4263103000" tools/watch
+chmod 0764 tools/watch
+chown 1000 tpl.bash_profile
+chgrp 1000 tpl.bash_profile
+touch -c -d "2020-07-15 13:14:35.4914952000" tpl.bash_profile
+chmod 0666 tpl.bash_profile
+chown 1000 tpl.bashrc
+chgrp 1000 tpl.bashrc
+touch -c -d "2020-07-15 13:14:35.4926711000" tpl.bashrc
+chmod 0666 tpl.bashrc
+chown 1000 tpl.gitconfig
+chgrp 1000 tpl.gitconfig
+touch -c -d "2020-06-26 10:31:11.4276422000" tpl.gitconfig
+chmod 0666 tpl.gitconfig
+chown 1000 tpl.vimrc
+chgrp 1000 tpl.vimrc
+touch -c -d "2020-06-26 10:31:11.4286505000" tpl.vimrc
+chmod 0666 tpl.vimrc
+chown 1000 vim-nanotemplate/tpl.bash.fun.sh
+chgrp 1000 vim-nanotemplate/tpl.bash.fun.sh
+touch -c -d "2020-06-26 10:31:11.4296513000" vim-nanotemplate/tpl.bash.fun.sh
+chmod 0666 vim-nanotemplate/tpl.bash.fun.sh
+chown 1000 vim-nanotemplate/tpl.bash.if.sh
+chgrp 1000 vim-nanotemplate/tpl.bash.if.sh
+touch -c -d "2020-06-26 10:31:11.4296513000" vim-nanotemplate/tpl.bash.if.sh
+chmod 0666 vim-nanotemplate/tpl.bash.if.sh
+chown 1000 vim-nanotemplate/tpl.bash.sh
+chgrp 1000 vim-nanotemplate/tpl.bash.sh
+touch -c -d "2020-06-26 10:31:11.4306561000" vim-nanotemplate/tpl.bash.sh
+chmod 0666 vim-nanotemplate/tpl.bash.sh
+chown 1000 vim-nanotemplate/tpl.c.c
+chgrp 1000 vim-nanotemplate/tpl.c.c
+touch -c -d "2020-06-26 10:31:11.4306561000" vim-nanotemplate/tpl.c.c
+chmod 0666 vim-nanotemplate/tpl.c.c
+chown 1000 vim-nanotemplate/tpl.html.html
+chgrp 1000 vim-nanotemplate/tpl.html.html
+touch -c -d "2020-06-26 10:31:11.4316491000" vim-nanotemplate/tpl.html.html
+chmod 0666 vim-nanotemplate/tpl.html.html
+chown 1000 vim-nanotemplate/tpl.javascript.js
+chgrp 1000 vim-nanotemplate/tpl.javascript.js
+touch -c -d "2020-06-26 10:31:11.4316491000" vim-nanotemplate/tpl.javascript.js
+chmod 0666 vim-nanotemplate/tpl.javascript.js
+chown 1000 vim-nanotemplate/tpl.php.php
+chgrp 1000 vim-nanotemplate/tpl.php.php
+touch -c -d "2020-06-26 10:31:11.4326501000" vim-nanotemplate/tpl.php.php
+chmod 0666 vim-nanotemplate/tpl.php.php
+chown 1000 vim-nanotemplate/tpl.python.arr.py
+chgrp 1000 vim-nanotemplate/tpl.python.arr.py
+touch -c -d "2020-06-26 10:31:11.4330224000" vim-nanotemplate/tpl.python.arr.py
+chmod 0666 vim-nanotemplate/tpl.python.arr.py
+chown 1000 vim-nanotemplate/tpl.python.cla.py
+chgrp 1000 vim-nanotemplate/tpl.python.cla.py
+touch -c -d "2020-06-26 10:31:11.4330224000" vim-nanotemplate/tpl.python.cla.py
+chmod 0666 vim-nanotemplate/tpl.python.cla.py
+chown 1000 vim-nanotemplate/tpl.python.if.py
+chgrp 1000 vim-nanotemplate/tpl.python.if.py
+touch -c -d "2020-06-26 10:31:11.4330224000" vim-nanotemplate/tpl.python.if.py
+chmod 0666 vim-nanotemplate/tpl.python.if.py
+chown 1000 vim-nanotemplate/tpl.python.py
+chgrp 1000 vim-nanotemplate/tpl.python.py
+touch -c -d "2020-06-26 10:31:11.4340312000" vim-nanotemplate/tpl.python.py
+chmod 0666 vim-nanotemplate/tpl.python.py
+chown 1000 vim-nanotemplate/tpl.ruby.arr.rb
+chgrp 1000 vim-nanotemplate/tpl.ruby.arr.rb
+touch -c -d "2020-06-26 10:31:11.4340312000" vim-nanotemplate/tpl.ruby.arr.rb
+chmod 0666 vim-nanotemplate/tpl.ruby.arr.rb
+chown 1000 vim-nanotemplate/tpl.ruby.cla.rb
+chgrp 1000 vim-nanotemplate/tpl.ruby.cla.rb
+touch -c -d "2020-06-26 10:31:11.4340312000" vim-nanotemplate/tpl.ruby.cla.rb
+chmod 0666 vim-nanotemplate/tpl.ruby.cla.rb
+chown 1000 vim-nanotemplate/tpl.ruby.con.rb
+chgrp 1000 vim-nanotemplate/tpl.ruby.con.rb
+touch -c -d "2020-06-26 10:31:11.4350307000" vim-nanotemplate/tpl.ruby.con.rb
+chmod 0666 vim-nanotemplate/tpl.ruby.con.rb
+chown 1000 vim-nanotemplate/tpl.ruby.for.rb
+chgrp 1000 vim-nanotemplate/tpl.ruby.for.rb
+touch -c -d "2020-06-26 10:31:11.4350307000" vim-nanotemplate/tpl.ruby.for.rb
+chmod 0666 vim-nanotemplate/tpl.ruby.for.rb
+chown 1000 vim-nanotemplate/tpl.ruby.fun.rb
+chgrp 1000 vim-nanotemplate/tpl.ruby.fun.rb
+touch -c -d "2020-06-26 10:31:11.4360294000" vim-nanotemplate/tpl.ruby.fun.rb
+chmod 0666 vim-nanotemplate/tpl.ruby.fun.rb
+chown 1000 vim-nanotemplate/tpl.ruby.if.rb
+chgrp 1000 vim-nanotemplate/tpl.ruby.if.rb
+touch -c -d "2020-06-26 10:31:11.4360294000" vim-nanotemplate/tpl.ruby.if.rb
+chmod 0666 vim-nanotemplate/tpl.ruby.if.rb
+chown 1000 vim-nanotemplate/tpl.ruby.pri.rb
+chgrp 1000 vim-nanotemplate/tpl.ruby.pri.rb
+touch -c -d "2020-06-26 10:31:11.4360294000" vim-nanotemplate/tpl.ruby.pri.rb
+chmod 0666 vim-nanotemplate/tpl.ruby.pri.rb
+chown 1000 vim-nanotemplate/tpl.ruby.rb
+chgrp 1000 vim-nanotemplate/tpl.ruby.rb
+touch -c -d "2020-06-26 10:31:11.4370316000" vim-nanotemplate/tpl.ruby.rb
+chmod 0666 vim-nanotemplate/tpl.ruby.rb
+chown 1000 vim-nanotemplate/tpl.ruby.reg.rb
+chgrp 1000 vim-nanotemplate/tpl.ruby.reg.rb
+touch -c -d "2020-06-26 10:31:11.4370316000" vim-nanotemplate/tpl.ruby.reg.rb
+chmod 0666 vim-nanotemplate/tpl.ruby.reg.rb
+chown 1000 vim-nanotemplate/tpl.ruby.swi.rb
+chgrp 1000 vim-nanotemplate/tpl.ruby.swi.rb
+touch -c -d "2020-06-26 10:31:11.4380313000" vim-nanotemplate/tpl.ruby.swi.rb
+chmod 0666 vim-nanotemplate/tpl.ruby.swi.rb
+chown 1000 vim-nanotemplate/tpl.ruby.var.rb
+chgrp 1000 vim-nanotemplate/tpl.ruby.var.rb
+touch -c -d "2020-06-26 10:31:11.4380313000" vim-nanotemplate/tpl.ruby.var.rb
+chmod 0666 vim-nanotemplate/tpl.ruby.var.rb
+chown 1000 vim-nanotemplate/tpl.ruby.whi.rb
+chgrp 1000 vim-nanotemplate/tpl.ruby.whi.rb
+touch -c -d "2020-06-26 10:31:11.4380313000" vim-nanotemplate/tpl.ruby.whi.rb
+chmod 0666 vim-nanotemplate/tpl.ruby.whi.rb
+chown 1000 vim-nanotemplate/tpl.vim.fun.vimrc
+chgrp 1000 vim-nanotemplate/tpl.vim.fun.vimrc
+touch -c -d "2020-06-26 10:31:11.4390322000" vim-nanotemplate/tpl.vim.fun.vimrc
+chmod 0666 vim-nanotemplate/tpl.vim.fun.vimrc
+chown 1000 vim-nanotemplate/tpl.vim.if.vimrc
+chgrp 1000 vim-nanotemplate/tpl.vim.if.vimrc
+touch -c -d "2020-06-26 10:31:11.4390322000" vim-nanotemplate/tpl.vim.if.vimrc
+chmod 0666 vim-nanotemplate/tpl.vim.if.vimrc
+chown 1000 vim-nanotemplate/tpl.vim.var.vimrc
+chgrp 1000 vim-nanotemplate/tpl.vim.var.vimrc
+touch -c -d "2020-06-26 10:31:11.4390322000" vim-nanotemplate/tpl.vim.var.vimrc
+chmod 0666 vim-nanotemplate/tpl.vim.var.vimrc
