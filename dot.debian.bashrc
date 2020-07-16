@@ -1,6 +1,6 @@
 
 # added for java
-export JAVA_HOME=$(/usr/libexec/java_home)
+# export JAVA_HOME=$(/usr/libexec/java_home)
 
 # Added for HomeBrew Linux
 export HOMEBREW_BUILD_FROM_SOURCE=1     # build from precompiled source via linux brew
@@ -9,12 +9,12 @@ export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
 export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
 
 # Added for bash completion
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-  . $(brew --prefix)/etc/bash_completion
-fi
+# if [ -f $(brew --prefix)/etc/bash_completion ]; then
+#   . $(brew --prefix)/etc/bash_completion
+# fi
 
 # Added for HomeBrew github access
-export HOMEBREW_GITHUB_API_TOKEN=<REPLACEME:xxxxxx>
+# export HOMEBREW_GITHUB_API_TOKEN=<REPLACEME:xxxxxx>
 
 # Added for swapping escape key into caps
 
