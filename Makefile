@@ -128,9 +128,8 @@ mac-ensure:											## ensure mac package mgrs, tools present
 	@echo "- python pip, ruby gems, node yarn are required dependancies";
 	@# environment : config									========================================
 	@$(call fn_print_header,ensure folders are present)
-	# cp dot.vimrc.template ~/.vimrc
-	# cp ~/.bashrc ~/.bashrc.bak
-	# cp dot.mac.bashrc.template ~/.bashrc
+	cp -n dot.vimrc ~/.vimrc || echo "skip - found .vimrc"
+	cp -n tpl.bashrc ~/.bashrc || echo "skip - found .bashrc"
 	@# tools : vim													========================================
 	@$(call fn_print_header,ensure vim folders exist)
 	-mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
@@ -176,13 +175,12 @@ mac-ensure:											## ensure mac package mgrs, tools present
 	# -yarn global add tty.js
 	# -yarn add @babel/core @babel/cli --dev					# (project) babel version backport
 	@# tools : python pip										========================================
-	# -pip install --upgrade pip												# upgrade pip self
 	-pip3 install --upgrade pip setuptools						# package manager for python
-	# -pip install -U $$(pip freeze | awk -F'[/=]' '{print $$1}')
 	-pip3 install -U $$(pip3 freeze | awk -F'[/=]' '{print $$1}')
 	-pip3 install ansible || pip3 install -U ansible	# cloud ansible
 	-pip3 install sslyze || pip3 install -U sslyze			# ssl check tool
 	-pip3 install paramiko || pip3 install -U paramiko			# ssh tool
+	-pip3 install ansible-lint || pip3 install -U ansible-lint	# cloud ansible
 	# -pip3 install localstack													# dev stack aws
 	# -pip3 install csvkit															# csv editor / converter
 	# -pip3 install --upgrade flake8										# lint python (ale)
