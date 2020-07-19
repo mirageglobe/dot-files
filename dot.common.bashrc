@@ -140,7 +140,7 @@ alias _fox="echo '
   _fox_fzfvim                   # fzf load with preview and open with vim
   _fox_path                     # shows current path
   _fox_random                   # gives a random number
-
+  
   _fox_aws                      # aws helpers
   _fox_docker                   # docker helpers
   _fox_file                     # file helpers (size/rename)
@@ -156,7 +156,10 @@ alias _fox="echo '
   _fox_now_date                 # show date : echo \$(date +\"%Y%m%d\");
   _fox_now_time                 # show time : echo \$(date +\"%H%M%S\");
 
+
 :: notes ::
+  
+  _fox_vim                      # vim hints
 
   status codes
   - 1xx (info)
@@ -547,12 +550,46 @@ fn_fox_showmaclaunch() {
   launchctl list | grep -v "com.apple";
 }
 
+# ===
+# === hints
+# ===
+
+# ## ==> tmux
+
+alias _fox_tmux="echo '
+:: help ::
+  
+  tmux ls                                                     # list all sessions
+  tmux info                                                   # show all info
+  tmux new -s mynewsession                                    # start new tmux session with name
+  ctrl-b                                                      # leader key
+
+  ctrl-b s                                                    # session list
+  ctrl-b $                                                    # session rename
+
+  ctrl-b c                                                    # window create new
+  ctrl-b ,                                                    # window rename
+  ctrl-b <0-9>                                                # window jump window
+  ctrl-b n / p                                                # window next / previous
+  
+  ctrl-b %                                                    # pane split vertical
+  ctrl-b \"                                                    # pane split horizontal
+  ctrl-b q                                                    # pane show pane number (query)
+  ctrl-b q <0-9>                                              # pane switch to pane number
+  ctrl-b o                                                    # pane switch to next pane
+  ctrl-b <arrow direction>                                    # pane switch to pane
+
+  :setw -g mode-keys vi                                       # use vi keys in buffer
+
+:: notes ::
+
+  https://tmuxcheatsheet.com/
+'"
+
 # ## ==> vim
 
 alias _fox_vim="echo '
 :: help ::
-
-:: notes ::
 
   hjkl                                                        # left - down - up - right
 
