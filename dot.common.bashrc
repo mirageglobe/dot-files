@@ -554,11 +554,20 @@ fn_fox_showmaclaunch() {
 # === hints
 # ===
 
+# ## ==> ansible
+
+alias _fox_ansible="echo '
+:: help ::
+
+  ansible -m setup <hostname>                                 # show all ansible variables for host
+  ansible -m setup localhost                                  # show all ansible variables for localhost
+'"
+
 # ## ==> tmux
 
 alias _fox_tmux="echo '
 :: help ::
-  
+
   tmux ls                                                     # list all sessions
   tmux info                                                   # show all info
   tmux new -s mynewsession                                    # start new tmux session with name
@@ -571,13 +580,17 @@ alias _fox_tmux="echo '
   ctrl-b ,                                                    # window rename
   ctrl-b <0-9>                                                # window jump window
   ctrl-b n / p                                                # window next / previous
-  
+
   ctrl-b %                                                    # pane split vertical
-  ctrl-b \"                                                    # pane split horizontal
+  ctrl-b \"                                                   # pane split horizontal
   ctrl-b q                                                    # pane show pane number (query)
   ctrl-b q <0-9>                                              # pane switch to pane number
   ctrl-b o                                                    # pane switch to next pane
   ctrl-b <arrow direction>                                    # pane switch to pane
+
+  ctrl-b [                                                    # pane/window scrolling on
+  ctrl-b q                                                    # pane/window scrolling off
+  :set -g mouse on                                            # turn on mouse scrolling
 
   :setw -g mode-keys vi                                       # use vi keys in buffer
 
