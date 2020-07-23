@@ -194,13 +194,6 @@ mac-ensure:	common-ensure										## ensure mac gui tools and common-ensure pre
 
 debian-ensure: common-ensure								## ensure debian gui tools and common-ensure present
 
-tex-ensure:											## ensure all latex deps are installed
-	@$(call fn_print_header,ensure latex and tlmgr are pristine)
-	tlmgr update --self																# update texmaker packager
-	tlmgr update --all																# update texmaker packages
-	tlmgr install collection-fontsrecommended					# update tex fonts
-	tlmgr install fontspec lualatex-math							# depend of xelatex lualatex
-
 ##@ Helpers
 
 now-datetime:										## get date and time methods
@@ -212,21 +205,6 @@ now-datetime:										## get date and time methods
 	echo $$(date +"%H:%M:%S")
 	printf "\nget epoch - sec after 1970"
 	echo $$(date +"%s")
-
-version:												## semver show version
-	@git describe --tags --abbrev=0
-
-vinit:													## semver init version 0.1.0
-	@git tag 0.1.0
-
-vpatch:													## semver patch (fix); git tag $(make vpatch)
-	@semver $$(git describe --tags --abbrev=0) -i patch
-
-vminor:													## semver minor (feature); git tag $(make vminor)
-	@semver $$(git describe --tags --abbrev=0) -i minor
-
-vmajor:													## semver major (breaking); git tag $(make vmajor)
-	@semver $$(git describe --tags --abbrev=0) -i major
 
 help:														## display this help
 	@awk 'BEGIN { FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"; } \
