@@ -76,13 +76,6 @@ launch:													## loads basic init tools
 	open https://www.nerdfonts.com/
 	open https://www.noisli.com/
 
-docker:													## common docker apps
-	@$(call fn_print_header,common docker apps)
-	@$(call fn_print_tab,"tool","commands",)
-	@$(call fn_print_tab, "----","--------",)
-	@$(call fn_print_tab,"browser","docker run --rm -it browsh/browsh",)
-	@echo ""
-
 check:													## check system / environment
 	@$(call fn_print_header,check tools)
 	@$(call fn_check_command_note,curl,)
@@ -102,7 +95,6 @@ check:													## check system / environment
 	@$(call fn_print_header_command,python3 info,pip3 list)
 	@$(call fn_print_header_command,color test,tput colors)
 	@$(call fn_print_header,summary)
-	@echo "- note that pip (python2 will be deprecated. install as pip3)";
 
 bin-ensure:											## ensure common tools in ~/.tools folder
 	@# tools : common bin										========================================
@@ -123,7 +115,7 @@ bin-ensure:											## ensure common tools in ~/.tools folder
 	@$(call fn_print_header,"recommended")
 	# - brew cask install font-firacode-nerd-font font-hasklig-nerd-font font-inconsolata-nerd-font font-iosevka-nerd-font font-monoid-nerd-font font-noto-nerd-font font-robotomono-nerd-font font-tinos-nerd-font
 
-mac-ensure:											## ensure mac package mgrs, tools present
+common-ensure:											## ensure common package managers and non gui tools present
 	@$(call fn_print_header,note)
 	@echo "- python pip, ruby gems, node yarn are required dependancies";
 	@# environment : config									========================================
@@ -135,6 +127,7 @@ mac-ensure:											## ensure mac package mgrs, tools present
 	-mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
 	@# tools : node yarn										========================================
 	@$(call fn_print_header,ensure node yarn bins are pristine)
+	-curl -L https://git.io/n-install | bash; bash n lts;
 	# ref - https://shift.infinite.red/npm-vs-yarn-cheat-sheet-8755b092e5cc
 	-curl -o- -L https://yarnpkg.com/install.sh | bash
 	-yarn global upgrade
@@ -169,8 +162,6 @@ mac-ensure:											## ensure mac package mgrs, tools present
 	-yarn global upgrade --latest bats
 	# yarn add --dev cucumber														# test (per project) cucumber
 	# -yarn global add pomd															# general pomodoro
-	-yarn global add n																# node version package manager
-	-yarn global upgrade --latest n
 	# -yarn global add svg2png-cli
 	# -yarn global add tty.js
 	# -yarn add @babel/core @babel/cli --dev					# (project) babel version backport
@@ -195,86 +186,13 @@ mac-ensure:											## ensure mac package mgrs, tools present
 	# -gem install --user-install mdl											# lint markdown
 	# -gem install --user-install cucumber								# test cucumber ruby rails
 	@# tools : go bin												========================================
-	@$(call fn_print_header,ensure go bins are pristine)
-	# go get -u sigs.k8s.io/kind											# install kind (kubernetes in docker)
 	@$(call fn_print_header,summary)
 
-deb-ensure:											## ensure debian package mgrs, tools present
-	@$(call fn_print_header,note)
-	@echo "- python pip, ruby gems, node yarn are required dependancies";
-	@# environment : config									========================================
-	@$(call fn_print_header,ensure folders are present)
-	# cp dot.vimrc.template ~/.vimrc
-	# cp ~/.bashrc ~/.bashrc.bak
-	# cp dot.mac.bashrc.template ~/.bashrc
-	@# tools : vim													========================================
-	@$(call fn_print_header,ensure vim folders exist)
-	-mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
-	@# tools : node yarn										========================================
-	@$(call fn_print_header,ensure node yarn bins are pristine)
-	# ref - https://shift.infinite.red/npm-vs-yarn-cheat-sheet-8755b092e5cc
-	-curl -o- -L https://yarnpkg.com/install.sh | bash
-	# -yarn global upgrade
-	# -yarn global add semver														# dev semver tool (see https://github.com/fsaintjacques/semver-tool)
-	# -yarn global add write-good												# lint english grammer
-	# -yarn global add htmlhint													# lint html
-	# yarn global add stylelint													# lint
-	# -yarn global add standard													# lint javascript (ale)
-	# yarn global add eslint														# lint javascript (ale)
-	# -yarn global add prettier													# lint javascript fixer (ale)
-	# -yarn global add jsonlint													# lint json
-	# -yarn global add vue-language-server							# linter vuejs (ale)
-	# -yarn global add typescript												# javascript framework
-	# -yarn global add @neutralinojs/neu								# nwjs and electron alternative
-	# -yarn global add electron													# desktop webkit
-	# -yarn global add @vue/cli													# web framework - vue cli 3.x
-	# -yarn global upgrade --latest @vue/cli
-	# yarn global add graphql														# web framework - vue graphql dependency
-	# yarn global add @vue/cli-service-global						# web framework - vue service global
-	# yarn global add @babel/core @babel/cli						# web framework - vue-global-service dependency
-	# -yarn global add cordova														# mobile framework - cross mobile
-	# -yarn global add serverless												# serverless framework
-	# -yarn global add local-web-server									# server simple local web server - use ws to start
-	# -yarn global add http-server												# server simple local web server
-	# -yarn global add fauxton														# db ui - couchdb docker container missing fauxton
-	# -yarn global add hotel														# db https://github.com/typicode/hotel
-	# -yarn global add json-server											# db https://github.com/typicode/json-server#database
-	# https://netflix.github.io/pollyjs/#/
-	# -yarn global add mountebank												# test mock server
-	# -yarn global add nightwatch												# test e2e browser test - default by vuejs
-	# -yarn global add bats															# test shell / bash test suite (bats-core)
-	# -yarn global upgrade --latest bats
-	# yarn add --dev cucumber														# test (per project) cucumber
-	# -yarn global add pomd															# general pomodoro
-	# -yarn global add n																# node version package manager
-	# -yarn global upgrade --latest n
-	# -yarn global add svg2png-cli
-	# -yarn global add tty.js
-	# -yarn add @babel/core @babel/cli --dev					# (project) babel version backport
-	@# tools : python pip										========================================
-	# -pip install --upgrade pip												# upgrade pip self
-	-pip3 install --upgrade pip setuptools						# package manager for python
-	# -pip install -U $$(pip freeze | awk -F'[/=]' '{print $$1}')
-	-pip3 install -U $$(pip3 freeze | awk -F'[/=]' '{print $$1}')
-	-pip3 install ansible || pip3 install -U ansible	# cloud ansible
-	-pip3 install sslyze || pip3 install -U sslyze			# ssl check tool
-	# -pip3 install localstack													# dev stack aws
-	# -pip3 install csvkit															# csv editor / converter
-	# -pip3 install --upgrade flake8										# lint python (ale)
-	# -pip3 install --upgrade autopep8									# lint python based on pep8
-	# -pip3 install weasyprint													# doc easy pdf printer https://weasyprint.org/start/
-	@# tools : ruby gems										========================================
-	@$(call fn_print_header,ensure ruby system gems are pristine)
-	# -gem update --system || echo "never use sudo for gem installation; check ruby path in homebrew"
-	# -gem update || echo "never use sudo for gem installation; check ruby path in homebrew"
-	@$(call fn_print_header,ensure ruby user dir gems are pristine)
-	# -gem install --user-install terraform_landscape			# adding terraform extensions
-	# -gem install --user-install mdl											# lint markdown
-	# -gem install --user-install cucumber								# test cucumber ruby rails
-	@# tools : go bin												========================================
-	@$(call fn_print_header,ensure go bins are pristine)
-	# go get -u sigs.k8s.io/kind											# install kind (kubernetes in docker)
-	@$(call fn_print_header,summary)
+mac-ensure:	common-ensure										## ensure mac gui tools and common-ensure present
+	-yarn global add n																# node version package manager
+	-yarn global upgrade --latest n
+
+debian-ensure: common-ensure								## ensure debian gui tools and common-ensure present
 
 tex-ensure:											## ensure all latex deps are installed
 	@$(call fn_print_header,ensure latex and tlmgr are pristine)

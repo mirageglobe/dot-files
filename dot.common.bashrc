@@ -563,6 +563,50 @@ alias _fox_ansible="echo '
   ansible -m setup localhost                                  # show all ansible variables for localhost
 '"
 
+# ## ==> kubernetes
+
+alias _fox_k8s="echo '
+:: help ::
+
+  # to launch new credentials
+  rm ~/.kube/config;
+  az aks get-credentials --subscription <subid> --name <clustername> -g <rgname>;
+
+  kubectl                                                     # show all commands
+  kubectl config view                                         # show all configuration
+  kubectl config get-contexts                                 # show available configuration
+  kubectl config current-context                              # show current configuration
+  kubectl cluster-info                                        # show cluster info
+
+  kubectl get namespaces                                      # show all namespaces (or get ns)
+
+  kubectl get pods --all-namespaces                           # show pods from all namespaces
+  kubectl get pods --namespace <namespace>                    # show pods from a namespace
+  kubectl describe pods --namespace <namespace> <pod>         # show info of pod from a namespace
+
+  kubectl get events --all-namespaces                         # show events from all namespaces
+  kubectl get events --namespace <namespace>                  # show events from a namespace
+  kubectl describe events --namespace <namespace> <event>     # show info of pod from a namespace
+
+  kubectl get <option> --all-namespaces                       # show info for option
+  option: services / pods / pv / configmap
+
+  kubectl edit svc/docker-registry                            # edit resource
+  kubectl logs --namespace <namespace> <pod>                  # view logs of pod
+  kubectl delete --namespace <namespace> pod,service foo      # delete pod and services named foo
+  kubectl exec <pod> -- ls /                                  # run command on pod (1 container)
+  kubectl exec <pod> -c mycontainer -- ls /                   # run command on pod (multi container)
+
+  kubectl apply -f ./my-manifest.yaml                         # create resource(s)
+  kubectl apply -f https://git.io/openk8sresources            # create resource(s) from url
+  kubectl create deployment nginx --image=nginx               # start a single instance of nginx
+
+:: notes ::
+
+  https://kubernetes.io/docs/reference/kubectl/cheatsheet/
+
+'"
+
 # ## ==> tmux
 
 alias _fox_tmux="echo '
