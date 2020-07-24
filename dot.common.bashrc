@@ -570,7 +570,8 @@ alias _fox_k8s="echo '
 
   # to launch new credentials
   rm ~/.kube/config;
-  az aks get-credentials --subscription <subid> --name <clustername> -g <rgname>;
+  az aks get-credentials --subscription <subid> --name <clustername> -g <rgname>; # azure
+  aws eks --region <region-code> update-kubeconfig --name <cluster_name>;         # aws
 
   kubectl                                                     # show all commands
   kubectl config view                                         # show all configuration
