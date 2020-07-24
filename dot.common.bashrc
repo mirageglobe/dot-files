@@ -1,13 +1,6 @@
 # ===
-# === setup
+# === common bashrc
 # ===
-
-# ==> following for .bash_profile
-# [ -f ~/.profile ] && source ~/.profile
-# [ -f ~/.bashrc ] && source ~/.bashrc
-
-# ==> following for .bashrc
-# [ -f ~/dot-files/dot.common.bashrc ] && source ~/dot-files/dot.common.bashrc
 
 printf "%s\t" ":: common : "
  
