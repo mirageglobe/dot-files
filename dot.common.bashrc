@@ -94,6 +94,16 @@ else
   printf "%s" "bash(v?) "
 fi
 
+if echo ${BASH_VERSION} | grep -q "^5\."; then
+  export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
+  [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+fi
+
+# ==> added for kubectl completion
+if command -V kubectlssss 2> /dev/null; then
+  source <(kubectl completion bash)
+fi
+
 # # ==> added for make completion
 # if [ -f ~/dot.bash-completion.make.bash ]; then
 #   source ~/dot.bash-completion.make.bash
@@ -116,24 +126,13 @@ printf "%s" "[+] aliases "
 alias _fox="echo '
 :: help ::
 
-  _ls                           # list with colour
-  _ll                           # list with permissions
-  _tree                         # list tree
-  _tree_verbose                 # list tree with files
-  
-  _rs                           # reload current shell
-
-  _cp                           # cp with confirmation
-  _mv                           # mv with confirmation
-  _rm                           # rm with confirmation
-
   _fox_diff <file a> <file b>   # show diff between 2 or more files (use --brief for simple)
   _fox_emoshrug                 # emoji shrug
   _fox_fzf                      # fzf load with preview
   _fox_fzfvim                   # fzf load with preview and open with vim
   _fox_path                     # shows current path
   _fox_random                   # gives a random number
-  
+
   _fox_aws                      # aws helpers
   _fox_docker                   # docker helpers
   _fox_file                     # file helpers (size/rename)
@@ -149,17 +148,8 @@ alias _fox="echo '
   _fox_now_date                 # show date : echo \$(date +\"%Y%m%d\");
   _fox_now_time                 # show time : echo \$(date +\"%H%M%S\");
 
-
-:: notes ::
-  
   _fox_vim                      # vim hints
-
-  status codes
-  - 1xx (info)
-  - 2xx (success) - 200 (ok)
-  - 3xx (redirection)
-  - 4xx (client side) - 404 (not found) - 403 (forbidden)
-  - 5xx (server side) - 503 (service unavailable) - 504 (gateway timeout)
+  
 '"
 
 fn_fox_system() {
@@ -260,6 +250,40 @@ fn_fox_aws_profile_show() {
   aws configure list;
   printf "\n"
 }
+
+# ## ==> bash
+
+alias _fox_bash="echo '
+:: help ::
+
+  _ls                           # list with colour
+  _ll                           # list with permissions
+  _tree                         # list tree
+  _tree_verbose                 # list tree with files
+
+  _rs                           # reload current shell
+
+  _cp                           # cp with confirmation
+  _mv                           # mv with confirmation
+  _rm                           # rm with confirmation
+
+:: notes ::
+
+  > file                        # redirects stdout to file
+  1> file                       # redirects stdout to file
+  2> file                       # redirects stderr to file
+  &> file                       # redirects stdout and stderr to file
+  2&1> file                     # redirects stdout and stderr to file
+
+  /dev/null                     # null device
+
+  status codes
+  - 1xx (info)
+  - 2xx (success) - 200 (ok)
+  - 3xx (redirection)
+  - 4xx (client side) - 404 (not found) - 403 (forbidden)
+  - 5xx (server side) - 503 (service unavailable) - 504 (gateway timeout)
+'"
 
 # ## ==> docker
 
