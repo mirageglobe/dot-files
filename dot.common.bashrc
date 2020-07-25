@@ -277,6 +277,12 @@ alias _fox_bash="echo '
 
   /dev/null                     # null device
 
+	$(date +"%Y%m%d-%H:%M:%S")    # current date and time
+	$(date +"%Y%m%d")             # current date
+	$(date +"%H:%M:%S")           # current time
+	$(date +"%s")                 # epoch seconds after 1970
+
+
   status codes
   - 1xx (info)
   - 2xx (success) - 200 (ok)

@@ -88,7 +88,6 @@ check:													## check system / environment
 	@$(call fn_check_command_note,vim,)
 	@$(call fn_check_command_note,bats,see https://github.com/sharkdp/bat/releases/latest)
 	@$(call fn_check_command_note,rg,see https://github.com/BurntSushi/ripgrep/releases/latest)
-	# bin - fx tree pstree
 	@$(call fn_print_header_command,brew info,brew list && brew cask list)
 	@$(call fn_print_header_command,node yarn info,yarn global list)
 	@$(call fn_print_header_command,ruby gem info,gem list)
@@ -127,85 +126,74 @@ common-ensure:											## ensure common package managers and non gui tools pre
 	-mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
 	@# tools : node yarn										========================================
 	@$(call fn_print_header,ensure node yarn bins are pristine)
-	-curl -L https://git.io/n-install | bash
+	-command -v n || curl -L https://git.io/n-install | bash
 	-n latest
-	# ref - https://shift.infinite.red/npm-vs-yarn-cheat-sheet-8755b092e5cc
-	-curl -o- -L https://yarnpkg.com/install.sh | bash
-	command -v yarn || true
+	-command -v yarn || curl -o- -L https://yarnpkg.com/install.sh | bash
 	-yarn global upgrade
-	# -yarn global add semver														# dev semver tool (see https://github.com/fsaintjacques/semver-tool)
 	-yarn global add write-good												# lint english grammer
 	-yarn global add htmlhint													# lint html
-	# yarn global add stylelint													# lint
 	-yarn global add standard													# lint javascript (ale)
-	# yarn global add eslint														# lint javascript (ale)
 	-yarn global add prettier													# lint javascript fixer (ale)
 	-yarn global add jsonlint													# lint json
 	-yarn global add fx																# json tool
-	# -yarn global add vue-language-server							# linter vuejs (ale)
-	# -yarn global add typescript												# javascript framework
-	-yarn global add @neutralinojs/neu								# nwjs and electron alternative
 	-yarn global add electron													# desktop webkit
 	-yarn global add @vue/cli													# web framework - vue cli 3.x
 	-yarn global upgrade --latest @vue/cli
-	# yarn global add graphql														# web framework - vue graphql dependency
-	# yarn global add @vue/cli-service-global						# web framework - vue service global
-	# yarn global add @babel/core @babel/cli						# web framework - vue-global-service dependency
-	# -yarn global add cordova														# mobile framework - cross mobile
-	# -yarn global add serverless												# serverless framework
 	-yarn global add local-web-server									# server simple local web server - use ws to start
-	# -yarn global add http-server												# server simple local web server
-	# -yarn global add fauxton														# db ui - couchdb docker container missing fauxton
-	# -yarn global add hotel														# db https://github.com/typicode/hotel
-	# -yarn global add json-server											# db https://github.com/typicode/json-server#database
-	# https://netflix.github.io/pollyjs/#/
 	-yarn global add mountebank												# test mock server
 	-yarn global add nightwatch												# test e2e browser test - default by vuejs
-	-yarn global add bats															# test shell / bash test suite (bats-core)
+	-yarn global add bats															# test bash test suite (bats-core)
 	-yarn global upgrade --latest bats
-	# yarn add --dev cucumber														# test (per project) cucumber
-	# -yarn global add pomd															# general pomodoro
-	# -yarn global add svg2png-cli
-	# -yarn global add tty.js
-	# -yarn add @babel/core @babel/cli --dev					# (project) babel version backport
-	@# tools : python pip										========================================
-	-pip3 install --upgrade pip setuptools						# package manager for python
+	# tools : python pip										========================================
+	-pip3 install --upgrade pip setuptools														# package manager for python
 	-pip3 install -U $$(pip3 freeze | awk -F'[/=]' '{print $$1}')
-	-pip3 install ansible || pip3 install -U ansible	# cloud ansible
-	-pip3 install sslyze || pip3 install -U sslyze			# ssl check tool
-	-pip3 install paramiko || pip3 install -U paramiko			# ssh tool
-	-pip3 install ansible-lint || pip3 install -U ansible-lint	# cloud ansible
-	# -pip3 install localstack													# dev stack aws
-	# -pip3 install csvkit															# csv editor / converter
-	# -pip3 install --upgrade flake8										# lint python (ale)
-	# -pip3 install --upgrade autopep8									# lint python based on pep8
-	# -pip3 install weasyprint													# doc easy pdf printer https://weasyprint.org/start/
-	@# tools : ruby gems										========================================
+	-pip3 install ansible || pip3 install -U ansible									# ansible
+	-pip3 install ansible-lint || pip3 install -U ansible-lint				# lint ansible
+	-pip3 install sslyze || pip3 install -U sslyze										# ssl check tool
+	-pip3 install paramiko || pip3 install -U paramiko								# ssh tool
+	# tools : ruby gems										========================================
 	@$(call fn_print_header,ensure ruby system gems are pristine)
 	-gem update --system || echo "never use sudo for gem installation; check ruby path in homebrew"
 	-gem update || echo "never use sudo for gem installation; check ruby path in homebrew"
 	@$(call fn_print_header,ensure ruby user dir gems are pristine)
 	-gem install --user-install terraform_landscape			# adding terraform extensions
+	# archived tools												========================================
+	# -yarn global add semver														# dev semver tool (see https://github.com/fsaintjacques/semver-tool)
+	# -yarn global add stylelint													# lint
+	# -yarn global add eslint														# lint javascript (ale)
+	# -yarn global add vue-language-server							# linter vuejs (ale)
+	# -yarn global add typescript												# javascript framework
+	# -yarn global add graphql														# web framework - vue graphql dependency
+	# -yarn global add @vue/cli-service-global						# web framework - vue service global
+	# -yarn global add @babel/core @babel/cli						# web framework - vue-global-service dependency
+	# -yarn global add cordova														# mobile framework - cross mobile
+	# -yarn global add serverless												# serverless framework
+	# -yarn global add @neutralinojs/neu								# nwjs and electron alternative (deprecated)
+	# -yarn global add http-server												# server simple local web server
+	# -yarn global add fauxton														# db ui - couchdb docker container missing fauxton
+	# -yarn global add hotel														# db https://github.com/typicode/hotel
+	# -yarn global add json-server											# db https://github.com/typicode/json-server#database
+	# -yarn global add pomd															# general pomodoro
+	# -yarn global add svg2png-cli
+	# -yarn global add tty.js
+	# -yarn add cucumber --dev														# test (per project) cucumber
+	# -yarn add @babel/core @babel/cli --dev							# (project) babel version backport
+
+	# -pip3 install localstack													# dev stack aws
+	# -pip3 install csvkit															# csv editor / converter
+	# -pip3 install --upgrade flake8										# lint python (ale)
+	# -pip3 install --upgrade autopep8									# lint python based on pep8
+	# -pip3 install weasyprint													# doc easy pdf printer https://weasyprint.org/start/
+
 	# -gem install --user-install mdl											# lint markdown
 	# -gem install --user-install cucumber								# test cucumber ruby rails
-	@# tools : go bin												========================================
-	@$(call fn_print_header,summary)
 
 mac-ensure:	common-ensure										## ensure mac gui tools and common-ensure present
+	# ref - https://shift.infinite.red/npm-vs-yarn-cheat-sheet-8755b092e5cc
 
 debian-ensure: common-ensure								## ensure debian gui tools and common-ensure present
 
 ##@ Helpers
-
-now-datetime:										## get date and time methods
-	printf "\nget current date and time"
-	echo $$(date +"%Y%m%d-%H:%M:%S")
-	printf "\nget date"
-	echo $$(date +"%Y%m%d")
-	printf "\nget time"
-	echo $$(date +"%H:%M:%S")
-	printf "\nget epoch - sec after 1970"
-	echo $$(date +"%s")
 
 help:														## display this help
 	@awk 'BEGIN { FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"; } \
