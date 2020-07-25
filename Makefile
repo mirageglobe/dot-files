@@ -127,7 +127,8 @@ common-ensure:											## ensure common package managers and non gui tools pre
 	-mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
 	@# tools : node yarn										========================================
 	@$(call fn_print_header,ensure node yarn bins are pristine)
-	-curl -L https://git.io/n-install | bash; n latest;
+	-curl -L https://git.io/n-install | bash
+	-n latest
 	# ref - https://shift.infinite.red/npm-vs-yarn-cheat-sheet-8755b092e5cc
 	-curl -o- -L https://yarnpkg.com/install.sh | bash
 	command -v yarn || true
