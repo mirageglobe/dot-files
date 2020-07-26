@@ -277,13 +277,23 @@ alias _fox_bash="echo '
 
   /dev/null                     # null device
 
-	$(date +"%Y%m%d-%H:%M:%S")    # current date and time
-	$(date +"%Y%m%d")             # current date
-	$(date +"%H:%M:%S")           # current time
-	$(date +"%s")                 # epoch seconds after 1970
+  \$(date +"%Y%m%d-%H:%M:%S")      # current date and time
+  \$(date +"%Y%m%d")               # current date
+  \$(date +"%H:%M:%S")             # current time
+  \$(date +"%s")                   # epoch seconds after 1970
 
+  # basic permissions
+  0: no rights / 1: execute / 2: write / 4: read
 
-  status codes
+  # combination of basic permissions
+  3: write + execute / 5: read + execute / 6: read + write / 7: read + write + execute
+
+  # common structure of permissions (i.e. chmod 754)
+  7 (1st no.) user permission
+  5 (2nd no.) group permission
+  4 (3rd no.) others permission
+
+  # http request status codes
   - 1xx (info)
   - 2xx (success) - 200 (ok)
   - 3xx (redirection)
