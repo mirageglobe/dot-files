@@ -192,7 +192,7 @@ Plug 'sheerun/vim-polyglot'                           " syntax superfast on dema
 
 " ==> linters
 
-Plug 'w0rp/ale'                                       " enables ale universal language linter
+Plug 'dense-analysis/ale'                             " enables ale universal language linter
 Plug 'maximbaz/lightline-ale'                         " enables ale in lightline
 " Plug 'scrooloose/syntastic'
 
