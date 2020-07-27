@@ -2,21 +2,14 @@
 # === info
 
 # attribution - by jimmy mg lim ::  www.mirageglobe.com :: github.com/mirageglobe
-# reference - https://www.gnu.org/software/make/manual/html_node/Standard-Targets.html
-
-# notes
-#
-# - use $$ for escaping variable
-# - use - to ignore errors (make)
-# - use @ to not print the command
 
 # === targets
 
 # menu shortcuts targets
-MENU := launch check bin-ensure mac-ensure tex-ensure
+MENU := launch check mac-ensure debian-ensure tex-ensure
 
 # menu helpers targets
-MENU := now-datetimeversion vinit vpatch vminor vmajor todo help
+MENU := common-ensure help
 
 # load phony
 # info - phony is used to make sure there is no similar file(s) such as <target> that cause the make recipe not to work
@@ -30,11 +23,7 @@ MENU := now-datetimeversion vinit vpatch vminor vmajor todo help
 # # set default shell to use
 # SHELL := /bin/bash
 
-# sets all lines in the recipe to be passed in a single shell invocation
-# ref - https://www.gnu.org/software/make/manual/html_node/One-Shell.html
-# warning - supported make > 3.82, ref - https://stackoverflow.com/questions/32153034/oneshell-not-working-properly-in-makefile
-# recommend - use gmake rather than make to ensure oneshell works
-# warning - oneshell is not POSIX standard
+# sets all lines in the recipe to be passed in a single shell invocation. or use multiline
 .ONESHELL:
 
 # === functions
@@ -78,16 +67,20 @@ launch:													## loads basic init tools
 
 check:													## check system / environment
 	@$(call fn_print_header,check tools)
-	@$(call fn_check_command_note,curl,)
-	@$(call fn_check_command_note,jq,)
 	@$(call fn_check_command_note,python,)
 	@$(call fn_check_command_note,pip,)
 	@$(call fn_check_command_note,ruby,)
 	@$(call fn_check_command_note,yarn,)
+	@$(call fn_check_command_note,curl,)
+	@$(call fn_check_command_note,jq,)
+	@$(call fn_check_command_note,fx,)
+	@$(call fn_check_command_note,bat,see https://github.com/sharkdp/bat)
+	@$(call fn_check_command_note,fd,see https://github.com/sharkdp/fd)
 	@$(call fn_check_command_note,wget,)
 	@$(call fn_check_command_note,vim,)
-	@$(call fn_check_command_note,bats,see https://github.com/sharkdp/bat/releases/latest)
+	@$(call fn_check_command_note,fzf,)
 	@$(call fn_check_command_note,rg,see https://github.com/BurntSushi/ripgrep/releases/latest)
+	@$(call fn_check_command_note,bats,see https://github.com/sharkdp/bat/releases/latest)
 	@$(call fn_print_header_command,brew info,brew list && brew cask list)
 	@$(call fn_print_header_command,node yarn info,yarn global list)
 	@$(call fn_print_header_command,ruby gem info,gem list)
@@ -95,32 +88,21 @@ check:													## check system / environment
 	@$(call fn_print_header_command,color test,tput colors)
 	@$(call fn_print_header,summary)
 
-bin-ensure:											## ensure common tools in ~/.tools folder
-	@# tools : common bin										========================================
-	@$(call fn_print_header,"ensure .tool folder exist")
-	-mkdir -pv $$HOME/.tools/sh
-	-mkdir -pv $$HOME/.tools/bin
-	-grep -qxF 'export PATH="$$HOME/.tools/bin:$$PATH"' $$HOME/.bashrc || echo '\nexport PATH="$$HOME/.tools/bin:$$PATH"' >> $$HOME/.bashrc
-	-grep -qxF 'export PATH="$$HOME/.tools/sh:$$PATH"' $$HOME/.bashrc || echo '\nexport PATH="$$HOME/.tools/sh:$$PATH"' >> $$HOME/.bashrc
-	@$(call fn_print_header,"ensure tools are in tools/bin folder")
-	-cp -p tools/* $$HOME/.tools/sh/
-	-curl https://raw.githubusercontent.com/fsaintjacques/semver-tool/master/src/semver > $$HOME/.tools/bin/semver && chmod u+x $$HOME/.tools/bin/semver
-	@$(call fn_print_header,"ensure completion scripts are in tools folder")
-	-curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash > $$HOME/.tools/sh/dot.bash-completion.git.bash
-	@$(call fn_print_header,"ensure fonts are on desktop")
-	@$(call fn_print_header,"summary")
-	@echo "installed the following tools to path:"
-	@ls tools
-	@$(call fn_print_header,"recommended")
-	# - brew cask install font-firacode-nerd-font font-hasklig-nerd-font font-inconsolata-nerd-font font-iosevka-nerd-font font-monoid-nerd-font font-noto-nerd-font font-robotomono-nerd-font font-tinos-nerd-font
+mac-ensure:	common-ensure										## ensure mac gui tools and common-ensure present
+	# ref - https://shift.infinite.red/npm-vs-yarn-cheat-sheet-8755b092e5cc
+
+debian-ensure: common-ensure								## ensure debian gui tools and common-ensure present
+
+##@ Helpers
 
 common-ensure:											## ensure common package managers and non gui tools present
 	@$(call fn_print_header,note)
 	@echo "- python pip, ruby gems, node yarn are required dependancies";
 	@# environment : config									========================================
 	@$(call fn_print_header,ensure folders are present)
-	cp -n dot.vimrc ~/.vimrc || echo "skip - found .vimrc"
-	cp -n tpl.bashrc ~/.bashrc || echo "skip - found .bashrc"
+	cp -n tpl.bashrc ~/.bashrc || echo "skip - found .bashrc"					# never override local config
+	cp tpl.vimrc ~/.vimrc																							# always override local config
+	cp dot.tmux.conf ~/.tmux.conf																			# always override local config
 	@# tools : vim													========================================
 	@$(call fn_print_header,ensure vim folders exist)
 	-mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
@@ -178,22 +160,13 @@ common-ensure:											## ensure common package managers and non gui tools pre
 	# -yarn global add tty.js
 	# -yarn add cucumber --dev														# test (per project) cucumber
 	# -yarn add @babel/core @babel/cli --dev							# (project) babel version backport
-
 	# -pip3 install localstack													# dev stack aws
 	# -pip3 install csvkit															# csv editor / converter
 	# -pip3 install --upgrade flake8										# lint python (ale)
 	# -pip3 install --upgrade autopep8									# lint python based on pep8
 	# -pip3 install weasyprint													# doc easy pdf printer https://weasyprint.org/start/
-
 	# -gem install --user-install mdl											# lint markdown
 	# -gem install --user-install cucumber								# test cucumber ruby rails
-
-mac-ensure:	common-ensure										## ensure mac gui tools and common-ensure present
-	# ref - https://shift.infinite.red/npm-vs-yarn-cheat-sheet-8755b092e5cc
-
-debian-ensure: common-ensure								## ensure debian gui tools and common-ensure present
-
-##@ Helpers
 
 help:														## display this help
 	@awk 'BEGIN { FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"; } \

@@ -2,16 +2,8 @@
 " === custom vim config
 " ===
 
-" include the following lines in your vimrc file
-" cd ~ && touch .vimrc
+" === fonts configuration
 "
-" if filereadable(expand("~/dot.vimrc"))
-"   source ~/dot.vimrc
-" endif
-"
-" === iterm2
-"
-" or nerd fonts and use iterm2 to change font to 
 " Font -> FuraCode Nerd Font [Regular] [12]
 " Use built-in Powerline glyphs -> true
 " Enable subpixel anti-aliasing -> true
@@ -37,8 +29,7 @@ set wrap linebreak nolist                             " set soft wrap for text
 " ==> general
 
 set nocompatible                                      " required by vim for extra features
-" set noshowcmd                                         " speed up turning off display of cmds
-set showcmd                                           " speed up turning off display of cmds. need to be after nocompatible
+set showcmd                                           " noshowcmd / showcmd speed up turning off display of cmds. need to be after nocompatible
 
 set number                                            " show line numbers
 set history=1000                                      " store lots of :cmdline history
@@ -139,13 +130,13 @@ call plug#begin('~/.vim/plugged')
 
 " ==> colour schemes and IDE customisation
 
-" Plug 'dracula/vim'                                    " enables gruvbox colorscheme
 Plug 'drewtempelmeyer/palenight.vim'                  " enables palenight color scheme
-" Plug 'flazz/vim-colorschemes'                         " enables package colorschemes (flazz)
 Plug 'itchyny/lightline.vim'                          " enables superlight status bar - https://github.com/itchyny/lightline.vim
+Plug 'rafi/awesome-vim-colorschemes'                  " enables package colorschemes (rafi)
+" Plug 'flazz/vim-colorschemes'                         " enables package colorschemes (flazz)
+" Plug 'dracula/vim'                                    " enables gruvbox colorscheme
 " Plug 'lifepillar/vim-gruvbox8'                        " enables gruvbox colorscheme
 " Plug 'lifepillar/vim-solarized8'                      " enables gruvbox colorscheme
-Plug 'rafi/awesome-vim-colorschemes'                  " enables package colorschemes (rafi)
 
 Plug 'editorconfig/editorconfig-vim'                  " enables .editorconfig file overrides - https://editorconfig.org/
 Plug 'tpope/vim-sensible'                             " enables common standard settings for vim
@@ -167,10 +158,10 @@ Plug 'tpope/vim-fugitive'                             " git in vim
 
 " ==> language / syntax
 
-" Plug 'ervandew/supertab'                              " enables tab actions i.e. autocomplete by using <tab> insert mode
 Plug 'lifepillar/vim-mucomplete'                      " enables code completion without tab; similar to supertab
-" Plug 'maralla/completor.vim'                          " yet another async code completion cool
 Plug 'sheerun/vim-polyglot'                           " syntax superfast on demand loader for over 100 languages
+" Plug 'ervandew/supertab'                              " enables tab actions i.e. autocomplete by using <tab> insert mode
+" Plug 'maralla/completor.vim'                          " yet another async code completion cool
 " Plug 'vim-vdebug/vdebug'                              " vim debugger that interfaces with xdebug
 " Plug 'MarcWeber/vim-addon-mw-utils'                   " snippet tool 
 " Plug 'tomtom/tlib_vim'                                " snippet tool
@@ -524,7 +515,7 @@ if exists("did_load_filetypes")
 
       autocmd FileType conf,sh nnoremap <Leader>hel :-1read ~/dot-files/vim-nanotemplate/tpl.bash.sh<CR>
       autocmd FileType conf,sh nnoremap <Leader>if :-1read ~/dot-files/vim-nanotemplate/tpl.bash.if.sh<CR>
-      autocmd FileType conf,sh nnoremap <Leader>fun :-1read ~/dot-files/vim-nanotemplate/tpl.bash.fn.sh<CR>
+      autocmd FileType conf,sh nnoremap <Leader>fnc :-1read ~/dot-files/vim-nanotemplate/tpl.bash.fn.sh<CR>
 
     endif
 
