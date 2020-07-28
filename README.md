@@ -56,3 +56,4 @@ curl -fLo "<FONT NAME> Nerd Font Complete.otf" https://github.com/ryanoasis/nerd
 
 - https://github.com/tonsky/FiraCode
 - https://www.nerdfonts.com/font-downloads
+- https://gist.github.com/spicycode/1229612

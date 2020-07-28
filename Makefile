@@ -9,7 +9,7 @@
 MENU := launch check mac-ensure debian-ensure tex-ensure
 
 # menu helpers targets
-MENU := common-ensure help
+MENU := common-ensure pkgmgr-ensure help
 
 # load phony
 # info - phony is used to make sure there is no similar file(s) such as <target> that cause the make recipe not to work
@@ -88,14 +88,14 @@ check:													## check system / environment
 	@$(call fn_print_header_command,color test,tput colors)
 	@$(call fn_print_header,summary)
 
-mac-ensure:	common-ensure										## ensure mac gui tools and common-ensure present
+mac-ensure:	common-ensure pkgmgr-ensure										## ensure mac gui tools and common-ensure present
 	# ref - https://shift.infinite.red/npm-vs-yarn-cheat-sheet-8755b092e5cc
 
-debian-ensure: common-ensure								## ensure debian gui tools and common-ensure present
+debian-ensure: common-ensure pkgmgr-ensure								## ensure debian gui tools and common-ensure present
 
 ##@ Helpers
 
-common-ensure:											## ensure common package managers and non gui tools present
+common-ensure:											## ensure config and tools present
 	@$(call fn_print_header,note)
 	@echo "- python pip, ruby gems, node yarn are required dependancies";
 	@# environment : config									========================================
@@ -106,6 +106,8 @@ common-ensure:											## ensure common package managers and non gui tools pre
 	@# tools : vim													========================================
 	@$(call fn_print_header,ensure vim folders exist)
 	-mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
+
+pkgmgr-ensure:											## ensure package managers and non gui tools present
 	@# tools : node yarn										========================================
 	@$(call fn_print_header,ensure node yarn bins are pristine)
 	-command -v n || curl -L https://git.io/n-install | bash
