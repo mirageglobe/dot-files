@@ -6,7 +6,7 @@
 # === targets
 
 # menu shortcuts targets
-MENU := launch check mac-ensure debian-ensure tex-ensure
+MENU := launch check mac-ensure debian-ensure tex-ensure scan-he
 
 # menu helpers targets
 MENU := common-ensure pkgmgr-ensure help
@@ -92,6 +92,9 @@ mac-ensure:	common-ensure pkgmgr-ensure										## ensure mac gui tools and com
 	# ref - https://shift.infinite.red/npm-vs-yarn-cheat-sheet-8755b092e5cc
 
 debian-ensure: common-ensure pkgmgr-ensure								## ensure debian gui tools and common-ensure present
+
+scan-he:																									## run hawkeye scanner
+	docker run --rm -v $$PWD:/target hawkeyesec/scanner-cli
 
 ##@ Helpers
 

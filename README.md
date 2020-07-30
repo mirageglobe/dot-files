@@ -32,7 +32,6 @@ curl -fLo "<FONT NAME> Nerd Font Complete.otf" https://github.com/ryanoasis/nerd
 
 - setup coc in vim - https://github.com/neoclide/coc.nvim
 - fix ale - https://github.com/dense-analysis/ale#usage-completion
-- add scanner for vulnerability
 - create home downloads for files
 - fira source (https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/FiraCode.zip)
 - noto source (https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/Noto.zip)
@@ -40,7 +39,6 @@ curl -fLo "<FONT NAME> Nerd Font Complete.otf" https://github.com/ryanoasis/nerd
 - hasklug  (https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/Hasklig.zip)
 - aws vault (https://github.com/99designs/aws-vault/releases)
 - include tool repo update
-- add python lint security : bandit
 - add ruby lint : use ruby -wc
 - add rails lint : use traceroute
 - add php lint : php -l
@@ -50,6 +48,8 @@ curl -fLo "<FONT NAME> Nerd Font Complete.otf" https://github.com/ryanoasis/nerd
 - add php debugger : xdebug
 - look at https://github.com/mozilla/cipherscan/blob/master/cipherscan
 - refer to sdkman - for groovy ( curl -s get.sdkman.io | bash )
+- [done] add hawkeye scanner for vulnerability
+- [done] add python lint security : bandit - use hawkeye scanner
 - [done] use homebrew - bat cat source (https://github.com/sharkdp/bat/releases/latest)
 - [done] use homebrew - rg grep source (https://github.com/BurntSushi/ripgrep/releases/latest)
 - [done] include path builder for tooling
