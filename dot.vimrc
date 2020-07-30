@@ -158,7 +158,8 @@ Plug 'tpope/vim-fugitive'                             " git in vim
 
 " ==> language / syntax
 
-Plug 'lifepillar/vim-mucomplete'                      " enables code completion without tab; similar to supertab
+" Plug 'lifepillar/vim-mucomplete'                      " enables code completion popup
+Plug 'neoclide/coc.nvim', {'branch': 'release'}       " enables code completion
 Plug 'sheerun/vim-polyglot'                           " syntax superfast on demand loader for over 100 languages
 " Plug 'ervandew/supertab'                              " enables tab actions i.e. autocomplete by using <tab> insert mode
 " Plug 'maralla/completor.vim'                          " yet another async code completion cool
@@ -350,10 +351,10 @@ let g:lightline.component_type = {
 
 " === mucomplete start
 
-set completeopt+=menuone                              " mandatory setting for vim
-set completeopt+=noselect
-set shortmess+=c                                      " shut off completion messages
-let g:mucomplete#enable_auto_at_startup = 1           " auto startup mucomplete
+" set completeopt+=menuone                              " mandatory setting for vim
+" set completeopt+=noselect
+" set shortmess+=c                                      " shut off completion messages
+" let g:mucomplete#enable_auto_at_startup = 1           " auto startup mucomplete
 " let g:mucomplete#completion_delay = 1                 " makes mucomplete less interuptive by only activating on pause
 " imap <expr> <down> mucomplete#extend_fwd("\<down>")   " expanding via context see mucomplete-extend-compl
 
