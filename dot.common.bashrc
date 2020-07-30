@@ -133,21 +133,21 @@ alias _fox="echo '
   _fox_path                     # shows current path
   _fox_random                   # gives a random number
 
-  _fox_aws                      # aws helpers
-  _fox_docker                   # docker helpers
-  _fox_file                     # file helpers (size/rename)
-  _fox_git                      # git helpers
-  _fox_graph                    # graph helpers
-  _fox_sys                      # sysops helpers
-
-  _fox_ssh_load                 # load default key to ssh agent
-  _fox_ssh_keygen               # generates key pair ~/.ssh/id_rsa_standard (2048 bits)
-  _fox_ssh_tunnel               # shows how to tunnel
+  _fox_aws                      # aws helper
+  _fox_docker                   # docker helper
+  _fox_file                     # file helper (size/rename)
+  _fox_git                      # git helper
+  _fox_graph                    # graph helper
+  _fox_ssh                      # ssh ssl helper / hints
+  _fox_sys                      # sysops helper
 
   _fox_now                      # show date-time : echo \$(date +\"%Y%m%d-%H%M%S\");
   _fox_now_date                 # show date : echo \$(date +\"%Y%m%d\");
   _fox_now_time                 # show time : echo \$(date +\"%H%M%S\");
 
+  _fox_bash                     # bash shell hints
+  _fox_k8s                      # k8s hints
+  _fox_tmux                     # tmux hints
   _fox_vim                      # vim hints
   
 '"
@@ -174,10 +174,6 @@ fn_fox_sys_get_current_folder() {
   # printf '%s\n' "${PWD##*/}";
   echo "$(basename $PWD)";
 }
-
-alias _fox_ssh_load="printf ':: loading default-key to agent :: \n';ssh-add;"
-alias _fox_ssh_keygen="printf ':: generating standard sshkey :: \n';ssh-keygen -b 2048 -t rsa -f ~/.ssh/id_rsa_standard -C \"( $HOSTNAME : changeme@gmail.com ) \""
-alias _fox_ssh_tunnel="printf ':: ssh tunnelling :: \n:: usage\t\t ssh -L 8080:www.google.com:80 172.10.10.10\n:: example\t\t ssh -L <local.port>:<target>:<target.port> <proxy>\n'; "
 
 alias _ls="ls -Gd .*"
 alias _ll="ls -lhAG"
@@ -640,6 +636,21 @@ alias _fox_k8s="echo '
   https://kubernetes.io/docs/reference/kubectl/cheatsheet/
 
 '"
+
+# ## ==> ssh
+
+alias _fox_ssh="echo '
+:: help ::
+
+  _fox_ssh_load                 # load default key pair ~/.ssh/id_rsa to ssh agent
+  _fox_ssh_keygen               # generates key pair ~/.ssh/id_rsa_standard (2048 bits)
+
+  # ssh tunnel using ssh -L <local.port>:<target>:<target.port> <proxy>
+  ssh -L 8080:www.google.com:80 172.10.10.10
+'"
+
+alias _fox_ssh_load="ssh-add;"
+alias _fox_ssh_keygen="ssh-keygen -b 2048 -t rsa -f ~/.ssh/id_rsa_standard -C \"( $HOSTNAME : changeme@gmail.com ) \""
 
 # ## ==> tmux
 
