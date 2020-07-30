@@ -1,10 +1,10 @@
 # dot-files
 
-public dot-files to make life easier. 
+jimmys public dot-files to make life easier.
 
 # to use
 
-ensure that you have curl or wget. you can check by using the following command in terminal.
+ensure that you have git, and curl or wget; you can check by using the following command in terminal.
 
 ```
 # check dependancies
@@ -30,6 +30,8 @@ curl -fLo "<FONT NAME> Nerd Font Complete.otf" https://github.com/ryanoasis/nerd
 
 # to do
 
+- setup coc in vim - https://github.com/neoclide/coc.nvim
+- fix ale - https://github.com/dense-analysis/ale#usage-completion
 - add scanner for vulnerability
 - create home downloads for files
 - fira source (https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/FiraCode.zip)
