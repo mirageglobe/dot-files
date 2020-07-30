@@ -30,6 +30,7 @@ curl -fLo "<FONT NAME> Nerd Font Complete.otf" https://github.com/ryanoasis/nerd
 
 # to do
 
+- fox add hawkeye scanner for vulnerability
 - setup coc in vim - https://github.com/neoclide/coc.nvim
 - fix ale - https://github.com/dense-analysis/ale#usage-completion
 - create home downloads for files
@@ -48,7 +49,6 @@ curl -fLo "<FONT NAME> Nerd Font Complete.otf" https://github.com/ryanoasis/nerd
 - add php debugger : xdebug
 - look at https://github.com/mozilla/cipherscan/blob/master/cipherscan
 - refer to sdkman - for groovy ( curl -s get.sdkman.io | bash )
-- [done] add hawkeye scanner for vulnerability
 - [done] add python lint security : bandit - use hawkeye scanner
 - [done] use homebrew - bat cat source (https://github.com/sharkdp/bat/releases/latest)
 - [done] use homebrew - rg grep source (https://github.com/BurntSushi/ripgrep/releases/latest)
