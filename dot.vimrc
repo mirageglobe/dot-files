@@ -418,11 +418,6 @@ let g:terraform_fmt_on_save=1
 
 " === aliases end
 
-" === shortcuts start
-
-
-" === shortcuts end
-
 " === snippets start
 
 " n = normal mode
@@ -458,10 +453,10 @@ nnoremap <Leader>p :r !pbpaste<CR><ESC>
 nmap <Leader>z za<ESC>
 
 " split navigations
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+" nnoremap <C-J> <C-W><C-J>
+" nnoremap <C-K> <C-W><C-K>
+" nnoremap <C-L> <C-W><C-L>
+" nnoremap <C-H> <C-W><C-H>
 
 " reload
 nnoremap <Leader>rs :source ~/dot-files/dot.vimrc<ESC>
@@ -491,7 +486,7 @@ if exists("did_load_filetypes")
 
     " remove all autocommands for the current group
     autocmd!
-    
+
     " markdown files
     if index(['markdown'], &filetype) == -1
 
@@ -516,7 +511,7 @@ if exists("did_load_filetypes")
 
       autocmd FileType conf,sh nnoremap <Leader>hel :-1read ~/dot-files/vim-nanotemplate/tpl.bash.sh<CR>
       autocmd FileType conf,sh nnoremap <Leader>if :-1read ~/dot-files/vim-nanotemplate/tpl.bash.if.sh<CR>
-      autocmd FileType conf,sh nnoremap <Leader>fnc :-1read ~/dot-files/vim-nanotemplate/tpl.bash.fn.sh<CR>
+      autocmd FileType conf,sh nnoremap <Leader>fnc :-1read ~/dot-files/vim-nanotemplate/tpl.bash.fun.sh<CR>
 
     endif
 
@@ -569,14 +564,36 @@ endif " if exists("did_load_filetypes")
 
 " === snippets end
 
-" === fzf start
+" === commands start
 
-" to preview files. usage :Files!
+command ReloadShell :source ~/dot-files/dot.vimrc
+command Rs :source ~/dot-files/dot.vimrc
+
+" nanotemplate
+if exists("did_load_filetypes")
+  augroup idrtemplate
+
+    " bash sh files
+    if index(['conf','sh'], &filetype) == -1
+
+      command IdrHelp :-1read ~/dot-files/idrtemplates/tpl.bash.sh
+      command IdrIf :-1read ~/dot-files/idrtemplates/tpl.bash.if.sh
+      command IdrFunction :-1read ~/dot-files/idrtemplates/tpl.bash.fun.sh
+
+    endif
+
+    " ansible
+    " terraform
+
+  augroup END
+endif
+
+" fzf - to preview files. usage :Files!
 command! -bang -nargs=* -complete=dir Files
       \ call fzf#vim#files(<q-args>,
       \   <bang>0 ? fzf#vim#with_preview('up:60%')
       \           : fzf#vim#with_preview('right:50%:hidden', '?'),
       \   <bang>0)
 
-" === fzf end
+" === commands end
 
