@@ -211,13 +211,15 @@ alias _fox_aws="echo '
   _fox_aws_check                                      # use sts to check connectivity
   _fox_aws_config                                     # show aws account configure
   _fox_aws_config_init                                # set up aws account using configuration
+
   _fox_aws_access_key_id <profile>                    # get aws key id
   _fox_aws_secret_access_key <profile>                # get aws secret access key
-  _fox_aws_profile_ls                                 # list all profiles
   _fox_aws_profile_load <profile>                     # load profile
 
-  _fox_aws_vault add <profile>                        # add new profile. check ~/.aws/config to verify profile arn
-  _fox_aws_vault list                                 # list all profiles in aws vault
+  _fox_aws_profile_ls                                 # list all profiles
+
+  aws_vault add <profile>                             # add new profile. check ~/.aws/config to verify profile arn
+  aws_vault list                                      # list all profiles in aws vault
 '"
 
 alias _fox_aws_check="aws sts get-caller-identity"
@@ -617,6 +619,8 @@ alias _fox_k8s="echo '
   kubectl config get-contexts                                 # show available configuration
   kubectl config current-context                              # show current configuration
   kubectl cluster-info                                        # show cluster info
+
+  kubectl api-resources --namespaced=true                     # show all resources (kind/shortnames/etc)
 
   kubectl get namespaces                                      # show all namespaces (or get ns)
 
