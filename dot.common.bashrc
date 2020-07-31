@@ -88,19 +88,25 @@ git config --global alias.rbm "rebase master"
 printf "%s" "[+] completion "
 
 # ==> checks if bash version is 5
+BASH_VERSION_5=false
+
 if echo ${BASH_VERSION} | grep -q "^5\."; then
+  BASH_VERSION_5=true
+fi
+
+if ${BASH_VERSION_5} = true; then
   printf "%s" "bash(v5+) "
 else
   printf "%s" "bash(v?) "
 fi
 
-if echo ${BASH_VERSION} | grep -q "^5\."; then
+if ${BASH_VERSION_5} = true; then
   export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
   [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
 fi
 
 # ==> added for kubectl completion
-if command -V kubectlssss 2> /dev/null; then
+if command -V kubectl 1> /dev/null; then
   source <(kubectl completion bash)
 fi
 
@@ -136,8 +142,8 @@ alias _fox="echo '
   _fox_aws                      # aws helper
   _fox_docker                   # docker helper
   _fox_file                     # file helper (size/rename)
-  _fox_git                      # git helper
-  _fox_graph                    # graph helper
+  _fox_git                      # git helper / hints
+  _fox_graph                    # graph helper / hints
   _fox_ssh                      # ssh ssl helper / hints
   _fox_sys                      # sysops helper
 
@@ -149,7 +155,7 @@ alias _fox="echo '
   _fox_k8s                      # k8s hints
   _fox_tmux                     # tmux hints
   _fox_vim                      # vim hints
-  
+
 '"
 
 fn_fox_system() {
@@ -222,22 +228,6 @@ alias _fox_aws_secret_access_key="aws configure get aws_secret_access_key --prof
 alias _fox_aws_profile_ls="fn_fox_aws_profile_show;"
 alias _fox_aws_profile_load="fn_fox_aws_profile_load;"
 
-fn_fox_aws_profile_load_now_datetime() {
-  echo "$(date +\"%Y%m%d-%H%M%S\")";
-}
-
-fn_fox_aws_profile_load() {
-  printf ":: loading aws profile(s) : $1 ::\n";
-  cat ~/.aws/credentials | grep $1; # check if user exists in credentials
-  export AWS_DEFAULT_PROFILE=$1;
-  export AWS_PROFILE=$1;
-  export AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id --profile $1);
-  export AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key --profile $1);
-  export AWS_DEFAULT_REGION=$(aws configure get region --profile $1);
-  printf ":: checking loaded variables for $1 ::\n";
-  aws configure list;
-}
-
 fn_fox_aws_profile_show() {
   printf ":: showing aws profile available ::\n\n";
   cat ~/.aws/credentials | grep '\[';
@@ -245,6 +235,17 @@ fn_fox_aws_profile_show() {
   printf ":: showing aws profile loaded ::\n\n";
   aws configure list;
   printf "\n"
+}
+
+fn_fox_aws_profile_load() {
+  printf ":: loading aws profile(s) : $1 ::\n";
+  cat ~/.aws/credentials | grep $1;           # check if user exists in credentials
+  export AWS_DEFAULT_PROFILE=$1;
+  export AWS_PROFILE=$1;
+  export AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id --profile $1);
+  export AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key --profile $1);
+  export AWS_DEFAULT_REGION=$(aws configure get region --profile $1);
+  aws configure list;
 }
 
 # ## ==> bash
@@ -304,12 +305,15 @@ alias _fox_docker="echo '
 
   _fox_docker_ps                    # list all process
   _fox_docker_ps_less               # list all process (fit width)
-  _fox_docker_ps_purge              # purge all processes
-  _fox_docker_images                # list images
-  _fox_docker_images_purge          # purge all images
-  _fox_docker_volumes               # list all volumes
+  _fox_docker_ps_prune              # purge all processes
+  _fox_docker_img                   # list images
+  _fox_docker_img_prune             # purge all images
+  _fox_docker_vol                   # list all volumes
+  _fox_docker_vol_prune             # purge all volumes
 
-  _fox_docker_all_purge             # system prune (purge all containers and images)
+  _fox_docker_show                  # show all
+  _fox_docker_prune                 # prune all (purge all containers and images)
+  
   _fox_docker_sh <container id>     # shell sh into container
   _fox_docker_bash <container id>   # shell bash into container
   _fox_docker_logs <container id>   # show docker logs
@@ -317,35 +321,41 @@ alias _fox_docker="echo '
   _fox_docker_stop <container id>   # stop container
 '"
 
-alias _fox_docker_ps="docker ps -a"
-alias _fox_docker_ps_less="docker ps | less -S"
-alias _fox_docker_ps_purge="fn_fox_docker_runningpurge;"
-alias _fox_docker_images="docker images"
-alias _fox_docker_images_purge="fn_fox_docker_imagepurge;"
-alias _fox_docker_volumes="docker volume ls"
+alias _fox_docker_ps="docker ps -a;"
+alias _fox_docker_ps_less="docker ps | less -S;"
+alias _fox_docker_ps_prune="fn_fox_docker_pspurge;"
 
-alias _fox_docker_purge="docker system prune"
-alias _fox_docker_sh="fn_fox_docker_sh"
-alias _fox_docker_bash="fn_fox_docker_bash"
+alias _fox_docker_img="docker image list"
+alias _fox_docker_img_prune="fn_fox_docker_imgpurge;"
+
+alias _fox_docker_vol="docker volume ls"
+alias _fox_docker_vol_prune="docker volume prune"
+
+alias _fox_docker_show="echo '=== PS ===';docker ps -a;echo '=== IMAGES ===';docker image list;echo '=== VOLUMES ==='; docker volume ls;"
+alias _fox_docker_prune="docker system prune"
+
 alias _fox_docker_logs="docker logs"
+alias _fox_docker_exec_sh="fn_fox_docker_sh"
+alias _fox_docker_exec_bash="fn_fox_docker_bash"
 
-alias _fox_docker_stop="echo ':: stopping running container ::'; fn_fox_docker_rmrunning"
+alias _fox_docker_stop="fn_fox_docker_stop"
 
-fn_fox_docker_imagepurge(){
-  # printf ":: removing dangling images :: \n";
+fn_fox_docker_pspurge() {
+  printf ":: stopping and removing docker containers :: \n";
+  docker stop $(docker ps -a -q);
+  docker rm $(docker ps -a -q);
+}
+
+fn_fox_docker_imgpurge(){
+  printf ":: purging unused images :: \n";
   # docker rmi $(docker images --filter "dangling=true" -q --no-trunc);
   docker rmi $(docker images -a -q);
 }
 
-fn_fox_docker_runningpurge() {
-  printf ":: stopping and removing running docker containers :: \n";
-  docker stop $(docker ps -aq);
-  docker rm $(docker ps -aq);
-}
-
-fn_fox_docker_rmrunning() {
-  printf ":: stopping container ::\n";
-  docker stop $1; docker rm $1;
+fn_fox_docker_volpurge(){
+  printf ":: purging all volumes :: \n";
+  # docker rmi $(docker images --filter "dangling=true" -q --no-trunc);
+  docker volume prune;
 }
 
 fn_fox_docker_sh() {
@@ -358,13 +368,18 @@ fn_fox_docker_bash() {
   docker exec -it $1 bash;
 }
 
+fn_fox_docker_stop() {
+  printf ":: stop and remove container ::\n";
+  docker stop $1; docker rm $1;
+}
+
 # ## ==> file
 
 alias _fox_file="echo '
 :: help ::
-  
+
   _fox_file_get                       # get file with curl
-  
+
   _fox_file_namefix                   # rename file with default lower
   _fox_file_namelower                 # make file name lowercase
 
@@ -388,6 +403,20 @@ alias _fox_file_size_1m="find . -type f -size +1M -exec ls -lh {} \;"
 alias _fox_file_size_10m="find . -type f -size +10M -exec ls -lh {} \;"
 alias _fox_file_size_100m="find . -type f -size +100M -exec ls -lh {} \;"
 
+fn_fox_file_get() {
+  if [ -z "$1" ]; then
+    cat << EOM
+usage
+
+  _fox_file_get <local location> <remote file>
+  _fox_file_get "~/Desktop" "https://github.com/aws-vault/download/v4.7.1/amd64.dmg"
+
+EOM
+  else
+    pushd $1 && curl -O $2 && popd;
+  fi
+}
+
 fn_fox_file_namefix() {
   local parsevar=$1
   # substitute brackets
@@ -409,20 +438,6 @@ fn_fox_file_namelowercase() {
   echo "$parsevar" | awk '{ print tolower($0) }'
 }
 
-fn_fox_file_get() {
-  if [ -z "$1" ]; then
-    cat << EOM
-usage
-
-  _fox_file_get <local location> <remote file>
-  _fox_file_get "~/Desktop" "https://github.com/aws-vault/download/v4.7.1/amd64.dmg"
-
-EOM
-  else
-    pushd $1 && curl -O $2 && popd;
-  fi
-}
-
 # ## ==> git
 
 alias _fox_git="echo '
@@ -434,10 +449,6 @@ alias _fox_git="echo '
 
   _git_ls                       # fetch and list all branches
   _git_ll                       # show log in pretty format
-  _git_develop <branch>         # checkout develop and branch (feature/TICKET-123-myfeature)
-  _git_staging <branch>         # checkout staging and branch
-  _git_master <branch>          # checkout master and branch (hotfix/TICKET-123-myhotfix)
-  _git_pull_all                 # try to checkout master/staging/develop and pull for all
 
 :: notes ::
 
@@ -470,11 +481,6 @@ alias _git_diff="echo ':: git changes - git diff head^ ::'; git diff head^;"
 
 alias _git_ls="git fetch --all; git branch --all;"
 alias _git_ll="git log --pretty='format:%C(yellow)%h%Creset - %Cgreen%>(12)%ad%Creset %C(bold blue)<%an>%Creset %s' --date=relative;"
-
-alias _git_pull_all="git checkout master && git pull; git checkout staging && git pull; git checkout develop && git pull;"
-alias _git_develop="git checkout develop;"
-alias _git_staging="git checkout staging;"
-alias _git_master="git checkout master;"
 
 # ## ==> graph
 
@@ -590,6 +596,10 @@ alias _fox_ansible="echo '
 
   ansible -m setup <hostname>                                 # show all ansible variables for host
   ansible -m setup localhost                                  # show all ansible variables for localhost
+
+  {{ lookup('env','HOME') }}                                  # read environment variable
+  {{ lookup('file', '/etc/foo.txt') }}                        # read file contents
+
 '"
 
 # ## ==> kubernetes
@@ -647,6 +657,8 @@ alias _fox_ssh="echo '
 
   # ssh tunnel using ssh -L <local.port>:<target>:<target.port> <proxy>
   ssh -L 8080:www.google.com:80 172.10.10.10
+
+  # consider using stunnel tool - https://www.stunnel.org/auth.html
 '"
 
 alias _fox_ssh_load="ssh-add;"
