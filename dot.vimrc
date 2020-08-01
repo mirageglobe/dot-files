@@ -2,40 +2,31 @@
 " === custom vim config
 " ===
 
-" === fonts configuration
+" === fonts configuration (iterm)
 "
-" Font -> FuraCode Nerd Font [Regular] [12]
-" Use built-in Powerline glyphs -> true
-" Enable subpixel anti-aliasing -> true
-" Use ligatures -> true
-" Anti-aliased -> true
+" font -> FuraCode Nerd Font [Regular] [12]
+" use built-in Powerline glyphs -> true
+" enable subpixel anti-aliasing -> true
+" use ligatures -> true
+" anti-aliased -> true
 
 " === vim start
 
 " ==> system optimisations for vim
 
 set lazyredraw                                        " do not redraw when executing macros; buffer instead of constant redraws
-set noshowmode                                        " speed up by turning of showing mode on last line
+set noshowmode                                        " speed up by turning off showing mode on last line
 " set showmode                                         " show current mode down the bottom
 set regexpengine=1                                    " speed up by using old regex engine
-set scrolloff=5                                       " setting window to scroll when x lines at end of screen
-set timeoutlen=1000                                   " speed up scrolling
-set ttimeoutlen=0                                     " speed up scrolling
-set ttyfast                                           " speed up loading and scrolling of vim (boolean)
-set ttyscroll=10                                      " set scrolling speed (1-999; 1 fastest)
-" set nowrap                                            " speed up by setting nowraping
-set wrap linebreak nolist                             " set soft wrap for text
 
 " ==> general
 
 set nocompatible                                      " required by vim for extra features
 set showcmd                                           " noshowcmd / showcmd speed up turning off display of cmds. need to be after nocompatible
-
-set number                                            " show line numbers
-set history=1000                                      " store lots of :cmdline history
+set history=1000                                      " number of commands history to store
 set visualbell                                        " no sounds
 set hidden                                            " set hidden
-syntax enable                                         " set syntax highlighting in vim
+
 set backupcopy=yes                                    " yes/no/auto when opening a file, vim makes a copy and overwrites
 set undodir=~/.vim/.undo//                            " set vim to use tmp directory for undo files
 set backupdir=~/.vim/.backup//                        " set vim to use tmp directory for backup files
@@ -44,31 +35,13 @@ set directory=~/.vim/.swp//                           " set vim to use tmp direc
 set encoding=UTF-8                                    " The encoding displayed.
 set fileencoding=UTF-8                                " The encoding written to file
 
-" ==> indentation
-
-set smartindent
-set shiftwidth=2
-set softtabstop=2
-set tabstop=2
-set expandtab
-
-" ==> navigation and files
-
-" set path+=**                                          " provides tab completion for all file related tasks
-set wildmenu                                          " display all matching files for tab completion, use :b to find files, :ls for list buffer
-
 " ==> visuals
 
-set cursorline                                        " highlight current line
-
-" if running via macvim
+" if gui (macvim) or not gui (iterm/alacritty)
 if has('gui_running')
-  :set guifont=FiraCode\ Nerd\ Font\ Complete:h13
-  " :set guifont=Inconsolata\ Nerd\ Font\ Complete:h13
-endif
-
-" if not using any gui. for example iterm2
-if !has('gui_running')
+  set guifont=FiraCode\ Nerd\ Font\ Complete:h13
+  " set guifont=Inconsolata\ Nerd\ Font\ Complete:h13
+else
   set t_Co=256
 endif
 
@@ -76,18 +49,13 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
-set splitright                                        " auto split right for screens
-
 " ==> misc settings
 
-" activate mouse for terminal
-set mouse=a
-
-" https://vim.fandom.com/wiki/Accessing_the_system_clipboard
-" system wide clipboard for macosx : yank to clipboard
-" clipboard * and + is the same for macosx and windows
-" https://stackoverflow.com/questions/677986/vim-copy-selection-to-os-x-clipboard
-" note that this will not work if its -clipboard (not complied with vim)
+" clipboard
+" - will not work if its -clipboard (not complied with vim)
+" - * and + is the same for macosx and windows
+" - https://vim.fandom.com/wiki/Accessing_the_system_clipboard
+" - https://stackoverflow.com/questions/677986/vim-copy-selection-to-os-x-clipboard
 
 if has("clipboard")
   set clipboard=unnamed         " copy to the system clipboard
@@ -96,23 +64,64 @@ if has("clipboard")
   endif
 endif
 
-" highlight trailing space and tabs
+" === code
+
+" === === completion
+
+set wildmenu                                          " display all matching files for code completion, use :b to find files, :ls for list buffer
+filetype plugin indent on                             " enables filetype detection - http://vimdoc.sourceforge.net/htmldoc/filetype.html
+set omnifunc=syntaxcomplete#Complete                  " turn on omnicomplete
+" set path+=**                                          " provides tab completion for all file related tasks
+
+" === === highlight
+
+syntax enable                                         " set syntax highlighting in vim
 set list listchars=tab:»·,trail:·                     " display tabs and trailing spaces visually
 
-" turn on vims omnicomplete
-filetype plugin indent on                             " enables filetype detection - http://vimdoc.sourceforge.net/htmldoc/filetype.html
-set omnifunc=syntaxcomplete#Complete
-
-" turn on vims spell checker
-set spell spelllang=en_gb
-
+" === === numbering
+set number                                            " show line numbers
 set relativenumber                                    " enables relative number rather than running number
 
-" set code folding
+" === === folding
+" <leader>z for fold
+
+set nofoldenable
 set foldmethod=indent
 set foldnestmax=10
-set nofoldenable
 set foldlevel=2
+
+" === === indentation
+
+set smartindent
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
+set expandtab
+
+" === === wrapping
+
+set wrap linebreak nolist                             " set soft wrap for text
+" set nowrap                                            " turn off code wrap
+
+" mouse cursor and scrolling
+
+set mouse=a                                           " turn on terminal mouse
+set cursorline                                        " highlight current line
+set scrolloff=5                                       " setting window to scroll when x lines at end of screen
+set timeoutlen=1000                                   " speed up scrolling
+set ttimeoutlen=0                                     " speed up scrolling
+set ttyfast                                           " speed up loading and scrolling of vim (boolean)
+set ttyscroll=10                                      " set scrolling speed (1-999; 1 fastest)
+
+" spell check
+" z= activate / zg add word to dict / zw mark incorrect to dict / [s next / ]s prev /
+
+set spell spelllang=en_gb                             " turn on vims spell checker
+" set nospell                                           " explicitly turn off spell check
+
+" misc
+
+" set splitright                                        " auto split right for screens
 
 " === vim end
 
@@ -197,38 +206,6 @@ call plug#end()
 
 " === plug end
 
-" === vim vinegar start
-
-" activate default treeview for terminal
-" let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'      " hide dot files - press gh
-" to toggle hiding
-
-let g:netrw_liststyle = 3                             " use tree view
-" let g:netrw_banner = 0                               " remove top banner
-" let g:netrw_browse_split = 4                         " open a new horizonal split for file
-" let g:netrw_winsize = 25                             " set width of tree to 25%
-let g:netrw_altv = 1
-
-"augroup ProjectDrawer
-"  autocmd!
-"  autocmd VimEnter * :Vexplore
-"augroup END
-"
-" notes:
-" gh  - toggle hidden files
-" -   - toggle project drawer
-" .   - using on a file to populate in command view
-" y.  - to yank absolute path for file cursor
-" ~   - to go home
-
-" === vim vinegar end
-
-" === fugitive start
-
-set statusline+=%{fugitive#statusline()}
-
-" === fugitive end
-
 " === colorscheme start
 " to select, :colorscheme then space followed by tab
 
@@ -255,24 +232,6 @@ colorscheme palenight
 " colorscheme zenburn
 
 " === colorscheme end
-
-" === syntastic start
-
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
-
-" let g:syntastic_javascript_checkers = ['standard']
-
-" allow the use of 'local'
-" let g:syntastic_sh_shellcheck_args="-e SC2039"
-
-" === syntastic end
 
 " === lightline start
 
@@ -316,7 +275,7 @@ let g:lightline.active = {
       \   ]
       \ }
 
-" ==> lightlineale
+" === === lightline ale
 
 let g:lightline.component_expand = {
       \   'linter_checking': 'lightline#ale#checking',
@@ -338,27 +297,9 @@ let g:lightline.component_type = {
 " let g:lightline#ale#indicator_errors = "\uf05e"
 " let g:lightline#ale#indicator_ok = "\uf00c"
 
-" ==> lightlineale end
+" === === lightline ale end
 
 " === lightline end
-
-" === supertab start
-
-" let g:SuperTabDefaultCompletionType = "context"
-" let g:SuperTabContextDefaultCompletionType = "<c-n>"
-
-" === supertab end
-
-" === mucomplete start
-
-" set completeopt+=menuone                              " mandatory setting for vim
-" set completeopt+=noselect
-" set shortmess+=c                                      " shut off completion messages
-" let g:mucomplete#enable_auto_at_startup = 1           " auto startup mucomplete
-" let g:mucomplete#completion_delay = 1                 " makes mucomplete less interuptive by only activating on pause
-" imap <expr> <down> mucomplete#extend_fwd("\<down>")   " expanding via context see mucomplete-extend-compl
-
-" === mucomplete end
 
 " === ale start
 
@@ -388,11 +329,22 @@ let g:ale_list_window_size = 5
 
 " === ale end
 
-" === the silver searcher start
+" === fugitive start
 
-let g:ackprg = 'ag --nogroup --nocolor --column'
+set statusline+=%{fugitive#statusline()}
 
-" === the silver searcher end
+" === fugitive end
+
+" === mucomplete start
+
+" set completeopt+=menuone                              " mandatory setting for vim
+" set completeopt+=noselect
+" set shortmess+=c                                      " shut off completion messages
+" let g:mucomplete#enable_auto_at_startup = 1           " auto startup mucomplete
+" let g:mucomplete#completion_delay = 1                 " makes mucomplete less interuptive by only activating on pause
+" imap <expr> <down> mucomplete#extend_fwd("\<down>")   " expanding via context see mucomplete-extend-compl
+
+" === mucomplete end
 
 " === vim polyglot start
 
@@ -400,6 +352,63 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:terraform_fmt_on_save=1
 
 " === vim polyglot end
+
+" === the silver searcher start
+
+" let g:ackprg = 'ag --nogroup --nocolor --column'
+
+" === the silver searcher end
+
+" === supertab start
+
+" let g:SuperTabDefaultCompletionType = "context"
+" let g:SuperTabContextDefaultCompletionType = "<c-n>"
+
+" === supertab end
+
+" === syntastic start
+
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+
+" let g:syntastic_javascript_checkers = ['standard']
+
+" allow the use of 'local'
+" let g:syntastic_sh_shellcheck_args="-e SC2039"
+
+" === syntastic end
+
+" === vim vinegar start
+
+" activate default treeview for terminal
+" let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'      " hide dot files - press gh
+" to toggle hiding
+
+let g:netrw_liststyle = 3                             " use tree view
+" let g:netrw_banner = 0                               " remove top banner
+" let g:netrw_browse_split = 4                         " open a new horizonal split for file
+" let g:netrw_winsize = 25                             " set width of tree to 25%
+let g:netrw_altv = 1
+
+"augroup ProjectDrawer
+"  autocmd!
+"  autocmd VimEnter * :Vexplore
+"augroup END
+"
+" notes:
+" gh  - toggle hidden files
+" -   - toggle project drawer
+" .   - using on a file to populate in command view
+" y.  - to yank absolute path for file cursor
+" ~   - to go home
+
+" === vim vinegar end
 
 " === aliases and leaderboard shortcuts
 "
@@ -509,18 +518,18 @@ if exists("did_load_filetypes")
     " bash sh files
     if index(['conf','sh'], &filetype) == -1
 
-      autocmd FileType conf,sh nnoremap <Leader>hel :-1read ~/dot-files/vim-nanotemplate/tpl.bash.sh<CR>
-      autocmd FileType conf,sh nnoremap <Leader>if :-1read ~/dot-files/vim-nanotemplate/tpl.bash.if.sh<CR>
-      autocmd FileType conf,sh nnoremap <Leader>fnc :-1read ~/dot-files/vim-nanotemplate/tpl.bash.fun.sh<CR>
+      " autocmd FileType conf,sh nnoremap <Leader>hel :-1read ~/dot-files/vim-nanotemplate/tpl.bash.sh<CR>
+      " autocmd FileType conf,sh nnoremap <Leader>if :-1read ~/dot-files/vim-nanotemplate/tpl.bash.if.sh<CR>
+      " autocmd FileType conf,sh nnoremap <Leader>fnc :-1read ~/dot-files/vim-nanotemplate/tpl.bash.fun.sh<CR>
 
     endif
 
     " vimrc files
     if index(['vim'], &filetype) == -1
 
-      autocmd FileType vim nnoremap <Leader>var :-1read ~/dot-files/vim-nanotemplate/tpl.vim.var.vimrc<CR>
-      autocmd FileType vim nnoremap <Leader>if :-1read ~/dot-files/vim-nanotemplate/tpl.vim.if.vimrc<CR>
-      autocmd FileType vim nnoremap <Leader>fun :-1read ~/dot-files/vim-nanotemplate/tpl.vim.fun.vimrc<CR>
+      " autocmd FileType vim nnoremap <Leader>var :-1read ~/dot-files/vim-nanotemplate/tpl.vim.var.vimrc<CR>
+      " autocmd FileType vim nnoremap <Leader>if :-1read ~/dot-files/vim-nanotemplate/tpl.vim.if.vimrc<CR>
+      " autocmd FileType vim nnoremap <Leader>fun :-1read ~/dot-files/vim-nanotemplate/tpl.vim.fun.vimrc<CR>
 
     endif
 
@@ -571,21 +580,46 @@ command Rs :source ~/dot-files/dot.vimrc
 
 " nanotemplate
 if exists("did_load_filetypes")
+
   augroup idrtemplate
+
+    " remove all autocommands for the current group
+    autocmd!
+
+    " if index(['example'], &filetype) == -1
+
+    "   command IdrHelp :-1read ~/dot-files/idrtemplates
+    "   command IdrIf :-1read ~/dot-files/idrtemplates
+    "   command IdrVar :-1read ~/dot-files/idrtemplates
+    "   command IdrFunction :-1read ~/dot-files/idrtemplates
+
+    " endif
 
     " bash sh files
     if index(['conf','sh'], &filetype) == -1
 
-      command IdrHelp :-1read ~/dot-files/idrtemplates/tpl.bash.sh
-      command IdrIf :-1read ~/dot-files/idrtemplates/tpl.bash.if.sh
-      command IdrFunction :-1read ~/dot-files/idrtemplates/tpl.bash.fun.sh
+      command! -buffer IdrHelp :-1read ~/dot-files/idrtemplates/tpl.bash.sh
+      " command IdrIf :-1read ~/dot-files/idrtemplates/tpl.bash.if.sh
+      " command IdrFunction :-1read ~/dot-files/idrtemplates/tpl.bash.function.sh
 
     endif
+
+    " vimrc files
+    if index(['vim'], &filetype) == -1
+
+      " autocmd FileType conf,sh  :-1read ~/dot-files/vim-nanotemplate/tpl.bash.sh<CR>
+      " command! -buffer IdrHelp :-1read ~/dot-files/idrtemplates
+      command! -buffer IdrIf :-1read ~/dot-files/idrtemplates/tpl.vim.if.vimrc
+      command IdrFunction :-1read ~/dot-files/idrtemplates/tpl.vim.function.vimrc
+
+    endif
+
 
     " ansible
     " terraform
 
   augroup END
+
 endif
 
 " fzf - to preview files. usage :Files!
