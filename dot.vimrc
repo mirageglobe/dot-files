@@ -12,7 +12,7 @@
 
 " === vim start
 
-" ==> system optimisations for vim
+" ==> system optimisations
 
 set lazyredraw                                        " do not redraw when executing macros; buffer instead of constant redraws
 set noshowmode                                        " speed up by turning off showing mode on last line
@@ -25,7 +25,7 @@ set nocompatible                                      " required by vim for extr
 set showcmd                                           " noshowcmd / showcmd speed up turning off display of cmds. need to be after nocompatible
 set history=1000                                      " number of commands history to store
 set visualbell                                        " no sounds
-set hidden                                            " set hidden
+set hidden                                            " set current buffer to be hidden when opening a new file. use :ls to see all buffers then :b[n] n=buffer number to select
 
 set backupcopy=yes                                    " yes/no/auto when opening a file, vim makes a copy and overwrites
 set undodir=~/.vim/.undo//                            " set vim to use tmp directory for undo files
@@ -159,9 +159,9 @@ Plug 'tpope/vim-repeat'                               " enables repeating comman
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'                               " enables super fast fuzzy search with :FZF
-" Plug 'tpope/vim-vinegar'                              " enables file drawer with - key
+Plug 'tpope/vim-vinegar'                              " enables file drawer with - key
 Plug 'airblade/vim-gitgutter'                         " shows git status in gutter
-Plug 'tpope/vim-fugitive'                             " git in vim
+Plug 'tpope/vim-fugitive'                             " run git commands in vim
 " Plug tpope/vim-rhubarb
 " Plug 'tommcdo/vim-fubitive'                           " git in vim for bitbucket
 
@@ -385,28 +385,26 @@ let g:terraform_fmt_on_save=1
 " === syntastic end
 
 " === vim vinegar start
+" gh  - toggle hidden files
+" -   - toggle project drawer
+" .   - using on a file to populate in command view
+" y.  - to yank absolute path for file cursor
+" ~   - to go home
 
 " activate default treeview for terminal
 " let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'      " hide dot files - press gh
 " to toggle hiding
 
 let g:netrw_liststyle = 3                             " use tree view
+let g:netrw_altv = 1
 " let g:netrw_banner = 0                               " remove top banner
 " let g:netrw_browse_split = 4                         " open a new horizonal split for file
 " let g:netrw_winsize = 25                             " set width of tree to 25%
-let g:netrw_altv = 1
 
 "augroup ProjectDrawer
 "  autocmd!
 "  autocmd VimEnter * :Vexplore
 "augroup END
-"
-" notes:
-" gh  - toggle hidden files
-" -   - toggle project drawer
-" .   - using on a file to populate in command view
-" y.  - to yank absolute path for file cursor
-" ~   - to go home
 
 " === vim vinegar end
 

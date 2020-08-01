@@ -181,10 +181,18 @@ fn_fox_sys_get_current_folder() {
   echo "$(basename $PWD)";
 }
 
-alias _ls="ls -Gd .*"
-alias _ll="ls -lhAG"
-alias _tree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
-alias _tree_verbose="find . | sed -e 's/[^-][^\/]*\// |/g' -e 's/|\([^ ]\)/|-\1/'"
+alias _ls='lsd'
+alias _l='lsd -l'
+alias _la='lsd -a'
+alias _lla='lsd -la'
+alias _lt='lsd --tree'
+alias _tree='lsd --tree'
+# alias _ls="ls -Gd .*"
+# alias _ll="ls -lhAG"
+# alias _tree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
+# alias _tree_verbose="find . | sed -e 's/[^-][^\/]*\// |/g' -e 's/|\([^ ]\)/|-\1/'"
+
+alias _cat="bat"
 
 alias _cp="cp -i"
 alias _mv="mv -i"
