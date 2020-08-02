@@ -30,6 +30,7 @@ curl -fLo "<FONT NAME> Nerd Font Complete.otf" https://github.com/ryanoasis/nerd
 
 # to do
 
+- switch to sdkman - for groovy/java ( curl -s get.sdkman.io | bash )
 - fox add hawkeye scanner for vulnerability
 - setup coc in vim - https://github.com/neoclide/coc.nvim
 - fix ale - https://github.com/dense-analysis/ale#usage-completion
@@ -48,7 +49,6 @@ curl -fLo "<FONT NAME> Nerd Font Complete.otf" https://github.com/ryanoasis/nerd
 - add php standard lint : php_cs-fixer
 - add php debugger : xdebug
 - look at https://github.com/mozilla/cipherscan/blob/master/cipherscan
-- refer to sdkman - for groovy ( curl -s get.sdkman.io | bash )
 - [done] add python lint security : bandit - use hawkeye scanner
 - [done] use homebrew - bat cat source (https://github.com/sharkdp/bat/releases/latest)
 - [done] use homebrew - rg grep source (https://github.com/BurntSushi/ripgrep/releases/latest)
@@ -58,6 +58,7 @@ curl -fLo "<FONT NAME> Nerd Font Complete.otf" https://github.com/ryanoasis/nerd
 
 # references
 
+- https://www.ubuntupit.com/best-vim-plugins-for-programming/
 - https://github.com/tonsky/FiraCode
 - https://www.nerdfonts.com/font-downloads
 - https://gist.github.com/spicycode/1229612
