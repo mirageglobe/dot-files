@@ -263,10 +263,11 @@ fn_fox_aws_profile_load() {
 alias _fox_bash="echo '
 :: help ::
 
-  _ls                           # list with colour
-  _ll                           # list with permissions
-  _tree                         # list tree
-  _tree_verbose                 # list tree with files
+  _ls                           # list condensed
+  _l                            # list with permissions
+  _la                           # list condensed all
+  _lla                          # list with permissions all
+  _lt                           # list tree or _tree
 
   _rs                           # reload current shell
 
@@ -546,29 +547,33 @@ EOM
 alias _fox_sys="echo '
 :: help ::
 
-  _fox_sys_ls                   # show general system information + listening ports + processes
-  _fox_sys_ps                   # show running processes
+  _fox_sys_ls                                         # show general system information + listening ports + processes
+  _fox_sys_ps                                         # show running processes
 
-  _fox_sys_ip                   # show ip of en0
-  _fox_sys_network              # show all network information
-  _fox_sys_ports                # investigate listing ports
-  _fox_sys_subnet               # show subnet for a range _subnet subnet.im/192.168.12.12/30
-  _fox_sys_tcp                  # show tcp dump
+  _fox_sys_ip                                         # show ip of en0
+  _fox_sys_network                                    # show all network information
+  _fox_sys_ports                                      # investigate listing ports
+  _fox_sys_subnet                                     # show subnet for a range _subnet subnet.im/192.168.12.12/30
+  _fox_sys_tcp                                        # show tcp dump
 
 :: notes ::
 
-  ifconfig -a | grep ether      # get mac address
-  ifconfig | grep inet          # get inet
+  ifconfig -a | grep ether                            # get mac address
+  ifconfig | grep inet                                # get inet
+
+  dig @8.8.8.8 yahoo.com                              # check ip v4/zone records for yahoo.com
+  nslookup www.mytestsite.com                         # check dns zone resolving/ipv4 for www.mytestsite.com
+  host yahoo.com                                      # check ip v4/v6 and dns records
 '"
 
 alias _fox_sys_ls="fn_fox_system;fn_fox_showmaclaunch;"
-alias _fox_sys_ps="printf ':: showing running processes ::\n';ps -a;"
+alias _fox_sys_ps="ps -a;"
 
-alias _fox_sys_ip="printf ':: show ip on en0 ::\n'; ifconfig en0 | grep inet;"
+alias _fox_sys_ip="ifconfig en0 | grep inet;"
 alias _fox_sys_network="fn_fox_network_info;"
-alias _fox_sys_port="printf ':: investigate listening ports :: \n';sudo lsof -PiTCP -sTCP:LISTEN;"
+alias _fox_sys_port="printf 'sudo lsof -PiTCP -sTCP:LISTEN;"
 alias _fox_sys_subnet="echo 'use curl subnet.im/192.168.12.12/30'"
-alias _fox_sys_tcp="printf ':: show network interfaces ::\n'; tcpdump -D;"
+alias _fox_sys_tcp="tcpdump -D;"
 
 fn_fox_network_info() {
   printf ":: about network (me) ::\n";
