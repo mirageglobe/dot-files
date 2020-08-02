@@ -348,15 +348,15 @@ alias _fox_docker_img_prune="fn_fox_docker_imgpurge;"
 alias _fox_docker_vol="docker volume ls"
 alias _fox_docker_vol_prune="docker volume prune"
 
-alias _fox_docker_vol="docker network ls"
-alias _fox_docker_vol_prune="docker network prune"
+alias _fox_docker_network="docker network ls"
+alias _fox_docker_network_prune="docker network prune"
 
 alias _fox_docker_show="echo '=== PS ===';docker ps -a;echo '=== IMAGES ===';docker image list;echo '=== VOLUMES ==='; docker volume ls;echo '=== NETWORKS ==='; docker network list;"
 alias _fox_docker_prune="docker system prune"
 
 alias _fox_docker_logs="docker logs"
-alias _fox_docker_exec_sh="fn_fox_docker_sh"
-alias _fox_docker_exec_bash="fn_fox_docker_bash"
+alias _fox_docker_sh="fn_fox_docker_sh"
+alias _fox_docker_bash="fn_fox_docker_bash"
 
 alias _fox_docker_stop="fn_fox_docker_stop"
 
@@ -374,7 +374,6 @@ fn_fox_docker_imgpurge(){
 
 fn_fox_docker_volpurge(){
   printf ":: purging all volumes :: \n";
-  # docker rmi $(docker images --filter "dangling=true" -q --no-trunc);
   docker volume prune;
 }
 
