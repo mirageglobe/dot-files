@@ -102,12 +102,15 @@ common-ensure:											## ensure config and tools present
 	@$(call fn_print_header,note)
 	@echo "- python pip, ruby gems, node yarn are required dependancies";
 	@# environment : config									========================================
-	@$(call fn_print_header,ensure folders are present)
-	cp -n tpl.bashrc ~/.bashrc || echo "skip - found .bashrc"					# never override local config
-	cp tpl.vimrc ~/.vimrc																							# always override local config
-	cp dot.tmux.conf ~/.tmux.conf																			# always override local config
+	@$(call fn_print_header,ensure .bashrc exist)
+	cp -n tpl.bashrc ~/.bashrc || echo "skip - found .bashrc"					# never overwrite
+	@$(call fn_print_header,ensure .config/alacritty/alacritty.yml exist)
+	cp -i dot.mac.alacritty.yml ~/.config/alacritty/alacritty.yml
+	@$(call fn_print_header,ensure .tmux exist)
+	cp -i dot.tmux.conf ~/.tmux.conf										# always overwrite
 	@# tools : vim													========================================
-	@$(call fn_print_header,ensure vim folders exist)
+	@$(call fn_print_header,ensure .vimrc and folders exist)
+	cp -i tpl.vimrc ~/.vimrc														# always overwrite
 	-mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
 
 pkgmgr-ensure:											## ensure package managers and non gui tools present

@@ -314,22 +314,28 @@ alias _fox_bash="echo '
 alias _fox_docker="echo '
 :: help ::
 
-  _fox_docker_ps                    # list all process
-  _fox_docker_ps_less               # list all process (fit width)
-  _fox_docker_ps_prune              # purge all processes
-  _fox_docker_img                   # list images
-  _fox_docker_img_prune             # purge all images
-  _fox_docker_vol                   # list all volumes
-  _fox_docker_vol_prune             # purge all volumes
+  _fox_docker_ps                                      # list all process
+  _fox_docker_ps_less                                 # list all process (fit width)
+  _fox_docker_ps_prune                                # purge all processes
+  _fox_docker_img                                     # list images
+  _fox_docker_img_prune                               # purge all images
+  _fox_docker_vol                                     # list all volumes
+  _fox_docker_vol_prune                               # purge all volumes
+  _fox_docker_network                                 # list all docker networks
+  _fox_docker_network_prune                           # purge all docker networks
 
-  _fox_docker_show                  # show all
-  _fox_docker_prune                 # prune all (purge all containers and images)
+  _fox_docker_show                                    # show all of docker
+  _fox_docker_prune                                   # prune all (purge all containers and images)
   
-  _fox_docker_sh <container id>     # shell sh into container
-  _fox_docker_bash <container id>   # shell bash into container
-  _fox_docker_logs <container id>   # show docker logs
+  _fox_docker_sh <container id>                       # shell sh into container
+  _fox_docker_bash <container id>                     # shell bash into container
+  _fox_docker_logs <container id>                     # show docker logs
 
-  _fox_docker_stop <container id>   # stop container
+  _fox_docker_stop <container id>                     # stop container
+
+:: notes ::
+
+  docker build -t mycontainername .
 '"
 
 alias _fox_docker_ps="docker ps -a;"
@@ -342,7 +348,10 @@ alias _fox_docker_img_prune="fn_fox_docker_imgpurge;"
 alias _fox_docker_vol="docker volume ls"
 alias _fox_docker_vol_prune="docker volume prune"
 
-alias _fox_docker_show="echo '=== PS ===';docker ps -a;echo '=== IMAGES ===';docker image list;echo '=== VOLUMES ==='; docker volume ls;"
+alias _fox_docker_vol="docker network ls"
+alias _fox_docker_vol_prune="docker network prune"
+
+alias _fox_docker_show="echo '=== PS ===';docker ps -a;echo '=== IMAGES ===';docker image list;echo '=== VOLUMES ==='; docker volume ls;echo '=== NETWORKS ==='; docker network list;"
 alias _fox_docker_prune="docker system prune"
 
 alias _fox_docker_logs="docker logs"
