@@ -635,6 +635,7 @@ alias _fox_k8s="echo '
   aws eks --region <region-code> update-kubeconfig --name <cluster_name>;         # aws
 
   kubectl                                                     # show all commands
+  kubectl version -o json                                     # show version of client and server
   kubectl config view                                         # show all configuration
   kubectl config get-contexts                                 # show available configuration
   kubectl config current-context                              # show current configuration
@@ -651,6 +652,9 @@ alias _fox_k8s="echo '
   kubectl get events --all-namespaces                         # show events from all namespaces
   kubectl get events --namespace <namespace>                  # show events from a namespace
   kubectl describe events --namespace <namespace> <event>     # show info of pod from a namespace
+
+  kubectl get rs --namespace <namespace>                      # show running replica-sets from a namespace
+  kubectl describe rs --namespace <namespace> <replica>       # show details of replica-set from a namespace
 
   kubectl get <resource> --all-namespaces                     # show info for <resource>: services / pods / pv / configmap / secrets
 
