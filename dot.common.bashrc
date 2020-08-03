@@ -29,7 +29,6 @@ export TERM=xterm-256color                            # common
 # ==> for homebrew ruby
 printf "%s" "[+] ruby "
 
-# export PATH="$HOME/.gem/ruby/2.6.0/bin:$PATH"
 export PATH="/usr/local/lib/ruby/gems/2.7.0/bin:$PATH"
 export PATH="/usr/local/opt/ruby/bin:$PATH"
 
@@ -41,7 +40,7 @@ export PATH="/usr/local/opt/ruby/bin:$PATH"
 # export PATH="$HOME/.jenv/bin:$PATH"
 # eval "$(jenv init -)"
 
-# ==> added for java
+# ==> added for java adopt
 printf "%s" "[+] java "
 if [ -z $JAVA_HOME ]; then
   export JAVA_HOME=$(/usr/libexec/java_home)
@@ -653,8 +652,7 @@ alias _fox_k8s="echo '
   kubectl get events --namespace <namespace>                  # show events from a namespace
   kubectl describe events --namespace <namespace> <event>     # show info of pod from a namespace
 
-  kubectl get <option> --all-namespaces                       # show info for option
-  option: services / pods / pv / configmap
+  kubectl get <resource> --all-namespaces                     # show info for <resource>: services / pods / pv / configmap / secrets
 
   kubectl edit svc/docker-registry                            # edit resource
   kubectl logs --namespace <namespace> <pod>                  # view logs of pod
@@ -665,6 +663,8 @@ alias _fox_k8s="echo '
   kubectl apply -f ./my-manifest.yaml                         # create resource(s)
   kubectl apply -f https://git.io/openk8sresources            # create resource(s) from url
   kubectl create deployment nginx --image=nginx               # start a single instance of nginx
+  kubectl create -n istio-system secret tls tls-my-domain.com --key=my.domain.com.key --cert=my.domain.com.crt
+  # create resource (secret) in namespace (istio-system) with cert and key
 
 :: notes ::
 
@@ -684,6 +684,7 @@ alias _fox_ssh="echo '
   ssh -L 8080:www.google.com:80 172.10.10.10
 
   # consider using stunnel tool - https://www.stunnel.org/auth.html
+
 '"
 
 alias _fox_ssh_load="ssh-add;"
