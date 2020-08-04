@@ -145,6 +145,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'drewtempelmeyer/palenight.vim'                  " enables palenight color scheme
 Plug 'itchyny/lightline.vim'                          " enables superlight status bar - https://github.com/itchyny/lightline.vim
+Plug 'itchyny/vim-gitbranch'                          " simple gitbranch name to replace fugitive
 Plug 'rafi/awesome-vim-colorschemes'                  " enables package colorschemes (rafi)
 " Plug 'flazz/vim-colorschemes'                         " enables package colorschemes (flazz)
 " Plug 'dracula/vim'                                    " enables gruvbox colorscheme
@@ -163,9 +164,9 @@ Plug 'tpope/vim-repeat'                               " enables repeating comman
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'                               " enables super fast fuzzy search with :FZF
-Plug 'tpope/vim-vinegar'                              " enables file drawer with - key
+" Plug 'tpope/vim-vinegar'                              " enables file drawer with - key
 Plug 'airblade/vim-gitgutter'                         " shows git status in gutter
-Plug 'tpope/vim-fugitive'                             " run git commands in vim
+" Plug 'tpope/vim-fugitive'                             " run git commands in vim
 " Plug tpope/vim-rhubarb
 " Plug 'tommcdo/vim-fubitive'                           " git in vim for bitbucket
 
@@ -245,20 +246,9 @@ colorscheme palenight
 set laststatus=2                                      " (optional) fix for statusline not showing
 set noshowmode                                        " hide status of mode (insert/visual) as lightline is showing
 
-" this is lightlines init; needs to be first function
+" lightline init - needs to be first function
+
 let g:lightline = {
-      \   'component': {
-      \     'lineinfo': ' %3l:%-2v',
-      \     'filetype': '%{&filetype}',
-      \     'readonly': '%{&filetype=="help"?"":&readonly?"":""}',
-      \     'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-      \     'fugitive': '%{exists("*fugitive#head")?"":""} %{exists("*fugitive#head")?fugitive#head():""}',
-      \   },
-      \   'component_visible_condition': {
-      \     'readonly': '(&filetype!="help"&& &readonly)',
-      \     'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
-      \     'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())',
-      \   },
       \   'separator': { 
       \     'left': "",
       \     'right': "",
@@ -269,17 +259,39 @@ let g:lightline = {
       \   }
       \ }
 
-" colorscheme for lightline = powerline, wombat, jellybeans, solarized dark, solarized light, PaperColor light, seoul256, one, landscape
-let g:lightline.colorscheme = 'palenight'
+" colorscheme for lightline
+"   powerline, wombat, jellybeans, solarized dark, solarized light,
+"   PaperColor dark, PaperColor light, seoul256, one dark, one light, landscape
+let g:lightline.colorscheme = 'wombat'
 
-" load lightline
+let g:lightline.component = {
+      \   'gitbranch': ' %{gitbranch#name()}',
+      \   'lineinfo': ' %3l:%-2v',
+      \   'filetype': '%{&filetype}',
+      \   'readonly': '%{&filetype=="help"?"":&readonly?"":""}',
+      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+      \ }
+      " \     'fugitive': '%{exists("*fugitive#head")?"":""} %{exists("*fugitive#head")?fugitive#head():""}',
+
+" let g:lightline.component_function = {
+"       \   'gitbranch': 'gitbranch#name'
+"       \ }
+
+let g:lightline.component_visible_condition = {
+      \   'readonly': '(&filetype!="help"&& &readonly)',
+      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
+      \ }
+      " \     'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())',
+
+" lightline active
 let g:lightline.active = {
       \   'left': [
       \     [ 'mode', 'paste' ],
-      \     [ 'fugitive', 'readonly', 'filename', 'modified' ],
+      \     [ 'gitbranch', 'readonly', 'filename', 'modified' ],
       \     [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ]
       \   ]
       \ }
+
 
 " === === lightline ale
 
@@ -298,10 +310,10 @@ let g:lightline.component_type = {
       \ }
 
 " change lightline ale plugin to use symbols
-" let g:lightline#ale#indicator_checking = "\uf110"
-" let g:lightline#ale#indicator_warnings = "\uf071"
-" let g:lightline#ale#indicator_errors = "\uf05e"
-" let g:lightline#ale#indicator_ok = "\uf00c"
+let g:lightline#ale#indicator_checking = "\uf110"
+let g:lightline#ale#indicator_warnings = "\uf071"
+let g:lightline#ale#indicator_errors = "\uf05e"
+let g:lightline#ale#indicator_ok = "\uf00c"
 
 " === === lightline ale end
 
@@ -337,7 +349,7 @@ let g:ale_list_window_size = 5
 
 " === fugitive start
 
-set statusline+=%{fugitive#statusline()}
+" set statusline+=%{fugitive#statusline()}
 
 " === fugitive end
 
@@ -356,12 +368,6 @@ set statusline+=%{fugitive#statusline()}
 let g:terraform_fmt_on_save=1
 
 " === vim polyglot end
-
-" === the silver searcher start
-
-" let g:ackprg = 'ag --nogroup --nocolor --column'
-
-" === the silver searcher end
 
 " === supertab start
 
@@ -585,7 +591,7 @@ endif " if exists("did_load_filetypes")
 
 " === commands start
 
-command ReloadShell :source ~/dot-files/dot.vimrc
+command! ReloadShell :source ~/dot-files/dot.vimrc
 
 " nanotemplate
 if exists("did_load_filetypes")
