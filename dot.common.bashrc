@@ -78,7 +78,7 @@ git config --global alias.f "fetch"
 git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 git config --global alias.p "pull"
 git config --global alias.s "status"
-git config --global alias.rbm "rebase master"
+git config --global alias.rim "rebase -i master"
 
 # ===
 # === bash completions
