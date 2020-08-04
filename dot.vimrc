@@ -68,14 +68,14 @@ endif
 
 " === === completion
 
-set wildmenu                                          " display all matching files for code completion, use :b to find files, :ls for list buffer
 filetype plugin indent on                             " enables filetype detection - http://vimdoc.sourceforge.net/htmldoc/filetype.html
 set omnifunc=syntaxcomplete#Complete                  " turn on omnicomplete
+set completeopt+=longest,menuone                      " mandatory setting for vim
 " set path+=**                                          " provides tab completion for all file related tasks
 
 " === === highlight
 
-syntax enable                                         " set syntax highlighting in vim
+syntax on                                             " set syntax highlighting in vim
 set list listchars=tab:»·,trail:·                     " display tabs and trailing spaces visually
 
 " === === numbering
@@ -102,6 +102,11 @@ set expandtab
 
 set wrap linebreak nolist                             " set soft wrap for text
 " set nowrap                                            " turn off code wrap
+
+" === command
+
+set wildmenu                                          " display command line completion, use :b to find files, :ls for list buffer
+set wildmode=list:full                                " display all command options of wildmenu with double tab
 
 " mouse cursor and scrolling
 
@@ -167,6 +172,8 @@ Plug 'tpope/vim-fugitive'                             " run git commands in vim
 
 " ==> language / syntax
 
+Plug 'ludovicchabant/vim-gutentags'                   " auto ctag management
+Plug 'majutsushi/tagbar'                              " enables ctag sidebar (install ctag via brew)
 " Plug 'lifepillar/vim-mucomplete'                      " enables code completion popup
 Plug 'neoclide/coc.nvim', {'branch': 'release'}       " enables code completion
 Plug 'sheerun/vim-polyglot'                           " syntax superfast on demand loader for over 100 languages
@@ -337,8 +344,6 @@ set statusline+=%{fugitive#statusline()}
 
 " === mucomplete start
 
-" set completeopt+=menuone                              " mandatory setting for vim
-" set completeopt+=noselect
 " set shortmess+=c                                      " shut off completion messages
 " let g:mucomplete#enable_auto_at_startup = 1           " auto startup mucomplete
 " let g:mucomplete#completion_delay = 1                 " makes mucomplete less interuptive by only activating on pause
@@ -425,7 +430,7 @@ let g:netrw_altv = 1
 
 " === aliases end
 
-" === snippets start
+" === mapping start
 
 " n = normal mode
 
@@ -444,10 +449,15 @@ let g:netrw_altv = 1
 " maps base leader key from , to space
 let mapleader = "\<space>"
 
-" general maps
+" === key maps
+
+" === === open file explorer
 nnoremap <Leader><SPACE> :Explore<CR>
 
-" sets co-authored for github
+" === === open ctag explorer
+nnoremap <Leader>t :TagbarToggle<CR>
+
+" === === set git co-author
 " let @z='ICo-authored-by: y$A <@gmail.com>@Pgua<f x'
 nmap <Leader>@ <ESC>VD <ESC>ICo-authored-by: <CR>
 nmap <Leader>jd <ESC>ICo-authored-by: John Doe <johndoe@gmail.com><ESC>
@@ -465,7 +475,7 @@ nmap <Leader>z za<ESC>
 " nnoremap <C-L> <C-W><C-L>
 " nnoremap <C-H> <C-W><C-H>
 
-" reload
+" reload vimrc
 nnoremap <Leader>rs :source ~/dot-files/dot.vimrc<ESC>
 
 " nmap <Leader> a# ===<ESC>Vgcc<ESC>^f=;;<esc>a<space>
@@ -569,12 +579,11 @@ if exists("did_load_filetypes")
 
 endif " if exists("did_load_filetypes")
 
-" === snippets end
+" === mapping end
 
 " === commands start
 
 command ReloadShell :source ~/dot-files/dot.vimrc
-command Rs :source ~/dot-files/dot.vimrc
 
 " nanotemplate
 if exists("did_load_filetypes")
