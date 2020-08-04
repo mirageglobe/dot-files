@@ -2,25 +2,27 @@
 " === custom vim config
 " ===
 
+" === notes
+" - https://tbaggery.com/2011/08/08/effortless-ctags-with-git.html
+" - https://vimways.org/2018/you-should-be-using-tags-in-vim/
+
 " === fonts configuration (iterm)
-"
 " font -> FuraCode Nerd Font [Regular] [12]
 " use built-in Powerline glyphs -> true
 " enable subpixel anti-aliasing -> true
 " use ligatures -> true
 " anti-aliased -> true
 
-" === vim start
+" === setting start
 
-" ==> system optimisations
+" optimisations
 
 set lazyredraw                                        " do not redraw when executing macros; buffer instead of constant redraws
 set noshowmode                                        " speed up by turning off showing mode on last line
 " set showmode                                         " show current mode down the bottom
 set regexpengine=1                                    " speed up by using old regex engine
 
-" ==> general
-
+" general
 set nocompatible                                      " required by vim for extra features
 set showcmd                                           " noshowcmd / showcmd speed up turning off display of cmds. need to be after nocompatible
 set history=1000                                      " number of commands history to store
@@ -35,8 +37,7 @@ set directory=~/.vim/.swp//                           " set vim to use tmp direc
 set encoding=UTF-8                                    " The encoding displayed.
 set fileencoding=UTF-8                                " The encoding written to file
 
-" ==> visuals
-
+" colour
 " if gui (macvim) or not gui (iterm/alacritty)
 if has('gui_running')
   set guifont=FiraCode\ Nerd\ Font\ Complete:h13
@@ -48,8 +49,6 @@ endif
 if (has("termguicolors"))
   set termguicolors
 endif
-
-" ==> misc settings
 
 " clipboard
 " - will not work if its -clipboard (not complied with vim)
@@ -128,7 +127,7 @@ set spell spelllang=en_gb                             " turn on vims spell check
 
 " set splitright                                        " auto split right for screens
 
-" === vim end
+" === setting end
 
 " === plug start
 
@@ -172,8 +171,8 @@ Plug 'tpope/vim-fugitive'                             " run git commands in vim
 
 " ==> language / syntax
 
-Plug 'ludovicchabant/vim-gutentags'                   " auto ctag management
 Plug 'majutsushi/tagbar'                              " enables ctag sidebar (install ctag via brew)
+Plug 'ludovicchabant/vim-gutentags'                   " auto ctag management
 " Plug 'lifepillar/vim-mucomplete'                      " enables code completion popup
 Plug 'neoclide/coc.nvim', {'branch': 'release'}       " enables code completion
 Plug 'sheerun/vim-polyglot'                           " syntax superfast on demand loader for over 100 languages
@@ -454,7 +453,10 @@ let mapleader = "\<space>"
 " === === open file explorer
 nnoremap <Leader><SPACE> :Explore<CR>
 
-" === === open ctag explorer
+" === === open file explorer
+" nnoremap <Leader>w <C-w><C-w>
+
+" === === open tagbar - ctag explorer
 nnoremap <Leader>t :TagbarToggle<CR>
 
 " === === set git co-author
