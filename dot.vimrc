@@ -162,7 +162,7 @@ Plug 'tpope/vim-repeat'                               " enables repeating comman
 
 " ==> file management
 
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }   " installs fzf
 Plug 'junegunn/fzf.vim'                               " enables super fast fuzzy search with :FZF
 " Plug 'tpope/vim-vinegar'                              " enables file drawer with - key
 Plug 'airblade/vim-gitgutter'                         " shows git status in gutter
@@ -488,7 +488,7 @@ nnoremap <Leader>rs :source ~/dot-files/dot.vimrc<ESC>
 
 " nmap <Leader> a# ===<ESC>Vgcc<ESC>^f=;;<esc>a<space>
 
-" read an empty template into current file - type ,ruby
+" read an empty template into current buffer based on filetype
 nnoremap <Leader>c :-1read ~/dot-files/vim-nanotemplate/template.c.c<CR>
 nnoremap <Leader>php :-1read ~/dot-files/vim-nanotemplate/template.php.php<CR>
 nnoremap <Leader>tf :-1read ~/dot-files/vim-nanotemplate/template.terraform.tf<CR>
@@ -513,7 +513,7 @@ if exists("did_load_filetypes")
     autocmd!
 
     " markdown files
-    if index(['markdown'], &filetype) == -1
+    if index(['markdown'], &filetype) != -1
 
       autocmd FileType markdown nnoremap <Leader>h 0i# <ESC>$<ESC>
       autocmd FileType markdown nnoremap <Leader>hh 0i## <ESC>$<ESC>
@@ -532,7 +532,7 @@ if exists("did_load_filetypes")
     autocmd!
 
     " bash sh files
-    if index(['conf','sh'], &filetype) == -1
+    if index(['conf','sh'], &filetype) != -1
 
       " autocmd FileType conf,sh nnoremap <Leader>hel :-1read ~/dot-files/vim-nanotemplate/tpl.bash.sh<CR>
       " autocmd FileType conf,sh nnoremap <Leader>if :-1read ~/dot-files/vim-nanotemplate/tpl.bash.if.sh<CR>
@@ -541,7 +541,7 @@ if exists("did_load_filetypes")
     endif
 
     " vimrc files
-    if index(['vim'], &filetype) == -1
+    if index(['vim'], &filetype) != -1
 
       " autocmd FileType vim nnoremap <Leader>var :-1read ~/dot-files/vim-nanotemplate/tpl.vim.var.vimrc<CR>
       " autocmd FileType vim nnoremap <Leader>if :-1read ~/dot-files/vim-nanotemplate/tpl.vim.if.vimrc<CR>
@@ -550,14 +550,14 @@ if exists("did_load_filetypes")
     endif
 
     " html files
-    if index(['html'], &filetype) == -1
+    if index(['html'], &filetype) != -1
 
       autocmd FileType vim nnoremap <Leader>hel :-1read ~/dot-files/vim-nanotemplate/tpl.html.html<CR>
 
     endif
 
     " ruby files
-    if index(['ruby'], &filetype) == -1
+    if index(['ruby'], &filetype) != -1
 
       autocmd FileType ruby nnoremap <Leader>hel :-1read ~/dot-files/vim-nanotemplate/tpl.ruby.rb<CR>
       autocmd FileType ruby nnoremap <Leader>arr :-1read ~/dot-files/vim-nanotemplate/tpl.ruby.arr.rb<CR>
@@ -575,7 +575,7 @@ if exists("did_load_filetypes")
     endif
 
     " python files
-    if index(['python'], &filetype) == -1
+    if index(['python'], &filetype) != -1
 
       autocmd FileType python nnoremap <Leader>hel :-1read ~/dot-files/vim-nanotemplate/tpl.python.py<CR>
       autocmd FileType python nnoremap <Leader>arr :-1read ~/dot-files/vim-nanotemplate/tpl.python.arr.py<CR>
@@ -585,15 +585,25 @@ if exists("did_load_filetypes")
     endif
   augroup END
 
-endif " if exists("did_load_filetypes")
+endif " exists("did_load_filetypes")
 
 " === mapping end
 
 " === commands start
 
+function! IdrToggle()
+  if exists("did_load_filetypes")
+    if index(['vim'], &filetype) != -1
+      echom "testfunction for vim!"
+    endif
+  endif
+endfunction
+
+command! Idr :call IdrToggle()
+
 command! ReloadShell :source ~/dot-files/dot.vimrc
 
-" nanotemplate
+
 if exists("did_load_filetypes")
 
   augroup idrtemplate
@@ -611,24 +621,19 @@ if exists("did_load_filetypes")
     " endif
 
     " bash sh files
-    if index(['conf','sh'], &filetype) == -1
+    if index(['conf','sh'], &filetype) != -1
 
       command! -buffer IdrHelp :-1read ~/dot-files/idrtemplates/tpl.bash.sh
-      " command IdrIf :-1read ~/dot-files/idrtemplates/tpl.bash.if.sh
-      " command IdrFunction :-1read ~/dot-files/idrtemplates/tpl.bash.function.sh
 
     endif
 
     " vimrc files
-    if index(['vim'], &filetype) == -1
+    if index(['vim'], &filetype) != -1
 
-      " autocmd FileType conf,sh  :-1read ~/dot-files/vim-nanotemplate/tpl.bash.sh<CR>
-      " command! -buffer IdrHelp :-1read ~/dot-files/idrtemplates
       command! -buffer IdrIf :-1read ~/dot-files/idrtemplates/tpl.vim.if.vimrc
-      command IdrFunction :-1read ~/dot-files/idrtemplates/tpl.vim.function.vimrc
+      command! -buffer IdrFunction :-1read ~/dot-files/idrtemplates/tpl.vim.function.vimrc
 
     endif
-
 
     " ansible
     " terraform
@@ -637,7 +642,7 @@ if exists("did_load_filetypes")
 
 endif
 
-" fzf - to preview files. usage :Files!
+" fzf - overrides Files command - usage :Files!
 command! -bang -nargs=* -complete=dir Files
       \ call fzf#vim#files(<q-args>,
       \   <bang>0 ? fzf#vim#with_preview('up:60%')
