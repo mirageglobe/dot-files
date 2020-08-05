@@ -483,9 +483,6 @@ nmap <Leader>z za<ESC>
 " nnoremap <C-L> <C-W><C-L>
 " nnoremap <C-H> <C-W><C-H>
 
-" reload vimrc
-nnoremap <Leader>rs :source ~/dot-files/dot.vimrc<ESC>
-
 " nmap <Leader> a# ===<ESC>Vgcc<ESC>^f=;;<esc>a<space>
 
 " read an empty template into current buffer based on filetype
@@ -531,24 +528,6 @@ if exists("did_load_filetypes")
     " remove all autocommands for the current group
     autocmd!
 
-    " bash sh files
-    if index(['conf','sh'], &filetype) != -1
-
-      " autocmd FileType conf,sh nnoremap <Leader>hel :-1read ~/dot-files/vim-nanotemplate/tpl.bash.sh<CR>
-      " autocmd FileType conf,sh nnoremap <Leader>if :-1read ~/dot-files/vim-nanotemplate/tpl.bash.if.sh<CR>
-      " autocmd FileType conf,sh nnoremap <Leader>fnc :-1read ~/dot-files/vim-nanotemplate/tpl.bash.fun.sh<CR>
-
-    endif
-
-    " vimrc files
-    if index(['vim'], &filetype) != -1
-
-      " autocmd FileType vim nnoremap <Leader>var :-1read ~/dot-files/vim-nanotemplate/tpl.vim.var.vimrc<CR>
-      " autocmd FileType vim nnoremap <Leader>if :-1read ~/dot-files/vim-nanotemplate/tpl.vim.if.vimrc<CR>
-      " autocmd FileType vim nnoremap <Leader>fun :-1read ~/dot-files/vim-nanotemplate/tpl.vim.fun.vimrc<CR>
-
-    endif
-
     " html files
     if index(['html'], &filetype) != -1
 
@@ -589,58 +568,48 @@ endif " exists("did_load_filetypes")
 
 " === mapping end
 
-" === commands start
-
-function! IdrToggle()
-  if exists("did_load_filetypes")
-    if index(['vim'], &filetype) != -1
-      echom "testfunction for vim!"
-    endif
-  endif
-endfunction
-
-command! Idr :call IdrToggle()
-
-command! ReloadShell :source ~/dot-files/dot.vimrc
-
+" === idrtemplates start
 
 if exists("did_load_filetypes")
 
-  augroup idrtemplate
-
-    " remove all autocommands for the current group
-    autocmd!
-
-    " if index(['example'], &filetype) == -1
-
-    "   command IdrHelp :-1read ~/dot-files/idrtemplates
-    "   command IdrIf :-1read ~/dot-files/idrtemplates
-    "   command IdrVar :-1read ~/dot-files/idrtemplates
-    "   command IdrFunction :-1read ~/dot-files/idrtemplates
-
-    " endif
-
-    " bash sh files
-    if index(['conf','sh'], &filetype) != -1
-
-      command! -buffer IdrHelp :-1read ~/dot-files/idrtemplates/tpl.bash.sh
-
-    endif
-
-    " vimrc files
+  function! IDRtoggle()
     if index(['vim'], &filetype) != -1
-
-      command! -buffer IdrIf :-1read ~/dot-files/idrtemplates/tpl.vim.if.vimrc
-      command! -buffer IdrFunction :-1read ~/dot-files/idrtemplates/tpl.vim.function.vimrc
-
+      echom "activate i dont remember (IDR) templates"
     endif
+  endfunction
 
-    " ansible
-    " terraform
+  command! IDR :call IDRtoggle()
 
-  augroup END
+  " bash sh files
+  if index(['conf','sh'], &filetype) != -1
+
+    command! -buffer IDRhelp :-1read ~/dot-files/idrtemplates/tpl.bash.sh
+    command! -buffer IDRif :-1read ~/dot-files/idrtemplates/tpl.bash.if.sh
+    command! -buffer IDRfunction :-1read ~/dot-files/idrtemplates/tpl.bash.function.sh
+
+  endif
+
+  " vimrc files
+  if index(['vim'], &filetype) != -1
+
+    command! -buffer IDRhelp :-1read ~/dot-files/idrtemplates/tpl.vim.vim
+    command! -buffer IDRif :-1read ~/dot-files/idrtemplates/tpl.vim.if.vim
+    command! -buffer IDRvar :-1read ~/dot-files/idrtemplates/tpl.vim.var.vim
+    command! -buffer IDRecho :-1read ~/dot-files/idrtemplates/tpl.vim.echo.vim
+    command! -buffer IDRfunction :-1read ~/dot-files/idrtemplates/tpl.vim.function.vim
+
+  endif
+
+  " ansible
+  " terraform
 
 endif
+
+" === idrtemplates end
+
+" === commands start
+
+command! ReloadShell :source ~/dot-files/dot.vimrc
 
 " fzf - overrides Files command - usage :Files!
 command! -bang -nargs=* -complete=dir Files
