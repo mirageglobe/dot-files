@@ -12,16 +12,16 @@ this is the source for idrtemplates (I dont remember templates). the goal of thi
 to use
 
 ```
-:IdrHelp              # will load default full list of code for detected language into new split buffer
+:IDRhelp              # will load default full list of code for detected language into new split buffer
 
-:IdrPrint             # add snippet
-:IdrIf                # add snippet
-:IdrFunction          # add snippet
-:IdrConstant          # add snippet
-:IdrArray             # add snippet
-:IdrClass             # add snippet
-:IdrSwitch            # add snippet
-:IdrVar               # add snippet
+:IDRarray             # add snippet for current language - array
+:IDRif                # add snippet for current language - if elseif else
+:IDRclass             # add snippet for current language - class
+:IDRconstant          # add snippet for current language - constant
+:IDRecho              # add snippet for current language - echo print
+:IDRfunction          # add snippet for current language - function
+:IDRloop              # add snippet for current language - while for loop
+:IDRswitch            # add snippet for current language - switch case
+:IDRregex             # add snippet for current language - regular expression
+:IDRvar               # add snippet for current language - variable string int
 ```
-
-

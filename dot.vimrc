@@ -169,6 +169,7 @@ Plug 'airblade/vim-gitgutter'                         " shows git status in gutt
 " Plug 'tpope/vim-fugitive'                             " run git commands in vim
 " Plug tpope/vim-rhubarb
 " Plug 'tommcdo/vim-fubitive'                           " git in vim for bitbucket
+Plug 'jlanzarotta/bufexplorer'                        " buffer explorer
 
 " ==> language / syntax
 
@@ -418,7 +419,20 @@ let g:netrw_altv = 1
 
 " === vim vinegar end
 
-" === aliases and leaderboard shortcuts
+" === commands start
+
+command ReloadShell :source ~/dot-files/dot.vimrc
+
+" fzf - overrides Files command - usage :Files!
+command! -bang -nargs=* -complete=dir Files
+      \ call fzf#vim#files(<q-args>,
+      \   <bang>0 ? fzf#vim#with_preview('up:100%')
+      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+      \   <bang>0)
+
+" === commands end
+
+" === aliases start
 "
 " ref - http://learnvimscriptthehardway.stevelosh.com/chapters/08.html
 " ref - http://learnvimscriptthehardway.stevelosh.com/chapters/03.html
@@ -449,7 +463,7 @@ let g:netrw_altv = 1
 
 " <c-d>   control + d
 
-" https://stackoverflow.com/questions/3776117/what-is-the-difference-between-the-remap-noremap-nnoremap-and-vnoremap-mapping
+" ref - https://stackoverflow.com/questions/3776117/what-is-the-difference-between-the-remap-noremap-nnoremap-and-vnoremap-mapping
 
 " maps base leader key from , to space
 let mapleader = "\<space>"
@@ -463,11 +477,11 @@ nnoremap <Leader><SPACE> :Explore<CR>
 " nnoremap <Leader>w <C-w><C-w>
 
 " === === open tagbar - ctag explorer
-nnoremap <Leader>t :TagbarToggle<CR>
+nnoremap <Leader>ct :TagbarToggle<CR>
 
 " === === set git co-author
 " let @z='ICo-authored-by: y$A <@gmail.com>@Pgua<f x'
-nmap <Leader>@ <ESC>VD <ESC>ICo-authored-by: <CR>
+" nmap <Leader>@ <ESC>VD <ESC>ICo-authored-by: <CR>
 nmap <Leader>jd <ESC>ICo-authored-by: John Doe <johndoe@gmail.com><ESC>
 
 " yank to/from clipboard
@@ -559,17 +573,26 @@ nmap <Leader>z za<ESC>
   " augroup filetypedetect
 
 command IDR :call IDRtoggle()
+command IDRhelp :call IDRhelp()
 command IDRif :call IDRif()
 
 function IDRtoggle()
-  if index(['vim'], &filetype) != '-1'
-    echom "activate i dont remember (IDR) templates"
+  echom "activate i dont remember (IDR) templates"
+endfunction
+
+function IDRhelp()
+  if index(['vim'], &filetype) != '-1'                              " vimrc
+    -1read ~/dot-files/idrtemplates/tpl.vim.vim
+  elseif index(['conf','sh'], &filetype) != '-1'                    " bash sh
+    -1read ~/dot-files/idrtemplates/tpl.bash.sh
   endif
 endfunction
 
 function IDRif()
-  if index(['vim'], &filetype) != '-1'
+  if index(['vim'], &filetype) != '-1'                              " vimrc
     -1read ~/dot-files/idrtemplates/tpl.vim.if.vim
+  elseif index(['conf','sh'], &filetype) != '-1'                    " bash sh
+    -1read ~/dot-files/idrtemplates/tpl.bash.if.sh
   endif
 endfunction
 
@@ -619,17 +642,4 @@ endfunction
 " endif
 
 " === idrtemplates end
-
-" === commands start
-
-command ReloadShell :source ~/dot-files/dot.vimrc
-
-" fzf - overrides Files command - usage :Files!
-command! -bang -nargs=* -complete=dir Files
-      \ call fzf#vim#files(<q-args>,
-      \   <bang>0 ? fzf#vim#with_preview('up:100%')
-      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-      \   <bang>0)
-
-" === commands end
 
