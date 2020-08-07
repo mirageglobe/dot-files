@@ -67,7 +67,7 @@ endif
 
 " === === completion
 
-filetype plugin indent on                             " enables filetype detection - http://vimdoc.sourceforge.net/htmldoc/filetype.html
+filetype indent plugin on                             " enables filetype - plugins, indenting rules, syntax highlighting http://vimdoc.sourceforge.net/htmldoc/filetype.html
 set omnifunc=syntaxcomplete#Complete                  " turn on omnicomplete
 set completeopt+=longest,menuone                      " mandatory setting for vim
 " set path+=**                                          " provides tab completion for all file related tasks
@@ -486,135 +486,148 @@ nmap <Leader>z za<ESC>
 " nmap <Leader> a# ===<ESC>Vgcc<ESC>^f=;;<esc>a<space>
 
 " read an empty template into current buffer based on filetype
-nnoremap <Leader>c :-1read ~/dot-files/vim-nanotemplate/template.c.c<CR>
-nnoremap <Leader>php :-1read ~/dot-files/vim-nanotemplate/template.php.php<CR>
-nnoremap <Leader>tf :-1read ~/dot-files/vim-nanotemplate/template.terraform.tf<CR>
+" nnoremap <Leader>c :-1read ~/dot-files/vim-nanotemplate/template.c.c<CR>
+" nnoremap <Leader>php :-1read ~/dot-files/vim-nanotemplate/template.php.php<CR>
+" nnoremap <Leader>tf :-1read ~/dot-files/vim-nanotemplate/template.terraform.tf<CR>
 
 " note that this remap uses gcc : timpopes auto commenter. method to
 " append ===, comment this, move cursor to first marker, append mode
 
-nmap <Leader>hh a#<SPACE>===<CR>#<SPACE>===<SPACE><CR>#<SPACE>===<ESC>Vkkgcc<ESC>j^f=;;<ESC>a<SPACE><ESC>
-nmap <Leader>hj a# ===<ESC>Vgcc<ESC>^f=;;<esc>a<space><ESC>
-nmap <Leader>hk a## ==><ESC>Vgcc<ESC>^f=ll<esc>a<space><ESC>
-nmap <Leader>hl a### >=><ESC>Vgcc<ESC>^f=ll<esc>a<space><ESC>
+" nmap <Leader>hh a#<SPACE>===<CR>#<SPACE>===<SPACE><CR>#<SPACE>===<ESC>Vkkgcc<ESC>j^f=;;<ESC>a<SPACE><ESC>
+" nmap <Leader>hj a# ===<ESC>Vgcc<ESC>^f=;;<esc>a<space><ESC>
+" nmap <Leader>hk a## ==><ESC>Vgcc<ESC>^f=ll<esc>a<space><ESC>
+" nmap <Leader>hl a### >=><ESC>Vgcc<ESC>^f=ll<esc>a<space><ESC>
 
 " filetype specific snippets
 " ref - http://vimdoc.sourceforge.net/htmldoc/autocmd.html
 " ref - http://learnvimscriptthehardway.stevelosh.com/chapters/13.html#autocommands-and-abbreviations
 
-if exists("did_load_filetypes")
+" if exists("did_load_filetypes")
 
-  augroup leadershortcut
+"   augroup leadershortcut
 
-    " remove all autocommands for the current group
-    autocmd!
+"     " remove all autocommands for the current group
+"     autocmd!
 
-    " markdown files
-    if index(['markdown'], &filetype) != -1
+"     " markdown files
+"     if index(['markdown'], &filetype) != -1
 
-      autocmd FileType markdown nnoremap <Leader>h 0i# <ESC>$<ESC>
-      autocmd FileType markdown nnoremap <Leader>hh 0i## <ESC>$<ESC>
-      autocmd FileType markdown nnoremap <Leader>hhh 0i### <ESC>$<ESC>
-      autocmd FileType markdown nnoremap <Leader>hr o---<ESC>
-      autocmd FileType markdown nnoremap <Leader>ref aref - <ESC>$<ESC>
-      autocmd FileType markdown nnoremap <Leader>code a```<ESC>o```<ESC>k<ESC>o# code block<CR><ESC>
+"       autocmd FileType markdown nnoremap <Leader>h 0i# <ESC>$<ESC>
+"       autocmd FileType markdown nnoremap <Leader>hh 0i## <ESC>$<ESC>
+"       autocmd FileType markdown nnoremap <Leader>hhh 0i### <ESC>$<ESC>
+"       autocmd FileType markdown nnoremap <Leader>hr o---<ESC>
+"       autocmd FileType markdown nnoremap <Leader>ref aref - <ESC>$<ESC>
+"       autocmd FileType markdown nnoremap <Leader>code a```<ESC>o```<ESC>k<ESC>o# code block<CR><ESC>
 
-    endif
+"     endif
 
-  augroup END
+"   augroup END
 
-  augroup vimnano
+"   augroup vimnano
 
-    " remove all autocommands for the current group
-    autocmd!
+"     " remove all autocommands for the current group
+"     autocmd!
 
-    " html files
-    if index(['html'], &filetype) != -1
+"     " html files
+"     if index(['html'], &filetype) != -1
 
-      autocmd FileType vim nnoremap <Leader>hel :-1read ~/dot-files/vim-nanotemplate/tpl.html.html<CR>
+"       autocmd FileType vim nnoremap <Leader>hel :-1read ~/dot-files/vim-nanotemplate/tpl.html.html<CR>
 
-    endif
+"     endif
 
-    " ruby files
-    if index(['ruby'], &filetype) != -1
+"     " python files
+"     if index(['python'], &filetype) != -1
 
-      autocmd FileType ruby nnoremap <Leader>hel :-1read ~/dot-files/vim-nanotemplate/tpl.ruby.rb<CR>
-      autocmd FileType ruby nnoremap <Leader>arr :-1read ~/dot-files/vim-nanotemplate/tpl.ruby.arr.rb<CR>
-      autocmd FileType ruby nnoremap <Leader>cla :-1read ~/dot-files/vim-nanotemplate/tpl.ruby.cla.rb<CR>
-      autocmd FileType ruby nnoremap <Leader>con :-1read ~/dot-files/vim-nanotemplate/tpl.ruby.con.rb<CR>
-      autocmd FileType ruby nnoremap <Leader>for :-1read ~/dot-files/vim-nanotemplate/tpl.ruby.for.rb<CR>
-      autocmd FileType ruby nnoremap <Leader>fun :-1read ~/dot-files/vim-nanotemplate/tpl.ruby.fun.rb<CR>
-      autocmd FileType ruby nnoremap <Leader>if :-1read ~/dot-files/vim-nanotemplate/tpl.ruby.if.rb<CR>
-      autocmd FileType ruby nnoremap <Leader>pri :-1read ~/dot-files/vim-nanotemplate/tpl.ruby.pri.rb<CR>
-      autocmd FileType ruby nnoremap <Leader>reg :-1read ~/dot-files/vim-nanotemplate/tpl.ruby.reg.rb<CR>
-      autocmd FileType ruby nnoremap <Leader>swi :-1read ~/dot-files/vim-nanotemplate/tpl.ruby.swi.rb<CR>
-      autocmd FileType ruby nnoremap <Leader>var :-1read ~/dot-files/vim-nanotemplate/tpl.ruby.var.rb<CR>
-      autocmd FileType ruby nnoremap <Leader>whi :-1read ~/dot-files/vim-nanotemplate/tpl.ruby.whi.rb<CR>
+"       autocmd FileType python nnoremap <Leader>hel :-1read ~/dot-files/vim-nanotemplate/tpl.python.py<CR>
+"       autocmd FileType python nnoremap <Leader>arr :-1read ~/dot-files/vim-nanotemplate/tpl.python.arr.py<CR>
+"       autocmd FileType python nnoremap <Leader>cla :-1read ~/dot-files/vim-nanotemplate/tpl.python.cla.py<CR>
+"       autocmd FileType python nnoremap <Leader>if :-1read ~/dot-files/vim-nanotemplate/tpl.python.if.py<CR>
 
-    endif
+"     endif
+"   augroup END
 
-    " python files
-    if index(['python'], &filetype) != -1
-
-      autocmd FileType python nnoremap <Leader>hel :-1read ~/dot-files/vim-nanotemplate/tpl.python.py<CR>
-      autocmd FileType python nnoremap <Leader>arr :-1read ~/dot-files/vim-nanotemplate/tpl.python.arr.py<CR>
-      autocmd FileType python nnoremap <Leader>cla :-1read ~/dot-files/vim-nanotemplate/tpl.python.cla.py<CR>
-      autocmd FileType python nnoremap <Leader>if :-1read ~/dot-files/vim-nanotemplate/tpl.python.if.py<CR>
-
-    endif
-  augroup END
-
-endif " exists("did_load_filetypes")
+" endif " exists("did_load_filetypes")
 
 " === mapping end
 
 " === idrtemplates start
 
-if exists("did_load_filetypes")
+" if exists("did_load_filetypes")
+"   finish
+" endif
 
-  function! IDRtoggle()
-    if index(['vim'], &filetype) != -1
-      echom "activate i dont remember (IDR) templates"
-    endif
-  endfunction
+  " augroup filetypedetect
 
-  command! IDR :call IDRtoggle()
+command IDR :call IDRtoggle()
+command IDRif :call IDRif()
 
-  " bash sh files
-  if index(['conf','sh'], &filetype) != -1
-
-    command! -buffer IDRhelp :-1read ~/dot-files/idrtemplates/tpl.bash.sh
-    command! -buffer IDRif :-1read ~/dot-files/idrtemplates/tpl.bash.if.sh
-    command! -buffer IDRfunction :-1read ~/dot-files/idrtemplates/tpl.bash.function.sh
-
+function IDRtoggle()
+  if index(['vim'], &filetype) != '-1'
+    echom "activate i dont remember (IDR) templates"
   endif
+endfunction
 
-  " vimrc files
-  if index(['vim'], &filetype) != -1
-
-    command! -buffer IDRhelp :-1read ~/dot-files/idrtemplates/tpl.vim.vim
-    command! -buffer IDRif :-1read ~/dot-files/idrtemplates/tpl.vim.if.vim
-    command! -buffer IDRvar :-1read ~/dot-files/idrtemplates/tpl.vim.var.vim
-    command! -buffer IDRecho :-1read ~/dot-files/idrtemplates/tpl.vim.echo.vim
-    command! -buffer IDRfunction :-1read ~/dot-files/idrtemplates/tpl.vim.function.vim
-
+function IDRif()
+  if index(['vim'], &filetype) != '-1'
+    -1read ~/dot-files/idrtemplates/tpl.vim.if.vim
   endif
+endfunction
 
-  " ansible
-  " terraform
+    " vimrc files
+    " if index(['vim'], &filetype) != '-1'
 
-endif
+    "   command IDRhelp :-1read ~/dot-files/idrtemplates/tpl.vim.vim
+
+    "   command -buffer IDRif :-1read ~/dot-files/idrtemplates/tpl.vim.if.vim
+    "   command -buffer IDRvar :-1read ~/dot-files/idrtemplates/tpl.vim.var.vim
+    "   command -buffer IDRecho :-1read ~/dot-files/idrtemplates/tpl.vim.echo.vim
+    "   command -buffer IDRfunction :-1read ~/dot-files/idrtemplates/tpl.vim.function.vim
+
+    " endif
+
+    " " bash sh files
+    " if index(['conf','sh'], &filetype) != -1
+
+    "   command! -buffer IDRhelp :-1read ~/dot-files/idrtemplates/tpl.bash.sh
+
+    "   command! -buffer IDRif :-1read ~/dot-files/idrtemplates/tpl.bash.if.sh
+    "   command! -buffer IDRfunction :-1read ~/dot-files/idrtemplates/tpl.bash.function.sh
+
+    " endif
+
+    " " ruby files
+    " if index(['ruby'], &filetype) != -1
+
+    "   command! -buffer IDRhelp :-1read ~/dot-files/idrtemplates/tpl.ruby.rb
+
+    "   command! -buffer IDRarray :-1read ~/dot-files/idrtemplates/tpl.ruby.array.rb
+    "   command! -buffer IDRclass :-1read ~/dot-files/idrtemplates/tpl.ruby.class.rb
+    "   command! -buffer IDRconstant :-1read ~/dot-files/idrtemplates/tpl.ruby.constant.rb
+    "   command! -buffer IDRecho :-1read ~/dot-files/idrtemplates/tpl.ruby.echo.rb
+    "   command! -buffer IDRfunction :-1read ~/dot-files/idrtemplates/tpl.ruby.function.rb
+    "   command! -buffer IDRif :-1read ~/dot-files/idrtemplates/tpl.ruby.if.rb
+    "   command! -buffer IDRloop :-1read ~/dot-files/idrtemplates/tpl.ruby.loop.rb
+    "   command! -buffer IDRswitch :-1read ~/dot-files/idrtemplates/tpl.ruby.switch.rb
+    "   command! -buffer IDRregex :-1read ~/dot-files/idrtemplates/tpl.ruby.regex.rb
+    "   command! -buffer IDRvariable :-1read ~/dot-files/idrtemplates/tpl.ruby.variable.rb
+
+    " endif
+
+    " ansible
+    " terraform
+  " augroup END
+" endif
 
 " === idrtemplates end
 
 " === commands start
 
-command! ReloadShell :source ~/dot-files/dot.vimrc
+command ReloadShell :source ~/dot-files/dot.vimrc
 
 " fzf - overrides Files command - usage :Files!
 command! -bang -nargs=* -complete=dir Files
       \ call fzf#vim#files(<q-args>,
-      \   <bang>0 ? fzf#vim#with_preview('up:60%')
+      \   <bang>0 ? fzf#vim#with_preview('up:100%')
       \           : fzf#vim#with_preview('right:50%:hidden', '?'),
       \   <bang>0)
 
