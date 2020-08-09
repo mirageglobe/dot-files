@@ -1,6 +1,7 @@
 class Customer
   # class Customer < Person           # inheritance
 
+  # initialize is magical constructors / deconstructors
   def initialize(id, name, addr)
     # @ sign defines instance variables
     @cust_id = id
@@ -16,25 +17,11 @@ class Customer
 
 end
 
-# cust1 = Customer.new("1", "John", "Wisdom Apartments, Ludhiya")
-# cust1.displayresults()
+# === to use object
+# john = Customer.new("1", "John", "Wisdom Apartments, Ludhiya")
+# john.displayresults()
 
-# == class constructors destructors (ruby uses initialize)
-# # ruby magically does it, thus no constructors/destructors
-#
-# class Customer
-#
-#   def initialize(id, name, addr)
-#     # @ sign defines instance variables
-#     @cust_id = id
-#
-#     etc...
-#   end
-#
-# end
-
-# == class inheritance
-#
+# === to use class inheritance
 # class Person
 #
 #   def breathe

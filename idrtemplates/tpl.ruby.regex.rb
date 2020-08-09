@@ -1,4 +1,7 @@
+# either match or scan
 text = "A regular expression is a sequence of characters that define a search pattern."
-matches = text.match(/character/)
-puts matches
+
+# match
+puts text.match(/character/)
+# scan
 puts text.scan(/\b[aeiou][a-z]*\b/)

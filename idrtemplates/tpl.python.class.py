@@ -1,4 +1,4 @@
-# class DerivedClassName(BaseClassName1, BaseClassName2): # (multiple)inheritance class example
+# class DerivedClassName(BaseClassName1, BaseClassName2):       # (multiple)inheritance class example
 class ClassName:
 
     kind = 'generalstat'            # class variable shared by all instances
@@ -9,7 +9,7 @@ class ClassName:
     def f(self):
         return 'hello world'
 
-
+# === to use
 fido = ClassName('Fido')
 fido.kind
 fido.name

@@ -491,34 +491,28 @@ nnoremap <Leader>p :r !pbpaste<CR><ESC>
 " code folding za / zc / zo
 nmap <Leader>z za<ESC>
 
+" comment header
+" note uses gcc : timpopes auto commenter. method: move begin, prepend === , esc, comment line
+nmap <Leader>h <ESC>gcc<ESC>I===<space><ESC>gcc<ESC>0
+nmap <Leader>hh <ESC>I===<space>section<space>start<ESC>gcc<ESC>0o===<space>section<space>end<ESC>gcc0
+
 " split navigations
 " nnoremap <C-J> <C-W><C-J>
 " nnoremap <C-K> <C-W><C-K>
 " nnoremap <C-L> <C-W><C-L>
 " nnoremap <C-H> <C-W><C-H>
 
-" nmap <Leader> a# ===<ESC>Vgcc<ESC>^f=;;<esc>a<space>
-
-" read an empty template into current buffer based on filetype
-" nnoremap <Leader>c :-1read ~/dot-files/vim-nanotemplate/template.c.c<CR>
-" nnoremap <Leader>php :-1read ~/dot-files/vim-nanotemplate/template.php.php<CR>
-" nnoremap <Leader>tf :-1read ~/dot-files/vim-nanotemplate/template.terraform.tf<CR>
-
-" note that this remap uses gcc : timpopes auto commenter. method to
-" append ===, comment this, move cursor to first marker, append mode
-
-" nmap <Leader>hh a#<SPACE>===<CR>#<SPACE>===<SPACE><CR>#<SPACE>===<ESC>Vkkgcc<ESC>j^f=;;<ESC>a<SPACE><ESC>
-" nmap <Leader>hj a# ===<ESC>Vgcc<ESC>^f=;;<esc>a<space><ESC>
-" nmap <Leader>hk a## ==><ESC>Vgcc<ESC>^f=ll<esc>a<space><ESC>
-" nmap <Leader>hl a### >=><ESC>Vgcc<ESC>^f=ll<esc>a<space><ESC>
-
 " filetype specific snippets
 " ref - http://vimdoc.sourceforge.net/htmldoc/autocmd.html
 " ref - http://learnvimscriptthehardway.stevelosh.com/chapters/13.html#autocommands-and-abbreviations
 
 " if exists("did_load_filetypes")
+"   finish
+" endif
 
-"   augroup leadershortcut
+" if exists("did_load_filetypes")
+
+"   augroup idrtemplates
 
 "     " remove all autocommands for the current group
 "     autocmd!
@@ -526,38 +520,10 @@ nmap <Leader>z za<ESC>
 "     " markdown files
 "     if index(['markdown'], &filetype) != -1
 
-"       autocmd FileType markdown nnoremap <Leader>h 0i# <ESC>$<ESC>
-"       autocmd FileType markdown nnoremap <Leader>hh 0i## <ESC>$<ESC>
-"       autocmd FileType markdown nnoremap <Leader>hhh 0i### <ESC>$<ESC>
-"       autocmd FileType markdown nnoremap <Leader>hr o---<ESC>
-"       autocmd FileType markdown nnoremap <Leader>ref aref - <ESC>$<ESC>
-"       autocmd FileType markdown nnoremap <Leader>code a```<ESC>o```<ESC>k<ESC>o# code block<CR><ESC>
+"       autocmd FileType vim nnoremap <Leader>idrhelp :IDRhelp
 
 "     endif
 
-"   augroup END
-
-"   augroup vimnano
-
-"     " remove all autocommands for the current group
-"     autocmd!
-
-"     " html files
-"     if index(['html'], &filetype) != -1
-
-"       autocmd FileType vim nnoremap <Leader>hel :-1read ~/dot-files/vim-nanotemplate/tpl.html.html<CR>
-
-"     endif
-
-"     " python files
-"     if index(['python'], &filetype) != -1
-
-"       autocmd FileType python nnoremap <Leader>hel :-1read ~/dot-files/vim-nanotemplate/tpl.python.py<CR>
-"       autocmd FileType python nnoremap <Leader>arr :-1read ~/dot-files/vim-nanotemplate/tpl.python.arr.py<CR>
-"       autocmd FileType python nnoremap <Leader>cla :-1read ~/dot-files/vim-nanotemplate/tpl.python.cla.py<CR>
-"       autocmd FileType python nnoremap <Leader>if :-1read ~/dot-files/vim-nanotemplate/tpl.python.if.py<CR>
-
-"     endif
 "   augroup END
 
 " endif " exists("did_load_filetypes")
@@ -566,20 +532,21 @@ nmap <Leader>z za<ESC>
 
 " === idrtemplates start
 
-" if exists("did_load_filetypes")
-"   finish
-" endif
-
   " augroup filetypedetect
 
-command IDR :call IDRtoggle()
-command IDRhelp :call IDRhelp()
-command IDRarray :call IDRarray()
-command IDRif :call IDRif()
-command IDRecho :call IDRecho()
-command IDRfunction :call IDRfunction()
-command IDRloop :call IDRloop()
-command IDRvariable :call IDRvariable()
+command IDR           :call IDRtoggle()               " toggle main idrtemplate reference
+command IDRhelp       :call IDRhelp()                 " show full language default help/template
+command IDRscaffold   :call IDRscaffold()             " inject the most common basic template for language
+
+command IDRarray      :call IDRarray()
+command IDRif         :call IDRif()
+command IDRclass      :call IDRclass()
+command IDRecho       :call IDRecho()
+command IDRfunction   :call IDRfunction()
+command IDRloop       :call IDRloop()
+command IDRregex      :call IDRregex()
+command IDRswitch     :call IDRswitch()
+command IDRvariable   :call IDRvariable()
 
 function IDRtoggle()
   echom "IDR : activate i dont remember (IDR) templates"
@@ -590,10 +557,24 @@ function IDRhelp()
     -1read ~/dot-files/idrtemplates/tpl.vim.vim
   elseif index(['conf','sh'], &filetype) != '-1'                    " bash sh
     -1read ~/dot-files/idrtemplates/tpl.bash.sh
+  elseif index(['c'], &filetype) != '-1'                            " c c
+    -1read ~/dot-files/idrtemplates/tpl.c.c
+  elseif index(['html'], &filetype) != '-1'                         " html html
+    -1read ~/dot-files/idrtemplates/tpl.html.html
+  elseif index(['javascript'], &filetype) != '-1'                   " javascript js
+    -1read ~/dot-files/idrtemplates/tpl.javascript.js
+  elseif index(['markdown'], &filetype) != '-1'                     " markdown md
+    -1read ~/dot-files/idrtemplates/tpl.markdown.md
+  elseif index(['php'], &filetype) != '-1'                          " php php
+    -1read ~/dot-files/idrtemplates/tpl.php.php
+  elseif index(['python'], &filetype) != '-1'                       " python py
+    -1read ~/dot-files/idrtemplates/tpl.python.py
   elseif index(['ruby'], &filetype) != '-1'                         " ruby rb
     -1read ~/dot-files/idrtemplates/tpl.ruby.rb
+  elseif index(['terraform'], &filetype) != '-1'                    " terraform tf
+    -1read ~/dot-files/idrtemplates/tpl.terraform.tf
   else
-    echom "IDR : current syntax or file type '" . &filetype . "' not supported. add syntax or run :set ft=<file>."
+    echom "IDR : syntax not found or file type '" . &filetype . "' not supported. add syntax or run :set ft=<file>."
   endif
 endfunction
 
@@ -602,10 +583,26 @@ function IDRarray()
     -1read ~/dot-files/idrtemplates/tpl.idr.placeholder.vim
   elseif index(['conf','sh'], &filetype) != '-1'                    " bash sh
     -1read ~/dot-files/idrtemplates/tpl.idr.placeholder.vim
+  elseif index(['python'], &filetype) != '-1'                       " python py
+    -1read ~/dot-files/idrtemplates/tpl.python.array.py
   elseif index(['ruby'], &filetype) != '-1'                         " ruby rb
     -1read ~/dot-files/idrtemplates/tpl.ruby.array.rb
   else
-    echom "IDR : current syntax or file type '" . &filetype . "' not supported. add syntax or run :set ft=<file>."
+    echom "IDR : syntax not found or file type '" . &filetype . "' not supported. add syntax or run :set ft=<file>."
+  endif
+endfunction
+
+function IDRclass()
+  if index(['vim'], &filetype) != '-1'                              " vimrc
+    -1read ~/dot-files/idrtemplates/tpl.idr.placeholder.vim
+  elseif index(['conf','sh'], &filetype) != '-1'                    " bash sh
+    -1read ~/dot-files/idrtemplates/tpl.idr.placeholder.vim
+  elseif index(['python'], &filetype) != '-1'                       " python py
+    -1read ~/dot-files/idrtemplates/tpl.python.class.py
+  elseif index(['ruby'], &filetype) != '-1'                         " ruby rb
+    -1read ~/dot-files/idrtemplates/tpl.ruby.class.rb
+  else
+    echom "IDR : syntax not found or file type '" . &filetype . "' not supported. add syntax or run :set ft=<file>."
   endif
 endfunction
 
@@ -617,7 +614,7 @@ function IDRecho()
   elseif index(['ruby'], &filetype) != '-1'                         " ruby rb
     -1read ~/dot-files/idrtemplates/tpl.ruby.echo.rb
   else
-    echom "IDR : current syntax or file type '" . &filetype . "' not supported. add syntax or run :set ft=<file>."
+    echom "IDR : syntax not found or file type '" . &filetype . "' not supported. add syntax or run :set ft=<file>."
   endif
 endfunction
 
@@ -629,7 +626,7 @@ function IDRfunction()
   elseif index(['ruby'], &filetype) != '-1'                         " ruby rb
     -1read ~/dot-files/idrtemplates/tpl.ruby.function.rb
   else
-    echom "IDR : current syntax or file type '" . &filetype . "' not supported. add syntax or run :set ft=<file>."
+    echom "IDR : syntax not found or file type '" . &filetype . "' not supported. add syntax or run :set ft=<file>."
   endif
 endfunction
 
@@ -638,10 +635,12 @@ function IDRif()
     -1read ~/dot-files/idrtemplates/tpl.vim.if.vim
   elseif index(['conf','sh'], &filetype) != '-1'                    " bash sh
     -1read ~/dot-files/idrtemplates/tpl.bash.if.sh
+  elseif index(['python'], &filetype) != '-1'                       " python py
+    -1read ~/dot-files/idrtemplates/tpl.python.if.py
   elseif index(['ruby'], &filetype) != '-1'                         " ruby rb
     -1read ~/dot-files/idrtemplates/tpl.ruby.if.rb
   else
-    echom "IDR : current syntax or file type '" . &filetype . "' not supported. add syntax or run :set ft=<file>."
+    echom "IDR : syntax not found or file type '" . &filetype . "' not supported. add syntax or run :set ft=<file>."
   endif
 endfunction
 
@@ -653,7 +652,31 @@ function IDRloop()
   elseif index(['ruby'], &filetype) != '-1'                         " ruby rb
     -1read ~/dot-files/idrtemplates/tpl.ruby.loop.rb
   else
-    echom "IDR : current syntax or file type '" . &filetype . "' not supported. add syntax or run :set ft=<file>."
+    echom "IDR : syntax not found or file type '" . &filetype . "' not supported. add syntax or run :set ft=<file>."
+  endif
+endfunction
+
+function IDRregex()
+  if index(['vim'], &filetype) != '-1'                              " vimrc
+    -1read ~/dot-files/idrtemplates/tpl.idr.placeholder.vim
+  elseif index(['conf','sh'], &filetype) != '-1'                    " bash sh
+    -1read ~/dot-files/idrtemplates/tpl.idr.placeholder.vim
+  elseif index(['ruby'], &filetype) != '-1'                         " ruby rb
+    -1read ~/dot-files/idrtemplates/tpl.ruby.regex.rb
+  else
+    echom "IDR : syntax not found or file type '" . &filetype . "' not supported. add syntax or run :set ft=<file>."
+  endif
+endfunction
+
+function IDRswitch()
+  if index(['vim'], &filetype) != '-1'                              " vimrc
+    -1read ~/dot-files/idrtemplates/tpl.idr.placeholder.vim
+  elseif index(['conf','sh'], &filetype) != '-1'                    " bash sh
+    -1read ~/dot-files/idrtemplates/tpl.idr.placeholder.vim
+  elseif index(['ruby'], &filetype) != '-1'                         " ruby rb
+    -1read ~/dot-files/idrtemplates/tpl.ruby.switch.rb
+  else
+    echom "IDR : syntax not found or file type '" . &filetype . "' not supported. add syntax or run :set ft=<file>."
   endif
 endfunction
 
@@ -665,24 +688,14 @@ function IDRvariable()
   elseif index(['ruby'], &filetype) != '-1'                         " ruby rb
     -1read ~/dot-files/idrtemplates/tpl.ruby.variable.rb
   else
-    echom "IDR : current syntax or file type '" . &filetype . "' not supported. add syntax or run :set ft=<file>."
+    echom "IDR : syntax not found or file type '" . &filetype . "' not supported. add syntax or run :set ft=<file>."
   endif
 endfunction
 
-" ruby files
-"   command! -buffer IDRclass :-1read ~/dot-files/idrtemplates/tpl.ruby.class.rb
-"   command! -buffer IDRconstant :-1read ~/dot-files/idrtemplates/tpl.ruby.constant.rb
-"   command! -buffer IDRswitch :-1read ~/dot-files/idrtemplates/tpl.ruby.switch.rb
-"   command! -buffer IDRregex :-1read ~/dot-files/idrtemplates/tpl.ruby.regex.rb
-
 " ansible
-" c
 " javascript
 " go
 " lua
-" php
-" python
-" terraform
 
 " === idrtemplates end
 
