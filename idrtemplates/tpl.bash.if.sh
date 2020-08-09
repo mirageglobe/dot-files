@@ -1,11 +1,9 @@
-# conditional - if empty string
-if [[ -z STRING ]]; then
-fi
-
-# conditional - if equals string
-if [[ STRING == STRING ]]; then
-fi
-
-# conditional - if not equals string
-if [[ STRING != STRING ]]; then
+# compare : -eq equals(num) / -lt less than(num) / -gt greater than(num) / == equals / != not equals / && and / || or
+# check : -e file exist / -d dir exist / -r read perm / -w write perm / -x execute perm / ! true if not
+if [[ -e myfile.txt ]] ; then
+  # do something
+elif [[ STRING == STRING ]] ; then
+  # do something
+else
+  # do something
 fi

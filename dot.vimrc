@@ -574,10 +574,15 @@ nmap <Leader>z za<ESC>
 
 command IDR :call IDRtoggle()
 command IDRhelp :call IDRhelp()
+command IDRarray :call IDRarray()
 command IDRif :call IDRif()
+command IDRecho :call IDRecho()
+command IDRfunction :call IDRfunction()
+command IDRloop :call IDRloop()
+command IDRvariable :call IDRvariable()
 
 function IDRtoggle()
-  echom "activate i dont remember (IDR) templates"
+  echom "IDR : activate i dont remember (IDR) templates"
 endfunction
 
 function IDRhelp()
@@ -585,6 +590,46 @@ function IDRhelp()
     -1read ~/dot-files/idrtemplates/tpl.vim.vim
   elseif index(['conf','sh'], &filetype) != '-1'                    " bash sh
     -1read ~/dot-files/idrtemplates/tpl.bash.sh
+  elseif index(['ruby'], &filetype) != '-1'                         " ruby rb
+    -1read ~/dot-files/idrtemplates/tpl.ruby.rb
+  else
+    echom "IDR : current syntax or file type '" . &filetype . "' not supported. add syntax or run :set ft=<file>."
+  endif
+endfunction
+
+function IDRarray()
+  if index(['vim'], &filetype) != '-1'                              " vimrc
+    -1read ~/dot-files/idrtemplates/tpl.idr.placeholder.vim
+  elseif index(['conf','sh'], &filetype) != '-1'                    " bash sh
+    -1read ~/dot-files/idrtemplates/tpl.idr.placeholder.vim
+  elseif index(['ruby'], &filetype) != '-1'                         " ruby rb
+    -1read ~/dot-files/idrtemplates/tpl.ruby.array.rb
+  else
+    echom "IDR : current syntax or file type '" . &filetype . "' not supported. add syntax or run :set ft=<file>."
+  endif
+endfunction
+
+function IDRecho()
+  if index(['vim'], &filetype) != '-1'                              " vimrc
+    -1read ~/dot-files/idrtemplates/tpl.vim.echo.vim
+  elseif index(['conf','sh'], &filetype) != '-1'                    " bash sh
+    -1read ~/dot-files/idrtemplates/tpl.bash.echo.sh
+  elseif index(['ruby'], &filetype) != '-1'                         " ruby rb
+    -1read ~/dot-files/idrtemplates/tpl.ruby.echo.rb
+  else
+    echom "IDR : current syntax or file type '" . &filetype . "' not supported. add syntax or run :set ft=<file>."
+  endif
+endfunction
+
+function IDRfunction()
+  if index(['vim'], &filetype) != '-1'                              " vimrc
+    -1read ~/dot-files/idrtemplates/tpl.vim.function.vim
+  elseif index(['conf','sh'], &filetype) != '-1'                    " bash sh
+    -1read ~/dot-files/idrtemplates/tpl.bash.function.sh
+  elseif index(['ruby'], &filetype) != '-1'                         " ruby rb
+    -1read ~/dot-files/idrtemplates/tpl.ruby.function.rb
+  else
+    echom "IDR : current syntax or file type '" . &filetype . "' not supported. add syntax or run :set ft=<file>."
   endif
 endfunction
 
@@ -593,53 +638,51 @@ function IDRif()
     -1read ~/dot-files/idrtemplates/tpl.vim.if.vim
   elseif index(['conf','sh'], &filetype) != '-1'                    " bash sh
     -1read ~/dot-files/idrtemplates/tpl.bash.if.sh
+  elseif index(['ruby'], &filetype) != '-1'                         " ruby rb
+    -1read ~/dot-files/idrtemplates/tpl.ruby.if.rb
+  else
+    echom "IDR : current syntax or file type '" . &filetype . "' not supported. add syntax or run :set ft=<file>."
   endif
 endfunction
 
-    " vimrc files
-    " if index(['vim'], &filetype) != '-1'
+function IDRloop()
+  if index(['vim'], &filetype) != '-1'                              " vimrc
+    -1read ~/dot-files/idrtemplates/tpl.idr.placeholder.vim
+  elseif index(['conf','sh'], &filetype) != '-1'                    " bash sh
+    -1read ~/dot-files/idrtemplates/tpl.idr.placeholder.vim
+  elseif index(['ruby'], &filetype) != '-1'                         " ruby rb
+    -1read ~/dot-files/idrtemplates/tpl.ruby.loop.rb
+  else
+    echom "IDR : current syntax or file type '" . &filetype . "' not supported. add syntax or run :set ft=<file>."
+  endif
+endfunction
 
-    "   command IDRhelp :-1read ~/dot-files/idrtemplates/tpl.vim.vim
+function IDRvariable()
+  if index(['vim'], &filetype) != '-1'                              " vimrc
+    -1read ~/dot-files/idrtemplates/tpl.vim.variable.vim
+  elseif index(['conf','sh'], &filetype) != '-1'                    " bash sh
+    -1read ~/dot-files/idrtemplates/tpl.idr.placeholder.vim
+  elseif index(['ruby'], &filetype) != '-1'                         " ruby rb
+    -1read ~/dot-files/idrtemplates/tpl.ruby.variable.rb
+  else
+    echom "IDR : current syntax or file type '" . &filetype . "' not supported. add syntax or run :set ft=<file>."
+  endif
+endfunction
 
-    "   command -buffer IDRif :-1read ~/dot-files/idrtemplates/tpl.vim.if.vim
-    "   command -buffer IDRvar :-1read ~/dot-files/idrtemplates/tpl.vim.var.vim
-    "   command -buffer IDRecho :-1read ~/dot-files/idrtemplates/tpl.vim.echo.vim
-    "   command -buffer IDRfunction :-1read ~/dot-files/idrtemplates/tpl.vim.function.vim
+" ruby files
+"   command! -buffer IDRclass :-1read ~/dot-files/idrtemplates/tpl.ruby.class.rb
+"   command! -buffer IDRconstant :-1read ~/dot-files/idrtemplates/tpl.ruby.constant.rb
+"   command! -buffer IDRswitch :-1read ~/dot-files/idrtemplates/tpl.ruby.switch.rb
+"   command! -buffer IDRregex :-1read ~/dot-files/idrtemplates/tpl.ruby.regex.rb
 
-    " endif
-
-    " " bash sh files
-    " if index(['conf','sh'], &filetype) != -1
-
-    "   command! -buffer IDRhelp :-1read ~/dot-files/idrtemplates/tpl.bash.sh
-
-    "   command! -buffer IDRif :-1read ~/dot-files/idrtemplates/tpl.bash.if.sh
-    "   command! -buffer IDRfunction :-1read ~/dot-files/idrtemplates/tpl.bash.function.sh
-
-    " endif
-
-    " " ruby files
-    " if index(['ruby'], &filetype) != -1
-
-    "   command! -buffer IDRhelp :-1read ~/dot-files/idrtemplates/tpl.ruby.rb
-
-    "   command! -buffer IDRarray :-1read ~/dot-files/idrtemplates/tpl.ruby.array.rb
-    "   command! -buffer IDRclass :-1read ~/dot-files/idrtemplates/tpl.ruby.class.rb
-    "   command! -buffer IDRconstant :-1read ~/dot-files/idrtemplates/tpl.ruby.constant.rb
-    "   command! -buffer IDRecho :-1read ~/dot-files/idrtemplates/tpl.ruby.echo.rb
-    "   command! -buffer IDRfunction :-1read ~/dot-files/idrtemplates/tpl.ruby.function.rb
-    "   command! -buffer IDRif :-1read ~/dot-files/idrtemplates/tpl.ruby.if.rb
-    "   command! -buffer IDRloop :-1read ~/dot-files/idrtemplates/tpl.ruby.loop.rb
-    "   command! -buffer IDRswitch :-1read ~/dot-files/idrtemplates/tpl.ruby.switch.rb
-    "   command! -buffer IDRregex :-1read ~/dot-files/idrtemplates/tpl.ruby.regex.rb
-    "   command! -buffer IDRvariable :-1read ~/dot-files/idrtemplates/tpl.ruby.variable.rb
-
-    " endif
-
-    " ansible
-    " terraform
-  " augroup END
-" endif
+" ansible
+" c
+" javascript
+" go
+" lua
+" php
+" python
+" terraform
 
 " === idrtemplates end
 

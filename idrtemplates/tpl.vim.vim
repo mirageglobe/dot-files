@@ -1,5 +1,7 @@
 # === vim help
 
+" ref - https://devhints.io/vimscript
+
 # print
 echo "result = " . str
 
