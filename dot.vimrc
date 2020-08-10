@@ -648,7 +648,7 @@ function IDRloop()
   if index(['vim'], &filetype) != '-1'                              " vimrc
     -1read ~/dot-files/idrtemplates/tpl.idr.placeholder.vim
   elseif index(['conf','sh'], &filetype) != '-1'                    " bash sh
-    -1read ~/dot-files/idrtemplates/tpl.idr.placeholder.vim
+    -1read ~/dot-files/idrtemplates/tpl.bash.loop.sh
   elseif index(['ruby'], &filetype) != '-1'                         " ruby rb
     -1read ~/dot-files/idrtemplates/tpl.ruby.loop.rb
   else
@@ -672,7 +672,7 @@ function IDRswitch()
   if index(['vim'], &filetype) != '-1'                              " vimrc
     -1read ~/dot-files/idrtemplates/tpl.idr.placeholder.vim
   elseif index(['conf','sh'], &filetype) != '-1'                    " bash sh
-    -1read ~/dot-files/idrtemplates/tpl.idr.placeholder.vim
+    -1read ~/dot-files/idrtemplates/tpl.bash.switch.sh
   elseif index(['ruby'], &filetype) != '-1'                         " ruby rb
     -1read ~/dot-files/idrtemplates/tpl.ruby.switch.rb
   else
