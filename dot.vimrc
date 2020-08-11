@@ -164,7 +164,7 @@ Plug 'tpope/vim-repeat'                               " enables repeating comman
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }   " installs fzf
 Plug 'junegunn/fzf.vim'                               " enables super fast fuzzy search with :FZF
-" Plug 'tpope/vim-vinegar'                              " enables file drawer with - key
+Plug 'tpope/vim-vinegar'                              " enables file drawer with - key
 Plug 'airblade/vim-gitgutter'                         " shows git status in gutter
 " Plug 'tpope/vim-fugitive'                             " run git commands in vim
 " Plug tpope/vim-rhubarb
@@ -451,8 +451,6 @@ command! -bang -nargs=* -complete=dir Files
 
 " === mapping start
 
-" n = normal mode
-
 " map       normal and visual mode (defaults to remap)
 " nmap      normal mode
 " vmap      visual mode
@@ -461,7 +459,7 @@ command! -bang -nargs=* -complete=dir Files
 " remap     map recursively (default)
 " noremap   non recursive map
 
-" <c-d>   control + d
+" <C-d>   control + d
 
 " ref - https://stackoverflow.com/questions/3776117/what-is-the-difference-between-the-remap-noremap-nnoremap-and-vnoremap-mapping
 
@@ -471,22 +469,26 @@ let mapleader = "\<space>"
 " === key maps
 
 " === === open file explorer
-nnoremap <Leader><SPACE> :Explore<CR>
+noremap <Leader><SPACE> :Explore<CR>
+
+" === === open buffer explorer
+noremap <Leader>b :BufExplorerVerticalSplit<CR>
 
 " === === open file explorer
 " nnoremap <Leader>w <C-w><C-w>
 
 " === === open tagbar - ctag explorer
-nnoremap <Leader>ct :TagbarToggle<CR>
+noremap <Leader>t :TagbarToggle<CR>
 
 " === === set git co-author
 " let @z='ICo-authored-by: y$A <@gmail.com>@Pgua<f x'
 " nmap <Leader>@ <ESC>VD <ESC>ICo-authored-by: <CR>
-nmap <Leader>jd <ESC>ICo-authored-by: John Doe <johndoe@gmail.com><ESC>
+noremap <Leader>jd <ESC>ICo-authored-by: John Doe <johndoe@gmail.com><ESC>
 
-" yank to/from clipboard
-vnoremap <Leader>y :w !pbcopy<CR><ESC>
-nnoremap <Leader>p :r !pbpaste<CR><ESC>
+" copy/paste from clipboard
+noremap <Leader>c :.w !pbcopy<CR><CR>
+noremap <Leader>v :.r !pbpaste<CR>
+" nnoremap <Leader>p :r !pbpaste<CR>
 
 " code folding za / zc / zo
 nmap <Leader>z za<ESC>
