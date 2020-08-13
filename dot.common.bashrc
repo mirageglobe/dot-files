@@ -211,8 +211,9 @@ fn_fox_sys_get_current_folder() {
 
 alias _fox_diff="diff -y --color"
 alias _fox_emoshrug="echo '¯\_(ツ)_/¯'";
-alias _fox_fzf="fzf --height=70% --preview=\"cat {}\" --preview-window=right:50%:wrap"
-alias _fox_fzfvim="fzf --height=70% --preview=\"cat {}\" --preview-window=right:50%:wrap | xargs -o vim"
+
+alias _fox_fzf="fzf --height=70% --preview='bat --style=numbers --color=always --line-range :500 {}' --preview-window=right:50%:wrap"
+alias _fox_fzfvim="fzf --height=70% --preview='bat --style=numbers --color=always --line-range :500 {}' --preview-window=right:50%:wrap | xargs -o vim"
 alias _fox_path="echo \$PATH | tr ':' '\n'"
 alias _fox_random="echo ${RANDOM:0:2};"
 
@@ -240,7 +241,7 @@ alias _fox_aws="echo '
 '"
 
 alias _fox_aws_check="aws sts get-caller-identity"
-alias _fox_aws_config="cat ~/.aws/config; cat ~/.aws/credentials;"
+alias _fox_aws_config="bat ~/.aws/config; bat ~/.aws/credentials;"
 alias _fox_aws_config_init="mkdir -pv ~/.aws && aws configure;"
 alias _fox_aws_access_key_id="aws configure get aws_access_key_id --profile;"
 alias _fox_aws_secret_access_key="aws configure get aws_secret_access_key --profile;"
@@ -503,7 +504,7 @@ alias _fox_git="echo '
   https://datasift.github.io/gitflow/IntroducingGitFlow.html
 '"
 
-alias _git_config="echo ':: showing gitconfig ::'; cat ~/.gitconfig;"
+alias _git_config="echo ':: showing gitconfig ::'; bat ~/.gitconfig;"
 alias _git_show="git fetch --all --prune; printf '\n'; git branch --all -vv; printf '\n'; git status --show-stash -vv;"
 alias _git_diff="echo ':: git changes - git diff head^ ::'; git diff head^;"
 

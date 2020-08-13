@@ -76,6 +76,7 @@ set completeopt+=longest,menuone                      " mandatory setting for vi
 
 syntax on                                             " set syntax highlighting in vim
 set list listchars=tab:»·,trail:·                     " display tabs and trailing spaces visually
+" set nolist                                            " breaks white space show
 
 " === === numbering
 set number                                            " show line numbers
@@ -99,8 +100,9 @@ set expandtab
 
 " === === wrapping
 
-set wrap linebreak nolist                             " set soft wrap for text
+set wrap                                                " set soft wrap for text
 " set nowrap                                            " turn off code wrap
+set linebreak                                           " set wrap at only
 
 " === command
 
@@ -164,6 +166,7 @@ Plug 'tpope/vim-repeat'                               " enables repeating comman
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }   " installs fzf
 Plug 'junegunn/fzf.vim'                               " enables super fast fuzzy search with :FZF
+Plug 'preservim/nerdtree'                             " project drawer
 Plug 'tpope/vim-vinegar'                              " enables file drawer with - key
 Plug 'airblade/vim-gitgutter'                         " shows git status in gutter
 " Plug 'tpope/vim-fugitive'                             " run git commands in vim
@@ -181,7 +184,7 @@ Plug 'sheerun/vim-polyglot'                           " syntax superfast on dema
 " Plug 'ervandew/supertab'                              " enables tab actions i.e. autocomplete by using <tab> insert mode
 " Plug 'maralla/completor.vim'                          " yet another async code completion cool
 " Plug 'vim-vdebug/vdebug'                              " vim debugger that interfaces with xdebug
-" Plug 'MarcWeber/vim-addon-mw-utils'                   " snippet tool 
+" Plug 'MarcWeber/vim-addon-mw-utils'                   " snippet tool
 " Plug 'tomtom/tlib_vim'                                " snippet tool
 " Plug 'garbas/vim-snipmate'                            " snippet tool
 " Plug 'honza/vim-snippets'                             " snippets - optional
@@ -250,11 +253,11 @@ set noshowmode                                        " hide status of mode (ins
 " lightline init - needs to be first function
 
 let g:lightline = {
-      \   'separator': { 
+      \   'separator': {
       \     'left': "",
       \     'right': "",
       \   },
-      \   'subseparator': { 
+      \   'subseparator': {
       \     'left': "\ue0b1",
       \     'right': "\ue0b3",
       \   }
@@ -423,12 +426,9 @@ let g:netrw_altv = 1
 
 command ReloadShell :source ~/dot-files/dot.vimrc
 
-" fzf - overrides Files command - usage :Files!
-command! -bang -nargs=* -complete=dir Files
-      \ call fzf#vim#files(<q-args>,
-      \   <bang>0 ? fzf#vim#with_preview('up:100%')
-      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-      \   <bang>0)
+" fzf - overrides Files command - usage :Files! - https://github.com/junegunn/fzf.vim
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
 
 " === commands end
 
@@ -476,6 +476,10 @@ noremap <Leader>b :BufExplorerVerticalSplit<CR>
 
 " === === open file explorer
 " nnoremap <Leader>w <C-w><C-w>
+noremap <Leader>n :NERDTreeToggle<CR>
+
+" === === open FZF explorer
+noremap <Leader>f :Files!<CR>
 
 " === === open tagbar - ctag explorer
 noremap <Leader>t :TagbarToggle<CR>
@@ -531,6 +535,17 @@ nmap <Leader>hh <ESC>I===<space>section<space>start<ESC>gcc<ESC>0o===<space>sect
 " endif " exists("did_load_filetypes")
 
 " === mapping end
+
+" === trimwhitespace trim start
+
+function TrimWhiteSpace()
+  echom "TTWS : trim trailing whitespace"
+  :%s/\s\+$//e
+endfunction
+
+command TrimWhiteSpace           :call TrimWhiteSpace()           " toggle trim trailing whitespace
+
+" === trimwhitespace end
 
 " === idrtemplates start
 
@@ -700,4 +715,3 @@ endfunction
 " lua
 
 " === idrtemplates end
-
