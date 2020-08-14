@@ -469,10 +469,10 @@ let mapleader = "\<space>"
 " === key maps
 
 " === === open file explorer
-noremap <Leader><SPACE> :Explore<CR>
+noremap <Leader>ff :Explore<CR>
 
 " === === open buffer explorer
-noremap <Leader>b :BufExplorerVerticalSplit<CR>
+noremap <Leader><SPACE> :BufExplorer<CR>
 
 " === === open file explorer
 " nnoremap <Leader>w <C-w><C-w>
