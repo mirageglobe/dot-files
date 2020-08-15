@@ -687,13 +687,14 @@ alias _fox_k8s="echo '
 
 '"
 
-# ## ==> ssh
+# ## ==> ssh ssl openssl
 
 alias _fox_ssh="echo '
 :: help ::
 
   _fox_ssh_load                 # load default key pair ~/.ssh/id_rsa to ssh agent
   _fox_ssh_keygen               # generates key pair ~/.ssh/id_rsa_standard (2048 bits)
+  _fox_ssl_gen                  # generate random shared secret
 
   # ssh tunnel using ssh -L <local.port>:<target>:<target.port> <proxy>
   ssh -L 8080:www.google.com:80 172.10.10.10
@@ -704,6 +705,8 @@ alias _fox_ssh="echo '
 
 alias _fox_ssh_load="ssh-add;"
 alias _fox_ssh_keygen="ssh-keygen -b 2048 -t rsa -f ~/.ssh/id_rsa_standard -C \"( $HOSTNAME : changeme@gmail.com ) \""
+
+alias _fox_ssl_gen="openssl rand -hex 16;"
 
 # ## ==> tmux
 
