@@ -550,6 +550,7 @@ command TrimWhiteSpace           :call TrimWhiteSpace()           " toggle trim 
 " === idrtemplates start
 
   " augroup filetypedetect
+let current_filetype = &filetype
 
 command IDR           :call IDRtoggle()               " toggle main idrtemplate reference
 command IDRhelp       :call IDRhelp()                 " show full language default help/template
@@ -565,13 +566,24 @@ command IDRregex      :call IDRregex()
 command IDRswitch     :call IDRswitch()
 command IDRvariable   :call IDRvariable()
 
+command IDRftansible    :call IDRfile("ansible", current_filetype)        " toggle to set file as ansible
+command IDRftterraform  :call IDRfile("terraform", current_filetype)      " toggle to set file as terraform
+command IDRftorigin     :call IDRfile(current_filetype, current_filetype) " toggle to set file as original format
+
 function IDRtoggle()
   echom "IDR : activate i dont remember (IDR) templates"
+endfunction
+
+function IDRfile(x, c)
+  echom "IDR : activate templates for : " . a:x . " / origin filetype : " . a:c
+  let &filetype = a:x
 endfunction
 
 function IDRhelp()
   if index(['vim'], &filetype) != '-1'                              " vimrc
     -1read ~/dot-files/idrtemplates/tpl.vim.vim
+  elseif index(['yaml'], &filetype) != '-1'                         " ansible yml
+    -1read ~/dot-files/idrtemplates/tpl.ansible.yml
   elseif index(['conf','sh'], &filetype) != '-1'                    " bash sh
     -1read ~/dot-files/idrtemplates/tpl.bash.sh
   elseif index(['c'], &filetype) != '-1'                            " c c

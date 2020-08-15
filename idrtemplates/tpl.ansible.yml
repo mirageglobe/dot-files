@@ -1,0 +1,37 @@
+
+# === references
+# - https://devhints.io/bash
+
+# === variable constants
+
+# === helper functions
+
+# === === debug message
+
+- name: debug {{ myvalue }}
+  shell: |
+    echo "one: {{ myvalue1 }}";
+    echo "two: {{ myvalue2 }}";
+
+# === === nested array loop
+
+# nested dictionary
+dictionary:
+  topic1:
+    - t1-sub1
+    - t1-sub2
+  topic2:
+    - t2-sub1
+    - t2-sub2
+
+allowlist:
+  - topic1
+
+# loops nested dictionary with conditional to check against allowlist
+- name: Read values {{ myvalue }}
+  shell: |
+      echo "one : {{ item.0.key }} # this is key i.e. topic1";
+      echo "two : {{ item.1 }} # this is value i.e. t1-sub1";
+  loop: "{{ dictionary | dict2items | subelements('value') }}"
+  when: item.0.key in allowlist
+
