@@ -13,6 +13,8 @@
 :IDR              " load IDR help
 :IDRhelp          " load default help of code for detected language
 
+:IDRscaffold      " create a basic file scaffold starter
+
 :IDRarray         " add snippet - array
 :IDRclass         " add snippet - class
 :IDRecho          " add snippet - echo print

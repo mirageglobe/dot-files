@@ -366,6 +366,12 @@ let g:ale_list_window_size = 5
 
 " === mucomplete end
 
+" === nerdtree start
+
+let NERDTreeShowHidden=1
+
+" === nerdtree end
+
 " === vim polyglot start
 
 " setting polygot terraform-vim
@@ -605,6 +611,20 @@ function IDRhelp(idr_path)
     execute "80vsplit " . fnameescape(a:idr_path) . "tpl.ruby.rb"
   elseif index(['terraform'], &filetype) != '-1'                    " terraform tf
     execute "80vsplit " . fnameescape(a:idr_path) . "tpl.terraform.tf"
+  else
+    echom "IDR : syntax not found or file type '" . &filetype . "' not supported. add syntax or run :set ft=<file>."
+  endif
+endfunction
+
+function IDRscaffold()
+  if index(['vim'], &filetype) != '-1'                              " vimrc
+    -1read ~/dot-files/idrtemplates/tpl.idr.placeholder.vim
+  elseif index(['conf','sh'], &filetype) != '-1'                    " bash sh
+    -1read ~/dot-files/idrtemplates/tpl.bash.scaffold.sh
+  elseif index(['python'], &filetype) != '-1'                       " python py
+    -1read ~/dot-files/idrtemplates/tpl.python.scaffold.py
+  elseif index(['ruby'], &filetype) != '-1'                         " ruby rb
+    -1read ~/dot-files/idrtemplates/tpl.ruby.scaffold.rb
   else
     echom "IDR : syntax not found or file type '" . &filetype . "' not supported. add syntax or run :set ft=<file>."
   endif
