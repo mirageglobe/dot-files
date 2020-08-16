@@ -549,11 +549,11 @@ command TrimWhiteSpace           :call TrimWhiteSpace()           " toggle trim 
 
 " === idrtemplates start
 
-  " augroup filetypedetect
-let current_filetype = &filetype
+let idr_current_filetype = &filetype
+let idr_path = "~/dot-files/idrtemplates/"            " path of idr directory
 
-command IDR           :call IDRtoggle()               " toggle main idrtemplate reference
-command IDRhelp       :call IDRhelp()                 " show full language default help/template
+command IDR           :call IDRtoggle(idr_path)       " toggle main idrtemplate reference
+command IDRhelp       :call IDRhelp(idr_path)         " show full language default help/template
 command IDRscaffold   :call IDRscaffold()             " inject the most common basic template for language
 
 command IDRarray      :call IDRarray()
@@ -566,12 +566,14 @@ command IDRregex      :call IDRregex()
 command IDRswitch     :call IDRswitch()
 command IDRvariable   :call IDRvariable()
 
-command IDRftansible    :call IDRfile("ansible", current_filetype)        " toggle to set file as ansible
-command IDRftterraform  :call IDRfile("terraform", current_filetype)      " toggle to set file as terraform
-command IDRftorigin     :call IDRfile(current_filetype, current_filetype) " toggle to set file as original format
+command IDRftansible    :call IDRfile("ansible", idr_current_filetype)              " toggle to set file as ansible
+command IDRftterraform  :call IDRfile("terraform", idr_current_filetype)            " toggle to set file as terraform
+command IDRftorigin     :call IDRfile(idr_current_filetype, idr_current_filetype)   " toggle to set file as original format
 
-function IDRtoggle()
+function IDRtoggle(idr_path)
   echom "IDR : activate i dont remember (IDR) templates"
+  set splitright
+  execute "80vsplit " . fnameescape(a:idr_path) . "tpl.idr.help.vim"
 endfunction
 
 function IDRfile(x, c)
@@ -579,29 +581,30 @@ function IDRfile(x, c)
   let &filetype = a:x
 endfunction
 
-function IDRhelp()
+function IDRhelp(idr_path)
+  set splitright
   if index(['vim'], &filetype) != '-1'                              " vimrc
-    -1read ~/dot-files/idrtemplates/tpl.vim.vim
+    execute "80vsplit " . fnameescape(a:idr_path) . "tpl.vim.vim"
   elseif index(['yaml'], &filetype) != '-1'                         " ansible yml
-    -1read ~/dot-files/idrtemplates/tpl.ansible.yml
+    execute "80vsplit " . fnameescape(a:idr_path) . "tpl.ansible.yml"
   elseif index(['conf','sh'], &filetype) != '-1'                    " bash sh
-    -1read ~/dot-files/idrtemplates/tpl.bash.sh
+    execute "80vsplit " . fnameescape(a:idr_path) . "tpl.bash.sh"
   elseif index(['c'], &filetype) != '-1'                            " c c
-    -1read ~/dot-files/idrtemplates/tpl.c.c
+    execute "80vsplit " . fnameescape(a:idr_path) . "tpl.c.c"
   elseif index(['html'], &filetype) != '-1'                         " html html
-    -1read ~/dot-files/idrtemplates/tpl.html.html
+    execute "80vsplit " . fnameescape(a:idr_path) . "tpl.html.html"
   elseif index(['javascript'], &filetype) != '-1'                   " javascript js
-    -1read ~/dot-files/idrtemplates/tpl.javascript.js
+    execute "80vsplit " . fnameescape(a:idr_path) . "tpl.javascript.js"
   elseif index(['markdown'], &filetype) != '-1'                     " markdown md
-    -1read ~/dot-files/idrtemplates/tpl.markdown.md
+    execute "80vsplit " . fnameescape(a:idr_path) . "tpl.markdown.md"
   elseif index(['php'], &filetype) != '-1'                          " php php
-    -1read ~/dot-files/idrtemplates/tpl.php.php
+    execute "80vsplit " . fnameescape(a:idr_path) . "tpl.php.php"
   elseif index(['python'], &filetype) != '-1'                       " python py
-    -1read ~/dot-files/idrtemplates/tpl.python.py
+    execute "80vsplit " . fnameescape(a:idr_path) . "tpl.python.py"
   elseif index(['ruby'], &filetype) != '-1'                         " ruby rb
-    -1read ~/dot-files/idrtemplates/tpl.ruby.rb
+    execute "80vsplit " . fnameescape(a:idr_path) . "tpl.ruby.rb"
   elseif index(['terraform'], &filetype) != '-1'                    " terraform tf
-    -1read ~/dot-files/idrtemplates/tpl.terraform.tf
+    execute "80vsplit " . fnameescape(a:idr_path) . "tpl.terraform.tf"
   else
     echom "IDR : syntax not found or file type '" . &filetype . "' not supported. add syntax or run :set ft=<file>."
   endif
@@ -721,7 +724,6 @@ function IDRvariable()
   endif
 endfunction
 
-" ansible
 " javascript
 " go
 " lua

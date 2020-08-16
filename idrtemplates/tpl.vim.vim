@@ -1,6 +1,7 @@
-# === vim help
+# === idr vim help
 
-" ref - https://devhints.io/vimscript
+" === reference
+" - https://devhints.io/vimscript
 
 # print
 echo "result = " . str

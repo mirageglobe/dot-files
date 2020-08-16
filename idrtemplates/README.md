@@ -12,7 +12,8 @@ this is the source for idrtemplates (I dont remember templates). the goal of thi
 to use
 
 ```
-:IDRhelp              # will load default full list of code for detected language into new split buffer
+:IDR                  # load IDR help
+:IDRhelp              # load default help of code for detected language
 
 :IDRarray             # add snippet for current language - array
 :IDRclass             # add snippet for current language - class
