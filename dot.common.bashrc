@@ -622,7 +622,7 @@ fn_fox_showmaclaunch() {
 # === hints
 # ===
 
-# ## ==> ansible
+# === === ansible
 
 alias _fox_ansible="echo '
 :: help ::
@@ -633,6 +633,26 @@ alias _fox_ansible="echo '
   {{ lookup('env','HOME') }}                                  # read environment variable
   {{ lookup('file', '/etc/foo.txt') }}                        # read file contents
 
+'"
+
+# === === crontab
+
+alias _fox_cron="echo '
+:: help ::
+
+  crontab -l                                                  # show crontab for current user
+  crontab -e                                                  # edit crontab for current user
+  crontab -r                                                  # remove crontab for current user
+  crontab -r -i                                               # remove crontab with confirmation for current user
+
+  crontab -l > file                                           # load crontab to file
+  crontab file                                                # load crontab from file
+
+  (crontab -l ; echo '0 4 * * * myscript') | crontab -        # load crontab directly
+
+  # crontab script for crontab
+  @reboot /home/user/script.sh                                # run script at reboot
+  * * * * * /home/user/script.sh                              # run script every minute
 '"
 
 # ## ==> kubernetes
