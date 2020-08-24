@@ -621,6 +621,8 @@ function IDRscaffold()
     -1read ~/dot-files/idrtemplates/tpl.idr.placeholder.vim
   elseif index(['conf','sh'], &filetype) != '-1'                    " bash sh
     -1read ~/dot-files/idrtemplates/tpl.bash.scaffold.sh
+  elseif index(['javascript'], &filetype) != '-1'                   " javascript js
+    -1read ~/dot-files/idrtemplates/tpl.javascript.scaffold.js
   elseif index(['python'], &filetype) != '-1'                       " python py
     -1read ~/dot-files/idrtemplates/tpl.python.scaffold.py
   elseif index(['ruby'], &filetype) != '-1'                         " ruby rb
@@ -635,6 +637,8 @@ function IDRarray()
     -1read ~/dot-files/idrtemplates/tpl.idr.placeholder.vim
   elseif index(['conf','sh'], &filetype) != '-1'                    " bash sh
     -1read ~/dot-files/idrtemplates/tpl.idr.placeholder.vim
+  elseif index(['javascript'], &filetype) != '-1'                   " javascript js
+    -1read ~/dot-files/idrtemplates/tpl.javascript.array.js
   elseif index(['python'], &filetype) != '-1'                       " python py
     -1read ~/dot-files/idrtemplates/tpl.python.array.py
   elseif index(['ruby'], &filetype) != '-1'                         " ruby rb
@@ -649,6 +653,8 @@ function IDRclass()
     -1read ~/dot-files/idrtemplates/tpl.idr.placeholder.vim
   elseif index(['conf','sh'], &filetype) != '-1'                    " bash sh
     -1read ~/dot-files/idrtemplates/tpl.idr.placeholder.vim
+  elseif index(['javascript'], &filetype) != '-1'                   " javascript js
+    -1read ~/dot-files/idrtemplates/tpl.javascript.class.js
   elseif index(['python'], &filetype) != '-1'                       " python py
     -1read ~/dot-files/idrtemplates/tpl.python.class.py
   elseif index(['ruby'], &filetype) != '-1'                         " ruby rb
@@ -663,6 +669,8 @@ function IDRecho()
     -1read ~/dot-files/idrtemplates/tpl.vim.echo.vim
   elseif index(['conf','sh'], &filetype) != '-1'                    " bash sh
     -1read ~/dot-files/idrtemplates/tpl.bash.echo.sh
+  elseif index(['javascript'], &filetype) != '-1'                   " javascript js
+    -1read ~/dot-files/idrtemplates/tpl.javascript.echo.js
   elseif index(['python'], &filetype) != '-1'                       " python py
     -1read ~/dot-files/idrtemplates/tpl.python.echo.py
   elseif index(['ruby'], &filetype) != '-1'                         " ruby rb
@@ -677,6 +685,8 @@ function IDRfunction()
     -1read ~/dot-files/idrtemplates/tpl.vim.function.vim
   elseif index(['conf','sh'], &filetype) != '-1'                    " bash sh
     -1read ~/dot-files/idrtemplates/tpl.bash.function.sh
+  elseif index(['javascript'], &filetype) != '-1'                   " javascript js
+    -1read ~/dot-files/idrtemplates/tpl.javascript.function.js
   elseif index(['ruby'], &filetype) != '-1'                         " ruby rb
     -1read ~/dot-files/idrtemplates/tpl.ruby.function.rb
   else
@@ -689,6 +699,8 @@ function IDRif()
     -1read ~/dot-files/idrtemplates/tpl.vim.if.vim
   elseif index(['conf','sh'], &filetype) != '-1'                    " bash sh
     -1read ~/dot-files/idrtemplates/tpl.bash.if.sh
+  elseif index(['javascript'], &filetype) != '-1'                   " javascript js
+    -1read ~/dot-files/idrtemplates/tpl.javascript.if.js
   elseif index(['python'], &filetype) != '-1'                       " python py
     -1read ~/dot-files/idrtemplates/tpl.python.if.py
   elseif index(['ruby'], &filetype) != '-1'                         " ruby rb
@@ -703,6 +715,8 @@ function IDRloop()
     -1read ~/dot-files/idrtemplates/tpl.idr.placeholder.vim
   elseif index(['conf','sh'], &filetype) != '-1'                    " bash sh
     -1read ~/dot-files/idrtemplates/tpl.bash.loop.sh
+  elseif index(['javascript'], &filetype) != '-1'                   " javascript js
+    -1read ~/dot-files/idrtemplates/tpl.javascript.loop.js
   elseif index(['ruby'], &filetype) != '-1'                         " ruby rb
     -1read ~/dot-files/idrtemplates/tpl.ruby.loop.rb
   else
@@ -715,6 +729,8 @@ function IDRregex()
     -1read ~/dot-files/idrtemplates/tpl.idr.placeholder.vim
   elseif index(['conf','sh'], &filetype) != '-1'                    " bash sh
     -1read ~/dot-files/idrtemplates/tpl.idr.placeholder.vim
+  elseif index(['javascript'], &filetype) != '-1'                   " javascript js
+    -1read ~/dot-files/idrtemplates/tpl.javascript.regex.js
   elseif index(['ruby'], &filetype) != '-1'                         " ruby rb
     -1read ~/dot-files/idrtemplates/tpl.ruby.regex.rb
   else
@@ -727,6 +743,8 @@ function IDRswitch()
     -1read ~/dot-files/idrtemplates/tpl.idr.placeholder.vim
   elseif index(['conf','sh'], &filetype) != '-1'                    " bash sh
     -1read ~/dot-files/idrtemplates/tpl.bash.switch.sh
+  elseif index(['javascript'], &filetype) != '-1'                   " javascript js
+    -1read ~/dot-files/idrtemplates/tpl.javascript.switch.js
   elseif index(['ruby'], &filetype) != '-1'                         " ruby rb
     -1read ~/dot-files/idrtemplates/tpl.ruby.switch.rb
   else
@@ -739,6 +757,8 @@ function IDRvariable()
     -1read ~/dot-files/idrtemplates/tpl.vim.variable.vim
   elseif index(['conf','sh'], &filetype) != '-1'                    " bash sh
     -1read ~/dot-files/idrtemplates/tpl.idr.placeholder.vim
+  elseif index(['javascript'], &filetype) != '-1'                   " javascript js
+    -1read ~/dot-files/idrtemplates/tpl.javascript.variable.js
   elseif index(['ruby'], &filetype) != '-1'                         " ruby rb
     -1read ~/dot-files/idrtemplates/tpl.ruby.variable.rb
   else
@@ -746,7 +766,6 @@ function IDRvariable()
   endif
 endfunction
 
-" javascript
 " go
 " lua
 
