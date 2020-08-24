@@ -4,6 +4,8 @@
 
 # === variable constants
 
+myvar: "value"
+
 # === helper functions
 
 # === === debug message
@@ -35,3 +37,10 @@ allowlist:
   loop: "{{ dictionary | dict2items | subelements('value') }}"
   when: item.0.key in allowlist
 
+# loops from main task to subtask
+- include_tasks: inner.yml
+  with_items:
+    - "{{ dictionary | dict2items }}"
+  vars:
+    mkey: "{{ item.key }}"
+    mvalue: "{{ item.value }}"

@@ -663,6 +663,8 @@ function IDRecho()
     -1read ~/dot-files/idrtemplates/tpl.vim.echo.vim
   elseif index(['conf','sh'], &filetype) != '-1'                    " bash sh
     -1read ~/dot-files/idrtemplates/tpl.bash.echo.sh
+  elseif index(['python'], &filetype) != '-1'                       " python py
+    -1read ~/dot-files/idrtemplates/tpl.python.echo.py
   elseif index(['ruby'], &filetype) != '-1'                         " ruby rb
     -1read ~/dot-files/idrtemplates/tpl.ruby.echo.rb
   else

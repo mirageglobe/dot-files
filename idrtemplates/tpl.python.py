@@ -4,12 +4,12 @@
 # good references can be found:
 # - https://devhints.io/python
 
-# === basic commands ===
+# === basic commands
 
-# print
-#
-# ```
-# ```
+# === === print
+
+print('Hello' + 'world')
+print('Hello {name} world')
 
 # variables and contants
 #
@@ -17,17 +17,15 @@
 # ```
 
 # arrays (lists and dicts)
-#
-# ```
-# list = []                     # lists are pure listed arrays
-# list.append(item)
-# list.insert(index, item)
-# list1 + list2                 # combine two list
-# set(list)                     # remove duplicate elements from a list
-#
-# dict.keys()                   # dicts are key value stores in python
-# dict.values()
-# ```
+
+list = []                     # lists are pure listed arrays
+list.append(item)
+list.insert(index, item)
+list1 + list2                 # combine two list
+set(list)                     # remove duplicate elements from a list
+
+dict.keys()                   # dicts are key value stores in python
+dict.values()
 
 # if conditionals
 #
