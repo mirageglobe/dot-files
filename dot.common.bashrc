@@ -35,6 +35,7 @@ export PATH="/usr/local/opt/ruby/bin:$PATH"
 # ==> for fzf
 # note that fzf will try to install this to default .bashrc too
 # [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+export FZF_COMPLETION_TRIGGER='??'
 
 # ==> added for jenv (http://www.jenv.be/)
 # export PATH="$HOME/.jenv/bin:$PATH"
