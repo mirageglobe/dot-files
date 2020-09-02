@@ -591,7 +591,7 @@ function IDRhelp(idr_path)
   set splitright
   if index(['vim'], &filetype) != '-1'                              " vimrc
     execute "80vsplit " . fnameescape(a:idr_path) . "tpl.vim.vim"
-  elseif index(['yaml'], &filetype) != '-1'                         " ansible yml
+  elseif index(['ansible'], &filetype) != '-1'                      " ansible yml
     execute "80vsplit " . fnameescape(a:idr_path) . "tpl.ansible.yml"
   elseif index(['conf','sh'], &filetype) != '-1'                    " bash sh
     execute "80vsplit " . fnameescape(a:idr_path) . "tpl.bash.sh"
