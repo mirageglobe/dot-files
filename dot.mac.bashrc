@@ -2,7 +2,7 @@
 # === bash loader
 # ===
 
-# ==> starting loader
+# === === starting loader
 printf "\n%s\t" ":: mac : "
 
 # ==> mac specific
@@ -18,7 +18,7 @@ printf "%s" "[+] envvars "
 export GREP_OPTIONS='--color=auto'                    # common
 export CLICOLOR=true                                  # common (mac only)
 
-# ==> added for AWS (default temp)
+# === === added for AWS (default temp)
 # export AWS_DEFAULT_PROFILE=default
 # export AWS_PROFILE=default
 # export AWS_DEFAULT_REGION=us-east-1
@@ -67,7 +67,7 @@ ${C_YELLOW}\$(fn_prompt_aws)${C_END}\
 ${C_PURPLEL} ${C_END} \
 "
 
-# ==> aws prompt method
+# === === aws prompt method
 # appends the prompt in sequence, according to following conditionals
 # note : this cannot be set as bashrc loads a new process. AWS is only valid in current terminal
 
@@ -77,7 +77,7 @@ ${C_PURPLEL} ${C_END} \
   # PROMPT_EXTEND="$PROMPT_EXTEND aws($AWS_PROFILE)"
 # fi
 
-# ==> prompt check git method
+# === === prompt check git method
 fn_prompt_git_branch() {
   # git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
   # ref : https://stackoverflow.com/questions/8914435/awk-sed-how-to-remove-parentheses-in-simple-text-file
@@ -85,7 +85,7 @@ fn_prompt_git_branch() {
   git branch 2> /dev/null | grep "\*" | awk '{ printf " "; printf $2; printf " "; }'
 }
 
-# ==> prompt check aws shell
+# === === prompt check aws shell
 fn_prompt_aws() {
   env 2> /dev/null | grep "AWS_REGION" | awk '{ printf " aws "; }'
 }

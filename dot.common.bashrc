@@ -18,40 +18,40 @@ export TERM=xterm-256color                            # common
 # === apps and tools required settings
 # ===
 
-# ==> for android sdk
+# === === for android sdk
 # export ANDROID_HOME=/usr/local/opt/android-sdk
 # printf "%s" "[+] android "
 
-# ==> for autojump
+# === === for autojump
 # https://github.com/wting/autojump
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
-# ==> for homebrew ruby
+# === === for homebrew ruby
 printf "%s" "[+] ruby "
 
 export PATH="/usr/local/lib/ruby/gems/2.7.0/bin:$PATH"
 export PATH="/usr/local/opt/ruby/bin:$PATH"
 
-# ==> for fzf
+# === === for fzf
 # note that fzf will try to install this to default .bashrc too
 # [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 export FZF_COMPLETION_TRIGGER='??'
 
-# ==> added for jenv (http://www.jenv.be/)
+# === === for jenv (http://www.jenv.be/)
 # export PATH="$HOME/.jenv/bin:$PATH"
 # eval "$(jenv init -)"
 
-# ==> added for java adopt
+# === === for java adopt
 printf "%s" "[+] java "
 if [ -z $JAVA_HOME ]; then
   export JAVA_HOME=$(/usr/libexec/java_home)
 fi
 
-# ==> added for n (node and yarn package mgr) default install to home folder
+# === === for n (node and yarn package mgr) default install to home folder
 # export N_PREFIX=$HOME/n
 # export PREFIX=$HOME/n
 
-# ==> added for python3
+# === === added for python3
 printf "%s" "[+] python "
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
@@ -61,7 +61,7 @@ export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
 printf "%s" "[+] git "
 
-# ==> for git configurations
+# === === for git configurations
 # default push branch to remote
 # git config --global --add push.default current
 cat ~/.gitconfig | grep "default = current" > /dev/null || git config --global --add push.default current
@@ -89,7 +89,7 @@ git config --global alias.rim "rebase -i master"
 
 printf "%s" "[+] completion "
 
-# ==> checks if bash version is 5
+# === === checks if bash version is 5
 BASH_VERSION_5=false
 
 if echo ${BASH_VERSION} | grep -q "^5\."; then
@@ -107,17 +107,17 @@ if ${BASH_VERSION_5} = true; then
   [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
 fi
 
-# ==> added for kubectl completion
+# === === added for kubectl completion
 if command -V kubectl 1> /dev/null; then
   source <(kubectl completion bash)
 fi
 
-# # ==> added for make completion
+# === === added for make completion
 # if [ -f ~/dot.bash-completion.make.bash ]; then
 #   source ~/dot.bash-completion.make.bash
 # fi
 
-# ==> added for git completion
+# === === added for git completion
 # # this should be added automatically if bash-completion@2 is installed
 # if [ -f ~/dot.bash-completion.git.bash ]; then
 #   source ~/dot.bash-completion.git.bash
@@ -129,7 +129,7 @@ fi
 
 printf "%s" "[+] aliases "
 
-# ==> overrides
+# === === overrides
 
 alias cat="bat"
 # alias _cat="bat"
@@ -161,7 +161,7 @@ alias _rm="rm -i"
 
 alias _rs="printf ':: restarting shell :: \n';exec $SHELL -l;"
 
-# ## ==> basic aliases
+# === === basic aliases
 
 alias _fox="echo '
 :: help ::
@@ -227,7 +227,7 @@ alias _fox_now="fn_fox_now_date && fn_fox_now_time;"
 alias _fox_now_date="fn_fox_now_date;"
 alias _fox_now_time="fn_fox_now_time;"
 
-# ## ==> aws
+# === === aws
 
 alias _fox_aws="echo '
 :: help ::
@@ -274,7 +274,7 @@ fn_fox_aws_profile_load() {
   aws configure list;
 }
 
-# ## ==> bash
+# === === bash
 
 alias _fox_bash="echo '
 :: help ::
@@ -325,7 +325,7 @@ alias _fox_bash="echo '
   - 5xx (server side) - 503 (service unavailable) - 504 (gateway timeout)
 '"
 
-# ## ==> docker
+# === === docker
 
 alias _fox_docker="echo '
 :: help ::
@@ -408,7 +408,7 @@ fn_fox_docker_stop() {
   docker stop $1; docker rm $1;
 }
 
-# ## ==> file
+# === === file
 
 alias _fox_file="echo '
 :: help ::
@@ -473,7 +473,7 @@ fn_fox_file_namelowercase() {
   echo "$parsevar" | awk '{ print tolower($0) }'
 }
 
-# ## ==> git
+# === === git
 
 alias _fox_git="echo '
 :: help ::
@@ -517,7 +517,7 @@ alias _git_diff="echo ':: git changes - git diff head^ ::'; git diff head^;"
 alias _git_ls="git fetch --all; git branch --all;"
 alias _git_ll="git log --pretty='format:%C(yellow)%h%Creset - %Cgreen%>(12)%ad%Creset %C(bold blue)<%an>%Creset %s' --date=relative;"
 
-# ## ==> graph
+# === === graph
 
 # # sample.dot
 # digraph test {
@@ -566,7 +566,7 @@ EOM
   fi
 }
 
-# ## ==> sys ops
+# === === sys ops
 
 alias _fox_sys="echo '
 :: help ::
@@ -661,7 +661,7 @@ alias _fox_cron="echo '
   * * * * * /home/user/script.sh                              # run script every minute
 '"
 
-# ## ==> kubernetes
+# === === kubernetes
 
 alias _fox_k8s="echo '
 :: help ::
@@ -713,7 +713,7 @@ alias _fox_k8s="echo '
 
 '"
 
-# ## ==> ssh ssl openssl
+# === === ssh ssl openssl
 
 alias _fox_ssh="echo '
 :: help ::
@@ -734,7 +734,7 @@ alias _fox_ssh_keygen="ssh-keygen -b 2048 -t rsa -f ~/.ssh/id_rsa_standard -C \"
 
 alias _fox_ssl_gen="openssl rand -hex 16;"
 
-# ## ==> tmux
+# === === tmux
 
 alias _fox_tmux="echo '
 :: help ::
@@ -770,7 +770,7 @@ alias _fox_tmux="echo '
   https://tmuxcheatsheet.com/
 '"
 
-# ## ==> vim
+# === === vim
 
 alias _fox_vim="echo '
 :: help ::
