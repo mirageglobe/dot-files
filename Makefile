@@ -134,7 +134,7 @@ pkgmgr-ensure:											## ensure package managers and non gui tools present
 	-yarn global add bats															# test bash test suite (bats-core)
 	-yarn global upgrade --latest bats
 	# tools : python pip										========================================
-	-pip3 install --upgrade pip setuptools														# package manager for python
+	# -pip3 install --upgrade pip setuptools														# package manager for python upgrade pip causes issues with brew python (reinstall python instead)
 	-pip3 install -U $$(pip3 freeze | awk -F'[/=]' '{print $$1}')
 	-pip3 install ansible || pip3 install -U ansible									# ansible
 	-pip3 install ansible-lint || pip3 install -U ansible-lint				# lint ansible

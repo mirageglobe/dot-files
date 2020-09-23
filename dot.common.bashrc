@@ -131,24 +131,29 @@ printf "%s" "[+] aliases "
 
 # ==> overrides
 
-alias ls='lsd'
-alias ll='lsd -la'
-alias lt='lsd ---tree'
-alias cat='bat'
-alias grep='rg'
+alias cat="bat"
+# alias _cat="bat"
 
-alias _ls='lsd'
-alias _l='lsd -l'
-alias _la='lsd -a'
-alias _lla='lsd -la'
-alias _lt='lsd --tree'
-alias _tree='lsd --tree'
+alias grep="rg"
+
+alias kc="kubectl"
+
+alias ls="lsd"
+# alias _ls="lsd"
+
+alias ll="lsd -la"
+# alias _lla="lsd -la"
+# alias _l="lsd -l"
+# alias _la="lsd -a"
+
+alias lt="lsd ---tree"
+# alias _lt="lsd --tree"
+# alias _tree="lsd --tree"
+
 # alias _ls="ls -Gd .*"
 # alias _ll="ls -lhAG"
 # alias _tree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
 # alias _tree_verbose="find . | sed -e 's/[^-][^\/]*\// |/g' -e 's/|\([^ ]\)/|-\1/'"
-
-alias _cat="bat"
 
 alias _cp="cp -i"
 alias _mv="mv -i"
