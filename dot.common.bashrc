@@ -134,7 +134,7 @@ printf "%s" "[+] aliases "
 alias cat="bat"
 # alias _cat="bat"
 
-alias grep="rg"
+# alias grep="rg"
 
 alias kc="kubectl"
 

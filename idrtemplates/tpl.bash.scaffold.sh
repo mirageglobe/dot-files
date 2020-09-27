@@ -1,33 +1,28 @@
+#!/usr/bin/env bash
 
 # === bash helper functions
 # source - https://github.com/mirageglobe/
-# version 0.0.1
+# version 0.0.2
 
-define fn_check_file_regex
+function fn_check_file_regex {
+  # args: string regex
 	cat $(1) || grep "$(2)"
-endef
+}
 
-define fn_check_command_note
+function fn_check_command_note {
+  # args: string error
 	command -V $(1) || printf "$(2)"
-endef
+}
 
-define fn_print_header
+function fn_print_header {
+  # args: string
 	echo "";
-	echo "==> $(1)";
+	echo "=== $(1)";
 	echo "";
-endef
-
-define fn_print_header_command
-	echo "";
-	echo "==> $(1)";
-	echo "";
-	$(2);
-endef
-
-define fn_print_tab
-	printf "%s\t\t%s\t\t%s\n" $(1) $(2) $(3)
-endef
+}
 
 # === end bash helper functions
 
 # === main
+
+fn_print_header "bash script"
