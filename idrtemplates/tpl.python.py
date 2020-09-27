@@ -1,79 +1,135 @@
-
-# this is a python template for quick start.
-
-# good references can be found:
+# === references
 # - https://devhints.io/python
 
-# === basic commands
+# === === arrays (lists tuple and dicts)
+
+# mutable list - can change, print mylist[0]
+mylist = ['physics', 'chemistry', 1997, 2000]
+
+# immutable list - no change, print mytuple[0]
+mytuple = ['physics', 'chemistry', 1997, 2000]
+
+# key-value list, print mydict['Name']
+mydict = {'Name': 'Zara', 'Age': 7, 'Class': 'First'}
+
+# lists are pure listed arrays
+list = []
+
+# add to list
+list.append(item)
+list.insert(index, item)
+
+# combine two lists
+list1 + list2
+
+# remove duplicate elements from a list
+set(list)
+
+# get dict keys
+dict.keys()
+
+# get dict values
+dict.values()
+
+# === === class
+
+# basic class
+class ClassName:
+
+    kind = 'generalstat'            # class variable shared by all instances
+
+    def __init__(self, name):
+        self.name = name            # instance variable unique to each instance
+
+    def f(self):
+        return 'hello world'
+
+fido = ClassName('Fido')
+fido.kind
+fido.name
+
+# (multiple) inheritance example
+class DerivedClassName(BaseClassName1, BaseClassName2):
+    kind = 'generalstat'            # class variable shared by all instances
+
+    def __init__(self, name):
+        self.name = name            # instance variable unique to each instance
+
+    def f(self):
+        return 'hello world'
+
+# === === function
+
+def my_function(param1, param2):
+    print("function with : " + param1 + ""  + param2)
+
+my_function("one", "two")
+
+# === === if conditionals
+
+if expression1:
+    statement()
+elif expression2:
+    statement()
+elif expression3:
+    statement()
+else:
+    statement()
 
 # === === print
 
 print('Hello' + 'world')
 print('Hello {name} world')
 
-# variables and contants
-#
-# ```
-# ```
+# === === loop
 
-# arrays (lists and dicts)
+# while
+i = 1
+while i < 6:
+    print(i)
+    i += 1
+    if i == 3:
+        break
+else:
+    print("i is no longer less than 6")
 
-list = []                     # lists are pure listed arrays
-list.append(item)
-list.insert(index, item)
-list1 + list2                 # combine two list
-set(list)                     # remove duplicate elements from a list
+# for each
+fruits = ["apple", "banana", "cherry"]
+for x in fruits:
+    print(x)
 
-dict.keys()                   # dicts are key value stores in python
-dict.values()
+# === === regex
 
-# if conditionals
-#
-# ```
-# ```
+import re
 
-# loops while
-#
-# ```
-# ```
+txt = "The rain in Spain"
+x = re.search("^The.*Spain$", txt)
 
-# for each item loop
-#
-# ```
-# for item in ["a", "b", "c"]:
-#
-# ```
+re.match(r'^[aeiou]', str)
+re.sub(r'^[aeiou]', '?', str)
 
-# function
-#
-# ```
-# ```
+# === === switch
 
-# class
-#
-# ```
-# ```
+# python does not have switch case; use custom function
+def week(i):
+    switcher={
+        0:'Sunday',
+        1:'Monday',
+        2:'Tuesday',
+        3:'Wednesday',
+        4:'Thursday',
+        5:'Friday',
+        6:'Saturday'
+    }
+    return switcher.get(i,"Invalid day of week")
 
-# classes constructors destructors (ruby uses initialize)
-#
-# ```
-# ```
+week(2)
 
-# classes inheritance
-#
-# ```
-# ```
+# === === variables
+
+i = 1
 
 # === helper commands ===
-
-# regex
-#
-# ```
-# import re
-#
-# re.match(r'^[aeiou]', str)
-# re.sub(r'^[aeiou]', '?', str)
-# ```
 
 # threads - used to assign multi-threading
 #

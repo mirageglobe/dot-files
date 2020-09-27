@@ -1,8 +1,8 @@
 if expression1:
-   statement
+    statement()
 elif expression2:
-   statement
+    statement()
 elif expression3:
-   statement
+    statement()
 else:
-   statement
+    statement()

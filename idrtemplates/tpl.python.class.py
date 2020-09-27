@@ -1,4 +1,3 @@
-# class DerivedClassName(BaseClassName1, BaseClassName2):       # (multiple)inheritance class example
 class ClassName:
 
     kind = 'generalstat'            # class variable shared by all instances
