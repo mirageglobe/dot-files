@@ -78,8 +78,8 @@ else:
 
 # === === print
 
-print('Hello' + 'world')
-print('Hello {name} world')
+print('hello' + 'world')
+print('hello {name} world')
 
 # === === loop
 

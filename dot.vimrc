@@ -573,9 +573,7 @@ command IDRregex      :call IDRregex()
 command IDRswitch     :call IDRswitch()
 command IDRvariable   :call IDRvariable()
 
-command IDRftansible    :call IDRfile("ansible", idr_current_filetype)              " toggle to set file as ansible
-command IDRftterraform  :call IDRfile("terraform", idr_current_filetype)            " toggle to set file as terraform
-command IDRftorigin     :call IDRfile(idr_current_filetype, idr_current_filetype)   " toggle to set file as original format
+command IDRftorigin         :call IDRfile(idr_current_filetype, idr_current_filetype)   " toggle to set file as original format
 
 function IDRtoggle(idr_path)
   echom "IDR : activate i dont remember (IDR) templates"
@@ -592,7 +590,7 @@ function IDRhelp(idr_path)
   set splitright
   if index(['vim'], &filetype) != '-1'                              " vimrc
     execute "80vsplit " . fnameescape(a:idr_path) . "tpl.vim.vim"
-  elseif index(['ansible'], &filetype) != '-1'                      " ansible yml
+  elseif index(['yaml.ansible'], &filetype) != '-1'                " ansible yml
     execute "80vsplit " . fnameescape(a:idr_path) . "tpl.ansible.yml"
   elseif index(['conf','sh'], &filetype) != '-1'                    " bash sh
     execute "80vsplit " . fnameescape(a:idr_path) . "tpl.bash.sh"

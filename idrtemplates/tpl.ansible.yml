@@ -1,6 +1,6 @@
 
 # === references
-# - https://devhints.io/bash
+# - https://devhints.io/ansible
 
 # === variable constants
 
@@ -14,6 +14,12 @@ myvar: "value"
   shell: |
     echo "one: {{ myvalue1 }}";
     echo "two: {{ myvalue2 }}";
+  register: output_myresponse
+
+- name: debug show value
+  shell: |
+    echo "{{ output_myresponse.stdout | default([], true) | from_json | json_query('id') }}";
+  register: output_myresponse_id
 
 # === === nested array loop
 
