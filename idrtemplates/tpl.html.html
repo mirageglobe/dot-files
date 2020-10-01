@@ -3,7 +3,7 @@
 <!-- === references -->
 <!-- - https://devhints.io/html -->
 
-<!-- === basic commands -->
+<!-- === basic commands (vue) -->
 
 <!-- === === array -->
 
@@ -11,7 +11,41 @@
 <!-- === === function -->
 <!-- === === if -->
 <!-- === === loop -->
+
+<div id="app">
+ <ul>
+   <li v-for="x in todos">
+   {{ x.text }}
+   </li>
+  </ul>
+</div>
+
+<script>
+myObject = new Vue({
+    el: '#app',
+    data: {
+    todos: [
+        { text: 'Learn JavaScript' },
+        { text: 'Learn Vue.js' },
+        { text: 'Build Something Awesome' }
+        ]
+    }
+})
+</script>
+
 <!-- === === print -->
+
+<div id="app">
+<h1>{{ message }}</h1>
+</div>
+
+<script>
+var myObject = new Vue({
+    el: '#app',
+    data: {message: 'Hello Vue!'}
+})
+</script>
+
 <!-- === === regex -->
 <!-- === === switch -->
 <!-- === === variable -->
