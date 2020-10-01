@@ -1,8 +1,6 @@
-// #!/usr/bin/env node
+// === javascript
 
-// this is a javascript template for quick start.
-
-// good references can be found:
+// === references
 // - https://devhints.io/es6
 // - https://www.w3schools.com/js/js_es6.asp
 
@@ -13,190 +11,139 @@
 // - es6 (es2016)
 // - node 12.x.x +
 
-// === basic commands ===
-
-// "use strict"; // add this to beginning of script; this forces js to be executed in strict mode; where all variables must be declared
-//
 // styles
 // - camelCase (variables/function names)
 // - UPPERCASE (global constants/constants)
 // - data-quantity (html5 attributes)
 // - font-size (css)
-//
-// always lower case file names : my-file.jpg
+// - filenames always lower case : my-file.jpg
 
-// print
-// javascript has five ways to print; with the fifth commonly used for debugging
-// ```
-// method 1 via innerhtml
-//
-// <p id="demo"></p>
-// <script>document.getElementById("demo").innerHTML = 5 + 6;</script>
-//
-// method 2 via doc write
-// <script>document.write(5 + 6);</script>
-//
-// method 3 overwrite after html is loaded
-// <p>My first paragraph.</p>
-// <button type="button" onclick="document.write(5 + 6)">Try it</button>
-//
-// method 4 via alerts
-// <script>window.alert(5 + 6);</script>
-//
-// method 5 via dom console log
-// <script>console.log("my message");</script>
-// ```
+// === basic commands
 
-// variables and contants
-//
-// ```
-// var myVariable = "something";
-// let myVariable = "something else";                 // from es6 (2015); this value can be declared in sub blocks without changing parent script
-// const MYCONST = "a value that cannot be changed"   // similar to let but fixed value
-// ```
+// === === array
 
-// arrays
-//
-// ```
-// var cars = ["saab", "volvo", "bmw"];
-// ```
+var cars = ["saab", "volvo", "bmw"];
 
-// if conditionals
-//
-// ```
-// if (condition) {
-// } else {
-// }
-// ```
+// === === class
 
-// switch case conditions
-//
-// ```
-// switch(expression) {
-//   case x:
-//     code block
-//     break;
-//   case y:
-//     code block
-//     break;
-//   default:
-//     code block
-// }
-// ```
+var person = new Object();
+person.firstName = "john";
 
-// loops while
-//
-// ```
-// while (condition) {  }
-// ```
+var person = {firstName:"John", lastName:"Doe", age:50, eyeColor:"blue"};
+
+// constructor functions with an upper-case first letter.
+function Person(first, last, age, eye) {
+  this.firstName = first;
+  this.lastName = last;
+  this.age = age;
+  this.eyeColor = eye;
+}
+
+// inheritance extensions
+function Person(first, last, age, eyecolor) {
+  this.firstName = first;
+  this.lastName = last;
+}
+
+Person.prototype.nationality = "English";        // adding a new property to object
+
+Person.prototype.name = function() {             // adding a new function to object
+  return this.firstName + " " + this.lastName;
+};
+
+// === === function
+
+function toCelsius(fahrenheit = 10) {
+  // es6 allows default values
+  return (5 / 9) * (fahrenheit - 32);
+}
+
+// === === if
+
+if (condition) {
+} else {
+}
+
+// === === loop
+
+// while
+while (condition) {  }
 
 // for each item loop
-//
-// ```
-// var i;
-// for (i = 0; i < cars.length; i++) { text += cars[i] + "<br>"; }
-// ```
+var i;
+for (i = 0; i < cars.length; i++) { text += cars[i] + "<br>"; }
 
-// function
-//
-// ```
-// function toCelsius(fahrenheit = 10) {
-//   // es6 allows default values
-//   return (5 / 9) * (fahrenheit - 32);
-// }
-// ```
+// === === print
+// javascript has five ways to print; with the fifth commonly used for debugging
 
-// class
-//
-// ```
-// var person = new Object();
-// person.firstName = "john";
-//
-// var person = {firstName:"John", lastName:"Doe", age:50, eyeColor:"blue"};
-// ```
+// method 1 via innerhtml
+<p id="demo"></p>
+<script>document.getElementById("demo").innerHTML = 5 + 6;</script>
 
-// classes constructors destructors
-//
-// constructor functions with an upper-case first letter.
-//
-// ```
-// function Person(first, last, age, eye) {
-//   this.firstName = first;
-//   this.lastName = last;
-//   this.age = age;
-//   this.eyeColor = eye;
-// }
-// ```
+// method 2 via doc write
+<script>document.write(5 + 6);</script>
 
-// classes inheritance extensions
-//
-// ```
-// function Person(first, last, age, eyecolor) {
-//   this.firstName = first;
-//   this.lastName = last;
-// }
-//
-// Person.prototype.nationality = "English";        // adding a new property to object
-//
-// Person.prototype.name = function() {             // adding a new function to object
-//   return this.firstName + " " + this.lastName;
-// };
-// ```
+// method 3 overwrite after html is loaded
+<p>My first paragraph.</p>
+<button type="button" onclick="document.write(5 + 6)">Try it</button>
 
-// === helper commands ===
+// method 4 via alerts
+<script>window.alert(5 + 6);</script>
+
+// method 5 via dom console log
+<script>console.log("my message");</script>
+
+// === === regex
+
+let re = /ab+c/;
+
+// with constructor
+let re = new RegExp('ab+c');
+
+// === === switch
+
+switch(expression) {
+  case x:
+    code block
+    break;
+  case y:
+    code block
+    break;
+  default:
+    code block
+}
+
+// === === variable
+
+var myVariable = "something";
+
+// from es6 (2015); this value can be declared in sub blocks without changing parent script
+let myVariable = "something else";
+
+// constant
+const MYCONST = "a value that cannot be changed"
+
+// === helper commands
 
 // debugging via breakpoints and chrome inspect
-//
-// ```
-// var x = 15 * 5;
-// debugger;
-// document.getElementById("demo").innerHTML = x;
-//
-// console.log("some issue issue");
-// ```
+var x = 15 * 5;
+debugger;
+document.getElementById("demo").innerHTML = x;
 
-// regular expressions
-//
-// ```
-// ```
-
-// threads - used to assign multi-threading
-//
-// ```
-// ```
-
-// numeric functions
-//
-// ```
-// ```
-
-// string functions
-//
-// ```
-// ```
-
-// ranges short cut
-//
-// ```
-// ```
+console.log("some issue issue");
 
 // type conversions
-//
-// ```
-// x.toString();
-// (123).toString();
-// Date().toString();
-// ```
+x.toString();
+(123).toString();
+Date().toString();
 
-// function to check if array
-//
-// function isArray(myArray) {
-//   return myArray.constructor === Array;
-// }
+// check if array
+function isArray(myArray) {
+  return myArray.constructor === Array;
+}
 
-// function to check if date
-//
-// function isDate(myDate) {
-//   return myDate.constructor === Date;
-// }
+// check if date
+function isDate(myDate) {
+  return myDate.constructor === Date;
+}
 

@@ -1,4 +1,3 @@
-function toCelsius (fahrenheit = 10) {
-  // es6 allows default values
-  return (5 / 9) * (fahrenheit - 32)
-}
+// "use strict"; // add this to beginning of script; this forces js to be executed in strict mode; where all variables must be declared
+//
+

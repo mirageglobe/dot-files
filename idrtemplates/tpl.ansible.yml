@@ -1,29 +1,27 @@
-
 # === references
 # - https://devhints.io/ansible
 
 # === variable constants
 
+# variable string
 myvar: "value"
 
-# === helper functions
+# variable from other results
+myvar: "{{ output_response.stdout }}"
 
-# === === debug message
-
-- name: debug {{ myvalue }}
-  shell: |
-    echo "one: {{ myvalue1 }}";
-    echo "two: {{ myvalue2 }}";
-  register: output_myresponse
-
-- name: debug show value
-  shell: |
-    echo "{{ output_myresponse.stdout | default([], true) | from_json | json_query('id') }}";
-  register: output_myresponse_id
+# === loop
 
 # === === nested array loop
 
-# nested dictionary
+- name: Read values {{ myvalue }}
+  shell: |
+      echo "{{ item }} # this is value";
+  loop: {{ mylist | default([], true) }}
+  when: mylist is defined
+
+# === === nested array loop
+
+# loop example for nested dictionary
 dictionary:
   topic1:
     - t1-sub1
@@ -50,3 +48,29 @@ allowlist:
   vars:
     mkey: "{{ item.key }}"
     mvalue: "{{ item.value }}"
+
+# === helper functions
+
+# === === debug using fact
+
+# set fact will show values in logs without debug
+- name: debug_set_fact
+  set_fact:
+    foo: "{{ output_response.stdout | from_json }}"
+
+- name: debug_main
+  debug:
+    var: foo
+
+# === === debug message
+
+- name: debug {{ myvalue }}
+  shell: |
+    echo "one: {{ myvalue }}";
+    printf "{{ myvalue2 }}";
+  register: output_myresponse
+
+- name: debug show value
+  shell: |
+    echo "{{ output_myresponse.stdout | default([], true) | from_json | json_query('id') }}";
+  register: output_myresponse_id

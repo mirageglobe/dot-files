@@ -573,6 +573,7 @@ command IDRregex      :call IDRregex()
 command IDRswitch     :call IDRswitch()
 command IDRvariable   :call IDRvariable()
 
+command IDRftansible        :call IDRfile("yaml.ansible", idr_current_filetype)         " force toggle to set filetype as ansible
 command IDRftorigin         :call IDRfile(idr_current_filetype, idr_current_filetype)   " toggle to set file as original format
 
 function IDRtoggle(idr_path)

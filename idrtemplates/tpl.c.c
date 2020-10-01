@@ -1,95 +1,24 @@
-/* #!/usr/bin/env cling */
+/* === c */
 
-// this is a c template for quick start.
-
-// good references can be found:
+/* === references */
 // - https://devhints.io/c_preprocessor
 
-// === basic commands ===
+/* === basic commands */
 
-// print
-//
-// ```
-// ```
+/* === === array */
 
-// variables and contants
-//
-// ```
-// ```
+/* === === class */
+/* === === function */
+/* === === if */
 
-// arrays
-//
-// ```
-// ```
+/* === === loop */
 
-// if conditionals
-//
-// ```
-// ```
+// for each item
+for item in ["a", "b", "c"]:
 
-// loops while
-//
-// ```
-// ```
+/* === === print */
+/* === === regex */
+/* === === switch */
+/* === === variable */
 
-// for each item loop
-//
-// ```
-// for item in ["a", "b", "c"]:
-//
-// ```
-
-// function
-//
-// ```
-// ```
-
-// class
-//
-// ```
-// ```
-
-// classes constructors destructors
-//
-// ```
-// ```
-
-// classes inheritance
-//
-// ```
-// ```
-
-// === helper commands ===
-
-// regular expressions
-//
-// ```
-// ```
-
-// threads - used to assign multi-threading
-//
-// ```
-// ```
-
-// numeric functions
-//
-// ```
-// ```
-
-// string functions
-//
-// ```
-// ```
-
-// ranges short cut
-//
-// ```
-// ```
-
-// type conversions
-//
-// ```
-// ```
-
-
-
+/* === helper commands */

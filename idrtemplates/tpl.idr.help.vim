@@ -18,21 +18,20 @@
 " === IDR commands
 
 :IDR              " load IDR help
-:IDRhelp          " load default help of code for detected language
+:IDRhelp          " load default help reference for code
 
+:IDRftorigin      " switch to original filetype
 :IDRscaffold      " create a basic file scaffold starter
 
 :IDRarray         " add snippet - array
 :IDRclass         " add snippet - class
-:IDRecho          " add snippet - echo print
 :IDRfunction      " add snippet - function
 :IDRif            " add snippet - if elseif else
 :IDRloop          " add snippet - while for loop
+:IDRprint         " add snippet - echo print
 :IDRregex         " add snippet - regular expression
 :IDRswitch        " add snippet - switch case
 :IDRvariable      " add snippet - variable string int
-
-:IDRftorigin      " switch to original filetype
 
 " === languages
 
@@ -41,16 +40,13 @@ languages             base        scaffold    helpfile
 ansible               progress    progress    ✓
 bash                  ✓           progress    ✓
 c                     progress    progress    ✓
+go                    progress    progress    progress
 html                  progress    progress    progress
 javascript            ✓           ✓           ✓
 markdown              n/a         progress    progress
 php                   progress    progress    progress
 python                ✓           ✓           ✓
 ruby                  ✓           ✓           ✓
+rust                  progress    progress    progress
 vim                   progress    progress    ✓
-
-tbc languages
-
-go
-rust
-vue
+vue                   progress    progress    progress

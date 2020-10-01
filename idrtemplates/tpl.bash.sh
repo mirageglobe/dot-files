@@ -1,14 +1,60 @@
+# === bash
 
 # === references
 # - https://devhints.io/bash
 
-# == variable constants
-#
-# CONST_VAR="variable"
+# === basic commands
 
-# === helper commands ===
+# === === array
 
-# == array exists in
+arr=( \
+  hello \  # test
+  world \
+  again \
+)
+
+# trim leading white space
+arr="${arr##*( )}"
+
+# trim trailing white space
+arr="${arr%%*( )}"
+
+# === === class
+# === === function
+
+function fn_my_custom_function {
+  # args: string regex
+  cat $(1) || grep "$(2)"
+}
+
+# === === if
+# === === loop
+
+arr=( \
+  hello   \  # test
+  world   \
+  world2  \
+)
+
+# loop array
+for item in ${arr[*]}
+do
+  # item=$(trim $item)        # trim leading trailing whitespace
+  echo $item
+done
+
+# === === print
+# === === regex
+# === === switch
+
+# === === variable
+
+# constants
+CONST_VAR="variable"
+
+# === helper commands
+
+# === === exists in
 # checks if element "$1" is in array "$2"
 # @note: be sure that array is passed in the form: "${ARR[@]}"
 
@@ -19,7 +65,19 @@ exists_in() {
   return 1
 }
 
-# == os checking script
+# === === trim function
+
+trim() {
+  local var
+  var="$*"
+  # remove leading whitespace characters
+  var="${var#"${var%%[![:space:]]*}"}"
+  # remove trailing whitespace characters
+  var="${var%"${var##*[![:space:]]}"}"
+  # echo $var
+}
+
+# === === os checking script
 
 fn_detect_os() {
   # sets env variable OSTYPESIMPLE
@@ -57,69 +115,27 @@ fn_detect_os() {
   fi
 }
 
-# === trim function
-
-trim() {
-  local var
-  var="$*"
-  # remove leading whitespace characters
-  var="${var#"${var%%[![:space:]]*}"}"
-  # remove trailing whitespace characters
-  var="${var%"${var##*[![:space:]]}"}"
-  # echo $var
-}
-
-# === array
-
-arr=( \
-  hello   \  # test
-  world   \
-  world2  \
-)
-
-# trim leading white space
-arr="${arr##*( )}"
-
-# trim trailing white space
-arr="${arr%%*( )}"
-
-# loop array
-for item in ${arr[*]}
-do
-  # item=$(trim $item)        # trim leading trailing whitespace
-  echo $item
-done
-
-# useful bash header functions (include this in header of bash script
+# useful bash header functions (include this in header of bash script)
 
 # === bash helper functions
 # source - https://github.com/mirageglobe/
-# version 0.0.1
+# version 0.0.2
 
-define fn_check_file_regex
-	cat $(1) || grep "$(2)"
-endef
+function fn_check_file_regex {
+  # args: string regex
+  cat $(1) || grep "$(2)"
+}
 
-define fn_check_command_note
-	command -V $(1) || printf "$(2)"
-endef
+function fn_check_command_note {
+  # args: string error
+  command -V $(1) || printf "$(2)"
+}
 
-define fn_print_header
-	echo "";
-	echo "==> $(1)";
-	echo "";
-endef
-
-define fn_print_header_command
-	echo "";
-	echo "==> $(1)";
-	echo "";
-	$(2);
-endef
-
-define fn_print_tab
-	printf "%s\t\t%s\t\t%s\n" $(1) $(2) $(3)
-endef
+function fn_print_header {
+  # args: string
+  echo "";
+  echo "=== $(1)";
+  echo "";
+}
 
 # === end bash helper functions
-

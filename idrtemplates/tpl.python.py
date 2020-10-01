@@ -1,7 +1,13 @@
+# === python
+
 # === references
 # - https://devhints.io/python
 
-# === === arrays (lists tuple and dicts)
+# === basic commands
+
+# === === array
+
+# lists tuple and dicts
 
 # mutable list - can change, print mylist[0]
 mylist = ['physics', 'chemistry', 1997, 2000]
@@ -65,7 +71,7 @@ def my_function(param1, param2):
 
 my_function("one", "two")
 
-# === === if conditionals
+# === === if
 
 if expression1:
     statement()
@@ -75,11 +81,6 @@ elif expression3:
     statement()
 else:
     statement()
-
-# === === print
-
-print('hello' + 'world')
-print('hello {name} world')
 
 # === === loop
 
@@ -97,6 +98,11 @@ else:
 fruits = ["apple", "banana", "cherry"]
 for x in fruits:
     print(x)
+
+# === === print
+
+print('hello' + 'world')
+print('hello {name} world')
 
 # === === regex
 
@@ -125,7 +131,7 @@ def week(i):
 
 week(2)
 
-# === === variables
+# === === variable
 
 i = 1
 

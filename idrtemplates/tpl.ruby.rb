@@ -1,65 +1,16 @@
+# === ruby
 
-# this is a ruby template for quick start.
-
-# good references can be found:
+# === references
 # - https://devhints.io/ruby
 # - https://www.tutorialspoint.com/ruby/ruby_blocks.htm
 
 # === basic commands
 
-# === === print
-
-print "hello \n"
-puts "hello"
-p "hello"         # puts same as p
-
-# === === variable contants
-
-VARCONST = "this is a constant"
-puts "value of constant is #{VARCONST}"
-
-$globalvar = "this is a global variable"
-
-# === === arrays
+# === === array
 
 cars = Array.new(20)
 puts cars.size
 puts cars.length
-
-# === === if
-
-if ($temperature < "20")
-  puts "have a good day!"
-elsif
-  puts "great"
-else
-  puts "awesome"
-end
-
-# === === loop while
-
- $x = 0
-
- while $x <= 5 do
-   puts "#{x}"
-   $x +=1
- end
-
-# === === for each item loop
-
-instance_values.each do |field, val|
-  if seems_true? val
-  # handle true
-end
-
-# === === function
-
-def method_name (farg, farg2 = 50)
-  puts "#{farg}"
-  rtnval = farg2
-
-  return $rtnval
-end
 
 # === === class
 
@@ -83,7 +34,7 @@ end
 cust1 = Customer.new("1", "John", "Wisdom Apartments, Ludhiya")
 cust1.displayresults()
 
-# === === class constructors destructors (ruby uses initialize)
+# class constructors destructors (ruby uses initialize)
 # ruby magically does it, thus no constructors/destructors
 
 class Customer
@@ -97,7 +48,7 @@ class Customer
 
 end
 
-# === === class inheritance
+# inheritance
 
 class Person
 
@@ -119,9 +70,50 @@ james = Customer.new
 james.breathe
 james.speak
 
-# === helper commands
+# === === function
 
-# === === regular expressions
+def method_name (farg, farg2 = 50)
+  puts "#{farg}"
+  rtnval = farg2
+
+  return $rtnval
+end
+
+# === === if
+
+if ($temperature < "20")
+  puts "have a good day!"
+elsif
+  puts "great"
+else
+  puts "awesome"
+end
+
+# === === loop
+
+# while loop
+
+ $x = 0
+
+ while $x <= 5 do
+   puts "#{x}"
+   $x +=1
+ end
+
+# for each item loop
+
+instance_values.each do |field, val|
+  if seems_true? val
+  # handle true
+end
+
+# === === print
+
+print "hello \n"
+puts "hello"
+p "hello"         # puts same as p
+
+# === === regex
 
 text = "A regular expression is a sequence of characters that define a search pattern."
 
@@ -129,6 +121,32 @@ matches = text.match(/character/)
 puts matches
 
 puts text.scan(/\b[aeiou][a-z]*\b/)
+
+# === === switch
+
+case cars
+when 1..5
+  "It's between 1 and 5"
+when 6
+  "It's 6"
+when "foo", "bar"
+  "It's either foo or bar"
+when String
+  "You passed a string"
+else
+  "You gave me #{x} -- I have no idea what to do with that."
+end
+
+# === === variable
+
+# constant
+VARCONST = "this is a constant"
+puts "value of constant is #{VARCONST}"
+
+# global
+$globalvar = "this is a global variable"
+
+# === helper commands
 
 # === === type conversions
 

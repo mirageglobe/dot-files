@@ -1,1 +1,1 @@
-// regular expressions
+let re = new RegExp('ab+c')
