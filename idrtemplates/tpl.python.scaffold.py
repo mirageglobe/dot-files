@@ -1,5 +1,5 @@
 # === usage
-# python3 <file>
+# python3 test.py
 
 # === main
 

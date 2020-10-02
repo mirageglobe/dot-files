@@ -1,6 +1,5 @@
-
 # === usage
-# ruby <filename>
+# ruby test.rb
 
 # === main
 

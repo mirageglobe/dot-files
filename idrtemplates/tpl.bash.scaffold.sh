@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# === usage
+# chmod +x test.sh
+# bash test.sh
+
 # === bash helper functions
 # source - https://github.com/mirageglobe/
 # version 0.0.2
