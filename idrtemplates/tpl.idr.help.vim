@@ -1,13 +1,14 @@
 " IDR (i dont remember) template help file
 
 " IDR detects current language and applies common snippet
-" this is the source for idrtemplates (I dont remember templates). the goal of this project/plugin is to fulfill the following:
-
-" - it detects the current language in buffer and loads corresponding templates
-" - reads (.idrtemplates) as snippets for common code
+" this is the source for idrtemplates (I dont remember templates)
+"
+" the goal of this project/plugin is to fulfill the following:
+" - detect the current language in buffer and loads corresponding templates
+" - read (.idrtemplates) as snippets for common code
 " - extendable for key mappings
 " - no dependencies
-" - recommended install for FT : https://github.com/sheerun/vim-polyglot
+" - recommended install for FT detection : https://github.com/sheerun/vim-polyglot
 
 " === common commands
 
@@ -35,18 +36,20 @@
 
 " === languages
 
-languages             base        scaffold    helpfile
+languages             base-help     scaffold        IDRcmds
 
-ansible               progress    progress    ✓
-bash                  ✓           progress    ✓
-c                     progress    progress    ✓
-go                    progress    progress    progress
-html                  progress    progress    progress
-javascript            ✓           ✓           ✓
-markdown              n/a         progress    progress
-php                   progress    progress    progress
-python                ✓           ✓           ✓
-ruby                  ✓           ✓           ✓
-rust                  progress    progress    progress
-vim                   progress    progress    ✓
-vue                   progress    progress    progress
+ansible               ✓             progress        n/a
+bash                  ✓             ✓               ✓
+c                     ✓             progress        progress
+go                    ✓             progress        progress
+html                  ✓             ✓               n/a
+javascript            ✓             ✓               ✓
+lua                   progress      progress        progress
+markdown              ✓             progress        n/a
+php                   ✓             progress        progress
+python                ✓             ✓               ✓
+ruby                  ✓             ✓               ✓
+rust                  progress      progress        progress
+terraform             progress      progress        n/a
+vim                   ✓             progress        progress
+vue                   progress      progress        progress

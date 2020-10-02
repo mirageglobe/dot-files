@@ -591,12 +591,14 @@ function IDRhelp(idr_path)
   set splitright
   if index(['vim'], &filetype) != '-1'                              " vimrc
     execute "80vsplit " . fnameescape(a:idr_path) . "tpl.vim.vim"
-  elseif index(['yaml.ansible'], &filetype) != '-1'                " ansible yml
+  elseif index(['yaml.ansible'], &filetype) != '-1'                 " ansible yml
     execute "80vsplit " . fnameescape(a:idr_path) . "tpl.ansible.yml"
   elseif index(['conf','sh'], &filetype) != '-1'                    " bash sh
     execute "80vsplit " . fnameescape(a:idr_path) . "tpl.bash.sh"
   elseif index(['c'], &filetype) != '-1'                            " c c
     execute "80vsplit " . fnameescape(a:idr_path) . "tpl.c.c"
+  elseif index(['go'], &filetype) != '-1'                           " go go
+    execute "80vsplit " . fnameescape(a:idr_path) . "tpl.go.go"
   elseif index(['html'], &filetype) != '-1'                         " html html
     execute "80vsplit " . fnameescape(a:idr_path) . "tpl.html.html"
   elseif index(['javascript'], &filetype) != '-1'                   " javascript js
@@ -621,6 +623,10 @@ function IDRscaffold()
     -1read ~/dot-files/idrtemplates/tpl.idr.placeholder.vim
   elseif index(['conf','sh'], &filetype) != '-1'                    " bash sh
     -1read ~/dot-files/idrtemplates/tpl.bash.scaffold.sh
+  elseif index(['c'], &filetype) != '-1'                            " c c
+    -1read ~/dot-files/idrtemplates/tpl.c.scaffold.c
+  elseif index(['html'], &filetype) != '-1'                         " html html
+    -1read ~/dot-files/idrtemplates/tpl.html.scaffold.html
   elseif index(['javascript'], &filetype) != '-1'                   " javascript js
     -1read ~/dot-files/idrtemplates/tpl.javascript.scaffold.js
   elseif index(['python'], &filetype) != '-1'                       " python py
@@ -636,7 +642,7 @@ function IDRarray()
   if index(['vim'], &filetype) != '-1'                              " vimrc
     -1read ~/dot-files/idrtemplates/tpl.idr.placeholder.vim
   elseif index(['conf','sh'], &filetype) != '-1'                    " bash sh
-    -1read ~/dot-files/idrtemplates/tpl.idr.placeholder.vim
+    -1read ~/dot-files/idrtemplates/tpl.bash.array.sh
   elseif index(['javascript'], &filetype) != '-1'                   " javascript js
     -1read ~/dot-files/idrtemplates/tpl.javascript.array.js
   elseif index(['python'], &filetype) != '-1'                       " python py
@@ -652,7 +658,7 @@ function IDRclass()
   if index(['vim'], &filetype) != '-1'                              " vimrc
     -1read ~/dot-files/idrtemplates/tpl.idr.placeholder.vim
   elseif index(['conf','sh'], &filetype) != '-1'                    " bash sh
-    -1read ~/dot-files/idrtemplates/tpl.idr.placeholder.vim
+    -1read ~/dot-files/idrtemplates/tpl.bash.class.sh
   elseif index(['javascript'], &filetype) != '-1'                   " javascript js
     -1read ~/dot-files/idrtemplates/tpl.javascript.class.js
   elseif index(['python'], &filetype) != '-1'                       " python py
@@ -732,7 +738,7 @@ function IDRregex()
   if index(['vim'], &filetype) != '-1'                              " vimrc
     -1read ~/dot-files/idrtemplates/tpl.idr.placeholder.vim
   elseif index(['conf','sh'], &filetype) != '-1'                    " bash sh
-    -1read ~/dot-files/idrtemplates/tpl.idr.placeholder.vim
+    -1read ~/dot-files/idrtemplates/tpl.bash.regex.sh
   elseif index(['javascript'], &filetype) != '-1'                   " javascript js
     -1read ~/dot-files/idrtemplates/tpl.javascript.regex.js
   elseif index(['python'], &filetype) != '-1'                       " python py
@@ -775,8 +781,5 @@ function IDRvariable()
     echom "IDR : syntax not found or file type '" . &filetype . "' not supported. add syntax or run :set ft=<file>."
   endif
 endfunction
-
-" go
-" lua
 
 " === idrtemplates end
