@@ -1,0 +1,14 @@
+# === usage
+# ansible-playbook test.yml
+
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: generate information
+      set_fact:
+        sourcelist:
+          - "first variable"
+    - name: debug_main
+      debug:
+        var: sourcelist
