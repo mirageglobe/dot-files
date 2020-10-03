@@ -1,129 +1,17 @@
-# === terraform
+# terraform
 
-# === references
-# - https://blog.gruntwork.io/terraform-tips-tricks-loops-if-statements-and-gotchas-f739bbae55f9
-
-# === === aws amis
+# === aws amis
 # - https://wiki.debian.org/cloud/amazonec2image/stretch
 # - eu-west-2 debian stretch ami-0ef10a4062f24d89d
 
-# === === structure
+# === structure
 # rename this to terraform/main.tf
 # recommended basic files structure for a tf project
 # - main.tf
 # - outputs.tf
 # - variables.tf
 
-# === basic commands
-
-# === === array
-
-variable "user_names" {
-  description = "Create IAM users with these names"
-  type        = list(string)
-  default     = ["neo", "trinity", "morpheus"]
-}
-
-# === === class
-# === === function
-# === === if
-
-# using lookup
-output "output_lookup_example" {
-  value       = lookup({ a = "ay", b = "bee" }, "a", "what?") # result: ay
-  description = "instance - docker registry"
-}
-
-output "output_lookup_default_example" {
-  value       = lookup({ a = "ay", b = "bee" }, "c", "what?") # result: what?
-  description = "instance - docker registry"
-}
-
-# using count as bool condition for if
-variable "enable_autoscaling" {
-  description = "if set to true, enable auto scaling"
-  type        = bool
-}
-
-resource "aws_autoscaling_schedule" "scale_out_business_hours" {
-  count                  = var.enable_autoscaling ? 1 : 0
-  scheduled_action_name  = "scale-out-during-business-hours"
-  min_size               = 2
-  max_size               = 10
-  desired_capacity       = 10
-  recurrence             = "0 9 * * *"
-  autoscaling_group_name = aws_autoscaling_group.example.name
-}
-
-# using count bool condition as if/else
-
-variable "give_neo_cloudwatch_full_access" {
-  description = "If true, neo gets full access to CloudWatch"
-  type        = bool
-}
-
-# this is the if part
-resource "aws_iam_user_policy_attachment" "neo_cloudwatch_full" {
-  count      = var.give_neo_cloudwatch_full_access ? 1 : 0
-  user       = aws_iam_user.example[0].name
-  policy_arn = aws_iam_policy.cloudwatch_full_access.arn
-}
-
-# this is else part; reverse of count
-resource "aws_iam_user_policy_attachment" "neo_cloudwatch_read" {
-  count      = var.give_neo_cloudwatch_full_access ? 0 : 1
-  user       = aws_iam_user.example[0].name
-  policy_arn = aws_iam_policy.cloudwatch_read_only.arn
-}
-
-# === === loop
-
-resource "aws_iam_user" "example" {
-  count = 3
-  name  = "neo"
-}
-
-# loop with unique name
-
-variable "user_names" {
-  description = "Create IAM users with these names"
-  type        = list(string)
-  default     = ["neo", "trinity", "morpheus"]
-}
-
-resource "aws_iam_user" "example" {
-  count = length(var.user_names)
-  name  = var.user_names[count.index]
-}
-
-# === === print
-
-output "instance_docker_registry" {
-  value       = "${aws_instance.dummy.public_dns}:5000"
-  description = "instance - docker registry"
-}
-
-# === === regex
-# === === switch
-# === === variable
-
-variable "http_port" {
-  description = "port used for http requests"
-  default     = "80"
-}
-
-locals {
-  common_tags = {
-    environment = "develop",
-    project     = "example",
-  }
-  namespace = "example"
-  owner     = "devops"
-}
-
-# === helper commands
-
-# === === provider settings
+# === provider settings
 
 terraform {
   required_version = ">=0.12.0"
@@ -150,7 +38,7 @@ provider "aws" {
   # - export AWS_SECRET_ACCESS_KEY="a-secret-key"
 }
 
-# === === service networks vpc subnet gateway
+# === service networks vpc subnet gateway
 
 resource "aws_vpc" "main" {
   cidr_block       = "10.0.0.0/16"
@@ -200,7 +88,7 @@ resource "aws_route_table_association" "subnet-association" {
   route_table_id = "${aws_route_table.main.id}"
 }
 
-# === === service network security
+# === service network security
 
 resource "aws_security_group" "allow-all-tls" {
   name        = "${local.namespace}-allow-all-tls"
@@ -306,7 +194,7 @@ resource "aws_iam_role" "instance" {
 EOF
 }
 
-# === === resource amis
+# === resource amis
 
 data "aws_ami" "aws-docker" {
   most_recent = true
@@ -341,7 +229,7 @@ data "aws_ami" "ubuntu-16" {
   }
 }
 
-# === === service networks
+# === service networks
 
 resource "aws_alb" "base" {
   name = "${local.namespace}-base"
@@ -361,7 +249,7 @@ resource "aws_alb" "base" {
   }
 }
 
-# === === service logging bucket
+# === service logging bucket
 
 resource "aws_s3_bucket" "log_bucket" {
   bucket = "${local.namespace}-logs-bucket"
@@ -378,7 +266,7 @@ resource "aws_s3_bucket" "base_bucket" {
   }
 }
 
-# === === service - dummy instance
+# === service - dummy instance
 
 resource "aws_instance" "dummy" {
   ami                         = "${data.aws_ami.ubuntu-16.id}"
@@ -466,7 +354,7 @@ resource "aws_lb_target_group" "dummy" {
   tags                 = "${local.common_tags}"
 }
 
-# === === service image repository
+# === service image repository
 
 resource "aws_ecr_repository" "base" {
   # actual aws reference name of the resource
@@ -474,14 +362,14 @@ resource "aws_ecr_repository" "base" {
   name = "base"
 }
 
-# === === general outputs
+# === general outputs ===
 
 output "instance_docker_registry" {
   value       = "${aws_instance.dummy.public_dns}:5000"
   description = "instance - docker registry"
 }
 
-# === === variables
+# === variables ===
 
 variable "http_port" {
   description = "port used for http requests"

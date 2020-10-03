@@ -1,13 +1,43 @@
 # === references
 # - https://devhints.io/ansible
 
-# === variable constants
+# === basic commands
 
-# variable string
-myvar: "value"
+# === array
 
-# variable from other results
-myvar: "{{ output_response.stdout }}"
+- name: set variable
+  set_fact:
+    fact_mylist:
+      - "first variable"
+      - "second variable"
+
+# === class
+
+# no class; see function
+
+# === if
+
+- name: if condition
+  shell: |
+      echo "test";
+  when: mylist is defined and mytask is success
+
+# === function
+
+# block can be used as function
+tasks:
+  - name: Install, configure, and start Apache
+    block:
+      - name: task 1
+        shell: |
+          echo "test"
+      - name: task 2
+        shell: |
+          echo "test 2"
+    when: myvar == "enable"
+    become: true
+    become_user: root
+    ignore_errors: yes
 
 # === loop
 
@@ -48,6 +78,54 @@ allowlist:
   vars:
     mkey: "{{ item.key }}"
     mvalue: "{{ item.value }}"
+
+# === print
+
+# show using echo
+- name: print {{ myvalue }}
+  shell: |
+    echo "one: {{ myvalue }}";
+
+# show using debug
+- name: debug_set_fact
+  set_fact:
+    foo: "{{ output_response.stdout | from_json }}"
+
+- name: debug_main
+  debug:
+    var: foo
+
+# === regex
+
+# search for "foo" in "foobar"
+{{ 'foobar' | regex_search('(foo)') }}
+
+# will return empty if it cannot find a match
+{{ 'ansible' | regex_search('(foobar)') }}
+
+# case insensitive search in multiline mode
+{{ 'foo\nBAR' | regex_search("^bar", multiline=True, ignorecase=True) }}
+
+# === switch
+
+vars:
+   myDict:
+     string1: a
+     string2: b
+   new_ansible_var: '{{ myDict[existing_ansible_var | default("this key does not exist in the dict")] | default("") }}'
+
+# === variable
+
+# variable string
+myvar: "value"
+
+# variable from other results
+myvar: "{{ output_response.stdout }}"
+
+# variable via set fact
+- name: set_fact_variable
+  set_fact:
+    foo: "{{ output_response.stdout | from_json }}"
 
 # === helper functions
 

@@ -38,9 +38,10 @@
 
 languages             base-help     scaffold        IDRcmds
 
-ansible               ✓             progress        n/a
+ansible               ✓             ✓               ✓
 bash                  ✓             ✓               ✓
 c                     ✓             progress        progress
+docker                progress      ✓               n/a
 go                    ✓             progress        progress
 html                  ✓             ✓               n/a
 javascript            ✓             ✓               ✓

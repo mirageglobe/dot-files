@@ -1,0 +1,5 @@
+- name: Read values {{ myvalue }}
+  shell: |
+      echo "{{ item }} # this is value";
+  loop: {{ mylist | default([], true) }}
+  when: mylist is defined
