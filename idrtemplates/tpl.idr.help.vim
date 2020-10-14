@@ -3,7 +3,7 @@
 " IDR detects current language and applies common snippet
 " this is the source for idrtemplates (I dont remember templates)
 "
-" the goal of this project/plugin is to fulfill the following:
+" the goal of this project/plug-in is to fulfil the following:
 " - detect the current language in buffer and loads corresponding templates
 " - read (.idrtemplates) as snippets for common code
 " - extendable for key mappings
@@ -36,21 +36,22 @@
 
 " === languages
 
-languages             base-help     scaffold        IDRcmds
+languages             base-help       scaffold        IDRcmds
 
-ansible               ✓             ✓               ✓
-bash                  ✓             ✓               ✓
-c                     ✓             progress        progress
-docker                progress      ✓               n/a
-go                    ✓             progress        progress
-html                  ✓             ✓               n/a
-javascript            ✓             ✓               ✓
-lua                   progress      progress        progress
-markdown              ✓             progress        n/a
-php                   ✓             progress        progress
-python                ✓             ✓               ✓
-ruby                  ✓             ✓               ✓
-rust                  progress      progress        progress
-terraform             progress      progress        n/a
-vim                   ✓             progress        progress
-vue                   progress      progress        progress
+ansible               ✓               ✓               ✓
+bash                  ✓               ✓               ✓
+c                     ✓               progress        progress
+docker                progress        ✓               n/a
+dotgraphs             progress        ✓               n/a
+go                    ✓               progress        progress
+html                  ✓               ✓               n/a
+javascript            ✓               ✓               ✓
+lua                   progress        progress        progress
+markdown              ✓               progress        n/a
+php                   ✓               progress        progress
+python                ✓               ✓               ✓
+ruby                  ✓               ✓               ✓
+rust                  progress        progress        progress
+terraform             progress        progress        n/a
+vim                   ✓               progress        progress
+vue                   progress        progress        progress
