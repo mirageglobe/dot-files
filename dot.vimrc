@@ -92,10 +92,11 @@ set foldlevel=2
 
 " === === indentation
 
-set smartindent
-set shiftwidth=2
+" set autoindent
+set smartindent                     " does the right indent in most programs
+set shiftwidth=2                    " indenting at 2 spaces
 set softtabstop=2
-set tabstop=2
+set tabstop=2                       " tabs are at proper location
 set expandtab
 
 " === === wrapping
