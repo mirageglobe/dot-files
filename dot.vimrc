@@ -1,19 +1,17 @@
-" ===
 " === custom vim config
-" ===
 
-" === notes
+" === === notes
 " - https://tbaggery.com/2011/08/08/effortless-ctags-with-git.html
 " - https://vimways.org/2018/you-should-be-using-tags-in-vim/
 
-" === fonts configuration (iterm)
+" === === fonts configuration (iterm)
 " font -> FuraCode Nerd Font [Regular] [12]
 " use built-in Powerline glyphs -> true
 " enable subpixel anti-aliasing -> true
 " use ligatures -> true
 " anti-aliased -> true
 
-" === setting start
+" === === setting start
 
 " optimisations
 
@@ -134,7 +132,7 @@ set spell spelllang=en_gb                             " turn on vims spell check
 
 " === plug start
 
-" ==> auto-install vim-plug
+" auto-install vim-plug
 
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -144,7 +142,7 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-" ==> colour schemes and IDE customisation
+" colour schemes and IDE customisation
 
 Plug 'drewtempelmeyer/palenight.vim'                  " enables palenight color scheme
 Plug 'itchyny/lightline.vim'                          " enables superlight status bar - https://github.com/itchyny/lightline.vim
@@ -163,7 +161,7 @@ Plug 'mhinz/vim-startify'                             " enables fancy startup
 " Plug 'tpope/vim-surround'                             " enables quoting with cs[' to change quotes from [ to ' - cst to add quotes
 Plug 'tpope/vim-repeat'                               " enables repeating command or input with "."
 
-" ==> file management
+" file management
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }   " installs fzf
 Plug 'junegunn/fzf.vim'                               " enables super fast fuzzy search with :FZF
@@ -175,7 +173,7 @@ Plug 'airblade/vim-gitgutter'                         " shows git status in gutt
 " Plug 'tommcdo/vim-fubitive'                           " git in vim for bitbucket
 Plug 'jlanzarotta/bufexplorer'                        " buffer explorer
 
-" ==> language / syntax
+" language / syntax
 
 Plug 'majutsushi/tagbar'                              " enables ctag sidebar (install ctag via brew)
 Plug 'ludovicchabant/vim-gutentags'                   " auto ctag management
@@ -203,13 +201,13 @@ Plug 'sheerun/vim-polyglot'                           " syntax superfast on dema
 " Plug 'tpope/vim-markdown'
 " Plug 'pangloss/vim-javascript'
 
-" ==> linters
+" linters
 
 Plug 'dense-analysis/ale'                             " enables ale universal language linter
 Plug 'maximbaz/lightline-ale'                         " enables ale in lightline
 " Plug 'scrooloose/syntastic'
 
-" ==> misc
+" misc
 
 " must be at the end
 Plug 'ryanoasis/vim-devicons'                         " enables super fonts (nerd fonts for vim)
@@ -223,8 +221,7 @@ call plug#end()
 
 set background=dark
 
-" ==> solarized options
-"
+" solarized options
 " let g:solarized_visibility = "high"
 " let g:solarized_contrast = "high"
 
@@ -377,6 +374,9 @@ let NERDTreeShowHidden=1
 
 " setting polygot terraform-vim
 let g:terraform_fmt_on_save=1
+
+" disable language packs
+let g:polyglot_disabled = ['htmldjango']
 
 " === vim polyglot end
 
@@ -576,6 +576,7 @@ command IDRvariable   :call IDRvariable()
 
 command IDRftansible        :call IDRfile("yaml.ansible", idr_current_filetype)         " force toggle to set filetype
 command IDRftyaml           :call IDRfile("yaml", idr_current_filetype)                 " force toggle to set filetype
+command IDRftjson           :call IDRfile("json", idr_current_filetype)                 " force toggle to set filetype
 command IDRftorigin         :call IDRfile(idr_current_filetype, idr_current_filetype)   " toggle to set file as original format
 
 function IDRtoggle(idr_path)
@@ -585,7 +586,7 @@ function IDRtoggle(idr_path)
 endfunction
 
 function IDRfile(x, c)
-  echom "IDR : activate templates for : " . a:x . " / origin filetype : " . a:c
+  echom "IDR : change filetype detection to - " . a:x . " . original detected filetype is - " . a:c . " ."
   let &filetype = a:x
 endfunction
 
