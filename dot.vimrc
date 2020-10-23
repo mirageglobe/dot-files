@@ -130,6 +130,18 @@ set spell spelllang=en_gb                             " turn on vims spell check
 
 " === setting end
 
+" === preplug settings
+
+" === === vim polyglot start
+
+" setting polygot terraform-vim
+let g:terraform_fmt_on_save=1
+
+" disable language packs
+let g:polyglot_disabled = ['htmldjango']
+
+" === === vim polyglot end
+
 " === plug start
 
 " auto-install vim-plug
@@ -369,16 +381,6 @@ let g:ale_list_window_size = 5
 let NERDTreeShowHidden=1
 
 " === nerdtree end
-
-" === vim polyglot start
-
-" setting polygot terraform-vim
-let g:terraform_fmt_on_save=1
-
-" disable language packs
-let g:polyglot_disabled = ['htmldjango']
-
-" === vim polyglot end
 
 " === supertab start
 
