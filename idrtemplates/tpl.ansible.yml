@@ -79,6 +79,35 @@ allowlist:
     mkey: "{{ item.key }}"
     mvalue: "{{ item.value }}"
 
+# double nested loop
+
+db_sql_schema:
+  - db: jldb1
+    tables:
+      - name: 'jldb1_table1'
+        partitionkey: '/partitionKey'
+      - name: 'jldb1_table2'
+        partitionkey: '/partitionKey'
+  - db: jldb2
+    tables:
+      - name: 'jldb2_table1'
+        partitionkey: "/partitionKey"
+
+- name: List db
+  debug:
+    msg: "databases = {{ item.db }}"
+  loop: "{{ db_sql_schema }}"
+
+- name: List tables
+  debug:
+    msg: "db = {{ item.0.db }} collection = {{ item.1.name }} key = {{ item.1.partitionkey }}"
+  loop: "{{ db_sql_schema | subelements('tables') }}"
+
+- name: Test
+  shell: |
+    echo "{{ item }}";
+  loop: "{{ db_sql_schema | default({}, true) }}"
+
 # === print
 
 # show using echo
@@ -89,11 +118,11 @@ allowlist:
 # show using debug
 - name: debug_set_fact
   set_fact:
-    foo: "{{ output_response.stdout | from_json }}"
+    fact_foo: "{{ output_response.stdout | from_json }}"
 
 - name: debug_main
   debug:
-    var: foo
+    var: fact_foo
 
 # === regex
 
@@ -125,7 +154,12 @@ myvar: "{{ output_response.stdout }}"
 # variable via set fact
 - name: set_fact_variable
   set_fact:
-    foo: "{{ output_response.stdout | from_json }}"
+    fact_foo: "{{ output_response.stdout | from_json }}"
+
+# variable via set fact with conditions
+- name: set_fact_variable
+  set_fact:
+    fact_foo: "{{ 'this is true' if (some_result == True) else 'this is false' }}"
 
 # === helper functions
 
@@ -134,11 +168,11 @@ myvar: "{{ output_response.stdout }}"
 # set fact will show values in logs without debug
 - name: debug_set_fact
   set_fact:
-    foo: "{{ output_response.stdout | from_json }}"
+    fact_foo: "{{ output_response.stdout | from_json }}"
 
 - name: debug_main
   debug:
-    var: foo
+    var: fact_foo
 
 # === === debug message
 
@@ -175,3 +209,15 @@ handlers:
   - name: run me even after an error
     ansible.builtin.debug:
     msg: 'this handler runs even on error'
+
+- name: Display message to pause and check until condition
+  pause:
+    seconds: 10
+    prompt: |
+      ======================
+      Found {{ number_of_nodes | length }} on {{ example_cluster }}.
+      Ensure that there is only 1 node on cluster {{ example_cluster }}
+
+      Contact xxxx to clean up and action the above.
+      ======================
+  when: number_of_nodes | length > 1
