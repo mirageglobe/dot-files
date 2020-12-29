@@ -57,7 +57,7 @@ endef
 
 ##@ Menu
 
-launch:													## loads basic init tools
+launch:													## launch basic tools including gmail and reddit
 	@$(call fn_print_header,launch basic tools)
 	open https://mail.google.com
 	open https://www.reddit.com/
@@ -80,7 +80,7 @@ check:													## check system / environment
 	@$(call fn_check_command_note,wget,)
 	@$(call fn_check_command_note,yarn,)
 	@$(call fn_check_command_note,vim,)
-	@$(call fn_print_header_command,brew info,brew list && brew cask list)
+	@$(call fn_print_header_command,brew info,brew list && brew list --cask)
 	@$(call fn_print_header_command,node yarn info,yarn global list)
 	@$(call fn_print_header_command,ruby gem info,gem list)
 	@$(call fn_print_header_command,python3 info,pip3 list)

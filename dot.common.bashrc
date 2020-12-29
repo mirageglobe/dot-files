@@ -18,42 +18,43 @@ export TERM=xterm-256color                            # common
 # === apps and tools required settings
 # ===
 
-# === === for android sdk
+# === === android sdk settings
 # export ANDROID_HOME=/usr/local/opt/android-sdk
 # printf "%s" "[+] android "
 
-# === === for autojump
+# === === autojump settings
 # https://github.com/wting/autojump
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
-# === === for homebrew ruby
-printf "%s" "[+] ruby "
-
-export PATH="/usr/local/lib/ruby/gems/2.7.0/bin:$PATH"
-export PATH="/usr/local/opt/ruby/bin:$PATH"
-
-# === === for fzf
+# === === fzf settings
 # note that fzf will try to install this to default .bashrc too
 # [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 export FZF_COMPLETION_TRIGGER='??'
 
-# === === for jenv (http://www.jenv.be/)
+# === === jenv settings (http://www.jenv.be/)
 # export PATH="$HOME/.jenv/bin:$PATH"
 # eval "$(jenv init -)"
 
-# === === for java adopt
+# === === java adopt settings
 printf "%s" "[+] java "
 if [ -z $JAVA_HOME ]; then
   export JAVA_HOME=$(/usr/libexec/java_home)
 fi
 
-# === === for n (node and yarn package mgr) default install to home folder
+# === === n settings (node and yarn package mgr) default install to home folder
 # export N_PREFIX=$HOME/n
 # export PREFIX=$HOME/n
 
-# === === added for python3
+# === === python3 settings
 printf "%s" "[+] python "
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+
+# === === ruby settings (homebrew)
+printf "%s" "[+] ruby "
+
+export PATH="/usr/local/lib/ruby/gems/2.7.0/bin:$PATH"
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
 
 # ===
 # === git
@@ -61,7 +62,7 @@ export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
 printf "%s" "[+] git "
 
-# === === for git configurations
+# === === git configuration and settings
 # default push branch to remote
 # git config --global --add push.default current
 cat ~/.gitconfig | grep "default = current" > /dev/null || git config --global --add push.default current
@@ -108,20 +109,20 @@ if ${BASH_VERSION_5} = true; then
   [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
 fi
 
-# === === added for kubectl completion
+# === === git completion
+# # this should be added automatically if bash-completion@2 is installed
+# if [ -f ~/dot.bash-completion.git.bash ]; then
+#   source ~/dot.bash-completion.git.bash
+# fi
+
+# === === kubectl completion
 if command -V kubectl 1> /dev/null; then
   source <(kubectl completion bash)
 fi
 
-# === === added for make completion
+# === === make completion
 # if [ -f ~/dot.bash-completion.make.bash ]; then
 #   source ~/dot.bash-completion.make.bash
-# fi
-
-# === === added for git completion
-# # this should be added automatically if bash-completion@2 is installed
-# if [ -f ~/dot.bash-completion.git.bash ]; then
-#   source ~/dot.bash-completion.git.bash
 # fi
 
 # ===
@@ -133,23 +134,15 @@ printf "%s" "[+] aliases "
 # === === overrides
 
 alias cat="bat"
-# alias _cat="bat"
-
 # alias grep="rg"
-
 alias kc="kubectl"
 
 alias ls="lsd"
-# alias _ls="lsd"
-
 alias ll="lsd -la"
-# alias _lla="lsd -la"
-# alias _l="lsd -l"
-# alias _la="lsd -a"
+alias lt="lsd --tree"
+alias tree="lsd --tree"
 
-alias lt="lsd ---tree"
-# alias _lt="lsd --tree"
-# alias _tree="lsd --tree"
+# === === new commands
 
 # alias _ls="ls -Gd .*"
 # alias _ll="ls -lhAG"
