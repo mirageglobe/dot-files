@@ -41,6 +41,7 @@ printf "%s" "[+] prompt"
 # references
 # - https://www.cyberciti.biz/faq/bash-shell-change-the-color-of-my-shell-prompt-under-linux-or-unix/
 # - https://www.shellhacks.com/bash-colors/
+# - https://www.nerdfonts.com/cheat-sheet
 
 C_BLACK="\[\e[0;30m\]"          # black
 C_BLACKL="\[\e[1;30m\]"         # black (same)
