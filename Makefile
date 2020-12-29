@@ -5,11 +5,14 @@
 
 # === targets
 
-# menu shortcuts targets
-MENU := launch check mac-ensure debian-ensure tex-ensure scan-he
+# menu targets
+MENU := launch check ensure-mac ensure-deb tex-ensure scan-he
 
-# menu helpers targets
-MENU := common-ensure pkgmgr-ensure help
+# menu target helpers
+MENU := ensure-mac-init ensure-deb-init ensure-common ensure-tools
+
+# menu default
+MENU := help
 
 # load phony
 # info - phony is used to make sure there is no similar file(s) such as <target> that cause the make recipe not to work
@@ -57,7 +60,7 @@ endef
 
 ##@ Menu
 
-launch:													## launch basic tools including gmail and reddit
+launch:													## launch useful web tools
 	@$(call fn_print_header,launch basic tools)
 	open https://mail.google.com
 	open https://www.reddit.com/
@@ -87,37 +90,54 @@ check:													## check system / environment
 	@$(call fn_print_header_command,color test,tput colors)
 	@$(call fn_print_header,summary)
 
-mac-ensure:	common-ensure pkgmgr-ensure										## ensure mac gui tools and common-ensure present
-	# ref - https://shift.infinite.red/npm-vs-yarn-cheat-sheet-8755b092e5cc
+ensure-mac: ensure-common	ensure-mac-init							## ensure mac gui tools and common-ensure present
+	@$(call fn_print_header,notes)
+	@echo "ref - https://shift.infinite.red/npm-vs-yarn-cheat-sheet-8755b092e5cc"
+	@echo "run make ensure-tools"
 
-debian-ensure: common-ensure pkgmgr-ensure								## ensure debian gui tools and common-ensure present
+ensure-deb: ensure-common ensure-deb-init							## ensure debian gui tools and common-ensure present
+	@echo run make ensure-tools
 
-scan-he:																									## run hawkeye scanner
+scan-he:																							## run hawkeye scanner
 	docker run --rm -v $$PWD:/target hawkeyesec/scanner-cli
 
 ##@ Helpers
 
-common-ensure:											## ensure config and tools present
-	@$(call fn_print_header,note)
-	@echo "- python pip, ruby gems, node yarn are required dependancies";
-	@# environment : config									========================================
-	@$(call fn_print_header,ensure .bashrc exist)
-	-cp -n tpl.bashrc ~/.bashrc || echo "skip - found .bashrc"					# never overwrite
+ensure-mac-init:
 	@$(call fn_print_header,ensure .config/alacritty/alacritty.yml exist)
 	-cp -i dot.mac.alacritty.yml ~/.config/alacritty/alacritty.yml
 	@$(call fn_print_header,ensure .tmux exist)
-	-cp -i dot.tmux.conf ~/.tmux.conf										# always overwrite
+	-cp -i dot.tmux.conf ~/.tmux.conf																	# always overwrite
+
+ensure-deb-init:
+	@$(call fn_print_header,ensure tools exist)
+	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+	@(command -v cargo || echo rust and cargo not found. install rust.) && command -v cargo
+	@command -v cargo &>/dev/null || { echo "cargo/rust not installed. try brew install xxxx [abort]" >&2; exit 1; }
+	cargo install lsd
+
+ensure-common:									## ensure config and tools present
+	@# environment : config									========================================
+	@$(call fn_print_header,ensure .bashrc exist)
+	-cp -n tpl.bashrc ~/.bashrc || echo "skip - found .bashrc"				# never overwrite
 	@# tools : vim													========================================
 	@$(call fn_print_header,ensure .vimrc and folders exist)
-	-cp -i tpl.vimrc ~/.vimrc														# always overwrite
+	-cp -i tpl.vimrc ~/.vimrc																					# always overwrite
 	-mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
 
-pkgmgr-ensure:											## ensure package managers and non gui tools present
-	@# tools : node yarn										========================================
-	@$(call fn_print_header,ensure node yarn bins are pristine)
+ensure-tools:										## ensure package managers and non gui tools present
+	@$(call fn_print_header,note)
+	@echo checking python pip ruby gems yarn are recommended tools
+	@(command -v gem || echo gem not found. install ruby.) && command -v gem
+	@(command -v n || echo n not found. install n.) && command -v n
+	@(command -v pip3 || echo pip3 not found. install python3.) && command -v pip3
+	@(command -v python || echo python not found. install python3.) && command -v python
+	@(command -v yarn || echo yarn not found. install yarn.) && command -v yarn
 	-command -v n || curl -L https://git.io/n-install | bash
 	-n latest
 	-command -v yarn || curl -o- -L https://yarnpkg.com/install.sh | bash
+	@# tools : node yarn										========================================
+	@$(call fn_print_header,ensure node yarn bins are pristine)
 	-yarn global upgrade
 	-yarn global add write-good												# lint english grammer
 	-yarn global add htmlhint													# lint html
@@ -185,4 +205,3 @@ help:														## display this help
 
 # $(MAKEFILE_LIST) is an environment variable (name of Makefile) thats available during Make.
 # FS = awks field separator. use it in the beginning of execution. i.e. FS = ","
-
