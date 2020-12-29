@@ -60,10 +60,11 @@ C_END="\[\e[m\]"
 
 PROMPT_EXTEND="\
 ${C_PURPLEL} ${C_END} \
-${C_PURPLE} \${UID} ${C_END}\
-${C_BLUE} \$(fn_prompt_get_current_folder) ${C_END}\
+${C_PURPLE} \$(whoami)(\${UID}) ${C_END}\
+${C_BLUE} \$(pwd) ${C_END}\
+${C_BLUEL}  \$(fn_prompt_get_current_folder) ${C_END}\
 ${C_GREEN}\$(fn_prompt_git_branch)${C_END}\
-${C_YELLOW}\$(fn_prompt_aws)${C_END}\
+${C_RED}\$(fn_prompt_aws)${C_END}\
 ${C_PURPLEL} ${C_END} \
 "
 
