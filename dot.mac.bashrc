@@ -61,7 +61,7 @@ C_END="\[\e[m\]"
 PROMPT_EXTEND="\
 ${C_PURPLEL} ${C_END} \
 ${C_PURPLE} \${UID} ${C_END}\
-${C_BLUE} \$(fn_fox_sys_get_current_folder) ${C_END}\
+${C_BLUE} \$(fn_prompt_get_current_folder) ${C_END}\
 ${C_GREEN}\$(fn_prompt_git_branch)${C_END}\
 ${C_YELLOW}\$(fn_prompt_aws)${C_END}\
 ${C_PURPLEL} ${C_END} \
@@ -76,6 +76,11 @@ ${C_PURPLEL} ${C_END} \
   # prompt + aws
   # PROMPT_EXTEND="$PROMPT_EXTEND aws($AWS_PROFILE)"
 # fi
+
+# === === prompt check current folder
+fn_prompt_get_current_folder() {
+  echo "$(basename $PWD)";
+}
 
 # === === prompt check git method
 fn_prompt_git_branch() {
@@ -94,7 +99,7 @@ fn_prompt_aws() {
 
 # PROMPT_SETTING="$PROMPT_SETTING\[\033[32m\]\$(fn_get_git_branch)\[\033[00m\]"
 
-# ==> setting final prompt on prompt
+# === setting final prompt on prompt
 
 printf "\n" ""
 

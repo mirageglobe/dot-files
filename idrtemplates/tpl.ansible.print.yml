@@ -1,3 +1,0 @@
-- name: print {{ myvalue }}
-  shell: |
-    echo "one: {{ myvalue }}";

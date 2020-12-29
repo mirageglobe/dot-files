@@ -1,5 +1,12 @@
 " === custom vim config
 
+" === usage
+" add the following lines to .vimrc
+"
+" if filereadable(expand("~/dot-files/dot.vimrc"))
+"   source ~/dot-files/dot.vimrc
+" endif
+
 " === === notes
 " - https://tbaggery.com/2011/08/08/effortless-ctags-with-git.html
 " - https://vimways.org/2018/you-should-be-using-tags-in-vim/

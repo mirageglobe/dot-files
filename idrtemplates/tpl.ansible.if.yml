@@ -1,4 +1,0 @@
-- name: if condition
-  shell: |
-      echo "test";
-  when: mylist is defined and mytask is success

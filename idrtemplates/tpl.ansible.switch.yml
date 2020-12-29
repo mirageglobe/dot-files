@@ -1,5 +1,0 @@
-vars: 
-   myDict:
-     string1: a
-     string2: b
-   new_ansible_var: '{{ myDict[existing_ansible_var | default("this key does not exist in the dict")] | default("") }}'

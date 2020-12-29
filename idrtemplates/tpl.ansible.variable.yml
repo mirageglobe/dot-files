@@ -1,3 +1,0 @@
-- name: set_fact_variable
-  set_fact:
-    foo: "bar"
