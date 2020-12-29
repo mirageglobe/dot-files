@@ -145,7 +145,6 @@ pkgmgr-ensure:											## ensure package managers and non gui tools present
 	-gem update --system || echo "never use sudo for gem installation; check ruby path in homebrew"
 	-gem update || echo "never use sudo for gem installation; check ruby path in homebrew"
 	@$(call fn_print_header,ensure ruby user dir gems are pristine)
-	-gem install --user-install terraform_landscape			# adding terraform extensions
 	# archived tools												========================================
 	# -yarn global add semver														# dev semver tool (see https://github.com/fsaintjacques/semver-tool)
 	# -yarn global add stylelint													# lint
@@ -173,6 +172,7 @@ pkgmgr-ensure:											## ensure package managers and non gui tools present
 	# -pip3 install --upgrade autopep8									# lint python based on pep8
 	# -pip3 install weasyprint													# doc easy pdf printer https://weasyprint.org/start/
 	# -gem install --user-install mdl											# lint markdown
+	# -gem install --user-install terraform_landscape			# adding terraform extensions
 	# -gem install --user-install cucumber								# test cucumber ruby rails
 
 help:														## display this help
