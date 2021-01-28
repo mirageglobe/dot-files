@@ -19,8 +19,8 @@ export TERM=xterm-256color                            # common
 # ===
 
 # === === android sdk settings
-# export ANDROID_HOME=/usr/local/opt/android-sdk
 # printf "%s" "[+] android "
+# export ANDROID_HOME=/usr/local/opt/android-sdk
 
 # === === autojump settings
 # https://github.com/wting/autojump
@@ -52,8 +52,11 @@ export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 # === === ruby settings (homebrew)
 printf "%s" "[+] ruby "
 
-export PATH="/usr/local/lib/ruby/gems/2.7.0/bin:$PATH"
+export PATH="/usr/local/lib/ruby/gems/3.0.0/bin:$PATH"
 export PATH="/usr/local/opt/ruby/bin:$PATH"
+
+# $HOME/.gem folder created by gem install <package> --user
+export PATH="$HOME/.gem/ruby/3.0.0/bin:$PATH"
 export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
 
 # ===

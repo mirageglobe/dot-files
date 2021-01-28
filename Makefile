@@ -6,12 +6,10 @@
 # === targets
 
 # menu targets
-MENU := launch check ensure-mac ensure-deb tex-ensure scan-he
+MENU := launch check ensure-mac ensure-deb ensure-tools scan-he
 
-# menu target helpers
-MENU := ensure-mac-init ensure-deb-init ensure-common ensure-tools
-
-# menu default
+# menu helpers
+MENU := ensure-mac-init ensure-deb-init ensure-common
 MENU := help
 
 # load phony
@@ -52,19 +50,46 @@ define fn_print_header_command
 	$(2);
 endef
 
-define fn_print_tab
-	printf "%s\t\t%s\t\t%s\n" $(1) $(2) $(3)
-endef
-
 # === main
+
+##@ Helpers
+
+help:														## display this help
+	@awk 'BEGIN { FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"; } \
+		/^[a-zA-Z0-9_-]+:.*?##/ { printf "  \033[36m%-30s\033[0m %s\n", $$1, $$2; } \
+		/^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5); } \
+		END { printf "\n"; }' $(MAKEFILE_LIST)
+
+ensure-mac-init:
+	@$(call fn_print_header,ensure .config/alacritty/alacritty.yml exist)
+	-cp -i dot.mac.alacritty.yml ~/.config/alacritty/alacritty.yml
+	@$(call fn_print_header,ensure .tmux exist)
+	-cp -i dot.tmux.conf ~/.tmux.conf																	# always overwrite
+
+ensure-deb-init:
+	@$(call fn_print_header,ensure tools exist)
+	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+	@(command -v cargo || echo rust and cargo not found. install rust.) && command -v cargo
+	@command -v cargo &>/dev/null || { echo "cargo/rust not installed. try brew install xxxx [abort]" >&2; exit 1; }
+	cargo install lsd
+
+ensure-common:
+	# === environment : config									========================================
+	@$(call fn_print_header,ensure .bashrc exist)
+	-cp -n tpl.bashrc ~/.bashrc || echo "skip - found .bashrc"				# never overwrite
+	# === tools : vim													========================================
+	@$(call fn_print_header,ensure .vimrc and folders exist)
+	-cp -i tpl.vimrc ~/.vimrc																					# always overwrite
+	-mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
 
 ##@ Menu
 
 launch:													## launch useful web tools
 	@$(call fn_print_header,launch basic tools)
-	open https://mail.google.com
+	open https://mail.google.com/
 	open https://www.reddit.com/
-	open https://devhints.io
+	open https://devhints.io/
+	open https://programming-idioms.org/
 	open https://www.nerdfonts.com/
 	open https://www.noisli.com/
 
@@ -88,55 +113,33 @@ check:													## check system / environment
 	@$(call fn_print_header_command,ruby gem info,gem list)
 	@$(call fn_print_header_command,python3 info,pip3 list)
 	@$(call fn_print_header_command,color test,tput colors)
-	@$(call fn_print_header,summary)
 
-ensure-mac: ensure-common	ensure-mac-init							## ensure mac gui tools and common-ensure present
-	@$(call fn_print_header,notes)
-	@echo "ref - https://shift.infinite.red/npm-vs-yarn-cheat-sheet-8755b092e5cc"
-	@echo "run make ensure-tools"
-
-ensure-deb: ensure-common ensure-deb-init							## ensure debian gui tools and common-ensure present
-	@echo run make ensure-tools
-
-scan-he:																							## run hawkeye scanner
+scan-he:												## run hawkeye scanner
 	docker run --rm -v $$PWD:/target hawkeyesec/scanner-cli
 
-##@ Helpers
+ensure-mac: ensure-common	ensure-mac-init							## ensure mac gui tools and common-ensure present
+	# === notes
+	# https://shift.infinite.red/npm-vs-yarn-cheat-sheet-8755b092e5cc
+	#
+	# run make ensure-tools
 
-ensure-mac-init:
-	@$(call fn_print_header,ensure .config/alacritty/alacritty.yml exist)
-	-cp -i dot.mac.alacritty.yml ~/.config/alacritty/alacritty.yml
-	@$(call fn_print_header,ensure .tmux exist)
-	-cp -i dot.tmux.conf ~/.tmux.conf																	# always overwrite
-
-ensure-deb-init:
-	@$(call fn_print_header,ensure tools exist)
-	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-	@(command -v cargo || echo rust and cargo not found. install rust.) && command -v cargo
-	@command -v cargo &>/dev/null || { echo "cargo/rust not installed. try brew install xxxx [abort]" >&2; exit 1; }
-	cargo install lsd
-
-ensure-common:									## ensure config and tools present
-	@# environment : config									========================================
-	@$(call fn_print_header,ensure .bashrc exist)
-	-cp -n tpl.bashrc ~/.bashrc || echo "skip - found .bashrc"				# never overwrite
-	@# tools : vim													========================================
-	@$(call fn_print_header,ensure .vimrc and folders exist)
-	-cp -i tpl.vimrc ~/.vimrc																					# always overwrite
-	-mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
+ensure-deb: ensure-common ensure-deb-init							## ensure debian gui tools and common-ensure present
+	#
+	# run make ensure-tools
 
 ensure-tools:										## ensure package managers and non gui tools present
 	@$(call fn_print_header,note)
+	# === check status									========================================
 	@echo checking python pip ruby gems yarn are recommended tools
 	@(command -v gem || echo gem not found. install ruby.) && command -v gem
 	@(command -v n || echo n not found. install n.) && command -v n
-	@(command -v pip3 || echo pip3 not found. install python3.) && command -v pip3
 	@(command -v python || echo python not found. install python3.) && command -v python
+	@(command -v pip3 || echo pip3 not found. install python3.) && command -v pip3
 	@(command -v yarn || echo yarn not found. install yarn.) && command -v yarn
 	-command -v n || curl -L https://git.io/n-install | bash
 	-n latest
 	-command -v yarn || curl -o- -L https://yarnpkg.com/install.sh | bash
-	@# tools : node yarn										========================================
+	# === tools : node yarn							========================================
 	@$(call fn_print_header,ensure node yarn bins are pristine)
 	-yarn global upgrade
 	-yarn global add write-good												# lint english grammer
@@ -149,23 +152,24 @@ ensure-tools:										## ensure package managers and non gui tools present
 	-yarn global add @vue/cli													# web framework - vue cli 3.x
 	-yarn global upgrade --latest @vue/cli
 	-yarn global add local-web-server									# server simple local web server - use ws to start
-	-yarn global add mountebank												# test mock server
-	-yarn global add nightwatch												# test e2e browser test - default by vuejs
 	-yarn global add bats															# test bash test suite (bats-core)
 	-yarn global upgrade --latest bats
-	# tools : python pip										========================================
+	-yarn global add mountebank												# test mock server
+	-yarn global add nightwatch												# test e2e browser test - default by vuejs
+	# === tools : python pip						========================================
 	# -pip3 install --upgrade pip setuptools														# package manager for python upgrade pip causes issues with brew python (reinstall python instead)
 	-pip3 install -U $$(pip3 freeze | awk -F'[/=]' '{print $$1}')
 	-pip3 install ansible || pip3 install -U ansible									# ansible
 	-pip3 install ansible-lint || pip3 install -U ansible-lint				# lint ansible
 	-pip3 install sslyze || pip3 install -U sslyze										# ssl check tool
 	-pip3 install paramiko || pip3 install -U paramiko								# ssh tool
-	# tools : ruby gems										========================================
+	# === tools : ruby gems							========================================
 	@$(call fn_print_header,ensure ruby system gems are pristine)
+	# to install, always use : gem install <package> --user
 	-gem update --system || echo "never use sudo for gem installation; check ruby path in homebrew"
 	-gem update || echo "never use sudo for gem installation; check ruby path in homebrew"
 	@$(call fn_print_header,ensure ruby user dir gems are pristine)
-	# archived tools												========================================
+	# === archived tools								========================================
 	# -yarn global add semver														# dev semver tool (see https://github.com/fsaintjacques/semver-tool)
 	# -yarn global add stylelint													# lint
 	# -yarn global add eslint														# lint javascript (ale)
@@ -194,14 +198,3 @@ ensure-tools:										## ensure package managers and non gui tools present
 	# -gem install --user-install mdl											# lint markdown
 	# -gem install --user-install terraform_landscape			# adding terraform extensions
 	# -gem install --user-install cucumber								# test cucumber ruby rails
-
-help:														## display this help
-	@awk 'BEGIN { FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"; } \
-		/^[a-zA-Z0-9_-]+:.*?##/ { printf "  \033[36m%-30s\033[0m %s\n", $$1, $$2; } \
-		/^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5); } \
-		END { printf "\n"; }' $(MAKEFILE_LIST)
-
-# === notes
-
-# $(MAKEFILE_LIST) is an environment variable (name of Makefile) thats available during Make.
-# FS = awks field separator. use it in the beginning of execution. i.e. FS = ","

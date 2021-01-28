@@ -137,17 +137,25 @@ set spell spelllang=en_gb                             " turn on vims spell check
 
 " === setting end
 
-" === preplug settings
+" === plug preload start
+" settings before plugins are loaded
 
 " === === vim polyglot start
 
 " setting polygot terraform-vim
-let g:terraform_fmt_on_save=1
+" let g:terraform_fmt_on_save=1
 
 " disable language packs
-let g:polyglot_disabled = ['htmldjango']
+" let g:polyglot_disabled = ['htmldjango']
 
 " === === vim polyglot end
+
+" === === ale start
+let g:ale_disable_lsp = 1
+let g:ale_completion_enabled = 1
+" === === ale end
+
+" === plug preload end
 
 " === plug start
 
@@ -198,7 +206,7 @@ Plug 'majutsushi/tagbar'                              " enables ctag sidebar (in
 Plug 'ludovicchabant/vim-gutentags'                   " auto ctag management
 " Plug 'lifepillar/vim-mucomplete'                      " enables code completion popup
 Plug 'neoclide/coc.nvim', {'branch': 'release'}       " enables code completion
-Plug 'sheerun/vim-polyglot'                           " syntax superfast on demand loader for over 100 languages
+" Plug 'sheerun/vim-polyglot'                           " syntax superfast on demand loader for over 100 languages
 " Plug 'ervandew/supertab'                              " enables tab actions i.e. autocomplete by using <tab> insert mode
 " Plug 'maralla/completor.vim'                          " yet another async code completion cool
 " Plug 'vim-vdebug/vdebug'                              " vim debugger that interfaces with xdebug
@@ -343,8 +351,6 @@ let g:lightline#ale#indicator_ok = "\uf00c"
 " === ale start
 
 " Enable completion where available.
-" This setting must be set before ALE is loaded.
-let g:ale_completion_enabled = 1
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
