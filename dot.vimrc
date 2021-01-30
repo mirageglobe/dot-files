@@ -151,8 +151,9 @@ set spell spelllang=en_gb                             " turn on vims spell check
 " === === vim polyglot end
 
 " === === ale start
-let g:ale_disable_lsp = 1
+" let g:ale_disable_lsp = 1
 let g:ale_completion_enabled = 1
+let g:ale_completion_autoimport = 1
 " === === ale end
 
 " === plug preload end
@@ -205,7 +206,7 @@ Plug 'jlanzarotta/bufexplorer'                        " buffer explorer
 Plug 'majutsushi/tagbar'                              " enables ctag sidebar (install ctag via brew)
 Plug 'ludovicchabant/vim-gutentags'                   " auto ctag management
 " Plug 'lifepillar/vim-mucomplete'                      " enables code completion popup
-Plug 'neoclide/coc.nvim', {'branch': 'release'}       " enables code completion
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}       " enables code completion
 " Plug 'sheerun/vim-polyglot'                           " syntax superfast on demand loader for over 100 languages
 " Plug 'ervandew/supertab'                              " enables tab actions i.e. autocomplete by using <tab> insert mode
 " Plug 'maralla/completor.vim'                          " yet another async code completion cool
@@ -569,3 +570,14 @@ command TrimWhiteSpace           :call TrimWhiteSpace()           " toggle trim 
 
 " === trimwhitespace end
 
+" === omnicomplete start
+" triggers auto complete popup without plugins
+" ref https://stackoverflow.com/questions/35837990/how-to-trigger-omnicomplete-auto-completion-on-keystrokes-in-insert-mode
+function! OpenCompletion()
+  if !pumvisible() && ((v:char >= 'a' && v:char <= 'z') || (v:char >= 'A' && v:char <= 'Z'))
+    call feedkeys("\<C-x>\<C-o>", "n")
+  endif
+endfunction
+
+" autocmd InsertCharPre * call OpenCompletion()
+" === omnicomplete end

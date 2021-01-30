@@ -13,7 +13,6 @@ MENU := ensure-mac-init ensure-deb-init ensure-common
 MENU := help
 
 # load phony
-# info - phony is used to make sure there is no similar file(s) such as <target> that cause the make recipe not to work
 .PHONY: all clean test $(MENU)
 
 # === variables
@@ -22,7 +21,7 @@ MENU := help
 .DEFAULT_GOAL := help
 
 # # set default shell to use
-# SHELL := /bin/bash
+SHELL := /bin/bash
 
 # sets all lines in the recipe to be passed in a single shell invocation. or use multiline
 .ONESHELL:
@@ -82,9 +81,19 @@ ensure-common:
 	-cp -i tpl.vimrc ~/.vimrc																					# always overwrite
 	-mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
 
+ensure-check:
+	# === check package managers	========================================
+	@echo checking python pip ruby gems yarn are recommended tools
+	@(command -v gem || echo gem not found. install ruby.) && command -v gem
+	@(command -v n || echo n not found. install n.) && command -v n
+	@(command -v python || echo python not found. install python3.) && command -v python
+	@(command -v pip3 || echo pip3 not found. install python3.) && command -v pip3
+	@(command -v yarn || echo yarn not found. install yarn.) && command -v yarn
+	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
+
 ##@ Menu
 
-launch:													## launch useful web tools
+launch:																								## launch useful web tools
 	@$(call fn_print_header,launch basic tools)
 	open https://mail.google.com/
 	open https://www.reddit.com/
@@ -93,20 +102,17 @@ launch:													## launch useful web tools
 	open https://www.nerdfonts.com/
 	open https://www.noisli.com/
 
-check:													## check system / environment
+status:																								## check system / environment status
 	@$(call fn_print_header,check tools)
+	# === check status					========================================
 	@$(call fn_check_command_note,bat,see https://github.com/sharkdp/bat)
 	@$(call fn_check_command_note,curl,)
 	@$(call fn_check_command_note,fd,see https://github.com/sharkdp/fd)
 	@$(call fn_check_command_note,fx,)
 	@$(call fn_check_command_note,fzf,)
 	@$(call fn_check_command_note,jq,)
-	@$(call fn_check_command_note,pip,)
-	@$(call fn_check_command_note,python,)
 	@$(call fn_check_command_note,rg,see https://github.com/BurntSushi/ripgrep/releases/latest)
-	@$(call fn_check_command_note,ruby,)
 	@$(call fn_check_command_note,wget,)
-	@$(call fn_check_command_note,yarn,)
 	@$(call fn_check_command_note,vim,)
 	@$(call fn_print_header_command,brew info,brew list && brew list --cask)
 	@$(call fn_print_header_command,node yarn info,yarn global list)
@@ -117,29 +123,23 @@ check:													## check system / environment
 scan-he:												## run hawkeye scanner
 	docker run --rm -v $$PWD:/target hawkeyesec/scanner-cli
 
-ensure-mac: ensure-common	ensure-mac-init							## ensure mac gui tools and common-ensure present
+ensure-mac: ensure-common	ensure-mac-init							## ensure mac specific cli tools and dependencies present
 	# === notes
 	# https://shift.infinite.red/npm-vs-yarn-cheat-sheet-8755b092e5cc
 	#
 	# run make ensure-tools
 
-ensure-deb: ensure-common ensure-deb-init							## ensure debian gui tools and common-ensure present
+ensure-deb: ensure-common ensure-deb-init							## ensure debian specific cli tools and dependencies present
 	#
 	# run make ensure-tools
 
-ensure-tools:										## ensure package managers and non gui tools present
-	@$(call fn_print_header,note)
-	# === check status									========================================
-	@echo checking python pip ruby gems yarn are recommended tools
-	@(command -v gem || echo gem not found. install ruby.) && command -v gem
-	@(command -v n || echo n not found. install n.) && command -v n
-	@(command -v python || echo python not found. install python3.) && command -v python
-	@(command -v pip3 || echo pip3 not found. install python3.) && command -v pip3
-	@(command -v yarn || echo yarn not found. install yarn.) && command -v yarn
+ensure-tools:	ensure-check														## ensure yarn pip gem cli tools present
+	# === tools : install n (nodejs)		========================================
 	-command -v n || curl -L https://git.io/n-install | bash
 	-n latest
-	-command -v yarn || curl -o- -L https://yarnpkg.com/install.sh | bash
-	# === tools : node yarn							========================================
+	# === tools : install yarn (nodejs)	========================================
+	-command -v yarn || curl -o- -L https://yarnpkg.com/install.sh | bash	
+	# === tools : yarn tools						========================================
 	@$(call fn_print_header,ensure node yarn bins are pristine)
 	-yarn global upgrade
 	-yarn global add write-good												# lint english grammer
@@ -156,19 +156,17 @@ ensure-tools:										## ensure package managers and non gui tools present
 	-yarn global upgrade --latest bats
 	-yarn global add mountebank												# test mock server
 	-yarn global add nightwatch												# test e2e browser test - default by vuejs
-	# === tools : python pip						========================================
+	# === tools : python pip tools			========================================
 	# -pip3 install --upgrade pip setuptools														# package manager for python upgrade pip causes issues with brew python (reinstall python instead)
 	-pip3 install -U $$(pip3 freeze | awk -F'[/=]' '{print $$1}')
 	-pip3 install ansible || pip3 install -U ansible									# ansible
 	-pip3 install ansible-lint || pip3 install -U ansible-lint				# lint ansible
 	-pip3 install sslyze || pip3 install -U sslyze										# ssl check tool
 	-pip3 install paramiko || pip3 install -U paramiko								# ssh tool
-	# === tools : ruby gems							========================================
-	@$(call fn_print_header,ensure ruby system gems are pristine)
+	# === tools : ruby gem tool					========================================
 	# to install, always use : gem install <package> --user
 	-gem update --system || echo "never use sudo for gem installation; check ruby path in homebrew"
 	-gem update || echo "never use sudo for gem installation; check ruby path in homebrew"
-	@$(call fn_print_header,ensure ruby user dir gems are pristine)
 	# === archived tools								========================================
 	# -yarn global add semver														# dev semver tool (see https://github.com/fsaintjacques/semver-tool)
 	# -yarn global add stylelint													# lint
