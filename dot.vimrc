@@ -182,34 +182,35 @@ Plug 'rafi/awesome-vim-colorschemes'                  " enables package colorsch
 " Plug 'lifepillar/vim-solarized8'                      " enables gruvbox colorscheme
 
 Plug 'editorconfig/editorconfig-vim'                  " enables .editorconfig file overrides - https://editorconfig.org/
-Plug 'tpope/vim-sensible'                             " enables common standard settings for vim
-
-Plug 'tpope/vim-commentary'                           " enables commenting - gcc (to [un]comment line) - gc(to comment with motion)
 Plug 'mhinz/vim-startify'                             " enables fancy startup
-" Plug 'tpope/vim-surround'                             " enables quoting with cs[' to change quotes from [ to ' - cst to add quotes
+Plug 'tpope/vim-sensible'                             " enables common standard settings for vim
+Plug 'tpope/vim-commentary'                           " enables commenting - gcc (to [un]comment line) - gc(to comment with motion)
 Plug 'tpope/vim-repeat'                               " enables repeating command or input with "."
+" Plug 'tpope/vim-surround'                             " enables quoting with cs[' to change quotes from [ to ' - cst to add quotes
 
 " file management
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }   " installs fzf
 Plug 'junegunn/fzf.vim'                               " enables super fast fuzzy search with :FZF
-Plug 'preservim/nerdtree'                             " project drawer
-Plug 'tpope/vim-vinegar'                              " enables file drawer with - key
+Plug 'preservim/nerdtree'                             " netrw alternative drawer
+Plug 'francoiscabrol/ranger.vim'                      " netrw alternative ranger - https://github.com/francoiscabrol/ranger.vim
+" Plug 'tpope/vim-vinegar'                              " netrw alternative enables drawer with - key
+
 Plug 'airblade/vim-gitgutter'                         " shows git status in gutter
-Plug 'tpope/vim-fugitive'                             " run git commands in vim
+" Plug 'tpope/vim-fugitive'                             " run git commands in vim
+Plug 'jlanzarotta/bufexplorer'                        " buffer explorer
 " Plug tpope/vim-rhubarb                                " git hub command plugin
 " Plug 'tommcdo/vim-fubitive'                           " git in vim for bitbucket
-Plug 'jlanzarotta/bufexplorer'                        " buffer explorer
 
 " language / syntax
 
 Plug 'majutsushi/tagbar'                              " enables ctag sidebar (install ctag via brew)
 Plug 'ludovicchabant/vim-gutentags'                   " auto ctag management
+Plug 'sheerun/vim-polyglot'                           " syntax superfast loader for over 100 languages - https://github.com/sheerun/vim-polyglot
+Plug 'maralla/completor.vim'                          " yet another async code completion cool - https://github.com/maralla/completor.vim
+" Plug 'ervandew/supertab'                              " enables tab actions i.e. autocomplete by using <tab> insert mode
 " Plug 'lifepillar/vim-mucomplete'                      " enables code completion popup
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}       " enables code completion
-" Plug 'sheerun/vim-polyglot'                           " syntax superfast on demand loader for over 100 languages
-" Plug 'ervandew/supertab'                              " enables tab actions i.e. autocomplete by using <tab> insert mode
-" Plug 'maralla/completor.vim'                          " yet another async code completion cool
 " Plug 'vim-vdebug/vdebug'                              " vim debugger that interfaces with xdebug
 " Plug 'MarcWeber/vim-addon-mw-utils'                   " snippet tool
 " Plug 'tomtom/tlib_vim'                                " snippet tool

@@ -4,16 +4,17 @@
 # attribution - by jimmy mg lim ::  www.mirageglobe.com :: github.com/mirageglobe
 
 # === targets
+MENU := all clean test
 
 # menu targets
-MENU := launch check ensure-mac ensure-deb ensure-tools scan-he
+MENU += launch check ensure-mac ensure-deb ensure-tools scan-he
 
 # menu helpers
-MENU := ensure-mac-init ensure-deb-init ensure-common
-MENU := help
+MENU += ensure-mac-init ensure-deb-init ensure-common
+MENU += help
 
 # load phony
-.PHONY: all clean test $(MENU)
+.PHONY: $(MENU)
 
 # === variables
 

@@ -1,5 +1,5 @@
 
-/* custom */
+# custom
 
 CMakeCache.txt
 CMakeFiles
@@ -10,6 +10,7 @@ install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
 
-/* ctags */
-
+# ctags
 tags
+
+.DS_Store
