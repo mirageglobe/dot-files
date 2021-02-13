@@ -24,7 +24,7 @@ MENU += help
 # # set default shell to use
 SHELL := /bin/bash
 
-# sets all lines in the recipe to be passed in a single shell invocation. or use multiline
+# sets all lines in the recipe to be passed in a single shell invocation. or use multi-line
 .ONESHELL:
 
 # === functions
@@ -62,9 +62,10 @@ help:														## display this help
 
 ensure-mac-init:
 	@$(call fn_print_header,ensure .config/alacritty/alacritty.yml exist)
+	-mkdir -pv ~/.config/alacritty/
 	-cp -i dot.mac.alacritty.yml ~/.config/alacritty/alacritty.yml
 	@$(call fn_print_header,ensure .tmux exist)
-	-cp -i dot.tmux.conf ~/.tmux.conf																	# always overwrite
+	-cp -i dot.tmux.conf ~/.tmux.conf  # always overwrite
 
 ensure-deb-init:
 	@$(call fn_print_header,ensure tools exist)
@@ -76,11 +77,12 @@ ensure-deb-init:
 ensure-common:
 	# === environment : config									========================================
 	@$(call fn_print_header,ensure .bashrc exist)
-	-cp -n tpl.bashrc ~/.bashrc || echo "skip - found .bashrc"				# never overwrite
+	-cp -n tpl.bashrc ~/.bashrc || echo "skip - found .bashrc"  # never overwrite
 	# === tools : vim													========================================
 	@$(call fn_print_header,ensure .vimrc and folders exist)
-	-cp -i tpl.vimrc ~/.vimrc																					# always overwrite
+	-cp -i tpl.vimrc ~/.vimrc  # always overwrite
 	-mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
+	-touch ~/.gitignore
 
 ensure-check:
 	# === check package managers	========================================

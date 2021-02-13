@@ -141,8 +141,7 @@ printf "%s" "[+] aliases "
 # === === overrides
 
 alias cat="bat"
-# alias grep="rg"
-alias kc="kubectl"
+alias kc="kubectl config view --minify --output 'jsonpath={.current-context}'; echo ''; echo '------------------------'; kubectl cluster-info;"
 
 alias ls="lsd"
 alias ll="lsd -la"

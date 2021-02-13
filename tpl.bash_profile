@@ -8,8 +8,4 @@
 #    source ~/.profile
 # fi
 
-# [ -f ~/.bashrc ] && source ~/.bashrc
-#
-# if [ -f ~/.bashrc ]; then
-#    source ~/.bashrc
-# fi
+# [[ -s ~/.bashrc ]] && source ~/.bashrc

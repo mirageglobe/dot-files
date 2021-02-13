@@ -186,7 +186,7 @@ Plug 'mhinz/vim-startify'                             " enables fancy startup
 Plug 'tpope/vim-sensible'                             " enables common standard settings for vim
 Plug 'tpope/vim-commentary'                           " enables commenting - gcc (to [un]comment line) - gc(to comment with motion)
 Plug 'tpope/vim-repeat'                               " enables repeating command or input with "."
-" Plug 'tpope/vim-surround'                             " enables quoting with cs[' to change quotes from [ to ' - cst to add quotes
+Plug 'tpope/vim-surround'                             " enables quoting with cs[' to change quotes from [ to ' - cst to add quotes
 
 " file management
 
