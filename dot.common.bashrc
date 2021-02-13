@@ -66,9 +66,19 @@ export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
 printf "%s" "[+] git "
 
 # === === git configuration and settings
+# basic
+git config --global user.name "Jimmy Lim"
+git config --global user.email "mirageglobe@gmail.com"
+
 # default push branch to remote
-# git config --global --add push.default current
-cat ~/.gitconfig | grep "default = current" > /dev/null || git config --global --add push.default current
+git config --global push.default current
+git config --global pull.rebase true
+
+# set gitignore file
+git config --global core.excludesfile '~/.gitignore'
+
+# set core editor
+git config --global core.editor vim
 
 # appending additional git aliases
 git config --global alias.alias "config --get-regexp alias"
@@ -82,15 +92,12 @@ git config --global alias.com "checkout main"
 git config --global alias.comm "checkout master"
 git config --global alias.f "fetch"
 git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-git config --global alias.ll "log --pretty='format:%C(yellow)%h%Creset - %Cgreen%>(12)%ad%Creset %C(bold blue)<%an>%Creset %s' --date=relative"
+git config --global alias.ll "log --pretty='format:%C(yellow)%H%Creset - %Cgreen%>(12)%ad%Creset %C(bold blue)<%an>%Creset %s' --date=relative"
 git config --global alias.p "pull"
 git config --global alias.pp "push"
 git config --global alias.ppp "push -f"
 git config --global alias.s "status"
 git config --global alias.rim "rebase -i master"
-
-# set global gitignore file
-git config --global core.excludesFile '~/.gitignore'
 
 # ===
 # === bash completions

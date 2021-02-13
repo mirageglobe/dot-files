@@ -82,7 +82,9 @@ ensure-common:
 	@$(call fn_print_header,ensure .vimrc and folders exist)
 	-cp -i tpl.vimrc ~/.vimrc  # always overwrite
 	-mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
+	# === tools : git													========================================
 	-touch ~/.gitignore
+	-touch ~/.gitconfig
 
 ensure-check:
 	# === check package managers	========================================
