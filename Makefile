@@ -1,17 +1,18 @@
 
 # === info
 
+# sensible dotfiles and bootstrap script
 # attribution - by jimmy mg lim ::  www.mirageglobe.com :: github.com/mirageglobe
 
 # === targets
 MENU := all clean test
 
 # menu targets
-MENU += launch check ensure-mac ensure-deb ensure-tools scan-he
+MENU += check ensure-mac ensure-deb ensure-tools
 
 # menu helpers
-MENU += ensure-mac-init ensure-deb-init ensure-common
-MENU += help
+MENU += scan-he ensure-mac-init ensure-deb-init ensure-common
+MENU += help info
 
 # load phony
 .PHONY: $(MENU)
@@ -60,6 +61,9 @@ help:														## display this help
 		/^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5); } \
 		END { printf "\n"; }' $(MAKEFILE_LIST)
 
+scan-he:												## run hawkeye scanner
+	docker run --rm -v $$PWD:/target hawkeyesec/scanner-cli
+
 ensure-mac-init:
 	@$(call fn_print_header,ensure .config/alacritty/alacritty.yml exist)
 	-mkdir -pv ~/.config/alacritty/
@@ -98,15 +102,6 @@ ensure-check:
 
 ##@ Menu
 
-launch:																								## launch useful web tools
-	@$(call fn_print_header,launch basic tools)
-	open https://mail.google.com/
-	open https://www.reddit.com/
-	open https://devhints.io/
-	open https://programming-idioms.org/
-	open https://www.nerdfonts.com/
-	open https://www.noisli.com/
-
 status:																								## check system / environment status
 	@$(call fn_print_header,check tools)
 	# === check status					========================================
@@ -124,9 +119,6 @@ status:																								## check system / environment status
 	@$(call fn_print_header_command,ruby gem info,gem list)
 	@$(call fn_print_header_command,python3 info,pip3 list)
 	@$(call fn_print_header_command,color test,tput colors)
-
-scan-he:												## run hawkeye scanner
-	docker run --rm -v $$PWD:/target hawkeyesec/scanner-cli
 
 ensure-mac: ensure-common	ensure-mac-init							## ensure mac specific cli tools and dependencies present
 	# === notes

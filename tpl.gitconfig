@@ -1,13 +1,17 @@
-[alias]
-	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-[user]
-	email = mirageglobe@gmail.com
-	name = jimmy lim
-[includeIf "gitdir:~/work/"]
-	path = ~/work/.gitconfig
-	name = jimmy lim
-	email = jimmy.lim@work
-[credential]
-	helper = cache --timeout 7200
 [core]
 	pager = diff-so-fancy | less --tabs=4 -RFX
+[user]
+	name = change me
+	email = change.me@gmail.com
+[credential]
+	helper = cache --timeout 7200
+[commit]
+	gpgsign = true
+[gpg]
+	program = gpg
+[includeIf "gitdir:~/apache/"]
+	path = ~/.gitconfig-apache
+[includeIf "gitdir:~/work/"]
+	path = ~/work/.gitconfig-work
+	name = change me
+	email = change.me@work.com

@@ -1,37 +1,12 @@
-# ===
-# === bash loader
-# ===
+# === info
 
-# === === starting loader
-printf "\n%s\t" ":: mac : "
+# includes
+# - bash prompt
+# 
+# ref
+# - https://www.cyberciti.biz/tips/howto-linux-unix-bash-shell-setup-prompt.html
 
-# ==> mac specific
-# for super fast key repeat rate (keyboard)
-# echo "defaults write NSGlobalDomain KeyRepeat -int 0"
-
-# ===
-# === common env variables
-# ===
-
-printf "%s" "[+] envvars "
-
-export GREP_OPTIONS='--color=auto'                    # common
-export CLICOLOR=true                                  # common (mac only)
-
-# === === added for AWS (default temp)
-# export AWS_DEFAULT_PROFILE=default
-# export AWS_PROFILE=default
-# export AWS_DEFAULT_REGION=us-east-1
-# export AWS_ACCESS_KEY_ID=default
-# export AWS_SECRET_ACCESS_KEY=default
-
-# ===
-# === setting custom prompt (default)
-# ===
-
-# ref - https://www.cyberciti.biz/tips/howto-linux-unix-bash-shell-setup-prompt.html
-printf "%s" "[+] prompt"
-
+# === colour settings
 # basic vanilla prompt - black 0;30 - red 0;31 - green 0;32 - brown 0;33 - blue 0,34 - purple 0;35 - cyan 0;36
 # to get lighter version, replace 0 with 1
 #
@@ -59,11 +34,48 @@ C_YELLOW="\[\e[0;33m\]"
 C_YELLOWL="\[\e[1;33m\]"
 C_END="\[\e[m\]"
 
+# === prompt functions
+
+# === === prompt bash check current folder
+fn_prompt_get_current_folder() {
+  echo "$(basename $PWD)";
+}
+
+# === === prompt git check method
+fn_prompt_git_branch() {
+  # git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+  # ref : https://stackoverflow.com/questions/8914435/awk-sed-how-to-remove-parentheses-in-simple-text-file
+  # git branch 2> /dev/null | grep "\*" | awk '{ print $2 }' #| awk -v FS="[()]" '{ for (i=2;i<=NF;i+=2) print $i }'
+  git branch 2> /dev/null | grep "\*" | awk '{ printf " "; printf $2; printf " "; }'
+}
+
+# === === prompt aws check shell
+fn_prompt_aws() {
+  env 2> /dev/null | grep "AWS_REGION" | awk '{ printf " aws "; }'
+}
+
+# === === starting loader
+printf "\n%s\t" ":: mac : "
+
+# ==> mac specific
+# for super fast key repeat rate (keyboard)
+# echo "defaults write NSGlobalDomain KeyRepeat -int 0"
+
+# === common env variables (mac only)
+
+printf "%s" "[+] envvars "
+
+export CLICOLOR=true
+
+# === setting custom prompt (default)
+
+printf "%s" "[+] prompt"
+
 PROMPT_EXTEND="\
 ${C_PURPLEL} ${C_END} \
 ${C_PURPLE} \$(whoami)(\${UID}) ${C_END}\
 ${C_BLUE} \$(pwd) ${C_END}\
-${C_BLUEL}  \$(fn_prompt_get_current_folder) ${C_END}\
+${C_BLUEL} \$(fn_prompt_get_current_folder) ${C_END}\
 ${C_GREEN}\$(fn_prompt_git_branch)${C_END}\
 ${C_RED}\$(fn_prompt_aws)${C_END}\
 ${C_PURPLEL} ${C_END} \
@@ -72,6 +84,10 @@ ${C_PURPLEL} ${C_END} \
 # === === aws prompt method
 # appends the prompt in sequence, according to following conditionals
 # note : this cannot be set as bashrc loads a new process. AWS is only valid in current terminal
+#
+# added for AWS (default temp)
+# export AWS_DEFAULT_PROFILE=default
+# export AWS_DEFAULT_REGION=us-east-1
 
 # if [ -z "$AWS_PROFILE" ]; then
 # if [[ "$AWS_PROFILE" != "default" ]]; then
@@ -79,29 +95,11 @@ ${C_PURPLEL} ${C_END} \
   # PROMPT_EXTEND="$PROMPT_EXTEND aws($AWS_PROFILE)"
 # fi
 
-# === === prompt check current folder
-fn_prompt_get_current_folder() {
-  echo "$(basename $PWD)";
-}
-
-# === === prompt check git method
-fn_prompt_git_branch() {
-  # git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
-  # ref : https://stackoverflow.com/questions/8914435/awk-sed-how-to-remove-parentheses-in-simple-text-file
-  # git branch 2> /dev/null | grep "\*" | awk '{ print $2 }' #| awk -v FS="[()]" '{ for (i=2;i<=NF;i+=2) print $i }'
-  git branch 2> /dev/null | grep "\*" | awk '{ printf " "; printf $2; printf " "; }'
-}
-
-# === === prompt check aws shell
-fn_prompt_aws() {
-  env 2> /dev/null | grep "AWS_REGION" | awk '{ printf " aws "; }'
-}
-
 # echo "==> modification test <=="
 
 # PROMPT_SETTING="$PROMPT_SETTING\[\033[32m\]\$(fn_get_git_branch)\[\033[00m\]"
 
 # === setting final prompt on prompt
 
-# export PS1="\u@\h \W\[\033[32m\]\$(fn_prompt_get_git_branch)\[\033[00m\] \$ "
 export PS1=" ${PROMPT_EXTEND}\n ${C_PURPLEL}  ${C_END}"
+# export PS1="\u@\h \W\[\033[32m\]\$(fn_prompt_get_git_branch)\[\033[00m\] \$ "       # override with normal prompt

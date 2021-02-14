@@ -1,22 +1,17 @@
-# ===
 # === common bashrc
-# ===
 
 printf "%s\t" ":: common : "
 
-# ===
 # === common env variables
-# ===
 
 printf "%s" "[+] envvars "
 
+export GREP_OPTIONS='--color=auto'                    # common
 export NOW=$(date +"%Y%m%d-000000")                   # common
 export EDITOR=vim                                     # common
 export TERM=xterm-256color                            # common
 
-# ===
 # === apps and tools required settings
-# ===
 
 # === === android sdk settings
 # printf "%s" "[+] android "
@@ -49,7 +44,7 @@ fi
 printf "%s" "[+] python "
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
-# === === ruby settings (homebrew)
+# === === ruby3 settings (homebrew)
 printf "%s" "[+] ruby "
 
 export PATH="/usr/local/lib/ruby/gems/3.0.0/bin:$PATH"
@@ -59,22 +54,16 @@ export PATH="/usr/local/opt/ruby/bin:$PATH"
 export PATH="$HOME/.gem/ruby/3.0.0/bin:$PATH"
 export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
 
-# ===
 # === git
-# ===
 
 printf "%s" "[+] git "
 
-# === === git configuration and settings
-# basic
-git config --global user.name "Jimmy Lim"
-git config --global user.email "mirageglobe@gmail.com"
-
+# === === git config and settings
 # default push branch to remote
 git config --global push.default current
 git config --global pull.rebase true
 
-# set gitignore file
+# set include gitignore file
 git config --global core.excludesfile '~/.gitignore'
 
 # set core editor
@@ -92,16 +81,15 @@ git config --global alias.com "checkout main"
 git config --global alias.comm "checkout master"
 git config --global alias.f "fetch"
 git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-git config --global alias.ll "log --pretty='format:%C(yellow)%H%Creset - %Cgreen%>(12)%ad%Creset %C(bold blue)<%an>%Creset %s' --date=relative"
+git config --global alias.lgg "log --pretty='format:%C(yellow)%H%Creset - %Cgreen%>(12)%ad%Creset %C(bold blue)<%an>%Creset %s' --date=relative"
 git config --global alias.p "pull"
 git config --global alias.pp "push"
 git config --global alias.ppp "push -f"
 git config --global alias.s "status"
-git config --global alias.rim "rebase -i master"
+git config --global alias.rim "rebase -i main"
+git config --global alias.rimm "rebase -i master"
 
-# ===
 # === bash completions
-# ===
 
 printf "%s" "[+] completion "
 
@@ -139,9 +127,7 @@ fi
 #   source ~/dot.bash-completion.make.bash
 # fi
 
-# ===
 # === aliases (type: "$ alias" to show current aliases)
-# ===
 
 printf "%s" "[+] aliases "
 
@@ -168,13 +154,10 @@ alias _rm="rm -i"
 
 alias _rs="printf ':: restarting shell :: \n';exec $SHELL -l;"
 
-# ===
 # === bash loader end
-# ===
 
 # printf "%s\\n" "::"
 # cat <<-EOF
 # :: term size $(stty size) :: type 'alias' - to show aliases
 # EOF
 # do not indent, nor add anything after closing EOF
-
