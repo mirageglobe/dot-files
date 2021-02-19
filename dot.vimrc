@@ -190,8 +190,8 @@ Plug 'tpope/vim-surround'                             " enables quoting with cs[
 
 " file management
 
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }   " installs fzf
-Plug 'junegunn/fzf.vim'                               " enables super fast fuzzy search with :FZF
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }   " enables super fast fuzzy search with :FZF
+" Plug 'junegunn/fzf.vim'                               " enables super fast fuzzy search with :FZF
 Plug 'preservim/nerdtree'                             " netrw alternative drawer
 Plug 'francoiscabrol/ranger.vim'                      " netrw alternative ranger - https://github.com/francoiscabrol/ranger.vim
 " Plug 'tpope/vim-vinegar'                              " netrw alternative enables drawer with - key
