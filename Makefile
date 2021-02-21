@@ -94,10 +94,8 @@ ensure-check:
 	# === check package managers	========================================
 	@echo checking python pip ruby gems yarn are recommended tools
 	@(command -v gem || echo gem not found. install ruby.) && command -v gem
-	@(command -v n || echo n not found. install n.) && command -v n
 	@(command -v python || echo python not found. install python3.) && command -v python
 	@(command -v pip3 || echo pip3 not found. install python3.) && command -v pip3
-	@(command -v yarn || echo yarn not found. install yarn.) && command -v yarn
 	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
 
 ##@ Menu
