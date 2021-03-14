@@ -152,7 +152,10 @@ alias _cp="cp -i"
 alias _mv="mv -i"
 alias _rm="rm -i"
 
-alias _rs="printf ':: restarting shell :: \n';exec $SHELL -l;"
+alias _rs="printf ':: reload shell :: \n';exec $SHELL -l;"
+
+alias ibrew='arch -x86_64 /usr/local/bin/brew'
+alias mbrew='arch -arm64e /opt/homebrew/bin/brew'
 
 # === bash loader end
 
