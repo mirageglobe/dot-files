@@ -47,12 +47,13 @@ export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 # === === ruby3 settings (homebrew)
 printf "%s" "[+] ruby "
 
-export PATH="/usr/local/lib/ruby/gems/3.0.0/bin:$PATH"
-export PATH="/usr/local/opt/ruby/bin:$PATH"
+# export PATH="/usr/local/opt/ruby/bin:$PATH"
+# export PATH="/usr/local/lib/ruby/gems/3.0.0/bin:$PATH"
 
 # $HOME/.gem folder created by gem install <package> --user
 export PATH="$HOME/.gem/ruby/3.0.0/bin:$PATH"
 export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
+export PATH="$HOME/.gem/ruby/2.6.0/bin:$PATH"
 
 # === git
 
