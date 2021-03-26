@@ -1,6 +1,7 @@
 # === usage
-#
 # add/replace this file as ~/.bashrc or  $HOME/.bashrc
+# bashrc is invoked non interactive login shell which launches on new shell
+# recommended contents - aliases function custom-prompts history-customisations etc
 
 # === === for linux ubuntu or debian ~/.bashrc
 [ -f ~/dot-files/dot.common.bashrc ] && source ~/dot-files/dot.common.bashrc
@@ -11,7 +12,7 @@
 [ -f ~/dot-files/dot.mac.bashrc ] && source ~/dot-files/dot.mac.bashrc
 
 # homebrew github api token
-export HOMEBREW_GITHUB_API_TOKEN=<REPLACEME>
+#export HOMEBREW_GITHUB_API_TOKEN=<REPLACEME>
 
 # homebrew doctor recommendation
-export PATH="/usr/local/sbin:$PATH"
+#export PATH="/usr/local/sbin:$PATH"

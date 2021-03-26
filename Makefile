@@ -160,8 +160,8 @@ ensure-tools:	ensure-check														## ensure yarn pip gem cli tools present
 	-pip3 install paramiko || pip3 install -U paramiko								# ssh tool
 	# === tools : ruby gem tool					========================================
 	# to install, always use : gem install <package> --user
-	-gem update --system || echo "never use sudo for gem installation; check ruby path in homebrew"
-	-gem update || echo "never use sudo for gem installation; check ruby path in homebrew"
+	-gem update --system || echo "never use sudo for gem installation; check ruby path in homebrew or use chruby"
+	-gem update || echo "never use sudo for gem installation; check ruby path in homebrew or use chruby"
 	# === archived tools								========================================
 	# -yarn global add semver														# dev semver tool (see https://github.com/fsaintjacques/semver-tool)
 	# -yarn global add stylelint													# lint

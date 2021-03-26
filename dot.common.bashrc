@@ -13,22 +13,13 @@ export TERM=xterm-256color                            # common
 
 # === apps and tools required settings
 
-# === === android sdk settings
-# printf "%s" "[+] android "
-# export ANDROID_HOME=/usr/local/opt/android-sdk
-
 # === === autojump settings
 # https://github.com/wting/autojump
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
 # === === fzf settings
-# note that fzf will try to install this to default .bashrc too
-# [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# need to install fzf via brew and run /usr/local/opt/fzf/install to support cmdline
 export FZF_COMPLETION_TRIGGER='??'
-
-# === === jenv settings (http://www.jenv.be/)
-# export PATH="$HOME/.jenv/bin:$PATH"
-# eval "$(jenv init -)"
 
 # === === java adopt settings
 printf "%s" "[+] java "
@@ -36,24 +27,12 @@ if [ -z $JAVA_HOME ]; then
   export JAVA_HOME=$(/usr/libexec/java_home)
 fi
 
-# === === n settings (node and yarn package mgr) default install to home folder
-# export N_PREFIX=$HOME/n
-# export PREFIX=$HOME/n
-
 # === === python3 settings
 printf "%s" "[+] python "
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
 # === === ruby3 settings (homebrew)
-printf "%s" "[+] ruby "
-
-# export PATH="/usr/local/opt/ruby/bin:$PATH"
-# export PATH="/usr/local/lib/ruby/gems/3.0.0/bin:$PATH"
-
 # $HOME/.gem folder created by gem install <package> --user
-export PATH="$HOME/.gem/ruby/3.0.0/bin:$PATH"
-export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
-export PATH="$HOME/.gem/ruby/2.6.0/bin:$PATH"
 
 # === git
 
@@ -159,9 +138,3 @@ alias ibrew='arch -x86_64 /usr/local/bin/brew'
 alias mbrew='arch -arm64e /opt/homebrew/bin/brew'
 
 # === bash loader end
-
-# printf "%s\\n" "::"
-# cat <<-EOF
-# :: term size $(stty size) :: type 'alias' - to show aliases
-# EOF
-# do not indent, nor add anything after closing EOF
