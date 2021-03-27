@@ -1,10 +1,16 @@
 " === custom vim config
+"
+" add/replace following lines to file as ~/.vimrc or $HOME/.vimrc
 
 " === usage
 " add the following lines to .vimrc
-"
 " if filereadable(expand("~/dot-files/dot.vimrc"))
 "   source ~/dot-files/dot.vimrc
+" endif
+
+" if you have idr
+" if filereadable(expand("~/dot-case/dot.idr.vimrc"))
+"   source ~/dot-case/dot.idr.vimrc
 " endif
 
 " === === notes

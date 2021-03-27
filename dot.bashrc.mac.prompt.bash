@@ -1,19 +1,15 @@
+# dotfile prompt
+## [ -f ~/dot-files/dot.bashrc.mac.prompt.bash ] && source ~/dot-files/dot.bashrc.mac.prompt.bash
+
 # === info
-
-# includes
-# - bash prompt
-# 
-# ref
-# - https://www.cyberciti.biz/tips/howto-linux-unix-bash-shell-setup-prompt.html
-
-# === colour settings
 # basic vanilla prompt - black 0;30 - red 0;31 - green 0;32 - brown 0;33 - blue 0,34 - purple 0;35 - cyan 0;36
 # to get lighter version, replace 0 with 1
 #
 # begin color modifications - \e[31m      # where 31 is the color code
 # end color modifications - \e[0m
-# 
-# references
+#
+# === references
+# - https://www.cyberciti.biz/tips/howto-linux-unix-bash-shell-setup-prompt.html
 # - https://www.cyberciti.biz/faq/bash-shell-change-the-color-of-my-shell-prompt-under-linux-or-unix/
 # - https://www.shellhacks.com/bash-colors/
 # - https://www.nerdfonts.com/cheat-sheet
@@ -54,22 +50,11 @@ fn_prompt_aws() {
   env 2> /dev/null | grep "AWS_REGION" | awk '{ printf " aws "; }'
 }
 
-# === === starting loader
-printf "\n%s\t" ":: mac : "
-
 # ==> mac specific
 # for super fast key repeat rate (keyboard)
 # echo "defaults write NSGlobalDomain KeyRepeat -int 0"
 
-# === common env variables (mac only)
-
-printf "%s" "[+] envvars "
-
-export CLICOLOR=true
-
 # === setting custom prompt (default)
-
-printf "%s" "[+] prompt"
 
 PROMPT_EXTEND="\
 ${C_PURPLEL} ${C_END} \
@@ -81,25 +66,8 @@ ${C_RED}\$(fn_prompt_aws)${C_END}\
 ${C_PURPLEL} ${C_END} \
 "
 
-# === === aws prompt method
-# appends the prompt in sequence, according to following conditionals
-# note : this cannot be set as bashrc loads a new process. AWS is only valid in current terminal
-#
-# added for AWS (default temp)
-# export AWS_DEFAULT_PROFILE=default
-# export AWS_DEFAULT_REGION=us-east-1
-
-# if [ -z "$AWS_PROFILE" ]; then
-# if [[ "$AWS_PROFILE" != "default" ]]; then
-  # prompt + aws
-  # PROMPT_EXTEND="$PROMPT_EXTEND aws($AWS_PROFILE)"
-# fi
-
-# echo "==> modification test <=="
-
-# PROMPT_SETTING="$PROMPT_SETTING\[\033[32m\]\$(fn_get_git_branch)\[\033[00m\]"
-
 # === setting final prompt on prompt
 
 export PS1=" ${PROMPT_EXTEND}\n ${C_PURPLEL}  ${C_END}"
 # export PS1="\u@\h \W\[\033[32m\]\$(fn_prompt_get_git_branch)\[\033[00m\] \$ "       # override with normal prompt
+

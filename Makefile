@@ -79,9 +79,6 @@ ensure-deb-init:
 	cargo install lsd
 
 ensure-common:
-	# === environment : config									========================================
-	@$(call fn_print_header,ensure .bashrc exist)
-	-cp -n tpl.bashrc ~/.bashrc || echo "skip - found .bashrc"  # never overwrite
 	# === tools : vim													========================================
 	@$(call fn_print_header,ensure .vimrc and folders exist)
 	-cp -i tpl.vimrc ~/.vimrc  # always overwrite
