@@ -1,3 +1,6 @@
+# ~/.gitconfig
+# config recommended to be set via cmdline :  git config --global user.name "Jimmy Lim"
+
 [core]
 	pager = diff-so-fancy | less --tabs=4 -RFX
 [user]

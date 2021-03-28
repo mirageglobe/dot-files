@@ -67,7 +67,7 @@ scan-he:												## run hawkeye scanner
 ensure-mac-init:
 	@$(call fn_print_header,ensure .config/alacritty/alacritty.yml exist)
 	-mkdir -pv ~/.config/alacritty/
-	-cp -i dot.mac.alacritty.yml ~/.config/alacritty/alacritty.yml
+	-cp -i dot.alacritty.yml ~/.config/alacritty/alacritty.yml
 	@$(call fn_print_header,ensure .tmux exist)
 	-cp -i dot.tmux.conf ~/.tmux.conf  # always overwrite
 

@@ -13,6 +13,10 @@ git config --global core.excludesfile '~/.gitignore'
 # set core editor
 git config --global core.editor vim
 
+# set default git user
+git config --global user.name 'Jimmy Lim'
+git config --global user.email 'mirageglobe@gmail.com'
+
 # appending additional git aliases
 git config --global alias.alias "config --get-regexp alias"
 git config --global alias.a "add -p"
@@ -25,7 +29,7 @@ git config --global alias.com "checkout main"
 git config --global alias.comm "checkout master"
 git config --global alias.f "fetch"
 git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-git config --global alias.lgg "log --pretty='format:%C(yellow)%H%Creset - %Cgreen%>(12)%ad%Creset %C(bold blue)<%an>%Creset %s' --date=relative"
+git config --global alias.ll "log --pretty='format:%C(yellow)%H%Creset - %Cgreen%>(12)%ad%Creset %C(bold blue)<%an>%Creset %s' --date=relative"
 git config --global alias.p "pull"
 git config --global alias.pp "push"
 git config --global alias.ppp "push -f"

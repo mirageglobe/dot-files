@@ -4,6 +4,10 @@
 # mac/linux :           ~/.config/alacritty/alacritty.yml
 # win location :        %APPDATA%/alacritty/alacritty.yml ( ~/appdata/roaming/alacritty/alacritty.yml)
 
+# installation
+# mkdir -pv ~/.config/alacritty
+# cat ~/dot-files/dot.alacritty.yml >> ~/.config/alacritty/alacritty.yml
+
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty itself.
