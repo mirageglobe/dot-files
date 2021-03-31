@@ -47,7 +47,7 @@ fn_prompt_git_branch() {
 
 # === === prompt aws check shell
 fn_prompt_aws() {
-  env 2> /dev/null | grep "AWS_REGION" | awk '{ printf " aws "; }'
+  env 2> /dev/null | grep 'AWS_REGION' | awk '{ printf " aws "; printf ENVIRON["AWS_REGION"]; printf " "; printf ENVIRON["AWS_PROFILE"]; printf " "; }'
 }
 
 # ==> mac specific
@@ -68,6 +68,6 @@ ${C_PURPLEL} ${C_END} \
 
 # === setting final prompt on prompt
 
-export PS1=" ${PROMPT_EXTEND}\n ${C_PURPLEL}  ${C_END}"
+export PS1="\n ${PROMPT_EXTEND}\n ${C_PURPLEL}  ${C_END}"
 # export PS1="\u@\h \W\[\033[32m\]\$(fn_prompt_get_git_branch)\[\033[00m\] \$ "       # override with normal prompt
 
