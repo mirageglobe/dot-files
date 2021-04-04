@@ -2,7 +2,9 @@
 # config recommended to be set via cmdline :  git config --global user.name "Jimmy Lim"
 
 [core]
-	pager = diff-so-fancy | less --tabs=4 -RFX
+	pager = delta
+[interactive]
+	diffFilter = delta --color-only
 [user]
 	name = change me
 	email = change.me@gmail.com
@@ -18,3 +20,18 @@
 	path = ~/work/.gitconfig-work
 	name = change me
 	email = change.me@work.com
+[delta]
+	features = side-by-side line-numbers decorations
+	syntax-theme = Dracula
+	plus-style = syntax "#003800"
+	minus-style = syntax "#3f0001"
+[delta "decorations"]
+	commit-decoration-style = yellow box ul
+	file-style = bold yellow
+	file-decoration-style = none
+	hunk-header-decoration-style = cyan box ul
+[delta "line-numbers"]
+	line-numbers-left-style = cyan
+	line-numbers-right-style = cyan
+	line-numbers-minus-style = 124
+	line-numbers-plus-style = 28
