@@ -21,14 +21,15 @@ if ${BASH_VERSION_5} = true; then
 fi
 
 # === === git completion
-# # this should be added automatically if bash-completion@2 is installed
-# if [ -f ~/dot.bash-completion.git.bash ]; then
-#   source ~/dot.bash-completion.git.bash
+# # add following to .bashrc to enable
+# if [ -f ~/dot-files/dot.completion.git.bash ]; then
+#   source ~/dot-files/dot.completion.git.bash
 # fi
 
 # === === make completion
-# if [ -f ~/dot.bash-completion.make.bash ]; then
-#   source ~/dot.bash-completion.make.bash
+# # add following to .bashrc to enable
+# if [ -f ~/dot-files/dot.bash-completion.make-menu.bash ]; then
+#   source ~/dot-files/dot.bash-completion.make-menu.bash
 # fi
 
 # === bash loader end
