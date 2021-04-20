@@ -91,7 +91,7 @@ set list listchars=tab:»·,trail:·                     " display tabs and trai
 
 " === === numbering
 set number                                            " show line numbers
-set relativenumber                                    " enables relative number rather than running number
+" set relativenumber                                    " enables relative number rather than running number
 
 " === === folding
 " <leader>z for fold
