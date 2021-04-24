@@ -27,6 +27,18 @@ curl -D - https://raw.githubusercontent.com/mirageglobe/dot-files/master/Makefil
 curl -fLo "<FONT NAME> Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/<FONT_PATH>/complete/<FONT_NAME>%20Nerd%20Font%20Complete.otf
 ```
 
+bash completions
+
+```bash
+# include in ~/.bashrc
+
+# for git completion
+[ -f ~/dot-files/dot.completion.git.bash ] && source ~/dot-files/dot.completion.git.bash
+
+# for make completion
+[ -f ~/dot-files/dot.completion.make-menu.bash ] && source ~/dot-files/dot.completion.make-menu.bash
+```
+
 # to contribute
 
 - ensure nothing sensitive is committed to this repo
