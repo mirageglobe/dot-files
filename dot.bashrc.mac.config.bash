@@ -17,6 +17,9 @@ git config --global core.editor vim
 git config --global user.name 'Jimmy Lim'
 git config --global user.email 'mirageglobe@gmail.com'
 
+# set default init branch to main
+git config --global init.defaultBranch main
+
 # appending additional git aliases
 git config --global alias.alias "config --get-regexp alias"
 git config --global alias.a "add -p"
