@@ -22,8 +22,8 @@ git config --global init.defaultBranch main
 
 # appending additional git aliases
 git config --global alias.alias "config --get-regexp alias"
-git config --global alias.a "add -p"
-git config --global alias.b "branch -a"
+git config --global alias.a "add --patch"
+git config --global alias.b "branch --all --verbose"
 git config --global alias.c "commit"
 git config --global alias.ca "commit --amend"
 git config --global alias.co "checkout"
@@ -38,7 +38,7 @@ git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Crese
 git config --global alias.ll "log --pretty='format:%C(yellow)%H%Creset - %Cgreen%>(12)%ad%Creset %C(bold blue)<%an>%Creset %s' --date=relative"
 git config --global alias.p "pull"
 git config --global alias.pp "push"
-git config --global alias.ppp "push -f"
+git config --global alias.ppp "push --force-with-lease"
 git config --global alias.s "status"
-git config --global alias.rim "rebase -i main"
-git config --global alias.rimm "rebase -i master"
+git config --global alias.rim "rebase --interactive main"
+git config --global alias.rimm "rebase --interactive master"
