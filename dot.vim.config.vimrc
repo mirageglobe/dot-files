@@ -176,48 +176,70 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-" colour schemes and IDE customisation
+" === === colour schemes and IDE customisation
 
 Plug 'drewtempelmeyer/palenight.vim'                  " enables palenight color scheme
 Plug 'itchyny/lightline.vim'                          " enables superlight status bar - https://github.com/itchyny/lightline.vim
-Plug 'itchyny/vim-gitbranch'                          " simple gitbranch name to replace fugitive
 Plug 'rafi/awesome-vim-colorschemes'                  " enables package colorschemes (rafi)
+
 " Plug 'flazz/vim-colorschemes'                         " enables package colorschemes (flazz)
 " Plug 'dracula/vim'                                    " enables gruvbox colorscheme
 " Plug 'lifepillar/vim-gruvbox8'                        " enables gruvbox colorscheme
 " Plug 'lifepillar/vim-solarized8'                      " enables gruvbox colorscheme
 
-Plug 'editorconfig/editorconfig-vim'                  " enables .editorconfig file overrides - https://editorconfig.org/
-Plug 'mhinz/vim-startify'                             " enables fancy startup
 Plug 'tpope/vim-sensible'                             " enables common standard settings for vim
-Plug 'tpope/vim-commentary'                           " enables commenting - gcc (to [un]comment line) - gc(to comment with motion)
-Plug 'tpope/vim-repeat'                               " enables repeating command or input with "."
-Plug 'tpope/vim-surround'                             " enables quoting with cs[' to change quotes from [ to ' - cst to add quotes
 
-" file management
+Plug 'editorconfig/editorconfig-vim'                  " enables .editorconfig file overrides - https://editorconfig.org/
+
+Plug 'itchyny/vim-gitbranch'                          " simple gitbranch name to replace fugitive
+
+Plug 'mhinz/vim-startify'                             " enables fancy startup
+
+Plug 'tpope/vim-commentary'                           " enables commenting - gcc (to [un]comment line) - gc(to comment with motion)
+
+Plug 'tpope/vim-repeat'                               " enables repeating command or input with "."
+
+" Plug 'tpope/vim-surround'                             " enables quoting with cs[' to change quotes from [ to ' - cst to add quotes
+
+" === === file management
+
+Plug 'francoiscabrol/ranger.vim'                      " netrw alternative ranger - https://github.com/francoiscabrol/ranger.vim
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }   " enables super fast fuzzy search with :FZF
 " Plug 'junegunn/fzf.vim'                               " enables super fast fuzzy search with :FZF
-Plug 'preservim/nerdtree'                             " netrw alternative drawer
-Plug 'francoiscabrol/ranger.vim'                      " netrw alternative ranger - https://github.com/francoiscabrol/ranger.vim
-" Plug 'tpope/vim-vinegar'                              " netrw alternative enables drawer with - key
+
+" Plug 'preservim/nerdtree'                             " netrw alternative drawer
+
+Plug 'tpope/vim-vinegar'                              " netrw alternative enables drawer with - key
+
+Plug 'jlanzarotta/bufexplorer'                        " buffer explorer
+
+" === === git
 
 Plug 'airblade/vim-gitgutter'                         " shows git status in gutter
 " Plug 'tpope/vim-fugitive'                             " run git commands in vim
-Plug 'jlanzarotta/bufexplorer'                        " buffer explorer
 " Plug tpope/vim-rhubarb                                " git hub command plugin
 " Plug 'tommcdo/vim-fubitive'                           " git in vim for bitbucket
 
-" language / syntax
+" === === language / syntax
 
+" ctags
 Plug 'majutsushi/tagbar'                              " enables ctag sidebar (install ctag via brew)
 Plug 'ludovicchabant/vim-gutentags'                   " auto ctag management
+
+" syntax highlight
 Plug 'sheerun/vim-polyglot'                           " syntax superfast loader for over 100 languages - https://github.com/sheerun/vim-polyglot
+" Plug 'scrooloose/syntastic'
+
+" code completion
 Plug 'maralla/completor.vim'                          " yet another async code completion cool - https://github.com/maralla/completor.vim
+
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}       " enables code completion
 " Plug 'ervandew/supertab'                              " enables tab actions i.e. autocomplete by using <tab> insert mode
 " Plug 'lifepillar/vim-mucomplete'                      " enables code completion popup
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}       " enables code completion
 " Plug 'vim-vdebug/vdebug'                              " vim debugger that interfaces with xdebug
+
+" snippet
 " Plug 'MarcWeber/vim-addon-mw-utils'                   " snippet tool
 " Plug 'tomtom/tlib_vim'                                " snippet tool
 " Plug 'garbas/vim-snipmate'                            " snippet tool
@@ -237,12 +259,10 @@ Plug 'maralla/completor.vim'                          " yet another async code c
 " Plug 'pangloss/vim-javascript'
 
 " linters
-
 Plug 'dense-analysis/ale'                             " enables ale universal language linter
 Plug 'maximbaz/lightline-ale'                         " enables ale in lightline
-" Plug 'scrooloose/syntastic'
 
-" misc
+" === === misc
 
 " must be at the end
 Plug 'ryanoasis/vim-devicons'                         " enables super fonts (nerd fonts for vim)
