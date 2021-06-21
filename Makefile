@@ -67,13 +67,14 @@ scan-he:												## run hawkeye scanner (deprecated)
 ensure-mac-init:
 	@$(call fn_print_header,ensure .config/alacritty/alacritty.yml exist)
 	-mkdir -pv ~/.config/alacritty/
-	-cp -i dot.alacritty.yml ~/.config/alacritty/alacritty.yml
+	-cp -i dot.alacritty.yml ~/.config/alacritty/alacritty.yml				# set alacritty config from template
 	@$(call fn_print_header,ensure .tmux exist)
-	-cp -i dot.tmux.conf ~/.tmux.conf  # always overwrite
+	-cp -i dot.tmux.conf ~/.tmux.conf																	# set tmux config from template
+	# curl https://sh.rustup.rs -sSf | sh															# recommended rust installation method (official book)
 
 ensure-deb-init:
 	@$(call fn_print_header,ensure tools exist)
-	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+	# curl https://sh.rustup.rs -sSf | sh															# recommended rust installation method (official book)
 	@(command -v cargo || echo rust and cargo not found. install rust.) && command -v cargo
 	@command -v cargo &>/dev/null || { echo "cargo/rust not installed. try brew install xxxx [abort]" >&2; exit 1; }
 	cargo install lsd
