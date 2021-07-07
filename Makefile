@@ -61,9 +61,6 @@ help:														## display this help
 		/^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5); } \
 		END { printf "\n"; }' $(MAKEFILE_LIST)
 
-scan-he:												## run hawkeye scanner (deprecated)
-	docker run --rm -v $$PWD:/target hawkeyesec/scanner-cli
-
 ensure-mac-init:
 	@$(call fn_print_header,ensure .config/alacritty/alacritty.yml exist)
 	-mkdir -pv ~/.config/alacritty/
