@@ -48,7 +48,7 @@ set directory=~/.vim/.swp//                           " set vim to use tmp direc
 set encoding=UTF-8                                    " The encoding displayed.
 set fileencoding=UTF-8                                " The encoding written to file
 
-" colour
+" color colour
 " if gui (macvim) or not gui (iterm/alacritty)
 if has('gui_running')
   set guifont=FiraCode\ Nerd\ Font\ Complete:h13
