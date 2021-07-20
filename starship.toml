@@ -1,0 +1,8 @@
+# this config should exist in as ~/.config/starship.toml
+command_timeout = 1000
+
+[aws]
+symbol = "🅰 "
+
+[kubernetes]
+disabled = false
