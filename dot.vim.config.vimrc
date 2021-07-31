@@ -191,8 +191,6 @@ Plug 'tpope/vim-sensible'                             " enables common standard 
 
 Plug 'editorconfig/editorconfig-vim'                  " enables .editorconfig file overrides - https://editorconfig.org/
 
-Plug 'itchyny/vim-gitbranch'                          " simple gitbranch name to replace fugitive
-
 Plug 'mhinz/vim-startify'                             " enables fancy startup
 
 Plug 'tpope/vim-commentary'                           " enables commenting - gcc (to [un]comment line) - gc(to comment with motion)
@@ -206,7 +204,7 @@ Plug 'tpope/vim-repeat'                               " enables repeating comman
 Plug 'francoiscabrol/ranger.vim'                      " netrw alternative ranger - https://github.com/francoiscabrol/ranger.vim
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }   " enables super fast fuzzy search with :FZF
-" Plug 'junegunn/fzf.vim'                               " enables super fast fuzzy search with :FZF
+Plug 'junegunn/fzf.vim'                               " needs both lines
 
 " Plug 'preservim/nerdtree'                             " netrw alternative drawer
 
@@ -217,9 +215,10 @@ Plug 'jlanzarotta/bufexplorer'                        " buffer explorer
 " === === git
 
 Plug 'airblade/vim-gitgutter'                         " shows git status in gutter
-" Plug 'tpope/vim-fugitive'                             " run git commands in vim
-" Plug tpope/vim-rhubarb                                " git hub command plugin
+Plug 'tpope/vim-fugitive'                             " run git commands in vim
+Plug 'tpope/vim-rhubarb'                                " git hub command plugin
 " Plug 'tommcdo/vim-fubitive'                           " git in vim for bitbucket
+Plug 'itchyny/vim-gitbranch'                          " simple gitbranch name to replace fugitive
 
 " === === language / syntax
 
@@ -482,6 +481,7 @@ set rtp+=/usr/local/opt/fzf
 command ReloadShell :source ~/dot-files/dot.vimrc
 
 " fzf - overrides Files command - usage :Files! - https://github.com/junegunn/fzf.vim
+" command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, <bang>0)
 command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
 
@@ -523,39 +523,53 @@ let mapleader = "\<space>"
 
 " === key maps
 
-" === === open file explorer
-noremap <Leader>ff :Explore<CR>
-
 " === === open buffer explorer
 noremap <Leader><SPACE> :BufExplorer<CR>
 
 " === === open file explorer
 " nnoremap <Leader>w <C-w><C-w>
-noremap <Leader>n :NERDTreeToggle<CR>
+" noremap <Leader>nt :NERDTreeToggle<CR>
 
-" === === open FZF explorer
-noremap <Leader>f :Files!<CR>
+" copy/paste from clipboard
+noremap <Leader>cc :.w !pbcopy<CR><CR>
+noremap <Leader>cp :.r !pbpaste<CR>
+" nnoremap <Leader>p :r !pbpaste<CR>
 
 " === === open tagbar - ctag explorer
-noremap <Leader>t :TagbarToggle<CR>
+noremap <Leader>ct :TagbarToggle<CR>
+
+" === === open FZF explorer
+noremap <Leader>fz :Files!<CR>
+noremap <Leader>f :Files!<CR>
+
+" === === open file explorer
+" noremap <Leader>ff :Explore<CR>
 
 " === === set git co-author
 " let @z='ICo-authored-by: y$A <@gmail.com>@Pgua<f x'
 " nmap <Leader>@ <ESC>VD <ESC>ICo-authored-by: <CR>
-noremap <Leader>jd <ESC>ICo-authored-by: John Doe <johndoe@gmail.com><ESC>
+noremap <Leader>gco <ESC>ICo-authored-by: John Doe <johndoe@gmail.com><ESC>
 
-" copy/paste from clipboard
-noremap <Leader>c :.w !pbcopy<CR><CR>
-noremap <Leader>v :.r !pbpaste<CR>
-" nnoremap <Leader>p :r !pbpaste<CR>
+" git browse and blame https://jakobgm.com/posts/vim/git-integration/
+" show commits for every source line (git blame)
+nnoremap <Leader>gb :Gblame<CR>
+
+" open current line in the browser (github)
+nnoremap <Leader>gh :.GBrowse<CR>
+
+" open visual selection in the browser (github)
+vnoremap <Leader>gh :GBrowse<CR>
+
+let g:ranger_map_keys = 0
+map <leader>r :Ranger<CR>
+
+" comment template header
+" note uses gcc : timpopes auto commenter. method: move begin, prepend === , esc, comment line
+nmap <Leader>th <ESC>gcc<ESC>I===<space><ESC>gcc<ESC>0
+nmap <Leader>thh <ESC>I===<space>section<space>start<ESC>gcc<ESC>0o===<space>section<space>end<ESC>gcc0
 
 " code folding za / zc / zo
 nmap <Leader>z za<ESC>
-
-" comment header
-" note uses gcc : timpopes auto commenter. method: move begin, prepend === , esc, comment line
-nmap <Leader>h <ESC>gcc<ESC>I===<space><ESC>gcc<ESC>0
-nmap <Leader>hh <ESC>I===<space>section<space>start<ESC>gcc<ESC>0o===<space>section<space>end<ESC>gcc0
 
 " split navigations
 " nnoremap <C-J> <C-W><C-J>
