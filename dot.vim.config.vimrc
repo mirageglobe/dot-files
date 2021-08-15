@@ -17,12 +17,18 @@
 " - https://tbaggery.com/2011/08/08/effortless-ctags-with-git.html
 " - https://vimways.org/2018/you-should-be-using-tags-in-vim/
 
-" === === fonts configuration (iterm)
+" === === fonts configuration (iterm2)
 " font -> FuraCode Nerd Font [Regular] [12]
 " use built-in Powerline glyphs -> true
 " enable subpixel anti-aliasing -> true
 " use ligatures -> true
 " anti-aliased -> true
+
+" === === toolings
+" lint                  ale
+" colorscheme           one dark (atom scheme)
+" explorer              ranger (leader r) / fzf (leader f) / vinegar (-)
+" popup complete        maralla completor
 
 " === === setting start
 
@@ -244,11 +250,11 @@ Plug 'sheerun/vim-polyglot'                           " syntax superfast loader 
 " Plug 'scrooloose/syntastic'
 
 " code completion
-Plug 'maralla/completor.vim'                          " yet another async code completion cool - https://github.com/maralla/completor.vim
+Plug 'maralla/completor.vim'                          " enables code completion - https://github.com/maralla/completor.vim
 
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}       " enables code completion
 " Plug 'ervandew/supertab'                              " enables tab actions i.e. autocomplete by using <tab> insert mode
-" Plug 'lifepillar/vim-mucomplete'                      " enables code completion popup
+" Plug 'lifepillar/vim-mucomplete'                      " enables code completion (popup)
 " Plug 'vim-vdebug/vdebug'                              " vim debugger that interfaces with xdebug
 
 " snippet
@@ -434,7 +440,7 @@ let g:ale_list_window_size = 5
 
 " === nerdtree start
 
-let NERDTreeShowHidden=1
+" let NERDTreeShowHidden=1
 
 " === nerdtree end
 
@@ -542,6 +548,9 @@ let mapleader = "\<space>"
 " === === open buffer explorer
 noremap <Leader><SPACE> :BufExplorer<CR>
 
+" === === fzf buffer explorer
+noremap <Leader>b :Buffers<CR>
+
 " === === open file explorer
 " nnoremap <Leader>w <C-w><C-w>
 " noremap <Leader>nt :NERDTreeToggle<CR>
@@ -568,7 +577,7 @@ noremap <Leader>gco <ESC>ICo-authored-by: John Doe <johndoe@gmail.com><ESC>
 
 " git browse and blame https://jakobgm.com/posts/vim/git-integration/
 " show commits for every source line (git blame)
-nnoremap <Leader>gb :Gblame<CR>
+nnoremap <Leader>gb :Git blame<CR>
 
 " open current line in the browser (github)
 nnoremap <Leader>gh :.GBrowse<CR>
@@ -576,6 +585,7 @@ nnoremap <Leader>gh :.GBrowse<CR>
 " open visual selection in the browser (github)
 vnoremap <Leader>gh :GBrowse<CR>
 
+" ranger
 let g:ranger_map_keys = 0
 map <leader>r :Ranger<CR>
 
@@ -633,13 +643,15 @@ command TrimWhiteSpace           :call TrimWhiteSpace()           " toggle trim 
 " === trimwhitespace end
 
 " === omnicomplete start
-" triggers auto complete popup without plugins
-" ref https://stackoverflow.com/questions/35837990/how-to-trigger-omnicomplete-auto-completion-on-keystrokes-in-insert-mode
+" triggers completion without plugins
+" https://stackoverflow.com/questions/35837990/how-to-trigger-omnicomplete-auto-completion-on-keystrokes-in-insert-mode
 function! OpenCompletion()
   if !pumvisible() && ((v:char >= 'a' && v:char <= 'z') || (v:char >= 'A' && v:char <= 'Z'))
     call feedkeys("\<C-x>\<C-o>", "n")
   endif
 endfunction
 
+" uncomment line to enable omnicomplete
 " autocmd InsertCharPre * call OpenCompletion()
+
 " === omnicomplete end
