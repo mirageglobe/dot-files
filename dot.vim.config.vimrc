@@ -528,13 +528,17 @@ command! -bang -nargs=? -complete=dir Files
 
 " === mapping start
 
-" map       normal and visual mode (defaults to remap)
-" nmap      normal mode
-" vmap      visual mode
-" imap      insert mode
-
+" map       root of recursive map - normal and visual mode (same as remap)
 " remap     map recursively (default)
-" noremap   non recursive map
+" noremap   root of non-recursive map
+
+" nmap      normal mode - recursive map
+" vmap      visual mode - recursive map
+" imap      insert mode - recursive map
+
+" nnoremap  normal mode - non recursive map
+" vnoremap  visual mode - non recursive map
+" inoremap  insert mode - non recursive map
 
 " <C-d>   control + d
 
@@ -546,10 +550,12 @@ let mapleader = "\<space>"
 " === key maps
 
 " === === open buffer explorer
-noremap <Leader><SPACE> :BufExplorer<CR>
+" noremap <Leader><SPACE> :BufExplorer<CR>
+nnoremap <Leader>be :BufExplorer<CR>
 
 " === === fzf buffer explorer
-noremap <Leader>b :Buffers<CR>
+nnoremap <Leader>bo :Buffers<CR>
+nnoremap <Leader>bc :bd<CR>
 
 " === === open file explorer
 " nnoremap <Leader>w <C-w><C-w>
@@ -561,11 +567,11 @@ noremap <Leader>cp :.r !pbpaste<CR>
 " nnoremap <Leader>p :r !pbpaste<CR>
 
 " === === open tagbar - ctag explorer
-noremap <Leader>ct :TagbarToggle<CR>
+nnoremap <Leader>ct :TagbarToggle<CR>
 
 " === === open FZF explorer
-noremap <Leader>fz :Files!<CR>
-noremap <Leader>f :Files!<CR>
+nnoremap <Leader>fo :Files!<CR>
+" nnoremap <Leader>f :Files!<CR>
 
 " === === open file explorer
 " noremap <Leader>ff :Explore<CR>
@@ -573,7 +579,7 @@ noremap <Leader>f :Files!<CR>
 " === === set git co-author
 " let @z='ICo-authored-by: y$A <@gmail.com>@Pgua<f x'
 " nmap <Leader>@ <ESC>VD <ESC>ICo-authored-by: <CR>
-noremap <Leader>gco <ESC>ICo-authored-by: John Doe <johndoe@gmail.com><ESC>
+nnoremap <Leader>gca <ESC>ICo-authored-by: John Doe <johndoe@gmail.com><ESC>
 
 " git browse and blame https://jakobgm.com/posts/vim/git-integration/
 " show commits for every source line (git blame)
@@ -587,7 +593,10 @@ vnoremap <Leader>gh :GBrowse<CR>
 
 " ranger
 let g:ranger_map_keys = 0
-map <leader>r :Ranger<CR>
+nnoremap <leader>ra :Ranger<CR>
+
+" ripgrep
+nnoremap <leader>rg :Rg<CR>
 
 " comment template header
 " note uses gcc : timpopes auto commenter. method: move begin, prepend === , esc, comment line
@@ -595,7 +604,7 @@ nmap <Leader>th <ESC>gcc<ESC>I===<space><ESC>gcc<ESC>0
 nmap <Leader>thh <ESC>I===<space>section<space>start<ESC>gcc<ESC>0o===<space>section<space>end<ESC>gcc0
 
 " code folding za / zc / zo
-nmap <Leader>z za<ESC>
+nmap <Leader>cf za<ESC>
 
 " split navigations
 " nnoremap <C-J> <C-W><C-J>
