@@ -11,7 +11,7 @@ MENU := all clean test
 MENU += check ensure-mac ensure-deb ensure-tools
 
 # menu helpers
-MENU += scan-he ensure-mac-init ensure-deb-init ensure-common
+MENU += ensure-mac-init ensure-deb-init ensure-common
 MENU += help info
 
 # load phony
@@ -128,7 +128,7 @@ ensure-tools:	ensure-check														## ensure yarn pip gem cli tools present
 	-command -v n || curl -L https://git.io/n-install | bash
 	-n latest
 	# === tools : install yarn (nodejs)	========================================
-	-command -v yarn || curl -o- -L https://yarnpkg.com/install.sh | bash	
+	-command -v yarn || curl -o- -L https://yarnpkg.com/install.sh | bash
 	# === tools : yarn tools						========================================
 	@$(call fn_print_header,ensure node yarn bins are pristine)
 	-yarn global upgrade

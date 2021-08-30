@@ -1,17 +1,18 @@
-# dotfile alias
-## [ -f ~/dot-files/dot.bash.mac.alias.bashrc ] && source ~/dot-files/dot.bash.mac.alias.bashrc
+# dot.bashrc.mac.alias.bash
+# bash mac alias
+# [ -f ~/dot-files/dot.bash.mac.alias.bashrc ] && source ~/dot-files/dot.bash.mac.alias.bashrc
 
-# === aliases (type: "$ alias" to show current aliases)
+# === alias (type: "$ alias" to show current aliases)
 
 printf "%s" "[+] aliases "
 
-# === === overrides
+# === overrides
 
 alias cat='bat'
 alias catcat='\cat'
 alias ls='lsd'
 
-# === === new aliases
+# === new aliases
 
 # alias _ls="ls -Gd .*"
 # alias _ll="ls -lhAG"
@@ -38,7 +39,7 @@ alias pg13stop='pg_ctl -D /usr/local/var/postgresql stop'
 
 # === custom commands
 
-# adding bat with gitdiff
-batdiff() {
+gitdiff() {
+    # use bat output with git diff
     git diff --name-only --diff-filter=d | xargs bat --diff
 }
