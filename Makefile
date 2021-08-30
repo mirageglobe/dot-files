@@ -8,13 +8,13 @@
 MENU := all clean test
 
 # menu targets
-MENU += check ensure-mac ensure-deb ensure-tools
+MENU += status ensure-mac ensure-deb ensure-tools
 
 # menu helpers
-MENU += ensure-mac-init ensure-deb-init ensure-common
+MENU += ensure-common
 MENU += help info
 
-# load phony
+# load phony (fake targets so make does not interpret commands as files)
 .PHONY: $(MENU)
 
 # === variables
@@ -25,7 +25,7 @@ MENU += help info
 # # set default shell to use
 SHELL := /bin/bash
 
-# sets all lines in the recipe to be passed in a single shell invocation. or use multi-line
+# sets all lines in the recipe to be passed in a single shell invocation. or use multi-line (not posix)
 .ONESHELL:
 
 # === functions
@@ -59,22 +59,7 @@ help:														## display this help
 	@awk 'BEGIN { FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"; } \
 		/^[a-zA-Z0-9_-]+:.*?##/ { printf "  \033[36m%-30s\033[0m %s\n", $$1, $$2; } \
 		/^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5); } \
-		END { printf "\n"; }' $(MAKEFILE_LIST)
-
-ensure-mac-init:
-	@$(call fn_print_header,ensure .config/alacritty/alacritty.yml exist)
-	-mkdir -pv ~/.config/alacritty/
-	-cp -i dot.alacritty.yml ~/.config/alacritty/alacritty.yml				# set alacritty config from template
-	@$(call fn_print_header,ensure .tmux exist)
-	-cp -i dot.tmux.conf ~/.tmux.conf																	# set tmux config from template
-	# curl https://sh.rustup.rs -sSf | sh															# recommended rust installation method (official book)
-
-ensure-deb-init:
-	@$(call fn_print_header,ensure tools exist)
-	# curl https://sh.rustup.rs -sSf | sh															# recommended rust installation method (official book)
-	@(command -v cargo || echo rust and cargo not found. install rust.) && command -v cargo
-	@command -v cargo &>/dev/null || { echo "cargo/rust not installed. try brew install xxxx [abort]" >&2; exit 1; }
-	cargo install lsd
+		END { printf ""; }' $(MAKEFILE_LIST)
 
 ensure-common:
 	# === tools : vim													========================================
@@ -85,19 +70,19 @@ ensure-common:
 	-touch ~/.gitignore
 	-touch ~/.gitconfig
 
-ensure-check:
-	# === check package managers	========================================
-	@echo checking python pip ruby gems yarn are recommended tools
-	@(command -v gem || echo gem not found. install ruby.) && command -v gem
-	@(command -v python || echo python not found. install python3.) && command -v python
-	@(command -v pip3 || echo pip3 not found. install python3.) && command -v pip3
-	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
-
 ##@ Menu
 
 status:																								## check system / environment status
 	@$(call fn_print_header,check tools)
+	# === check package managers	========================================
+	@echo "check if languages and package managers exist ..";
+	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
+	@(command -v gem || echo gem not found. install ruby.) && command -v gem
+	@(command -v python || echo python not found. install python3.) && command -v python
+	@(command -v pip3 || echo pip3 not found. install python3.) && command -v pip3
 	# === check status					========================================
+	@echo "check if recommended tools exist ..";
+	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
 	@$(call fn_check_command_note,bat,see https://github.com/sharkdp/bat)
 	@$(call fn_check_command_note,curl,)
 	@$(call fn_check_command_note,fd,see https://github.com/sharkdp/fd)
@@ -105,25 +90,33 @@ status:																								## check system / environment status
 	@$(call fn_check_command_note,fzf,)
 	@$(call fn_check_command_note,jq,)
 	@$(call fn_check_command_note,rg,see https://github.com/BurntSushi/ripgrep/releases/latest)
-	@$(call fn_check_command_note,wget,)
 	@$(call fn_check_command_note,vim,)
+	@$(call fn_check_command_note,wget,)
+	@$(call fn_check_command_note,yq,)
 	@$(call fn_print_header_command,brew info,brew list && brew list --cask)
 	@$(call fn_print_header_command,node yarn info,yarn global list)
 	@$(call fn_print_header_command,ruby gem info,gem list)
 	@$(call fn_print_header_command,python3 info,pip3 list)
 	@$(call fn_print_header_command,color test,tput colors)
 
-ensure-mac: ensure-common	ensure-mac-init							## ensure mac specific cli tools and dependencies present
+ensure-mac: ensure-common														## ensure mac specific cli tools and dependencies present
+	@$(call fn_print_header,ensure .config/alacritty/alacritty.yml exist)
+	-mkdir -pv ~/.config/alacritty/
+	-cp -i dot.alacritty.yml ~/.config/alacritty/alacritty.yml				# set alacritty config from template
+	@$(call fn_print_header,ensure .tmux exist)
+	-cp -i dot.tmux.conf ~/.tmux.conf																	# set tmux config from template
+	# curl https://sh.rustup.rs -sSf | sh															# recommended rust installation method (official book)
 	# === notes
 	# https://shift.infinite.red/npm-vs-yarn-cheat-sheet-8755b092e5cc
-	#
-	# run make ensure-tools
 
-ensure-deb: ensure-common ensure-deb-init							## ensure debian specific cli tools and dependencies present
-	#
-	# run make ensure-tools
+ensure-deb: ensure-common														## ensure debian specific cli tools and dependencies present
+	@$(call fn_print_header,ensure tools exist)
+	# curl https://sh.rustup.rs -sSf | sh															# recommended rust installation method (official book)
+	@(command -v cargo || echo rust and cargo not found. install rust.) && command -v cargo
+	@command -v cargo &>/dev/null || { echo "cargo/rust not installed. try brew install xxxx [abort]" >&2; exit 1; }
+	cargo install lsd
 
-ensure-tools:	ensure-check														## ensure yarn pip gem cli tools present
+ensure-tools:																				## ensure yarn pip gem cli tools present
 	# === tools : install n (nodejs)		========================================
 	-command -v n || curl -L https://git.io/n-install | bash
 	-n latest
