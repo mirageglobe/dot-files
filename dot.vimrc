@@ -1,4 +1,5 @@
 " ~/.vimrc 
+" cp -i dot.vimrc ~/.vimrc
 " add/replace following lines to file as ~/.vimrc or $HOME/.vimrc
 
 if filereadable(expand("~/dot-files/dot.vimrc"))
