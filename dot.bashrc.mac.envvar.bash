@@ -5,13 +5,16 @@ printf "%s" "[+] envvars "
 
 # bash
 export CLICOLOR=true
-export GREP_OPTIONS='--color=auto'                    # common
-export NOW=$(date +"%Y%m%d-000000")                   # common
-export EDITOR=vim                                     # common
-export TERM=xterm-256color                            # common
+export GREP_OPTIONS='--color=auto'                  # common
+export NOW=$(date +"%Y%m%d-000000")                 # common
+export EDITOR=vim                                   # common
+export TERM=xterm-256color                          # common
 
-# fzf settings - need to install fzf via brew and run /usr/local/opt/fzf/install to support cmdline
-export FZF_COMPLETION_TRIGGER='??'
+# fzf settings
+# - ensure install fzf via brew
+# - to support terminal and keybindings, run : /usr/local/opt/fzf/install
+export FZF_COMPLETION_TRIGGER='??'                            # keybind fzf trigger
+export FZF_COMPLETION_OPTS='--border --info=inline'           # apply fzf flags as default
 
 # github token
 export GITHUB_TOKEN=CHANGEME
