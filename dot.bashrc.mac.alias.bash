@@ -31,8 +31,8 @@ alias tree='lsd --tree'
 
 alias kc='kubectl config view --minify --output "jsonpath={.current-context}"; echo ""; echo "------------------------"; kubectl cluster-info;'
 
-alias ibrew='arch -x86_64 /usr/local/bin/brew'
-alias mbrew='arch -arm64e /opt/homebrew/bin/brew'
+alias brewi='arch -x86_64 /usr/local/bin/brew'
+alias brewm='arch -arm64e /opt/homebrew/bin/brew'
 
 alias pg13start='pg_ctl -D /usr/local/var/postgresql start'
 alias pg13stop='pg_ctl -D /usr/local/var/postgresql stop'

@@ -99,14 +99,14 @@ status:																								## check system / environment status
 	@$(call fn_print_header_command,color test,tput colors)
 
 ensure-mac: ensure-common														## ensure mac specific cli tools and dependencies present
-	@$(call fn_print_header,ensure .config/alacritty/alacritty.yml exist)
-	-mkdir -pv ~/.config/alacritty/
-	-cp -i dot.alacritty.yml ~/.config/alacritty/alacritty.yml				# set alacritty config from template
-	@$(call fn_print_header,ensure .tmux exist)
-	-cp -i dot.tmux.conf ~/.tmux.conf																	# set tmux config from template
-	# curl https://sh.rustup.rs -sSf | sh															# recommended rust installation method (official book)
-	# === notes
-	# https://shift.infinite.red/npm-vs-yarn-cheat-sheet-8755b092e5cc
+	# @$(call fn_print_header,ensure .config/alacritty/alacritty.yml exist)
+	# -mkdir -pv ~/.config/alacritty/
+	# -cp -i dot.alacritty.yml ~/.config/alacritty/alacritty.yml				# set alacritty config from template
+	# === setup tmux config
+	-cp -i dot.tmux.conf ~/.tmux.conf
+	# === setup git config
+	-cp -i dot.gitconfig ~/.gitconfig
+	-cp -i dot.gitignore ~/.gitignore
 
 ensure-deb: ensure-common														## ensure debian specific cli tools and dependencies present
 	@$(call fn_print_header,ensure tools exist)
@@ -128,16 +128,16 @@ ensure-tools:																				## ensure yarn pip gem cli tools present
 	-yarn global add htmlhint													# lint html
 	-yarn global add standard													# lint javascript (ale)
 	-yarn global add prettier													# lint javascript fixer (ale)
-	-yarn global add jsonlint													# lint json
+	# -yarn global add jsonlint													# lint json
 	-yarn global add fx																# json tool
 	-yarn global add electron													# desktop webkit
-	-yarn global add @vue/cli													# web framework - vue cli 3.x
-	-yarn global upgrade --latest @vue/cli
-	-yarn global add local-web-server									# server simple local web server - use ws to start
-	-yarn global add bats															# test bash test suite (bats-core)
-	-yarn global upgrade --latest bats
-	-yarn global add mountebank												# test mock server
-	-yarn global add nightwatch												# test e2e browser test - default by vuejs
+	# -yarn global add @vue/cli													# web framework - vue cli 3.x
+	# -yarn global upgrade --latest @vue/cli
+	# -yarn global add local-web-server									# server simple local web server - use ws to start
+	# -yarn global add bats															# test bash test suite (bats-core)
+	# -yarn global upgrade --latest bats
+	# -yarn global add mountebank												# test mock server
+	# -yarn global add nightwatch												# test e2e browser test - default by vuejs
 	# === tools : python pip tools			========================================
 	# -pip3 install --upgrade pip setuptools														# package manager for python upgrade pip causes issues with brew python (reinstall python instead)
 	-pip3 install -U $$(pip3 freeze | awk -F'[/=]' '{print $$1}')
@@ -178,3 +178,5 @@ ensure-tools:																				## ensure yarn pip gem cli tools present
 	# -gem install --user-install mdl											# lint markdown
 	# -gem install --user-install terraform_landscape			# adding terraform extensions
 	# -gem install --user-install cucumber								# test cucumber ruby rails
+	# === notes
+	# https://shift.infinite.red/npm-vs-yarn-cheat-sheet-8755b092e5cc
