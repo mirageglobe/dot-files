@@ -2,7 +2,13 @@
 command_timeout = 1000
 
 [aws]
-symbol = "🅰 "
+symbol = " "
 
 [kubernetes]
 disabled = false
+
+[nim]
+symbol = " "
+
+[nodejs]
+format = "via [ $version](bold green) "

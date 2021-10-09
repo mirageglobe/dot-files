@@ -7,12 +7,12 @@
 # === targets
 MENU := all clean test
 
+# menu helpers
+MENU += ensure-common ensure-gem ensure-pip ensure-yarn
+MENU += help info
+
 # menu targets
 MENU += status ensure-mac ensure-deb ensure-tools
-
-# menu helpers
-MENU += ensure-common
-MENU += help info
 
 # load phony (fake targets so make does not interpret commands as files)
 .PHONY: $(MENU)
@@ -62,17 +62,78 @@ help:														## display this help
 		END { printf ""; }' $(MAKEFILE_LIST)
 
 ensure-common:
-	# === tools : vim													========================================
-	@$(call fn_print_header,ensure .vimrc and folders exist)
+	# === tools : vim							========================================
+	@$(call fn_print_header,ensure common)
+	@echo "ensure vimrc and vim backup, swap, undo folders exist ..";
 	-mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
-	# === tools : git													========================================
+	# === tools : git							========================================
 	-touch ~/.gitignore
 	-touch ~/.gitconfig
+
+ensure-gem:
+	# to install, always use : gem install <package> --user
+	-gem update --system || echo "never use sudo for gem installation; check ruby path in homebrew or use chruby"
+	-gem update || echo "never use sudo for gem installation; check ruby path in homebrew or use chruby"
+	# === archived								========================================
+	# -gem install --user-install mdl										# linter markdown
+	# -gem install --user-install terraform_landscape		# adding terraform extensions
+	# -gem install --user-install cucumber							# test cucumber ruby rails
+
+ensure-pip:
+	# -pip3 install --upgrade pip setuptools						# package manager for python upgrade pip causes issues with brew python (reinstall python instead)
+	-pip3 install -U $$(pip3 freeze | awk -F'[/=]' '{print $$1}')
+	-pip3 install ansible || pip3 install -U ansible									# configuration
+	-pip3 install ansible-lint || pip3 install -U ansible-lint				# linter ansible
+	-pip3 install sslyze || pip3 install -U sslyze										# ssl check
+	-pip3 install paramiko || pip3 install -U paramiko								# ssh
+	# === archived								========================================
+	# -pip3 install csvkit															# csv editor / converter
+	# -pip3 install localstack													# dev stack aws
+	# -pip3 install --upgrade flake8										# lint python (ale)
+	# -pip3 install --upgrade autopep8									# lint python based on pep8
+	# -pip3 install weasyprint													# doc easy pdf printer https://weasyprint.org/start/
+
+ensure-yarn:
+	-yarn global upgrade
+	-yarn global add electron													# framework desktop
+	-yarn global add fx																# json parser
+	-yarn global add htmlhint													# linter html
+	-yarn global add moby															# thesaurus
+	-yarn global add prettier													# linter javascript fixer (ale)
+	-yarn global add standard													# linter javascript (ale)
+	-yarn global add write-good												# linter english grammer
+	# === archived								========================================
+	# -yarn global add bats															# test bash (bats-core)
+	# -yarn global upgrade --latest bats
+	# -yarn global add @babel/core @babel/cli						# framework - vue-global-service dependency
+	# -yarn global add cordova													# framework - cross mobile
+	# -yarn global add eslint														# linter javascript (ale)
+	# -yarn global add fauxton													# database - couchdb ui docker container missing fauxton
+	# -yarn global add graphql													# framework - vue graphql dependency
+	# -yarn global add http-server											# server simple web server
+	# -yarn global add hotel														# database https://github.com/typicode/hotel
+	# -yarn global add jsonlint													# linter json
+	# -yarn global add json-server											# database https://github.com/typicode/json-server#database
+	# -yarn global add local-web-server									# server - use ws to start
+	# -yarn global add mountebank												# test mock server
+	# -yarn global add @neutralinojs/neu								# framework nwjs and electron alternative (deprecated)
+	# -yarn global add nightwatch												# test e2e browser - default by vuejs
+	# -yarn global add pomd															# pomodoro
+	# -yarn global add semver														# semver (see https://github.com/fsaintjacques/semver-tool)
+	# -yarn global add stylelint												# linter
+	# -yarn global add typescript												# framework
+	# -yarn global add serverless												# framework
+	# -yarn global add svg2png-cli											# converter
+	# -yarn global add tty.js
+	# -yarn global add @vue/cli													# framework web vue-cli 3.x
+	# -yarn global upgrade --latest @vue/cli
+	# -yarn global add @vue/cli-service-global					# framework - vue service global
+	# -yarn global add vue-language-server							# linter vuejs (ale)
 
 ##@ Menu
 
 status:																								## check system / environment status
-	@$(call fn_print_header,check tools)
+	@$(call fn_print_header,status)
 	# === check package managers	========================================
 	@echo "check if languages and package managers exist ..";
 	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
@@ -98,6 +159,13 @@ status:																								## check system / environment status
 	@$(call fn_print_header_command,python3 info,pip3 list)
 	@$(call fn_print_header_command,color test,tput colors)
 
+ensure-deb: ensure-common														## ensure debian specific cli tools and dependencies present
+	@$(call fn_print_header,ensure tools exist)
+	# curl https://sh.rustup.rs -sSf | sh								# recommended rust installation method (official book)
+	@(command -v cargo || echo rust and cargo not found. install rust.) && command -v cargo
+	@command -v cargo &>/dev/null || { echo "cargo/rust not installed. try brew install xxxx [abort]" >&2; exit 1; }
+	cargo install lsd
+
 ensure-mac: ensure-common														## ensure mac specific cli tools and dependencies present
 	# @$(call fn_print_header,ensure .config/alacritty/alacritty.yml exist)
 	# -mkdir -pv ~/.config/alacritty/
@@ -108,75 +176,9 @@ ensure-mac: ensure-common														## ensure mac specific cli tools and depe
 	-cp -i dot.gitconfig ~/.gitconfig
 	-cp -i dot.gitignore ~/.gitignore
 
-ensure-deb: ensure-common														## ensure debian specific cli tools and dependencies present
-	@$(call fn_print_header,ensure tools exist)
-	# curl https://sh.rustup.rs -sSf | sh															# recommended rust installation method (official book)
-	@(command -v cargo || echo rust and cargo not found. install rust.) && command -v cargo
-	@command -v cargo &>/dev/null || { echo "cargo/rust not installed. try brew install xxxx [abort]" >&2; exit 1; }
-	cargo install lsd
-
 ensure-tools:																				## ensure yarn pip gem cli tools present
 	# === tools : install n (nodejs)		========================================
 	-command -v n || curl -L https://git.io/n-install | bash
 	-n latest
 	# === tools : install yarn (nodejs)	========================================
 	-command -v yarn || curl -o- -L https://yarnpkg.com/install.sh | bash
-	# === tools : yarn tools						========================================
-	@$(call fn_print_header,ensure node yarn bins are pristine)
-	-yarn global upgrade
-	-yarn global add write-good												# lint english grammer
-	-yarn global add htmlhint													# lint html
-	-yarn global add standard													# lint javascript (ale)
-	-yarn global add prettier													# lint javascript fixer (ale)
-	# -yarn global add jsonlint													# lint json
-	-yarn global add fx																# json tool
-	-yarn global add electron													# desktop webkit
-	# -yarn global add @vue/cli													# web framework - vue cli 3.x
-	# -yarn global upgrade --latest @vue/cli
-	# -yarn global add local-web-server									# server simple local web server - use ws to start
-	# -yarn global add bats															# test bash test suite (bats-core)
-	# -yarn global upgrade --latest bats
-	# -yarn global add mountebank												# test mock server
-	# -yarn global add nightwatch												# test e2e browser test - default by vuejs
-	# === tools : python pip tools			========================================
-	# -pip3 install --upgrade pip setuptools														# package manager for python upgrade pip causes issues with brew python (reinstall python instead)
-	-pip3 install -U $$(pip3 freeze | awk -F'[/=]' '{print $$1}')
-	-pip3 install ansible || pip3 install -U ansible									# ansible
-	-pip3 install ansible-lint || pip3 install -U ansible-lint				# lint ansible
-	-pip3 install sslyze || pip3 install -U sslyze										# ssl check tool
-	-pip3 install paramiko || pip3 install -U paramiko								# ssh tool
-	# === tools : ruby gem tool					========================================
-	# to install, always use : gem install <package> --user
-	-gem update --system || echo "never use sudo for gem installation; check ruby path in homebrew or use chruby"
-	-gem update || echo "never use sudo for gem installation; check ruby path in homebrew or use chruby"
-	# === archived tools								========================================
-	# -yarn global add semver														# dev semver tool (see https://github.com/fsaintjacques/semver-tool)
-	# -yarn global add stylelint													# lint
-	# -yarn global add eslint														# lint javascript (ale)
-	# -yarn global add vue-language-server							# linter vuejs (ale)
-	# -yarn global add typescript												# javascript framework
-	# -yarn global add graphql														# web framework - vue graphql dependency
-	# -yarn global add @vue/cli-service-global						# web framework - vue service global
-	# -yarn global add @babel/core @babel/cli						# web framework - vue-global-service dependency
-	# -yarn global add cordova														# mobile framework - cross mobile
-	# -yarn global add serverless												# serverless framework
-	# -yarn global add @neutralinojs/neu								# nwjs and electron alternative (deprecated)
-	# -yarn global add http-server												# server simple local web server
-	# -yarn global add fauxton														# db ui - couchdb docker container missing fauxton
-	# -yarn global add hotel														# db https://github.com/typicode/hotel
-	# -yarn global add json-server											# db https://github.com/typicode/json-server#database
-	# -yarn global add pomd															# general pomodoro
-	# -yarn global add svg2png-cli
-	# -yarn global add tty.js
-	# -yarn add cucumber --dev														# test (per project) cucumber
-	# -yarn add @babel/core @babel/cli --dev							# (project) babel version backport
-	# -pip3 install localstack													# dev stack aws
-	# -pip3 install csvkit															# csv editor / converter
-	# -pip3 install --upgrade flake8										# lint python (ale)
-	# -pip3 install --upgrade autopep8									# lint python based on pep8
-	# -pip3 install weasyprint													# doc easy pdf printer https://weasyprint.org/start/
-	# -gem install --user-install mdl											# lint markdown
-	# -gem install --user-install terraform_landscape			# adding terraform extensions
-	# -gem install --user-install cucumber								# test cucumber ruby rails
-	# === notes
-	# https://shift.infinite.red/npm-vs-yarn-cheat-sheet-8755b092e5cc
