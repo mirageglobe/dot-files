@@ -137,9 +137,9 @@ status:																								## check system / environment status
 	# === check package managers	========================================
 	@echo "check if languages and package managers exist ..";
 	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
-	@(command -v gem || echo gem not found. install ruby.) && command -v gem
-	@(command -v python || echo python not found. install python3.) && command -v python
-	@(command -v pip3 || echo pip3 not found. install python3.) && command -v pip3
+	@(command -v gem || echo gem not found. install ruby.)
+	@(command -v python || echo python not found. install python3.)
+	@(command -v pip3 || echo pip3 not found. install python3.)
 	# === check status					========================================
 	@echo "check if recommended tools exist ..";
 	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
