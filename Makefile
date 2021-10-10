@@ -170,11 +170,13 @@ ensure-mac: ensure-common														## ensure mac specific cli tools and depe
 	# @$(call fn_print_header,ensure .config/alacritty/alacritty.yml exist)
 	# -mkdir -pv ~/.config/alacritty/
 	# -cp -i dot.alacritty.yml ~/.config/alacritty/alacritty.yml				# set alacritty config from template
-	# === setup tmux config
-	-cp -i dot.tmux.conf ~/.tmux.conf
 	# === setup git config
 	-cp -i dot.gitconfig ~/.gitconfig
 	-cp -i dot.gitignore ~/.gitignore
+	# === setup starship config
+	-cp -i starship.toml ~/.config/starship.toml
+	# === setup tmux config
+	-cp -i dot.tmux.conf ~/.tmux.conf
 
 ensure-tools:																				## ensure yarn pip gem cli tools present
 	# === tools : install n (nodejs)		========================================

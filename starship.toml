@@ -1,5 +1,5 @@
 # this config should exist in as ~/.config/starship.toml
-command_timeout = 1000
+command_timeout = 3000
 
 [aws]
 symbol = " "
