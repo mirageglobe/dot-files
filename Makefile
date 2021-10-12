@@ -195,3 +195,6 @@ ensure-tools:																				## ensure yarn pip gem cli tools present
 	# === install arkade
 	# kubernetes - https://github.com/alexellis/arkade
 	# curl -sLS https://get.arkade.dev | sudo sh
+	#
+	# === install whalebrew
+	# whalebrew install tsub/graph-easy              # cli ascii tool
