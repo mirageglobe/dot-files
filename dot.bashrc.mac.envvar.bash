@@ -23,8 +23,10 @@ export GITHUB_TOKEN=CHANGEME
 # homebrew github api token
 export HOMEBREW_GITHUB_API_TOKEN=CHANGEME
 
-# java adopt
-if [ -z $JAVA_HOME ]; then
-  printf "%s" "[+] java "
-  export JAVA_HOME=$(/usr/libexec/java_home)
-fi
+# java
+# use sdkman.io to install temurin (adoptopenjdk replacement)
+# - sdk install java 17.0.0-tem
+# if [ -z $JAVA_HOME ]; then
+#   printf "%s" "[+] java "
+#   export JAVA_HOME=$(/usr/libexec/java_home)
+# fi

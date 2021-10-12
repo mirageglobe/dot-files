@@ -179,8 +179,19 @@ ensure-mac: ensure-common														## ensure mac specific cli tools and depe
 	-cp -i dot.tmux.conf ~/.tmux.conf
 
 ensure-tools:																				## ensure yarn pip gem cli tools present
-	# === tools : install n (nodejs)		========================================
-	-command -v n || curl -L https://git.io/n-install | bash
-	-n latest
-	# === tools : install yarn (nodejs)	========================================
-	-command -v yarn || curl -o- -L https://yarnpkg.com/install.sh | bash
+	# === install n
+	# nodejs - https://github.com/tj/n
+	# -command -v n || curl -L https://git.io/n-install | bash
+	# -n latest
+	#
+	# === install yarn
+	# npm nodejs - https://yarnpkg.com/
+	# curl -o- -L https://yarnpkg.com/install.sh | bash
+	#
+	# === install sdkman
+	# java gradle - https://github.com/sdkman/sdkman-cli
+	# curl -s https://get.sdkman.io | bash
+	#
+	# === install arkade
+	# kubernetes - https://github.com/alexellis/arkade
+	# curl -sLS https://get.arkade.dev | sudo sh
