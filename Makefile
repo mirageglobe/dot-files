@@ -8,11 +8,11 @@
 MENU := all clean test
 
 # menu helpers
-MENU += ensure-common ensure-gem ensure-pip ensure-yarn
+MENU += ensure-common
 MENU += help info
 
 # menu targets
-MENU += status ensure-mac ensure-deb ensure-tools
+MENU += status ensure-mac ensure-deb ensure-tools ensure-gem ensure-pip ensure-yarn
 
 # load phony (fake targets so make does not interpret commands as files)
 .PHONY: $(MENU)
@@ -24,9 +24,6 @@ MENU += status ensure-mac ensure-deb ensure-tools
 
 # # set default shell to use
 SHELL := /bin/bash
-
-# sets all lines in the recipe to be passed in a single shell invocation. or use multi-line (not posix)
-.ONESHELL:
 
 # === functions
 
@@ -62,16 +59,85 @@ help:														## display this help
 		END { printf ""; }' $(MAKEFILE_LIST)
 
 ensure-common:
-	# === tools : vim							========================================
+	# === setup vim							  ========================================
 	@$(call fn_print_header,ensure common)
 	@echo "ensure vimrc and vim backup, swap, undo folders exist ..";
 	-mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
-	# === tools : git							========================================
+	# === setup git								========================================
 	-touch ~/.gitignore
 	-touch ~/.gitconfig
 
-ensure-gem:
-	# to install, always use : gem install <package> --user
+##@ Menu
+
+status:																								## check system / environment status
+	# === check package managers	========================================
+	@echo "check if languages and package managers exist ..";
+	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
+	@(command -v gem || echo gem not found. install ruby.)
+	@(command -v python || echo python not found. install python3.)
+	@(command -v pip3 || echo pip3 not found. install python3.)
+	# === check status					========================================
+	@echo "check if recommended tools exist ..";
+	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
+	@$(call fn_check_command_note,bat,see https://github.com/sharkdp/bat)
+	@$(call fn_check_command_note,curl,)
+	@$(call fn_check_command_note,fd,see https://github.com/sharkdp/fd)
+	@$(call fn_check_command_note,fx,)
+	@$(call fn_check_command_note,fzf,)
+	@$(call fn_check_command_note,jq,)
+	@$(call fn_check_command_note,rg,see https://github.com/BurntSushi/ripgrep/releases/latest)
+	@$(call fn_check_command_note,vim,)
+	@$(call fn_check_command_note,wget,)
+	@$(call fn_check_command_note,yq,)
+	@$(call fn_print_header_command,brew info,brew list && brew list --cask)
+	@$(call fn_print_header_command,node yarn info,yarn global list)
+	@$(call fn_print_header_command,ruby gem info,gem list)
+	@$(call fn_print_header_command,python3 info,pip3 list)
+	@$(call fn_print_header_command,color test,tput colors)
+
+ensure-deb: ensure-common														## ensure debian specific cli tools and dependencies present
+	# === install rust
+	# curl https://sh.rustup.rs -sSf | sh								# recommended rust installation method (official book)
+	@(command -v cargo || echo rust and cargo not found. try brew install rust.) && command -v cargo
+	# === setup lsd
+	# cargo install lsd
+
+ensure-mac: ensure-common														## ensure mac specific cli tools and dependencies present
+	# === setup alacritty
+	# -mkdir -pv ~/.config/alacritty/
+	# -cp -i dot.alacritty.yml ~/.config/alacritty/alacritty.yml				# set alacritty config from template
+	# === setup git config
+	-cp -i dot.gitconfig ~/.gitconfig
+	-cp -i dot.gitignore ~/.gitignore
+	# === setup starship config
+	-cp -i starship.toml ~/.config/starship.toml
+	# === setup tmux config
+	-cp -i dot.tmux.conf ~/.tmux.conf
+
+list-tools:																						## list common cli tools install
+	# === install arkade
+	# kubernetes - https://github.com/alexellis/arkade
+	# curl -sLS https://get.arkade.dev | sudo sh
+	#
+	# === install n
+	# nodejs - https://github.com/tj/n
+	# -command -v n || curl -L https://git.io/n-install | bash
+	# -n latest
+	#
+	# === install sdkman
+	# java gradle - https://github.com/sdkman/sdkman-cli
+	# curl -s https://get.sdkman.io | bash
+	#
+	# === install yarn
+	# npm nodejs - https://yarnpkg.com/
+	# curl -o- -L https://yarnpkg.com/install.sh | bash
+	#
+	# === install whalebrew
+	# whalebrew install tsub/graph-easy              # cli ascii tool
+
+ensure-gem: 																					## install gem local tools
+	# === setup gem
+	gem --version # to install, always use : gem install <package> --user
 	-gem update --system || echo "never use sudo for gem installation; check ruby path in homebrew or use chruby"
 	-gem update || echo "never use sudo for gem installation; check ruby path in homebrew or use chruby"
 	# === archived								========================================
@@ -79,7 +145,9 @@ ensure-gem:
 	# -gem install --user-install terraform_landscape		# adding terraform extensions
 	# -gem install --user-install cucumber							# test cucumber ruby rails
 
-ensure-pip:
+ensure-pip:																						## install pip global tools
+	# === setup pip
+	pip3 --version
 	# -pip3 install --upgrade pip setuptools						# package manager for python upgrade pip causes issues with brew python (reinstall python instead)
 	-pip3 install -U $$(pip3 freeze | awk -F'[/=]' '{print $$1}')
 	-pip3 install ansible || pip3 install -U ansible									# configuration
@@ -93,7 +161,9 @@ ensure-pip:
 	# -pip3 install --upgrade autopep8									# lint python based on pep8
 	# -pip3 install weasyprint													# doc easy pdf printer https://weasyprint.org/start/
 
-ensure-yarn:
+ensure-yarn:																					## install yarn global tools
+	# === setup yarn
+	yarn --version
 	-yarn global upgrade
 	-yarn global add electron													# framework desktop
 	-yarn global add fx																# json parser
@@ -129,72 +199,3 @@ ensure-yarn:
 	# -yarn global upgrade --latest @vue/cli
 	# -yarn global add @vue/cli-service-global					# framework - vue service global
 	# -yarn global add vue-language-server							# linter vuejs (ale)
-
-##@ Menu
-
-status:																								## check system / environment status
-	@$(call fn_print_header,status)
-	# === check package managers	========================================
-	@echo "check if languages and package managers exist ..";
-	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
-	@(command -v gem || echo gem not found. install ruby.)
-	@(command -v python || echo python not found. install python3.)
-	@(command -v pip3 || echo pip3 not found. install python3.)
-	# === check status					========================================
-	@echo "check if recommended tools exist ..";
-	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
-	@$(call fn_check_command_note,bat,see https://github.com/sharkdp/bat)
-	@$(call fn_check_command_note,curl,)
-	@$(call fn_check_command_note,fd,see https://github.com/sharkdp/fd)
-	@$(call fn_check_command_note,fx,)
-	@$(call fn_check_command_note,fzf,)
-	@$(call fn_check_command_note,jq,)
-	@$(call fn_check_command_note,rg,see https://github.com/BurntSushi/ripgrep/releases/latest)
-	@$(call fn_check_command_note,vim,)
-	@$(call fn_check_command_note,wget,)
-	@$(call fn_check_command_note,yq,)
-	@$(call fn_print_header_command,brew info,brew list && brew list --cask)
-	@$(call fn_print_header_command,node yarn info,yarn global list)
-	@$(call fn_print_header_command,ruby gem info,gem list)
-	@$(call fn_print_header_command,python3 info,pip3 list)
-	@$(call fn_print_header_command,color test,tput colors)
-
-ensure-deb: ensure-common														## ensure debian specific cli tools and dependencies present
-	@$(call fn_print_header,ensure tools exist)
-	# curl https://sh.rustup.rs -sSf | sh								# recommended rust installation method (official book)
-	@(command -v cargo || echo rust and cargo not found. install rust.) && command -v cargo
-	@command -v cargo &>/dev/null || { echo "cargo/rust not installed. try brew install xxxx [abort]" >&2; exit 1; }
-	cargo install lsd
-
-ensure-mac: ensure-common														## ensure mac specific cli tools and dependencies present
-	# @$(call fn_print_header,ensure .config/alacritty/alacritty.yml exist)
-	# -mkdir -pv ~/.config/alacritty/
-	# -cp -i dot.alacritty.yml ~/.config/alacritty/alacritty.yml				# set alacritty config from template
-	# === setup git config
-	-cp -i dot.gitconfig ~/.gitconfig
-	-cp -i dot.gitignore ~/.gitignore
-	# === setup starship config
-	-cp -i starship.toml ~/.config/starship.toml
-	# === setup tmux config
-	-cp -i dot.tmux.conf ~/.tmux.conf
-
-ensure-tools:																				## ensure yarn pip gem cli tools present
-	# === install n
-	# nodejs - https://github.com/tj/n
-	# -command -v n || curl -L https://git.io/n-install | bash
-	# -n latest
-	#
-	# === install yarn
-	# npm nodejs - https://yarnpkg.com/
-	# curl -o- -L https://yarnpkg.com/install.sh | bash
-	#
-	# === install sdkman
-	# java gradle - https://github.com/sdkman/sdkman-cli
-	# curl -s https://get.sdkman.io | bash
-	#
-	# === install arkade
-	# kubernetes - https://github.com/alexellis/arkade
-	# curl -sLS https://get.arkade.dev | sudo sh
-	#
-	# === install whalebrew
-	# whalebrew install tsub/graph-easy              # cli ascii tool
