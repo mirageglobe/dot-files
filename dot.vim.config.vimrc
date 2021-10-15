@@ -26,6 +26,7 @@
 
 " === === toolings
 " lint                  ale
+" fixer                 ale
 " colorscheme           one dark (atom scheme)
 " explorer              ranger (leader r) / fzf (leader f) / vinegar (-)
 " popup complete        maralla completor
@@ -415,11 +416,13 @@ let g:ale_linters = {
       \ }
 let g:ale_fixers = {
       \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-      \   'javascript': ['prettier'],
       \ }
 
 " show 5 lines of errors (default: 10)
 let g:ale_list_window_size = 5
+
+" set this variable to 1 to fix files when you save them.
+" let g:ale_fix_on_save = 1
 
 " === ale end
 
