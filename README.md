@@ -4,26 +4,23 @@ jimmys public dot-files and bootstrapper to make life easier. one can use this t
 
 # to use
 
-ensure that you have git, and curl or wget;
-
 ```bash
 # check dependencies
-command -V git || echo "git tool not found"
-command -V curl || echo "curl tool not found"
-command -V wget || echo "wget tool not found"
+command -V git; command -V curl; command -V wget
 
-# quick start - to clone the repo and run the make to see menu
-cd ~
+# generate ssh key via ed25519 key pair ~/.ssh/id_ed25519 (recommended)
+ssh-keygen -o -a 100 -t ed25519 -f ~/.ssh/id_ed25519 -C "changeme@example.com"
+
+# generate RSA key pair ~/.ssh/id_rsa_standard (4096 bits)
+ssh-keygen -b 4096 -t rsa -f ~/.ssh/id_rsa_standard -C "changeme@example.com"
+
+# clone the repo and run the make to see menu
 git clone https://github.com/mirageglobe/dot-files.git
-```
 
-```bash
-# === misc commands
-
-# to only get the makefile
+# only get the makefile
 curl -D - https://raw.githubusercontent.com/mirageglobe/dot-files/master/Makefile > ~/Makefile
 
-# to curl font
+# only get font
 curl -fLo "<FONT NAME> Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/<FONT_PATH>/complete/<FONT_NAME>%20Nerd%20Font%20Complete.otf
 ```
 
@@ -48,10 +45,10 @@ bash completions
 
 - basic ssh key gen for local
 - create home downloads for files
-- switch to sdkman - for groovy/java ( curl -s get.sdkman.io | bash )
-- vim fix ale - https://github.com/dense-analysis/ale#usage-completion
-- fira source (https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/FiraCode.zip)
-- noto source (https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/Noto.zip)
+- [x] switch to sdkman - for groovy/java ( curl -s get.sdkman.io | bash )
+- [x] vim fix ale - https://github.com/dense-analysis/ale#usage-completion
+- [x] fira source (https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/FiraCode.zip)
+- [x] noto source (https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/Noto.zip)
 - aws vault (https://github.com/99designs/aws-vault/releases)
 - [x] use hawkeye scanner
 - [x] use homebrew - bat cat source (https://github.com/sharkdp/bat/releases/latest)
