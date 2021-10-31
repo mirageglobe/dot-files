@@ -172,6 +172,7 @@ ensure-yarn:																					## install yarn global tools
 	-yarn global add prettier													# linter javascript fixer (ale)
 	-yarn global add standard													# linter javascript (ale)
 	-yarn global add write-good												# linter english grammer
+	-yarn global add @vue/cli													# framework web vue-cli 3.x
 	# === archived								========================================
 	# -yarn global add bats															# test bash (bats-core)
 	# -yarn global upgrade --latest bats
@@ -195,7 +196,6 @@ ensure-yarn:																					## install yarn global tools
 	# -yarn global add serverless												# framework
 	# -yarn global add svg2png-cli											# converter
 	# -yarn global add tty.js
-	# -yarn global add @vue/cli													# framework web vue-cli 3.x
 	# -yarn global upgrade --latest @vue/cli
 	# -yarn global add @vue/cli-service-global					# framework - vue service global
 	# -yarn global add vue-language-server							# linter vuejs (ale)
