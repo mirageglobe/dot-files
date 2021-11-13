@@ -14,8 +14,8 @@ export TERM=xterm-256color                          # common
 # - ensure install fzf via brew
 # - to support terminal and keybindings, run : /usr/local/opt/fzf/install
 export FZF_COMPLETION_TRIGGER='??'                                      # keybind fzf trigger
-export FZF_COMPLETION_OPTS='--height 80% --border --info=inline'        # apply fzf flags as default for completion
-export FZF_DEFAULT_OPTS='--height 80% --border --info=inline'           # apply fzf flags as default for command, do not add preview
+export FZF_COMPLETION_OPTS='--height 30% --border --info=inline'        # apply fzf flags as default for completion
+export FZF_DEFAULT_OPTS='--height 30% --border --info=inline'           # apply fzf flags as default for command, do not add preview
 
 # github token
 export GITHUB_TOKEN=CHANGEME

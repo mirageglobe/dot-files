@@ -9,7 +9,7 @@ MENU := all clean test
 
 # menu helpers
 MENU += ensure-common
-MENU += help info
+MENU += help readme
 
 # menu targets
 MENU += status ensure-mac ensure-deb ensure-tools ensure-gem ensure-pip ensure-yarn
@@ -63,9 +63,16 @@ ensure-common:
 	@$(call fn_print_header,ensure common)
 	@echo "ensure vimrc and vim backup, swap, undo folders exist ..";
 	-mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
-	# === setup git								========================================
+	# === setup alacritty
+	# -mkdir -pv ~/.config/alacritty/
+	# -cp -i dot.alacritty.yml ~/.config/alacritty/alacritty.yml				# set alacritty config from template
+	# === setup git config
 	-touch ~/.gitignore
 	-touch ~/.gitconfig
+	-cp -i dot.gitconfig ~/.gitconfig
+	-cp -i dot.gitignore ~/.gitignore
+	# === setup tmux config
+	-cp -i dot.tmux.conf ~/.tmux.conf
 
 ##@ Menu
 
@@ -103,16 +110,8 @@ ensure-deb: ensure-common														## ensure debian specific cli tools and d
 	# cargo install lsd
 
 ensure-mac: ensure-common														## ensure mac specific cli tools and dependencies present
-	# === setup alacritty
-	# -mkdir -pv ~/.config/alacritty/
-	# -cp -i dot.alacritty.yml ~/.config/alacritty/alacritty.yml				# set alacritty config from template
-	# === setup git config
-	-cp -i dot.gitconfig ~/.gitconfig
-	-cp -i dot.gitignore ~/.gitignore
 	# === setup starship config
 	-cp -i starship.toml ~/.config/starship.toml
-	# === setup tmux config
-	-cp -i dot.tmux.conf ~/.tmux.conf
 
 list-tools:																						## list common cli tools install
 	# === install arkade
