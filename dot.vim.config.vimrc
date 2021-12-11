@@ -99,8 +99,10 @@ endif
 " === === completion
 
 filetype indent plugin on                             " enables filetype - plugins, indenting rules, syntax highlighting http://vimdoc.sourceforge.net/htmldoc/filetype.html
-set omnifunc=syntaxcomplete#Complete                  " turn on omnicomplete
-set completeopt+=longest,menuone                      " mandatory setting for vim
+" set omnifunc=syntaxcomplete#Complete                  " turn on omnicomplete
+" set omnifunc=ale#completion#OmniFunc                  " turn on omnicomplete via ALE
+set completeopt=menuone,noinsert,noselect,preview     " mandatory setting for vim
+" set completeopt+=longest,menuone
 " set path+=**                                          " provides tab completion for all file related tasks
 
 " === === highlight
@@ -229,14 +231,13 @@ Plug 'junegunn/fzf.vim'                               " needs both lines
 " Plug 'preservim/nerdtree'                             " netrw alternative drawer
 
 Plug 'tpope/vim-vinegar'                              " netrw alternative enables drawer with - key
-
 Plug 'jlanzarotta/bufexplorer'                        " buffer explorer
 
 " === === git
 
 Plug 'airblade/vim-gitgutter'                         " shows git status in gutter
 Plug 'tpope/vim-fugitive'                             " run git commands in vim
-Plug 'tpope/vim-rhubarb'                                " git hub command plugin
+" Plug 'tpope/vim-rhubarb'                              " git hub command plugin
 " Plug 'tommcdo/vim-fubitive'                           " git in vim for bitbucket
 Plug 'itchyny/vim-gitbranch'                          " simple gitbranch name to replace fugitive
 
@@ -247,11 +248,15 @@ Plug 'majutsushi/tagbar'                              " enables ctag sidebar (in
 Plug 'ludovicchabant/vim-gutentags'                   " auto ctag management
 
 " syntax highlight
-Plug 'sheerun/vim-polyglot'                           " syntax superfast loader for over 100 languages - https://github.com/sheerun/vim-polyglot
+" Plug 'sheerun/vim-polyglot'                           " syntax superfast loader for over 100 languages - https://github.com/sheerun/vim-polyglot
 " Plug 'scrooloose/syntastic'
 
 " code completion
-Plug 'maralla/completor.vim'                          " enables code completion - https://github.com/maralla/completor.vim
+" Plug 'maralla/completor.vim'                          " enables code completion - https://github.com/maralla/completor.vim
+Plug 'prabirshrestha/asyncomplete.vim'                " code completion with support for LSP
+Plug 'prabirshrestha/asyncomplete-buffer.vim'         " code completion with support for LSP
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}       " enables code completion
 " Plug 'ervandew/supertab'                              " enables tab actions i.e. autocomplete by using <tab> insert mode
@@ -339,9 +344,9 @@ let g:lightline = {
       \ }
 
 " colorscheme for lightline
-"   powerline, wombat, jellybeans, solarized dark, solarized light,
-"   PaperColor dark, PaperColor light, seoul256, one dark, one light, landscape
-let g:lightline.colorscheme = 'one dark'
+"   powerline, wombat, jellybeans, solarized, PaperColor, seoul256, one, landscape
+"   solarized dark, solarized light, PaperColor dark, PaperColor light, one dark, one light
+let g:lightline.colorscheme = 'powerline'
 
 let g:lightline.component = {
       \   'gitbranch': ' %{gitbranch#name()}',
@@ -370,7 +375,6 @@ let g:lightline.active = {
       \     [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ]
       \   ]
       \ }
-
 
 " === === lightline ale
 
@@ -425,6 +429,15 @@ let g:ale_list_window_size = 5
 " let g:ale_fix_on_save = 1
 
 " === ale end
+
+" === asyncomplete start
+
+let g:asyncomplete_auto_completeopt = 1
+let g:asyncomplete_enable_for_all = 1
+let b:asyncomplete_enable = 1
+let g:asyncomplete_auto_popup = 1
+
+" === asyncomplete end
 
 " === fugitive start
 
