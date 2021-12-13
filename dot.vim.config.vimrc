@@ -110,13 +110,14 @@ filetype indent plugin on         " enables filetype - plugins,
                                   " indenting rules, syntax highlighting
 " http://vimdoc.sourceforge.net/htmldoc/filetype.html
 
+" toggle omnicomplete
+set completeopt+=menuone,menu,longest,preview
+" set completeopt=menuone,noinsert,noselect,preview
+
+" turn on omnicomplete via ALE
+set omnifunc=ale#completion#OmniFunc
 " set omnifunc=syntaxcomplete#Complete
-                                  " urn on omnicomplete
-" set omnifunc=ale#completion#OmniFunc
-                                  " turn on omnicomplete via ALE
-set completeopt=menuone,noinsert,noselect,preview
-                                  " mandatory setting for vim
-" set completeopt+=longest,menuone
+
 " set path+=**                    " tab completion for file related tasks
 
 " -------------------------------------------------------------------- highlight
