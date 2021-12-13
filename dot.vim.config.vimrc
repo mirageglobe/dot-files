@@ -1,9 +1,8 @@
-" === custom vim config
-"
-" add/replace following lines to file as ~/.vimrc or $HOME/.vimrc
+" ============================================================ custom vim config
 
-" === usage
+" add/replace following lines to file as ~/.vimrc or $HOME/.vimrc
 " add the following lines to .vimrc
+
 " if filereadable(expand("~/dot-files/dot.vimrc"))
 "   source ~/dot-files/dot.vimrc
 " endif
@@ -13,49 +12,57 @@
 "   source ~/dot-case/dot.idr.vimrc
 " endif
 
-" === === notes
+" ======================================================================== notes
+
 " - https://tbaggery.com/2011/08/08/effortless-ctags-with-git.html
 " - https://vimways.org/2018/you-should-be-using-tags-in-vim/
 
-" === === fonts configuration (iterm2)
+" ================================================= fonts configuration (iterm2)
+
 " font -> FuraCode Nerd Font [Regular] [12]
 " use built-in Powerline glyphs -> true
 " enable subpixel anti-aliasing -> true
 " use ligatures -> true
 " anti-aliased -> true
 
-" === === toolings
+" ===================================================================== toolings
+
 " lint                  ale
 " fixer                 ale
 " colorscheme           one dark (atom scheme)
 " explorer              ranger (leader r) / fzf (leader f) / vinegar (-)
 " popup complete        maralla completor
 
-" === === setting start
+" ================================================================ setting start
 
-" optimisations
-
-set lazyredraw                                        " do not redraw when executing macros; buffer instead of constant redraws
-set noshowmode                                        " speed up by turning off showing mode on last line
-" set showmode                                         " show current mode down the bottom
-set regexpengine=1                                    " speed up by using old regex engine
+set lazyredraw                  " do not redraw when executing macros;
+                                " buffer instead of constant redraws
+set noshowmode                  " speed up by turning off showing mode
+                                " on last line
+" set showmode                    " show current mode down the bottom
+set regexpengine=1              " speed up by using old regex engine
 
 " general
-set nocompatible                                      " required by vim for extra features
-set showcmd                                           " noshowcmd / showcmd speed up turning off display of cmds. need to be after nocompatible
-set history=1000                                      " number of commands history to store
-set visualbell                                        " no sounds
-set hidden                                            " set current buffer to be hidden when opening a new file. use :ls to see all buffers then :b[n] n=buffer number to select
+set nocompatible                " required by vim for extra features
+set showcmd                     " noshowcmd / showcmd speed up turning off
+                                " display of cmds. need to be after nocompatible
+set history=1000                " number of commands history to store
+set visualbell                  " no sounds
+set hidden                      " set current buffer to be hidden when
+                                " opening a new file. use :ls to see all
+                                " buffers then :b[n] n=buffer number to select
 
-set backupcopy=yes                                    " yes/no/auto when opening a file, vim makes a copy and overwrites
-set undodir=~/.vim/.undo//                            " set vim to use tmp directory for undo files
-set backupdir=~/.vim/.backup//                        " set vim to use tmp directory for backup files
-set directory=~/.vim/.swp//                           " set vim to use tmp directory for swp files
+set backupcopy=yes              " yes/no/auto when opening a file
+                                " vim makes a copy and overwrites
+set undodir=~/.vim/.undo//      " set vim to use tmp directory for undo files
+set backupdir=~/.vim/.backup//  " set vim to use tmp directory for backup files
+set directory=~/.vim/.swp//     " set vim to use tmp directory for swp files
 
-set encoding=UTF-8                                    " The encoding displayed.
-set fileencoding=UTF-8                                " The encoding written to file
+set encoding=UTF-8              " The encoding displayed.
+set fileencoding=UTF-8          " The encoding written to file
 
-" color colour
+" ---------------------------------------------------------------- color colour
+
 " if gui (macvim) or not gui (iterm/alacritty)
 if has('gui_running')
   set guifont=FiraCode\ Nerd\ Font\ Complete:h13
@@ -68,6 +75,7 @@ endif
 " use 24-bit (true-color) mode in vim/neovim when outside tmux.
 " if you're using tmux version 2.2 or later, you can remove the outermost $tmux check and use tmux's 24-bit color support
 " (see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
+
 if (empty($TMUX))
   if (has("nvim"))
     "for neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
@@ -94,28 +102,36 @@ if has("clipboard")
   endif
 endif
 
-" === code
+" ========================================================================= code
 
-" === === completion
+" ------------------------------------------------------------------- completion
 
-filetype indent plugin on                             " enables filetype - plugins, indenting rules, syntax highlighting http://vimdoc.sourceforge.net/htmldoc/filetype.html
-" set omnifunc=syntaxcomplete#Complete                  " turn on omnicomplete
-" set omnifunc=ale#completion#OmniFunc                  " turn on omnicomplete via ALE
-set completeopt=menuone,noinsert,noselect,preview     " mandatory setting for vim
+filetype indent plugin on         " enables filetype - plugins,
+                                  " indenting rules, syntax highlighting
+" http://vimdoc.sourceforge.net/htmldoc/filetype.html
+
+" set omnifunc=syntaxcomplete#Complete
+                                  " urn on omnicomplete
+" set omnifunc=ale#completion#OmniFunc
+                                  " turn on omnicomplete via ALE
+set completeopt=menuone,noinsert,noselect,preview
+                                  " mandatory setting for vim
 " set completeopt+=longest,menuone
-" set path+=**                                          " provides tab completion for all file related tasks
+" set path+=**                    " tab completion for file related tasks
 
-" === === highlight
+" -------------------------------------------------------------------- highlight
 
-syntax on                                             " set syntax highlighting in vim
-set list listchars=tab:»·,trail:·                     " display tabs and trailing spaces visually
-" set nolist                                            " breaks white space show
+syntax on                       " set syntax highlighting in vim
+set list listchars=tab:»·,trail:·
+                                " display tabs and trailing spaces visually
+" set nolist                    " breaks white space show
 
-" === === numbering
-set number                                            " show line numbers
-" set relativenumber                                    " enables relative number rather than running number
+" -------------------------------------------------------------------- numbering
 
-" === === folding
+set number                      " show line numbers
+" set relativenumber              " enable relative number
+
+" ---------------------------------------------------------------------- folding
 " <leader>z for fold
 
 set nofoldenable
@@ -123,52 +139,55 @@ set foldmethod=indent
 set foldnestmax=10
 set foldlevel=2
 
-" === === indentation
+" ------------------------------------------------------------------ indentation
 
 " set autoindent
-set smartindent                     " does the right indent in most programs
-set shiftwidth=2                    " indenting at 2 spaces
+set smartindent                 " does the right indent in most programs
+set shiftwidth=2                " indenting at 2 spaces
 set softtabstop=2
-set tabstop=2                       " tabs are at proper location
+set tabstop=2                   " tabs are at proper location
 set expandtab
 
-" === === wrapping
+" --------------------------------------------------------------------- wrapping
 
-set wrap                                                " set soft wrap for text
-" set nowrap                                            " turn off code wrap
-set linebreak                                           " set wrap at only
+set wrap                        " set soft wrap for text
+" set nowrap                      " turn off code wrap
+set linebreak                   " set wrap at only
 
-" === command
+" ---------------------------------------------------------------------- command
 
-set wildmenu                                          " display command line completion, use :b to find files, :ls for list buffer
-set wildmode=list:full                                " display all command options of wildmenu with double tab
+set wildmenu                    " show command line completion
+                                " use :b to find files, :ls for list buffer
+set wildmode=list:full          " show command options with double tab
 
-" mouse cursor and scrolling
+" --------------------------------------------------- mouse cursor and scrolling
 
-set mouse=a                                           " turn on terminal mouse
-set cursorline                                        " highlight current line
-set scrolloff=5                                       " setting window to scroll when x lines at end of screen
-set timeoutlen=1000                                   " speed up scrolling
-set ttimeoutlen=0                                     " speed up scrolling
-set ttyfast                                           " speed up loading and scrolling of vim (boolean)
-set ttyscroll=10                                      " set scrolling speed (1-999; 1 fastest)
+set mouse=a                     " turn on terminal mouse
+set cursorline                  " highlight current line
+set scrolloff=5                 " window to scroll when x lines at end of screen
+set timeoutlen=1000             " speed up scrolling
+set ttimeoutlen=0               " speed up scrolling
+set ttyfast                     " speed up loading+scrolling of vim (boolean)
+set ttyscroll=10                " set scrolling speed (1-999; 1 fastest)
 
-" spell check
-" z= activate / zg add word to dict / zw mark incorrect to dict / [s next / ]s prev /
+" ------------------------------------------------------------------ spell check
 
-set spell spelllang=en_gb                             " turn on vims spell checker
-" set nospell                                           " explicitly turn off spell check
+" z= activate / zg add word to dict / zw mark incorrect to dict
+" / [s next / ]s prev
+
+set spell spelllang=en_gb       " turn on vims spell checker
+" set nospell                     " explicitly turn off spell check
 
 " misc
 
-" set splitright                                        " auto split right for screens
+" set splitright                  " auto split right for screens
 
-" === setting end
+" ================================================================== setting end
 
-" === plug preload start
+" =========================================================== plug preload start
 " settings before plugins are loaded
 
-" === === vim polyglot start
+" ----------------------------------------------------------- vim polyglot start
 
 " setting polygot terraform-vim
 " let g:terraform_fmt_on_save=1
@@ -176,17 +195,17 @@ set spell spelllang=en_gb                             " turn on vims spell check
 " disable language packs
 " let g:polyglot_disabled = ['htmldjango']
 
-" === === vim polyglot end
+" ------------------------------------------------------------- vim polyglot end
 
-" === === ale start
+" ---------------------------------------------------------------------ale start
 " let g:ale_disable_lsp = 1
 let g:ale_completion_enabled = 1
 let g:ale_completion_autoimport = 1
-" === === ale end
+" ---------------------------------------------------------------------- ale end
 
-" === plug preload end
+" ============================================================= plug preload end
 
-" === plug start
+" =================================================================== plug start
 
 " auto-install vim-plug
 
@@ -198,64 +217,112 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-" === === colour schemes and IDE customisation
+" ----------------------------------------- colour schemes and IDE customisation
 
-" Plug 'drewtempelmeyer/palenight.vim'                  " enables palenight color scheme
-Plug 'itchyny/lightline.vim'                          " enables superlight status bar - https://github.com/itchyny/lightline.vim
-Plug 'rafi/awesome-vim-colorschemes'                  " enables package colorschemes (rafi)
+" Plug 'drewtempelmeyer/palenight.vim'
+" enables palenight color scheme
 
-" Plug 'flazz/vim-colorschemes'                         " enables package colorschemes (flazz)
-" Plug 'dracula/vim'                                    " enables gruvbox colorscheme
-" Plug 'lifepillar/vim-gruvbox8'                        " enables gruvbox colorscheme
-" Plug 'lifepillar/vim-solarized8'                      " enables gruvbox colorscheme
+Plug 'itchyny/lightline.vim'
+" enables superlight status bar - https://github.com/itchyny/lightline.vim
 
-Plug 'tpope/vim-sensible'                             " enables common standard settings for vim
+Plug 'rafi/awesome-vim-colorschemes'
+" enables package colorschemes (rafi)
 
-Plug 'editorconfig/editorconfig-vim'                  " enables .editorconfig file overrides - https://editorconfig.org/
+" Plug 'flazz/vim-colorschemes'
+" enables package colorschemes (flazz)
 
-Plug 'mhinz/vim-startify'                             " enables fancy startup
+" Plug 'dracula/vim'
+" enables gruvbox colorscheme
 
-Plug 'tpope/vim-commentary'                           " enables commenting - gcc (to [un]comment line) - gc(to comment with motion)
+" Plug 'lifepillar/vim-gruvbox8'
+" enables gruvbox colorscheme
 
-Plug 'tpope/vim-repeat'                               " enables repeating command or input with "."
+" Plug 'lifepillar/vim-solarized8'
+" enables gruvbox colorscheme
 
-" Plug 'tpope/vim-surround'                             " enables quoting with cs[' to change quotes from [ to ' - cst to add quotes
+Plug 'tpope/vim-sensible'
+" enables common standard settings for vim
 
-" === === file management
+Plug 'editorconfig/editorconfig-vim'
+" enables .editorconfig file overrides - https://editorconfig.org/
 
-Plug 'francoiscabrol/ranger.vim'                      " netrw alternative ranger - https://github.com/francoiscabrol/ranger.vim
+Plug 'mhinz/vim-startify'
+" enables fancy startup
 
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }   " enables super fast fuzzy search with :FZF
-Plug 'junegunn/fzf.vim'                               " needs both lines
+Plug 'tpope/vim-commentary'
+" enables commenting - gcc (to [un]comment line) - gc(to comment with motion)
 
-" Plug 'preservim/nerdtree'                             " netrw alternative drawer
+Plug 'tpope/vim-repeat'
+" enables repeating command or input with '.'
 
-Plug 'tpope/vim-vinegar'                              " netrw alternative enables drawer with - key
-Plug 'jlanzarotta/bufexplorer'                        " buffer explorer
+" Plug 'tpope/vim-surround'
+" enables quoting with cs[' to change quotes from [ to ' - cst to add quotes
+
+" -------------------------------------------------------------- file management
+
+Plug 'francoiscabrol/ranger.vim'
+" netrw alternative ranger - https://github.com/francoiscabrol/ranger.vim
+
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+" enables super fast fuzzy search with :FZF
+
+Plug 'junegunn/fzf.vim'
+" needs both lines
+
+" Plug 'preservim/nerdtree'
+" netrw alternative drawer
+
+Plug 'tpope/vim-vinegar'
+" netrw alternative enables drawer with - key
+
+Plug 'jlanzarotta/bufexplorer'
+" buffer explorer
 
 " === === git
 
-Plug 'airblade/vim-gitgutter'                         " shows git status in gutter
-Plug 'tpope/vim-fugitive'                             " run git commands in vim
-" Plug 'tpope/vim-rhubarb'                              " git hub command plugin
-" Plug 'tommcdo/vim-fubitive'                           " git in vim for bitbucket
-Plug 'itchyny/vim-gitbranch'                          " simple gitbranch name to replace fugitive
+Plug 'airblade/vim-gitgutter'
+" shows git status in gutter
 
-" === === language / syntax
+Plug 'tpope/vim-fugitive'
+" run git commands in vim
+
+" Plug 'tpope/vim-rhubarb'
+" git hub command plugin
+
+" Plug 'tommcdo/vim-fubitive'
+" git in vim for bitbucket
+
+Plug 'itchyny/vim-gitbranch'
+" simple gitbranch name to replace fugitive
+
+" ------------------------------------------------------------ language / syntax
 
 " ctags
-Plug 'majutsushi/tagbar'                              " enables ctag sidebar (install ctag via brew)
-Plug 'ludovicchabant/vim-gutentags'                   " auto ctag management
+Plug 'majutsushi/tagbar'
+" enables ctag sidebar (install ctag via brew)
+
+Plug 'ludovicchabant/vim-gutentags'
+" auto ctag management
 
 " syntax highlight
-" Plug 'sheerun/vim-polyglot'                           " syntax superfast loader for over 100 languages - https://github.com/sheerun/vim-polyglot
+" Plug 'sheerun/vim-polyglot'
+" syntax fast loader 100 languages - https://github.com/sheerun/vim-polyglot
+
 " Plug 'scrooloose/syntastic'
 
-" code completion
-" Plug 'maralla/completor.vim'                          " enables code completion - https://github.com/maralla/completor.vim
-Plug 'prabirshrestha/asyncomplete.vim'                " code completion with support for LSP
-Plug 'prabirshrestha/asyncomplete-buffer.vim'         " code completion with support for LSP
+" -------------------------------------------------------------- code completion
+
+" Plug 'maralla/completor.vim'
+" enables code completion - https://github.com/maralla/completor.vim
+
+Plug 'prabirshrestha/asyncomplete.vim'
+" code completion with support for LSP
+
+Plug 'prabirshrestha/asyncomplete-buffer.vim'
+" code completion with support for LSP
+
 Plug 'prabirshrestha/vim-lsp'
+
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}       " enables code completion
@@ -263,7 +330,8 @@ Plug 'prabirshrestha/asyncomplete-lsp.vim'
 " Plug 'lifepillar/vim-mucomplete'                      " enables code completion (popup)
 " Plug 'vim-vdebug/vdebug'                              " vim debugger that interfaces with xdebug
 
-" snippet
+" ---------------------------------------------------------------------- snippet
+
 " Plug 'MarcWeber/vim-addon-mw-utils'                   " snippet tool
 " Plug 'tomtom/tlib_vim'                                " snippet tool
 " Plug 'garbas/vim-snipmate'                            " snippet tool
@@ -286,16 +354,16 @@ Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'dense-analysis/ale'                             " enables ale universal language linter
 Plug 'maximbaz/lightline-ale'                         " enables ale in lightline
 
-" === === misc
+" ------------------------------------------------------------------------- misc
 
 " must be at the end
 Plug 'ryanoasis/vim-devicons'                         " enables super fonts (nerd fonts for vim)
 
 call plug#end()
 
-" === plug end
+" ===================================================================== plug end
 
-" === colorscheme start
+" ============================================================ colorscheme start
 " to select, :colorscheme then space followed by tab
 
 set background=dark
@@ -322,13 +390,14 @@ colorscheme onedark
 " palenight requires plugin
 " colorscheme palenight
 
-" === colorscheme end
+" ============================================================== colorscheme end
 
-" === lightline start
+" ============================================================== lightline start
 
-" scriptencoding utf-8                                " (optional) unknown setting
-set laststatus=2                                      " (optional) fix for statusline not showing
-set noshowmode                                        " hide status of mode (insert/visual) as lightline is showing
+" scriptencoding utf-8            " (optional) unknown setting
+set laststatus=2                " (optional) fix for statusline not showing
+set noshowmode                  " hide status of mode (insert/visual)
+                                " as lightline is showing
 
 " lightline init - needs to be first function
 
@@ -376,7 +445,7 @@ let g:lightline.active = {
       \   ]
       \ }
 
-" === === lightline ale
+" ---------------------------------------------------------- lightline ale start
 
 let g:lightline.component_expand = {
       \   'linter_checking': 'lightline#ale#checking',
@@ -398,13 +467,13 @@ let g:lightline#ale#indicator_warnings = "\uf071"
 let g:lightline#ale#indicator_errors = "\uf05e"
 let g:lightline#ale#indicator_ok = "\uf00c"
 
-" === === lightline ale end
+" ------------------------------------------------------------ lightline ale end
 
-" === lightline end
+" ================================================================ lightline end
 
-" === ale start
+" ==================================================================== ale start
 
-" Enable completion where available.
+" enable completion where available.
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
@@ -428,46 +497,53 @@ let g:ale_list_window_size = 5
 " set this variable to 1 to fix files when you save them.
 " let g:ale_fix_on_save = 1
 
-" === ale end
+" ====================================================================== ale end
 
-" === asyncomplete start
+" =========================================================== asyncomplete start
 
 let g:asyncomplete_auto_completeopt = 1
 let g:asyncomplete_enable_for_all = 1
 let b:asyncomplete_enable = 1
 let g:asyncomplete_auto_popup = 1
 
-" === asyncomplete end
+" ============================================================= asyncomplete end
 
-" === fugitive start
+" =============================================================== fugitive start
 
 " set statusline+=%{fugitive#statusline()}
 
-" === fugitive end
+" ================================================================= fugitive end
 
-" === mucomplete start
+" ============================================================= mucomplete start
 
-" set shortmess+=c                                      " shut off completion messages
-" let g:mucomplete#enable_auto_at_startup = 1           " auto startup mucomplete
-" let g:mucomplete#completion_delay = 1                 " makes mucomplete less interuptive by only activating on pause
-" imap <expr> <down> mucomplete#extend_fwd("\<down>")   " expanding via context see mucomplete-extend-compl
+" set shortmess+=c
+" shut off completion messages
 
-" === mucomplete end
+" let g:mucomplete#enable_auto_at_startup = 1
+" auto startup mucomplete
 
-" === nerdtree start
+" let g:mucomplete#completion_delay = 1
+" makes mucomplete less interuptive by only activating on pause
+
+" imap <expr> <down> mucomplete#extend_fwd("\<down>")
+" expanding via context see mucomplete-extend-compl
+
+" =============================================================== mucomplete end
+
+" =============================================================== nerdtree start
 
 " let NERDTreeShowHidden=1
 
-" === nerdtree end
+" ================================================================= nerdtree end
 
-" === supertab start
+" =============================================================== supertab start
 
 " let g:SuperTabDefaultCompletionType = "context"
 " let g:SuperTabContextDefaultCompletionType = "<c-n>"
 
-" === supertab end
+" ================================================================= supertab end
 
-" === syntastic start
+" ============================================================== syntastic start
 
 " set statusline+=%#warningmsg#
 " set statusline+=%{SyntasticStatuslineFlag()}
@@ -483,38 +559,42 @@ let g:asyncomplete_auto_popup = 1
 " allow the use of 'local'
 " let g:syntastic_sh_shellcheck_args="-e SC2039"
 
-" === syntastic end
+" ================================================================ syntastic end
 
-" === vim vinegar start
+" ============================================================ vim vinegar start
 " gh  - toggle hidden files
 " -   - toggle project drawer
 " .   - using on a file to populate in command view
 " y.  - to yank absolute path for file cursor
 " ~   - to go home
 
+" let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 " activate default treeview for terminal
-" let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'      " hide dot files - press gh
-" to toggle hiding
+" hide dot files - press gh to toggle hiding
 
-let g:netrw_liststyle = 3                             " use tree view
+let g:netrw_liststyle = 3         " use tree view
+
 let g:netrw_altv = 1
-" let g:netrw_banner = 0                               " remove top banner
-" let g:netrw_browse_split = 4                         " open a new horizonal split for file
-" let g:netrw_winsize = 25                             " set width of tree to 25%
+
+" let g:netrw_banner = 0          " remove top banner
+" let g:netrw_browse_split = 4    " open a new horizonal split for file
+" let g:netrw_winsize = 25        " set width of tree to 25%
 
 "augroup ProjectDrawer
 "  autocmd!
 "  autocmd VimEnter * :Vexplore
 "augroup END
 
-" === vim vinegar end
+" ============================================================== vim vinegar end
 
-" === fzf start
+" ==================================================================== fzf start
 " recommended by homebrew
-set rtp+=/usr/local/opt/fzf
-" === fzf end
 
-" === commands start
+set rtp+=/usr/local/opt/fzf
+
+" ====================================================================== fzf end
+
+" =============================================================== commands start
 
 command ReloadShell :source ~/dot-files/dot.vimrc
 
@@ -523,9 +603,9 @@ command ReloadShell :source ~/dot-files/dot.vimrc
 command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
 
-" === commands end
+" ================================================================= commands end
 
-" === aliases start
+" ================================================================ aliases start
 "
 " ref - http://learnvimscriptthehardway.stevelosh.com/chapters/08.html
 " ref - http://learnvimscriptthehardway.stevelosh.com/chapters/03.html
@@ -540,9 +620,9 @@ command! -bang -nargs=? -complete=dir Files
 " split horizontal (default) and launch terminal
 " cabbrev termh terminal
 
-" === aliases end
+" ================================================================== aliases end
 
-" === mapping start
+" ================================================================ mapping start
 
 " map       root of recursive map - normal and visual mode (same as remap)
 " remap     map recursively (default)
@@ -563,17 +643,17 @@ command! -bang -nargs=? -complete=dir Files
 " maps base leader key from , to space
 let mapleader = "\<space>"
 
-" === key maps
+" --------------------------------------------------------------------- key maps
 
-" === === open buffer explorer
+" open buffer explorer
 " noremap <Leader><SPACE> :BufExplorer<CR>
 nnoremap <Leader>be :BufExplorer<CR>
 
-" === === fzf buffer explorer
+" fzf buffer explorer
 nnoremap <Leader>bo :Buffers<CR>
 nnoremap <Leader>bc :bd<CR>
 
-" === === open file explorer
+" open file explorer
 " nnoremap <Leader>w <C-w><C-w>
 " noremap <Leader>nt :NERDTreeToggle<CR>
 
@@ -582,22 +662,23 @@ noremap <Leader>cc :.w !pbcopy<CR><CR>
 noremap <Leader>cp :.r !pbpaste<CR>
 " nnoremap <Leader>p :r !pbpaste<CR>
 
-" === === open tagbar - ctag explorer
+" open tagbar - ctag explorer
 nnoremap <Leader>ct :TagbarToggle<CR>
 
-" === === open FZF explorer
+" open FZF explorer
 nnoremap <Leader>fo :Files!<CR>
 " nnoremap <Leader>f :Files!<CR>
 
-" === === open file explorer
+" open file explorer
 " noremap <Leader>ff :Explore<CR>
 
-" === === set git co-author
+" set git co-author
 " let @z='ICo-authored-by: y$A <@gmail.com>@Pgua<f x'
 " nmap <Leader>@ <ESC>VD <ESC>ICo-authored-by: <CR>
 nnoremap <Leader>gca <ESC>ICo-authored-by: John Doe <johndoe@gmail.com><ESC>
 
-" git browse and blame https://jakobgm.com/posts/vim/git-integration/
+" git browse and blame
+" https://jakobgm.com/posts/vim/git-integration/
 " show commits for every source line (git blame)
 nnoremap <Leader>gb :Git blame<CR>
 
@@ -654,9 +735,9 @@ nmap <Leader>cf za<ESC>
 
 " endif " exists("did_load_filetypes")
 
-" === mapping end
+" ================================================================== mapping end
 
-" === trimwhitespace trim start
+" ==================================================== trimwhitespace trim start
 
 function TrimWhiteSpace()
   echom "TTWS : trim trailing whitespace"
@@ -665,11 +746,12 @@ endfunction
 
 command TrimWhiteSpace           :call TrimWhiteSpace()           " toggle trim trailing whitespace
 
-" === trimwhitespace end
+" =========================================================== trimwhitespace end
 
-" === omnicomplete start
+" =========================================================== omnicomplete start
 " triggers completion without plugins
 " https://stackoverflow.com/questions/35837990/how-to-trigger-omnicomplete-auto-completion-on-keystrokes-in-insert-mode
+
 function! OpenCompletion()
   if !pumvisible() && ((v:char >= 'a' && v:char <= 'z') || (v:char >= 'A' && v:char <= 'Z'))
     call feedkeys("\<C-x>\<C-o>", "n")
@@ -677,6 +759,6 @@ function! OpenCompletion()
 endfunction
 
 " uncomment line to enable omnicomplete
-" autocmd InsertCharPre * call OpenCompletion()
+autocmd InsertCharPre * call OpenCompletion()
 
-" === omnicomplete end
+" ============================================================= omnicomplete end
