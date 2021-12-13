@@ -115,10 +115,21 @@ set completeopt+=menuone,menu,longest,preview
 " set completeopt=menuone,noinsert,noselect,preview
 
 " turn on omnicomplete via ALE
-set omnifunc=ale#completion#OmniFunc
-" set omnifunc=syntaxcomplete#Complete
+" set omnifunc=ale#completion#OmniFunc
+set omnifunc=syntaxcomplete#Complete
 
-" set path+=**                    " tab completion for file related tasks
+" set omnifunc=asyncomplete#sources#ale#get_source_options
+" this has error, check asyncomplete
+
+" ------------------------------------------------------------------- find files
+" :find *<tab>
+" :ls                           " show buffer
+
+set path+=**                    " tab completion for file related tasks
+set wildmenu                    " show command line completion
+                                " use :b to find files, :ls for list buffer
+set wildmode=list:full          " show command options with double tab
+
 
 " -------------------------------------------------------------------- highlight
 
@@ -154,12 +165,6 @@ set expandtab
 set wrap                        " set soft wrap for text
 " set nowrap                      " turn off code wrap
 set linebreak                   " set wrap at only
-
-" ---------------------------------------------------------------------- command
-
-set wildmenu                    " show command line completion
-                                " use :b to find files, :ls for list buffer
-set wildmode=list:full          " show command options with double tab
 
 " --------------------------------------------------- mouse cursor and scrolling
 
@@ -199,9 +204,16 @@ set spell spelllang=en_gb       " turn on vims spell checker
 " ------------------------------------------------------------- vim polyglot end
 
 " ---------------------------------------------------------------------ale start
-" let g:ale_disable_lsp = 1
+" enable completion where available.
+" this setting must be set before ale is loaded.
+" you should not turn this setting on if you wish to use ale as a completion
+" source for other completion plugins, like deoplete.
 let g:ale_completion_enabled = 1
+
+" automatic imports from external modules
 let g:ale_completion_autoimport = 1
+
+" let g:ale_disable_lsp = 1
 " ---------------------------------------------------------------------- ale end
 
 " ============================================================= plug preload end
@@ -316,15 +328,14 @@ Plug 'ludovicchabant/vim-gutentags'
 " Plug 'maralla/completor.vim'
 " enables code completion - https://github.com/maralla/completor.vim
 
-Plug 'prabirshrestha/asyncomplete.vim'
+" Plug 'prabirshrestha/asyncomplete.vim'
 " code completion with support for LSP
 
-Plug 'prabirshrestha/asyncomplete-buffer.vim'
+" Plug 'prabirshrestha/asyncomplete-buffer.vim'
 " code completion with support for LSP
 
-Plug 'prabirshrestha/vim-lsp'
-
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
+" Plug 'prabirshrestha/vim-lsp'
+" Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}       " enables code completion
 " Plug 'ervandew/supertab'                              " enables tab actions i.e. autocomplete by using <tab> insert mode
@@ -752,10 +763,20 @@ command TrimWhiteSpace           :call TrimWhiteSpace()           " toggle trim 
 " =========================================================== omnicomplete start
 " triggers completion without plugins
 " https://stackoverflow.com/questions/35837990/how-to-trigger-omnicomplete-auto-completion-on-keystrokes-in-insert-mode
+" autocomplete omnicomplete shortcuts:
+" - ^x^n                        for just this file
+" - ^x^f                        for filenames
+" - ^x^]                        for tags (ctags) only
+" - g^x^]                       for tags (ctags) only global
+" - ^n                          for anything specified by complete
 
 function! OpenCompletion()
   if !pumvisible() && ((v:char >= 'a' && v:char <= 'z') || (v:char >= 'A' && v:char <= 'Z'))
-    call feedkeys("\<C-x>\<C-o>", "n")
+    " call feedkeys("\<C-x>\<C-o>", "n")
+    call feedkeys("\<C-n>", "n")
+  endif
+  if !pumvisible() && (v:char == '/')
+    call feedkeys("\<C-x>\<C-f>", "n")
   endif
 endfunction
 
