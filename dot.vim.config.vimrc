@@ -110,14 +110,20 @@ filetype indent plugin on         " enables filetype - plugins,
                                   " indenting rules, syntax highlighting
 " http://vimdoc.sourceforge.net/htmldoc/filetype.html
 
-" toggle omnicomplete
+" toggle omnicomplete options
 set completeopt+=menuone,menu,longest,preview
 " set completeopt=menuone,noinsert,noselect,preview
 
-" turn on omnicomplete via ALE
-" set omnifunc=ale#completion#OmniFunc
-set omnifunc=syntaxcomplete#Complete
+" toggle default omnicomplete function
+" set omnifunc=syntaxcomplete#Complete
 
+" toggle omnicomplete via ALE
+set omnifunc=ale#completion#OmniFunc
+
+" toggle omnicomplete via completor
+" set omnifunc=completor#omnifunc
+
+" toggle omnicomplete via asyncomplete
 " set omnifunc=asyncomplete#sources#ale#get_source_options
 " this has error, check asyncomplete
 
@@ -337,7 +343,7 @@ Plug 'ludovicchabant/vim-gutentags'
 " Plug 'prabirshrestha/vim-lsp'
 " Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}       " enables code completion
+Plug 'neoclide/coc.nvim', {'branch': 'release'}       " enables code completion
 " Plug 'ervandew/supertab'                              " enables tab actions i.e. autocomplete by using <tab> insert mode
 " Plug 'lifepillar/vim-mucomplete'                      " enables code completion (popup)
 " Plug 'vim-vdebug/vdebug'                              " vim debugger that interfaces with xdebug
@@ -781,6 +787,6 @@ function! OpenCompletion()
 endfunction
 
 " uncomment line to enable omnicomplete
-autocmd InsertCharPre * call OpenCompletion()
+" autocmd InsertCharPre * call OpenCompletion()
 
 " ============================================================= omnicomplete end
