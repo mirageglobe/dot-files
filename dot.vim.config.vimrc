@@ -526,6 +526,13 @@ let g:asyncomplete_auto_popup = 1
 
 " ============================================================= asyncomplete end
 
+" ==================================================================== coc start
+
+" https://github.com/neoclide/coc.nvim/wiki/Language-servers#terraform
+let g:coc_global_extensions = ['coc-css', 'coc-git', 'coc-go', 'coc-html', 'coc-json', 'coc-markdownlint', 'coc-pyright', 'coc-sh', 'coc-solargraph', 'coc-texlab', 'coc-tsserver', 'coc-vetur']
+
+" ====================================================================== coc end
+
 " =============================================================== fugitive start
 
 " set statusline+=%{fugitive#statusline()}
