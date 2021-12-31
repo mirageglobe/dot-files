@@ -274,7 +274,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 " enables repeating command or input with '.'
 
-" Plug 'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 " enables quoting with cs[' to change quotes from [ to ' - cst to add quotes
 
 " -------------------------------------------------------------- file management
