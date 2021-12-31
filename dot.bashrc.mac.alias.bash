@@ -2,17 +2,16 @@
 # bash mac alias
 # [ -f ~/dot-files/dot.bash.mac.alias.bashrc ] && source ~/dot-files/dot.bash.mac.alias.bashrc
 
-# === alias (type: "$ alias" to show current aliases)
-
+# alias (type: `alias` to show current aliases)
 printf "%s" "[+] aliases "
 
-# === overrides
+# -------------------------------------------------i-------------- overrides ---
 
 alias cat='bat'
 alias catcat='\cat'
 alias ls='lsd'
 
-# === new aliases
+# -------------------------------------------------------------- new aliases ---
 
 # alias _ls="ls -Gd .*"
 # alias _ll="ls -lhAG"
@@ -22,20 +21,23 @@ alias ls='lsd'
 alias _cp='cp -i'
 alias _mv='mv -i'
 alias _rm='rm -i'
-
 alias _rs="printf ':: reload shell :: \n';exec $SHELL -l;"
 
+# lsd
 alias ll='lsd -la'
 alias lt='lsd --tree'
 alias tree='lsd --tree'
 
+# k8s
 alias kc='kubectl config view --minify --output "jsonpath={.current-context}"; echo ""; echo "------------------------"; kubectl cluster-info;'
 
+# homebrew
 alias brewi='arch -x86_64 /usr/local/bin/brew'
 alias brewm='arch -arm64e /opt/homebrew/bin/brew'
 
-alias pg13start='pg_ctl -D /usr/local/var/postgresql start'
-alias pg13stop='pg_ctl -D /usr/local/var/postgresql stop'
+# postgresql
+alias pgstart='pg_ctl -D /usr/local/var/postgresql start'
+alias pgstop='pg_ctl -D /usr/local/var/postgresql stop'
 
 # === custom commands
 

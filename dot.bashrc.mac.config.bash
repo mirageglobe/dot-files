@@ -1,5 +1,7 @@
 # dotfile config
-## [ -f ~/dot-files/dot.bashrc.mac.config.bash ] && source ~/dot-files/dot.bashrc.mac.config.bash
+# [ -f ~/dot-files/dot.bashrc.mac.config.bash ] && source ~/dot-files/dot.bashrc.mac.config.bash
+
+# --------------------------------------------------------------------- git ----
 
 printf "%s" "[+] git "
 
