@@ -1,54 +1,66 @@
 
-# === info
+################################################################################
+# ===================================================================== info = #
+################################################################################
 
-# sensible dotfiles and bootstrap script
-# attribution - by jimmy mg lim ::  www.mirageglobe.com :: github.com/mirageglobe
+# --------------------------------------------------------------- references ---
 
-# === targets
+# sensible dotfiles and bootstrap using makefile menu script
+# by jimmy mg lim ::  www.mirageglobe.com :: github.com/mirageglobe
+
+
+################################################################################
+# ============================================================ configuration = #
+################################################################################
+
+# ------------------------------------------------------------------ targets ---
+# defaults
 MENU := all clean test
 
-# menu helpers
-MENU += ensure-common
+# helpers
 MENU += help readme
+MENU += ensure-common
 
-# menu targets
-MENU += status ensure-mac ensure-deb ensure-tools ensure-gem ensure-pip ensure-yarn
+# main
+MENU += list-tools status ensure-mac ensure-deb ensure-ark ensure-gem ensure-pip ensure-tex ensure-yarn
 
-# load phony (fake targets so make does not interpret commands as files)
+# load phony
 .PHONY: $(MENU)
 
-# === variables
+# ----------------------------------------------------------------- settings ---
 
 # set default target
 .DEFAULT_GOAL := help
 
-# # set default shell to use
-SHELL := /bin/bash
+# ---------------------------------------------------- environment variables ---
 
-# === functions
+# load dot.env file into environment (prepend hypen to skip if not found)
+# -include dot.env
 
-define fn_check_file_regex
-	cat $(1) || grep "$(2)"
+# load current shell env vars into makefile shell env
+export
+
+################################################################################
+# ======================================================= makefile functions = #
+################################################################################
+
+# note that define can only take single line or rule
+
+define func_print_arrow
+	# ==> $(1)
 endef
 
-define fn_check_command_note
+define func_print_header
+	# ============================================= ### $(1) ###
+endef
+
+define func_check_command
 	command -V $(1) || printf "$(2)"
 endef
 
-define fn_print_header
-	echo "";
-	echo "==> $(1)";
-	echo "";
-endef
-
-define fn_print_header_command
-	echo "";
-	echo "==> $(1)";
-	echo "";
-	$(2);
-endef
-
-# === main
+################################################################################
+# ===================================================================== main = #
+################################################################################
 
 ##@ Helpers
 
@@ -58,62 +70,30 @@ help:														## display this help
 		/^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5); } \
 		END { printf ""; }' $(MAKEFILE_LIST)
 
+readme:													## show information and notes
+	$(call func_print_header,show readme)
+	@touch README.md
+	@cat README.md
+
 ensure-common:
-	# === setup vim							  ========================================
-	@$(call fn_print_header,ensure common)
-	@echo "ensure vimrc and vim backup, swap, undo folders exist ..";
+	$(call func_print_header,ensure common)
+	$(call func_print_arrow,setup vim - ensure vimrc and vim backup swap undo folders exist)
 	-mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
-	# === setup alacritty
+	$(call func_print_arrow,setup alacritty - skip)
 	# -mkdir -pv ~/.config/alacritty/
 	# -cp -i dot.alacritty.yml ~/.config/alacritty/alacritty.yml				# set alacritty config from template
-	# === setup git config
+	$(call func_print_arrow,setup git - config)
 	-touch ~/.gitignore
 	-touch ~/.gitconfig
 	-cp -i dot.gitconfig ~/.gitconfig
 	-cp -i dot.gitignore ~/.gitignore
-	# === setup tmux config
+	$(call func_print_arrow,setup tmux - config)
 	-cp -i dot.tmux.conf ~/.tmux.conf
 
 ##@ Menu
 
-status:																								## check system / environment status
-	# === check package managers	========================================
-	@echo "check if languages and package managers exist ..";
-	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
-	@(command -v gem || echo gem not found. install ruby.)
-	@(command -v python || echo python not found. install python3.)
-	@(command -v pip3 || echo pip3 not found. install python3.)
-	# === check status					========================================
-	@echo "check if recommended tools exist ..";
-	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
-	@$(call fn_check_command_note,bat,see https://github.com/sharkdp/bat)
-	@$(call fn_check_command_note,curl,)
-	@$(call fn_check_command_note,fd,see https://github.com/sharkdp/fd)
-	@$(call fn_check_command_note,fx,)
-	@$(call fn_check_command_note,fzf,)
-	@$(call fn_check_command_note,jq,)
-	@$(call fn_check_command_note,rg,see https://github.com/BurntSushi/ripgrep/releases/latest)
-	@$(call fn_check_command_note,vim,)
-	@$(call fn_check_command_note,wget,)
-	@$(call fn_check_command_note,yq,)
-	@$(call fn_print_header_command,brew info,brew list && brew list --cask)
-	@$(call fn_print_header_command,node yarn info,yarn global list)
-	@$(call fn_print_header_command,ruby gem info,gem list)
-	@$(call fn_print_header_command,python3 info,pip3 list)
-	@$(call fn_print_header_command,color test,tput colors)
-
-ensure-deb: ensure-common														## ensure debian specific cli tools and dependencies present
-	# === install rust
-	# curl https://sh.rustup.rs -sSf | sh								# recommended rust installation method (official book)
-	@(command -v cargo || echo rust and cargo not found. try brew install rust.) && command -v cargo
-	# === setup lsd
-	# cargo install lsd
-
-ensure-mac: ensure-common														## ensure mac specific cli tools and dependencies present
-	# === setup starship config
-	-cp -i starship.toml ~/.config/starship.toml
-
-list-tools:																						## list common cli tools install
+list-tools:											## list common cli tools install
+	$(call func_print_header,list tool setup)
 	# === install arkade
 	# kubernetes - https://github.com/alexellis/arkade
 	# curl -sLS https://get.arkade.dev | sudo sh
@@ -134,36 +114,123 @@ list-tools:																						## list common cli tools install
 	# === install whalebrew
 	# whalebrew install tsub/graph-easy              # cli ascii tool
 
-ensure-gem: 																					## install gem local tools
-	# === setup gem
-	gem --version # to install, always use : gem install <package> --user
+status:														## check system / environment status
+	$(call func_print_header,status)
+	$(call func_print_arrow,check package managers)
+	@echo "check if languages and package managers exist ..";
+	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
+	@(command -v gem || echo gem not found. install ruby.)
+	@(command -v python || echo python not found. install python3.)
+	@(command -v pip3 || echo pip3 not found. install python3.)
+	$(call func_print_arrow,check status)
+	@echo "check if recommended tools exist ..";
+	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
+	$(call func_check_command,bat,see https://github.com/sharkdp/bat)
+	$(call func_check_command,curl,)
+	$(call func_check_command,fd,see https://github.com/sharkdp/fd)
+	$(call func_check_command,fx,)
+	$(call func_check_command,fzf,)
+	$(call func_check_command,jq,)
+	$(call func_check_command,rg,see https://github.com/BurntSushi/ripgrep/releases/latest)
+	$(call func_check_command,vim,)
+	$(call func_check_command,wget,)
+	$(call func_check_command,yq,)
+	$(call func_print_arrow,show brew packages)
+	-brew list && brew list --cask
+	$(call func_print_arrow,show node npm yarn packages)
+	-yarn global list
+	$(call func_print_arrow,show ruby gem packages)
+	-gem list
+	$(call func_print_arrow,show python pip packages)
+	-pip3 list
+	$(call func_print_arrow,show supported colors)
+	-tput colors
+
+ensure-deb: ensure-common				## ensure debian specific cli tools and dependencies present
+	$(call func_print_header,ensure debian)
+	$(call func_print_arrow,check rust cargo packages)
+	@(command -v cargo || echo rust and cargo not found. try brew install rust.) && command -v cargo
+	# === install rust
+	# curl https://sh.rustup.rs -sSf | sh								# recommended rust installation method (official book)
+	# === setup lsd
+	# cargo install lsd
+
+ensure-mac: ensure-common				## ensure mac specific cli tools and dependencies present
+	$(call func_print_header,ensure mac)
+	# === setup starship config
+	$(call func_print_arrow,setup starship - prompt config)
+	-cp -i starship.toml ~/.config/starship.toml
+
+ensure-ark:											## install tools with arkade
+	$(call func_print_header,ensure arkade ark)
+	ark get helm
+	ark get k9s
+	ark get kubectx
+	ark get kubens
+	ark get yq
+
+ensure-gem: 										## install gem global tools
+	$(call func_print_header,ensure ruby gem)
+	$(call func_print_arrow,check gem)
+	gem --version
+	# to install, always use : gem install <package> --user
+	$(call func_print_arrow,update gem packages)
+	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
 	-gem update --system || echo "never use sudo for gem installation; check ruby path in homebrew or use chruby"
 	-gem update || echo "never use sudo for gem installation; check ruby path in homebrew or use chruby"
-	# === archived								========================================
+	# === archive
 	# -gem install --user-install mdl										# linter markdown
 	# -gem install --user-install terraform_landscape		# adding terraform extensions
 	# -gem install --user-install cucumber							# test cucumber ruby rails
 
-ensure-pip:																						## install pip global tools
-	# === setup pip
-	pip3 --version
-	# -pip3 install --upgrade pip setuptools						# package manager for python upgrade pip causes issues with brew python (reinstall python instead)
-	-pip3 install -U $$(pip3 freeze | awk -F'[/=]' '{print $$1}')
-	-pip3 install ansible || pip3 install -U ansible									# configuration
-	-pip3 install ansible-lint || pip3 install -U ansible-lint				# linter ansible
-	-pip3 install sslyze || pip3 install -U sslyze										# ssl check
-	-pip3 install paramiko || pip3 install -U paramiko								# ssh
-	# === archived								========================================
+ensure-pip:											## install pip global tools
+	$(call func_print_header,ensure python pip)
+	$(call func_print_arrow,check pip)
+	$(call func_check_command,pyenv,run: brew install pyenv)
+	pyenv --version
+	pyenv versions
+	# pyenv install --list  # show all installable versions
+	# pyenv install 3.10.1  # install version
+	pyenv local 3.10.1
+	pip --version
+	pip check
+	$(call func_print_arrow,upgrade pip self)
+	pip install --upgrade pip
+	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
+	# -pip install --upgrade pip setuptools						# package manager for python upgrade pip causes issues with brew python (reinstall python instead)
+	$(call func_print_arrow,upgrade pip packages)
+	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
+	-pip install -U $$(pip freeze | awk -F'[/=]' '{print $$1}')			# update all
+	-pip install ansible || pip3 install -U ansible										# configuration
+	-pip install paramiko || pip3 install -U paramiko									# ssh
+	# === archive
+	# -pip3 install ansible-lint || pip3 install -U ansible-lint				# linter ansible
+	# -pip3 install sslyze || pip3 install -U sslyze										# ssl check
 	# -pip3 install csvkit															# csv editor / converter
 	# -pip3 install localstack													# dev stack aws
 	# -pip3 install --upgrade flake8										# lint python (ale)
 	# -pip3 install --upgrade autopep8									# lint python based on pep8
 	# -pip3 install weasyprint													# doc easy pdf printer https://weasyprint.org/start/
 
+ensure-tex:											## setup basictex with tlmgr package manager
+	$(call func_print_header,ensure basictex latex tex tlmgr)
+	sudo tlmgr update --self														# update texmaker packager
+	sudo tlmgr update --all															# update texmaker packages
+	sudo tlmgr install collection-fontsrecommended			# update tex fonts
+	sudo tlmgr install lualatex-math										# required lualatex
+	sudo tlmgr install fontspec													# required xelatex and lualatex
+	sudo tlmgr install extsizes													# extend sizes https://www.ctan.org/pkg/extsizes
+	sudo tlmgr install grffile													# required lualatex
+	sudo tlmgr install selnolig													# required cv
+
 ensure-yarn:																					## install yarn global tools
-	# === setup yarn
+	$(call func_print_header,ensure node npm yarn)
+	$(call func_print_arrow,check yarn)
+	$(call func_check_command,yarn,run : make list-tools)
 	yarn --version
-	-yarn global upgrade
+	$(call func_print_arrow,upgrade node yarn packages)
+	-yarn global upgrade															# upgrade all
+	-yarn global add cordova													# framework - cross mobile
 	-yarn global add electron													# framework desktop
 	-yarn global add fx																# json parser
 	-yarn global add htmlhint													# linter html
@@ -172,11 +239,10 @@ ensure-yarn:																					## install yarn global tools
 	-yarn global add standard													# linter javascript (ale)
 	-yarn global add write-good												# linter english grammer
 	-yarn global add @vue/cli													# framework web vue-cli 3.x
-	# === archived								========================================
+	# === archive
 	# -yarn global add bats															# test bash (bats-core)
 	# -yarn global upgrade --latest bats
 	# -yarn global add @babel/core @babel/cli						# framework - vue-global-service dependency
-	# -yarn global add cordova													# framework - cross mobile
 	# -yarn global add eslint														# linter javascript (ale)
 	# -yarn global add fauxton													# database - couchdb ui docker container missing fauxton
 	# -yarn global add graphql													# framework - vue graphql dependency
