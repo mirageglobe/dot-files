@@ -13,7 +13,7 @@ export TERM=xterm-256color                          # common
 # fzf settings
 # - ensure install fzf via brew
 # - to support terminal and keybindings, run : /usr/local/opt/fzf/install
-export FZF_COMPLETION_TRIGGER='???'                                     # keybind fzf trigger
+export FZF_COMPLETION_TRIGGER='??'                                     # keybind fzf trigger
 export FZF_COMPLETION_OPTS='--height 30% --border --info=inline'        # apply fzf flags as default for completion
 export FZF_DEFAULT_OPTS='--height 30% --border --info=inline'           # apply fzf flags as default for command, do not add preview
 # - use fd (https://github.com/sharkdp/fd) instead of the default find command for listing path candidates.
