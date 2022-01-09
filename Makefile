@@ -85,9 +85,11 @@ ensure-common:
 	$(call func_print_arrow,setup git - config)
 	-touch ~/.gitignore
 	-touch ~/.gitconfig
+	$(call func_print_arrow,setup git - overwrite home .gitconfig and .gitignore)
 	-cp -i dot.gitconfig ~/.gitconfig
 	-cp -i dot.gitignore ~/.gitignore
 	$(call func_print_arrow,setup tmux - config)
+	$(call func_print_arrow,setup tmux - overwrite home .tmux.conf)
 	-cp -i dot.tmux.conf ~/.tmux.conf
 
 ##@ Menu
@@ -150,10 +152,11 @@ ensure-deb: ensure-common				## ensure debian specific cli tools and dependencie
 	$(call func_print_header,ensure debian)
 	$(call func_print_arrow,check rust cargo packages)
 	@(command -v cargo || echo rust and cargo not found. try brew install rust.) && command -v cargo
-	# === install rust
-	# curl https://sh.rustup.rs -sSf | sh								# recommended rust installation method (official book)
-	# === setup lsd
-	# cargo install lsd
+	# --------------------------------------------------------------- archive --- #
+	$(call func_print_arrow,install rust)
+	# curl https://sh.rustup.rs -sSf | sh									# recommended rust installation method (official book)
+	$(call func_print_arrow,install rust packages)
+	# cargo install lsd																		# install lsd
 
 ensure-mac: ensure-common				## ensure mac specific cli tools and dependencies present
 	$(call func_print_header,ensure mac)
@@ -178,10 +181,10 @@ ensure-gem: 										## install gem global tools
 	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
 	-gem update --system || echo "never use sudo for gem installation; check ruby path in homebrew or use chruby"
 	-gem update || echo "never use sudo for gem installation; check ruby path in homebrew or use chruby"
-	# === archive
-	# -gem install --user-install mdl										# linter markdown
-	# -gem install --user-install terraform_landscape		# adding terraform extensions
-	# -gem install --user-install cucumber							# test cucumber ruby rails
+	# --------------------------------------------------------------- archive --- #
+	# -gem install --user-install mdl											# linter markdown
+	# -gem install --user-install terraform_landscape			# adding terraform extensions
+	# -gem install --user-install cucumber								# test cucumber ruby rails
 
 ensure-pip:											## install pip global tools
 	$(call func_print_header,ensure python pip)
@@ -200,17 +203,17 @@ ensure-pip:											## install pip global tools
 	# -pip install --upgrade pip setuptools						# package manager for python upgrade pip causes issues with brew python (reinstall python instead)
 	$(call func_print_arrow,upgrade pip packages)
 	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
-	-pip install -U $$(pip freeze | awk -F'[/=]' '{print $$1}')			# update all
+	-pip install -U $$(pip freeze | awk -F'[/=]' '{print $$1}')				# update all
 	-pip install ansible || pip3 install -U ansible										# configuration
 	-pip install paramiko || pip3 install -U paramiko									# ssh
-	# === archive
+	# --------------------------------------------------------------- archive --- #
 	# -pip3 install ansible-lint || pip3 install -U ansible-lint				# linter ansible
 	# -pip3 install sslyze || pip3 install -U sslyze										# ssl check
-	# -pip3 install csvkit															# csv editor / converter
-	# -pip3 install localstack													# dev stack aws
-	# -pip3 install --upgrade flake8										# lint python (ale)
-	# -pip3 install --upgrade autopep8									# lint python based on pep8
-	# -pip3 install weasyprint													# doc easy pdf printer https://weasyprint.org/start/
+	# -pip3 install csvkit																# csv editor / converter
+	# -pip3 install localstack														# dev stack aws
+	# -pip3 install --upgrade flake8											# lint python (ale)
+	# -pip3 install --upgrade autopep8										# lint python based on pep8
+	# -pip3 install weasyprint														# doc easy pdf printer https://weasyprint.org/start/
 
 ensure-tex:											## setup basictex with tlmgr package manager
 	$(call func_print_header,ensure basictex latex tex tlmgr)
@@ -239,7 +242,7 @@ ensure-yarn:																					## install yarn global tools
 	-yarn global add standard													# linter javascript (ale)
 	-yarn global add write-good												# linter english grammer
 	-yarn global add @vue/cli													# framework web vue-cli 3.x
-	# === archive
+	# --------------------------------------------------------------- archive --- #
 	# -yarn global add bats															# test bash (bats-core)
 	# -yarn global upgrade --latest bats
 	# -yarn global add @babel/core @babel/cli						# framework - vue-global-service dependency
