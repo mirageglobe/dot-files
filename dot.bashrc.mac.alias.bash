@@ -5,7 +5,7 @@
 # alias (type: `alias` to show current aliases)
 printf "%s" "[+] aliases "
 
-# -------------------------------------------------i-------------- overrides ---
+# ---------------------------------------------------------------- overrides ---
 
 alias cat='bat'
 alias catcat='\cat'

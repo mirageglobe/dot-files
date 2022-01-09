@@ -633,11 +633,14 @@ set rtp+=/usr/local/opt/fzf
 " ====================================================================== fzf end
 
 " =============================================================== commands start
+" usage - :<command>
 
+" reload shell
 command ReloadShell :source ~/dot-files/dot.vimrc
 
-" fzf - overrides Files command - usage :Files! - https://github.com/junegunn/fzf.vim
-" command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, <bang>0)
+" fzf - overrides Files command
+" usage :Files!
+" ref - https://github.com/junegunn/fzf.vim
 command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
 
@@ -645,11 +648,11 @@ command! -bang -nargs=? -complete=dir Files
 
 " ================================================================ aliases start
 "
-" ref - http://learnvimscriptthehardway.stevelosh.com/chapters/08.html
 " ref - http://learnvimscriptthehardway.stevelosh.com/chapters/03.html
+" ref - http://learnvimscriptthehardway.stevelosh.com/chapters/08.html
 
 " i = insert / c = command / v = visual / n = normal
-" map = single key map / abbrev = statment map (alias)
+" map = single key map / abbrev = statement map (alias)
 " note : do not use comments AFTER the cabbrev line as it reads in as command
 
 " split vertical and launch terminal
@@ -662,9 +665,9 @@ command! -bang -nargs=? -complete=dir Files
 
 " ================================================================ mapping start
 
-" map       root of recursive map - normal and visual mode (same as remap)
-" remap     map recursively (default)
-" noremap   root of non-recursive map
+" map       all recursive map - normal and visual mode (same as remap)
+" remap     recursive map (default)
+" noremap   non recursive map
 
 " nmap      normal mode - recursive map
 " vmap      visual mode - recursive map
@@ -683,63 +686,72 @@ let mapleader = "\<space>"
 
 " --------------------------------------------------------------------- key maps
 
-" open buffer explorer
-" noremap <Leader><SPACE> :BufExplorer<CR>
+" buffer explorer open buffer
 nnoremap <Leader>be :BufExplorer<CR>
+" noremap <Leader><SPACE> :BufExplorer<CR>
 
-" fzf buffer explorer
+" buffer explorer via fzf
 nnoremap <Leader>bo :Buffers<CR>
-nnoremap <Leader>bc :bd<CR>
 
-" open file explorer
+" buffer delete current opened buffer (does not delete file)
+nnoremap <Leader>bc :bdelete<CR>
+
+" clipboard copy/paste from clipboard
+" noremap <Leader>cc :.w !pbcopy<CR><CR>
+" noremap <Leader>cp :.r !pbpaste<CR>
+
+" code folding za / zc / zo
+nmap <Leader>cf za<ESC>
+
+" ctag tagbar - open ctag explorer
+nnoremap <Leader>ct :TagbarToggle<CR>
+
+" file explorer open file
 " nnoremap <Leader>w <C-w><C-w>
 " noremap <Leader>nt :NERDTreeToggle<CR>
 
-" copy/paste from clipboard
-noremap <Leader>cc :.w !pbcopy<CR><CR>
-noremap <Leader>cp :.r !pbpaste<CR>
-" nnoremap <Leader>p :r !pbpaste<CR>
-
-" open tagbar - ctag explorer
-nnoremap <Leader>ct :TagbarToggle<CR>
-
-" open FZF explorer
+" file explorer open file via FZF file explorer
 nnoremap <Leader>fo :Files!<CR>
-" nnoremap <Leader>f :Files!<CR>
 
-" open file explorer
+" file explorer via ranger
+let g:ranger_map_keys = 0
+nnoremap <leader>ra :Ranger<CR>
+
+" file explorer via netrw tree
 " noremap <Leader>ff :Explore<CR>
-
-" set git co-author
-" let @z='ICo-authored-by: y$A <@gmail.com>@Pgua<f x'
-" nmap <Leader>@ <ESC>VD <ESC>ICo-authored-by: <CR>
-nnoremap <Leader>gca <ESC>ICo-authored-by: John Doe <johndoe@gmail.com><ESC>
 
 " git browse and blame
 " https://jakobgm.com/posts/vim/git-integration/
 " show commits for every source line (git blame)
 nnoremap <Leader>gb :Git blame<CR>
 
+" git pr set co-author
+" let @z='ICo-authored-by: y$A <@gmail.com>@Pgua<f x'
+" nmap <Leader>@ <ESC>VD <ESC>ICo-authored-by: <CR>
+nnoremap <Leader>gca <ESC>ICo-authored-by: John Doe <johndoe@gmail.com><ESC>
+
 " open current line in the browser (github)
-nnoremap <Leader>gh :.GBrowse<CR>
+" nnoremap <Leader>gh :.GBrowse<CR>
 
 " open visual selection in the browser (github)
-vnoremap <Leader>gh :GBrowse<CR>
+" vnoremap <Leader>gh :GBrowse<CR>
 
-" ranger
-let g:ranger_map_keys = 0
-nnoremap <leader>ra :Ranger<CR>
-
-" ripgrep
-nnoremap <leader>rg :Rg<CR>
-
-" comment template header
+" print template header
 " note uses gcc : timpopes auto commenter. method: move begin, prepend === , esc, comment line
-nmap <Leader>th <ESC>gcc<ESC>I===<space><ESC>gcc<ESC>0
-nmap <Leader>thh <ESC>I===<space>section<space>start<ESC>gcc<ESC>0o===<space>section<space>end<ESC>gcc0
 
-" code folding za / zc / zo
-nmap <Leader>cf za<ESC>
+" print template
+nmap <Leader>pt0 <ESC>O# =============================================================== CHANGEME === #<ESC>0
+nmap <Leader>pt1 <ESC>O# =============================================================== CHANGEME === #<ESC>0
+nmap <Leader>pt2 <ESC>O# --------------------------------------------------------------- CHANGEME --- #<ESC>0
+
+" nmap <Leader>ph1 <ESC>gcc<ESC>I===<ESC>gcc<ESC>0
+" nmap <Leader>ph2 <ESC>I===<space>section<space>start<ESC>gcc<ESC>0o===<space>section<space>end<ESC>gcc0
+
+" ================================================================================
+" # =============================================================== CHANGEME === #
+
+" search buffer via ripgrep
+nnoremap <leader>rg :Rg<CR>
 
 " split navigations
 " nnoremap <C-J> <C-W><C-J>
@@ -782,7 +794,8 @@ function TrimWhiteSpace()
   :%s/\s\+$//e
 endfunction
 
-command TrimWhiteSpace           :call TrimWhiteSpace()           " toggle trim trailing whitespace
+" toggle trim trailing whitespace
+command TrimWhiteSpace :call TrimWhiteSpace()
 
 " =========================================================== trimwhitespace end
 
