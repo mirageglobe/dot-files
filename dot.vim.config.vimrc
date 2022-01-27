@@ -194,6 +194,13 @@ set spell spelllang=en_gb       " turn on vims spell checker
 
 " set splitright                  " auto split right for screens
 
+" ------------------------------------------------------------------ spell check
+
+" fixes maxmempattern error E363 when hitting [ in md files
+" https://github.com/vim/vim/issues/2049
+
+set mmp=5000
+
 " ================================================================== setting end
 
 " =========================================================== plug preload start
