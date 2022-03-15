@@ -94,7 +94,7 @@ ensure-common:
 
 ##@ Menu
 
-list-tools:											## list common cli tools install
+list-tools:											## list common cli tools how-to install
 	$(call func_print_header,list tool setup)
 	# === install arkade
 	# kubernetes - https://github.com/alexellis/arkade
@@ -226,7 +226,7 @@ ensure-tex:											## setup basictex with tlmgr package manager
 	sudo tlmgr install grffile													# required lualatex
 	sudo tlmgr install selnolig													# required cv
 
-ensure-yarn:																					## install yarn global tools
+ensure-yarn:										## install yarn global tools
 	$(call func_print_header,ensure node npm yarn)
 	$(call func_print_arrow,check yarn)
 	$(call func_check_command,yarn,run : make list-tools)
