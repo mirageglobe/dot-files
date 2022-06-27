@@ -1,6 +1,6 @@
 # dot-files
 
-jimmys public dot-files and bootstrapper to make life easier. one can use this to quickly bootstrap a vanilla mac, debian based distro.
+jimmys public dot-files and bootstrapper to make life easier. one can use this to quickly bootstrap a vanilla mac or debian based distros.
 
 # to use
 

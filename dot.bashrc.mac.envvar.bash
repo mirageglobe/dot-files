@@ -3,21 +3,22 @@
 
 printf "%s" "[+] envvars "
 
-# bash
+# ----- bash
 export CLICOLOR=true
 export GREP_OPTIONS='--color=auto'                  # common
 export NOW=$(date +"%Y%m%d-000000")                 # common
 export EDITOR=vim                                   # common
 export TERM=xterm-256color                          # common
 
-# fzf settings
+# ----- fzf settings
 # - ensure install fzf via brew
 # - to support terminal and keybindings, run : /usr/local/opt/fzf/install
-export FZF_COMPLETION_TRIGGER='??'                                     # keybind fzf trigger
-export FZF_COMPLETION_OPTS='--height 30% --border --info=inline'        # apply fzf flags as default for completion
-export FZF_DEFAULT_OPTS='--height 30% --border --info=inline'           # apply fzf flags as default for command, do not add preview
+export FZF_COMPLETION_TRIGGER='??'                                      # keybind fzf trigger
+export FZF_COMPLETION_OPTS='--height 30% --border --info=inline'        # apply default flags for completion
+export FZF_DEFAULT_OPTS='--height 30% --border --info=inline'           # apply default flags for command, do not add preview
 # - use fd (https://github.com/sharkdp/fd) instead of the default find command for listing path candidates.
 # - the first argument to the function ($1) is the base path to start traversal
+
 # - see the source code (completion.{bash,zsh}) for the details.
 _fzf_compgen_path() {
   fd --hidden --follow --exclude ".git" . "$1"
@@ -28,7 +29,13 @@ _fzf_compgen_dir() {
   fd --type d --hidden --follow --exclude ".git" . "$1"
 }
 
-# java
+# - on bash, fuzzy completion is enabled only for a predefined set of commands (complete | grep _fzf to see the list). but you can enable it for other commands as well by using _fzf_setup_completion helper function. for example 'cd' is not in default list
+
+# - add following to bashrc
+# _fzf_setup_completion path ag git kubectl
+# _fzf_setup_completion dir cd
+
+# ----- java
 # use sdkman.io to install temurin (adoptopenjdk replacement)
 # - sdk install java 17.0.0-tem
 # if [ -z $JAVA_HOME ]; then
