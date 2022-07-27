@@ -171,6 +171,8 @@ set expandtab
 set wrap                        " set soft wrap for text
 " set nowrap                      " turn off code wrap
 set linebreak                   " set wrap at only
+set colorcolumn=80              " set a colour column length at 80
+set textwidth=80                " set text width to 80
 
 " --------------------------------------------------- mouse cursor and scrolling
 
@@ -747,9 +749,9 @@ nnoremap <Leader>gca <ESC>ICo-authored-by: John Doe <johndoe@gmail.com><ESC>
 " note uses gcc : timpopes auto commenter. method: move begin, prepend === , esc, comment line
 
 " print template
-nmap <Leader>pt0 <ESC>O# =============================================================== CHANGEME === #<ESC>0
-nmap <Leader>pt1 <ESC>O# =============================================================== CHANGEME === #<ESC>0
-nmap <Leader>pt2 <ESC>O# --------------------------------------------------------------- CHANGEME --- #<ESC>0
+nmap <Leader>pt <ESC>O# ============================================================ CHANGEME ===== #<ESC>0
+nmap <Leader>pt1 <ESC>O# ============================================================ CHANGEME ===== #<ESC>0
+nmap <Leader>pt2 <ESC>O# ------------------------------------------------------------ CHANGEME ----- #<ESC>0
 
 " nmap <Leader>ph1 <ESC>gcc<ESC>I===<ESC>gcc<ESC>0
 " nmap <Leader>ph2 <ESC>I===<space>section<space>start<ESC>gcc<ESC>0o===<space>section<space>end<ESC>gcc0
