@@ -750,6 +750,7 @@ nnoremap <Leader>gca <ESC>ICo-authored-by: John Doe <johndoe@gmail.com><ESC>
 
 " print template
 nmap <Leader>pt <ESC>O# ============================================================ CHANGEME ===== #<ESC>0
+nmap <Leader>ptt <ESC>O# ------------------------------------------------------------ CHANGEME ----- #<ESC>0
 nmap <Leader>pt1 <ESC>O# ============================================================ CHANGEME ===== #<ESC>0
 nmap <Leader>pt2 <ESC>O# ------------------------------------------------------------ CHANGEME ----- #<ESC>0
 
