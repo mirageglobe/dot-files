@@ -552,6 +552,8 @@ let g:coc_global_extensions = [
       \'coc-vetur'
       \]
 
+" <https://github.com/neoclide/coc.nvim>
+
 " some servers have issues with backup files, see #649.
 set nobackup
 set nowritebackup
@@ -560,12 +562,12 @@ set nowritebackup
 " delays and poor user experience.
 set updatetime=300
 
-" Always show the signcolumn, otherwise it would shift the text each time
+" always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
 set signcolumn=yes
 
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" use tab for trigger completion with characters ahead and navigate.
+" note: use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1):
