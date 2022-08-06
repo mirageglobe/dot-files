@@ -10,8 +10,6 @@
 	email = change.me@gmail.com
 [credential]
 	helper = cache --timeout 7200
-[commit]
-	gpgsign = true
 [gpg]
 	program = gpg
 [includeIf "gitdir:~/apache/"]
