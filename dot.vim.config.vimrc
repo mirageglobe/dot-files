@@ -681,6 +681,10 @@ let g:netrw_altv = 1
 " =================================================================== fzf start
 " recommended by homebrew
 
+" fzf enable fuzzy completion, run following in terminal
+" /usr/local/opt/fzf/install
+
+" to use fzf in vim
 set rtp+=/usr/local/opt/fzf
 
 " ===================================================================== fzf end

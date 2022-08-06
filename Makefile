@@ -88,33 +88,35 @@ ensure-common:
 	$(call func_print_arrow,setup git - overwrite home .gitconfig and .gitignore)
 	-cp -i dot.gitconfig ~/.gitconfig
 	-cp -i dot.gitignore ~/.gitignore
-	$(call func_print_arrow,setup tmux - config)
-	$(call func_print_arrow,setup tmux - overwrite home .tmux.conf)
-	-cp -i dot.tmux.conf ~/.tmux.conf
+	# $(call func_print_arrow,setup tmux - config)
+	# $(call func_print_arrow,setup tmux - overwrite home .tmux.conf)
+	# -cp -i dot.tmux.conf ~/.tmux.conf
 
 ##@ Menu
 
 list-tools:											## list common cli tools how-to install
 	$(call func_print_header,list tool setup)
-	# === install arkade
-	# kubernetes - https://github.com/alexellis/arkade
+	# arkade : <https://github.com/alexellis/arkade>
 	# curl -sLS https://get.arkade.dev | sudo sh
 	#
-	# === install n
-	# nodejs - https://github.com/tj/n
+	# fzf enable fuzzy completion, run following
+	# /usr/local/opt/fzf/install
+	#
+	# n node package manager
+	# <https://github.com/tj/n>
 	# -command -v n || curl -L https://git.io/n-install | bash
 	# -n latest
 	#
-	# === install sdkman
-	# java gradle - https://github.com/sdkman/sdkman-cli
+	# sdkman - java gradle
+	# <https://github.com/sdkman/sdkman-cli>
 	# curl -s https://get.sdkman.io | bash
 	#
-	# === install yarn
-	# npm nodejs - https://yarnpkg.com/
-	# curl -o- -L https://yarnpkg.com/install.sh | bash
+	# yarn
+	# <https://yarnpkg.com/getting-started/install>
+	# corepack enable
 	#
-	# === install whalebrew
-	# whalebrew install tsub/graph-easy              # cli ascii tool
+	# whalebrew
+	# whalebrew install tsub/graph-easy
 
 status:														## check system / environment status
 	$(call func_print_header,status)
@@ -171,6 +173,7 @@ ensure-ark:											## install tools with arkade
 	$(call func_print_header,ensure arkade ark)
 	ark get helm
 	ark get k9s
+	ark get kubectl
 	ark get kubectx
 	ark get kubens
 	ark get yq
