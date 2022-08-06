@@ -1,5 +1,6 @@
 # ~/.gitconfig
-# config recommended to be set via cmdline :  git config --global user.name "Jimmy Lim"
+# config recommended to be set via cmdline, for example
+# git config --global user.name "Jimmy Lim"
 
 [core]
 	pager = delta
