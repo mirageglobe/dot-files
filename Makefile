@@ -165,6 +165,9 @@ ensure-mac: ensure-common				## ensure mac specific cli tools and dependencies p
 	-cp -i starship.toml ~/.config/starship.toml
 
 ensure-ark:											## install tools with arkade
+	@echo "this will try to install apps from arkade :"
+	@echo "<https://github.com/alexellis/arkade>"
+	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
 	$(call func_print_header,ensure arkade ark)
 	ark get helm
 	ark get k9s
