@@ -80,6 +80,8 @@ if (has("nvim"))
 endif
 
 " onedark color scheme settings
+" https://github.com/joshdick/onedark.vim
+"
 "for neovim > 0.1.5 and vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
 "based on vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
 " < https://github.com/neovim/neovim/wiki/following-head#20160511 >
@@ -97,6 +99,19 @@ endif
 
 " onedark explict declare 256
 let g:onedark_termcolors=256
+
+" onedark color settings
+if (has("autocmd"))
+  augroup colorextend
+    autocmd!
+    " Make `Function`s bold in GUI mode
+    autocmd ColorScheme * call onedark#extend_highlight("Function", { "gui": "bold" })
+    " Override the `Statement` foreground color in 256-color mode
+    autocmd ColorScheme * call onedark#extend_highlight("Statement", { "fg": { "cterm": 128 } })
+    " Override the `Identifier` background color in GUI mode
+    autocmd ColorScheme * call onedark#extend_highlight("Identifier", { "bg": { "gui": "#333333" } })
+  augroup END
+endif
 
 " clipboard
 " - will not work if its -clipboard (not complied with vim)
