@@ -92,8 +92,8 @@ endif
 " clipboard
 " - will not work if its -clipboard (not complied with vim)
 " - * and + is the same for macosx and windows
-" - https://vim.fandom.com/wiki/Accessing_the_system_clipboard
-" - https://stackoverflow.com/questions/677986/vim-copy-selection-to-os-x-clipboard
+" - <https://vim.fandom.com/wiki/Accessing_the_system_clipboard>
+" - <https://stackoverflow.com/questions/677986/vim-copy-selection-to-os-x-clipboard>
 
 if has("clipboard")
   set clipboard=unnamed         " copy to the system clipboard
