@@ -67,8 +67,6 @@ set fileencoding=UTF-8          " The encoding written to file
 if has('gui_running')
   set guifont=FiraCode\ Nerd\ Font\ Complete:h13
   " set guifont=Inconsolata\ Nerd\ Font\ Complete:h13
-else
-  set t_Co=256
 endif
 
 " termguicolors (recommendation by onedark theme)
@@ -76,18 +74,29 @@ endif
 " if you're using tmux version 2.2 or later, you can remove the outermost $tmux check and use tmux's 24-bit color support
 " (see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
 
-if (empty($TMUX))
-  if (has("nvim"))
-    "for neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  endif
-  "for neovim > 0.1.5 and vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
-  "based on vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
-  " < https://github.com/neovim/neovim/wiki/following-head#20160511 >
-  if (has("termguicolors"))
-    set termguicolors
-  endif
+if (has("nvim"))
+  "for neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
+
+" onedark color scheme settings
+"for neovim > 0.1.5 and vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+"based on vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+" < https://github.com/neovim/neovim/wiki/following-head#20160511 >
+if (has("termguicolors"))
+  " defines how many colors should be used. (maximum: 256, minimum: 0)
+  set t_Co=256
+
+  " turns on true terminal colors
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+  " turns on 24-bit rgb color support
+  set termguicolors
+endif
+
+" onedark explict declare 256
+let g:onedark_termcolors=256
 
 " clipboard
 " - will not work if its -clipboard (not complied with vim)
@@ -139,6 +148,7 @@ set wildmode=list:full          " show command options with double tab
 " ------------------------------------------------------------------- highlight
 
 syntax on                       " set syntax highlighting in vim
+                                " required by onedark
 set list listchars=tab:»·,trail:·
                                 " display tabs and trailing spaces visually
 " set nolist                    " breaks white space show
