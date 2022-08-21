@@ -225,7 +225,7 @@ set spell spelllang=en_gb       " turn on vims spell checker
 " fixes maxmempattern error E363 when hitting [ in md files
 " https://github.com/vim/vim/issues/2049
 
-set mmp=6000                    " set maxmempattern. default is 1000
+set mmp=8000                    " set maxmempattern. default is 1000
 
 " ================================================================= setting end
 
