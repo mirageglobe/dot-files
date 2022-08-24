@@ -797,7 +797,7 @@ nnoremap <Leader>fo :Files!<CR>
 
 " file explorer via ranger
 let g:ranger_map_keys = 0
-nnoremap <leader>ra :Ranger<CR>
+nnoremap <leader>ro :Ranger<CR>
 
 " file explorer via netrw tree
 " noremap <Leader>ff :Explore<CR>
