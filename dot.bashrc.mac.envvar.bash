@@ -32,7 +32,8 @@ _fzf_compgen_dir() {
 # - on bash, fuzzy completion is enabled only for a predefined set of commands (complete | grep _fzf to see the list). but you can enable it for other commands as well by using _fzf_setup_completion helper function. for example 'cd' is not in default list
 
 # - add following to bashrc
-# _fzf_setup_completion path ag git kubectl
+# _fzf_setup_completion <type path/dir> <commands to hook on>
+# _fzf_setup_completion path cat rm ag git kubectl
 # _fzf_setup_completion dir cd
 
 # ----- java
