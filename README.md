@@ -44,9 +44,6 @@ bash completions
 
 ## to do
 
-- [] aws vault (<https://github.com/99designs/aws-vault/releases>)
-- [] basic ssh key gen for local
-- [] create home downloads for files
 - [x] use sdkman - for groovy/java ( curl -s get.sdkman.io | bash )
 - [x] vim fix ale - (<https://github.com/dense-analysis/ale#usage-completion>)
 - [x] fira source (<https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/FiraCode.zip>)
