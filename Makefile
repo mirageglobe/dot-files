@@ -8,7 +8,6 @@
 # sensible dotfiles and bootstrap using makefile menu script
 # by jimmy mg lim ::  www.mirageglobe.com :: github.com/mirageglobe
 
-
 ################################################################################
 # ============================================================ configuration = #
 ################################################################################
@@ -19,10 +18,10 @@ MENU := all clean test
 
 # helpers
 MENU += help readme
-MENU += ensure-common
+MENU += helper-common
 
 # main
-MENU += list-tools status ensure-mac ensure-deb ensure-ark ensure-gem ensure-pip ensure-tex ensure-yarn
+MENU += list-tools status ensure-ark ensure-ruby ensure-python ensure-nodejs ensure-tex ensure-mac ensure-deb
 
 # load phony
 .PHONY: $(MENU)
@@ -75,7 +74,7 @@ readme:													## show information and notes
 	@touch README.md
 	@cat README.md
 
-ensure-common:
+helper-common:
 	$(call func_print_header,ensure common)
 	$(call func_print_arrow,setup vim - ensure vimrc and vim backup swap undo folders exist)
 	-mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
@@ -150,23 +149,7 @@ status:														## check system / environment status
 	$(call func_print_arrow,show supported colors)
 	-tput colors
 
-ensure-deb: ensure-common				## ensure debian specific cli tools and dependencies present
-	$(call func_print_header,ensure debian)
-	$(call func_print_arrow,check rust cargo packages)
-	@(command -v cargo || echo rust and cargo not found. try brew install rust.) && command -v cargo
-	# --------------------------------------------------------------- archive --- #
-	$(call func_print_arrow,install rust)
-	# curl https://sh.rustup.rs -sSf | sh									# recommended rust installation method (official book)
-	$(call func_print_arrow,install rust packages)
-	# cargo install lsd																		# install lsd
-
-ensure-mac: ensure-common				## ensure mac specific cli tools and dependencies present
-	$(call func_print_header,ensure mac)
-	# === setup starship config
-	$(call func_print_arrow,setup starship - prompt config)
-	-cp -i starship.toml ~/.config/starship.toml
-
-ensure-ark:											## install tools with arkade
+ensure-ark:											## install kubernetes global tools via arkade
 	@echo "this will try to install apps from arkade :"
 	@echo "<https://github.com/alexellis/arkade>"
 	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
@@ -178,7 +161,7 @@ ensure-ark:											## install tools with arkade
 	ark get kubens
 	ark get yq
 
-ensure-gem: 										## install gem global tools
+ensure-ruby: 										## install ruby global tools via gem
 	$(call func_print_header,ensure ruby gem)
 	$(call func_print_arrow,check gem)
 	gem --version
@@ -192,7 +175,7 @@ ensure-gem: 										## install gem global tools
 	# -gem install --user-install terraform_landscape			# adding terraform extensions
 	# -gem install --user-install cucumber								# test cucumber ruby rails
 
-ensure-pip:											## install pip global tools
+ensure-python:											## install python global tools via pip
 	$(call func_print_header,ensure python pip)
 	$(call func_print_arrow,check pip)
 	$(call func_check_command,pyenv,run: brew install pyenv)
@@ -221,18 +204,7 @@ ensure-pip:											## install pip global tools
 	# -pip3 install --upgrade autopep8										# lint python based on pep8
 	# -pip3 install weasyprint														# doc easy pdf printer https://weasyprint.org/start/
 
-ensure-tex:											## setup basictex with tlmgr package manager
-	$(call func_print_header,ensure basictex latex tex tlmgr)
-	sudo tlmgr update --self														# update texmaker packager
-	sudo tlmgr update --all															# update texmaker packages
-	sudo tlmgr install collection-fontsrecommended			# update tex fonts
-	sudo tlmgr install lualatex-math										# required lualatex
-	sudo tlmgr install fontspec													# required xelatex and lualatex
-	sudo tlmgr install extsizes													# extend sizes https://www.ctan.org/pkg/extsizes
-	sudo tlmgr install grffile													# required lualatex
-	sudo tlmgr install selnolig													# required cv
-
-ensure-yarn:										## install yarn global tools
+ensure-nodejs:										## install nodejs global tools via yarn
 	$(call func_print_header,ensure node npm yarn)
 	$(call func_print_arrow,check yarn)
 	$(call func_check_command,yarn,run : make list-tools)
@@ -273,3 +245,30 @@ ensure-yarn:										## install yarn global tools
 	# -yarn global upgrade --latest @vue/cli
 	# -yarn global add @vue/cli-service-global					# framework - vue service global
 	# -yarn global add vue-language-server							# linter vuejs (ale)
+
+ensure-tex:											## setup basictex with tlmgr package manager
+	$(call func_print_header,ensure basictex latex tex tlmgr)
+	sudo tlmgr update --self														# update texmaker packager
+	sudo tlmgr update --all															# update texmaker packages
+	sudo tlmgr install collection-fontsrecommended			# update tex fonts
+	sudo tlmgr install lualatex-math										# required lualatex
+	sudo tlmgr install fontspec													# required xelatex and lualatex
+	sudo tlmgr install extsizes													# extend sizes https://www.ctan.org/pkg/extsizes
+	sudo tlmgr install grffile													# required lualatex
+	sudo tlmgr install selnolig													# required cv
+
+ensure-mac: helper-common				## ensure mac specific cli tools and dependencies present
+	$(call func_print_header,ensure mac)
+	# === setup starship config
+	$(call func_print_arrow,setup starship - prompt config)
+	-cp -i starship.toml ~/.config/starship.toml
+
+ensure-deb: helper-common				## ensure debian specific cli tools and dependencies present
+	$(call func_print_header,ensure debian)
+	$(call func_print_arrow,check rust cargo packages)
+	@(command -v cargo || echo rust and cargo not found. try brew install rust.) && command -v cargo
+	# --------------------------------------------------------------- archive --- #
+	$(call func_print_arrow,install rust)
+	# curl https://sh.rustup.rs -sSf | sh									# recommended rust installation method (official book)
+	$(call func_print_arrow,install rust packages)
+	# cargo install lsd																		# install lsd
