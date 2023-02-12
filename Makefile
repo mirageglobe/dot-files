@@ -180,24 +180,22 @@ ensure-python:											## install python global tools via pip
 	$(call func_print_arrow,check pip)
 	$(call func_check_command,pyenv,run: brew install pyenv)
 	pyenv --version
-	pyenv versions
-	# pyenv install --list  # show all installable versions
-	# pyenv install 3.10.1  # install version
-	pyenv local 3.10.1
-	pip --version
-	pip check
+	pyenv local 3.10				# switch to 3.10 latest
+	# run pip via python (recommended)
+	python -m pip --version
+	python -m pip check
 	$(call func_print_arrow,upgrade pip self)
-	pip install --upgrade pip
 	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
+	python -m pip install --upgrade pip
 	# -pip install --upgrade pip setuptools						# package manager for python upgrade pip causes issues with brew python (reinstall python instead)
 	$(call func_print_arrow,upgrade pip packages)
 	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
-	-pip install -U $$(pip freeze | awk -F'[/=]' '{print $$1}')				# update all
-	-pip install ansible || pip3 install -U ansible										# configuration
-	-pip install paramiko || pip3 install -U paramiko									# ssh
+	-python -m pip install ansible										# install ansible
+	-python -m pip install paramiko										# install pure python ssh
 	# --------------------------------------------------------------- archive --- #
-	# -pip3 install ansible-lint || pip3 install -U ansible-lint				# linter ansible
-	# -pip3 install sslyze || pip3 install -U sslyze										# ssl check
+	# -pip install --user $$(pip freeze | awk -F'[/=]' '{print $$1}')				# update all
+	# -pip3 install ansible-lint || pip3 install --user ansible-lint			# linter ansible
+	# -pip3 install sslyze || pip3 install --user sslyze									# ssl check
 	# -pip3 install csvkit																# csv editor / converter
 	# -pip3 install localstack														# dev stack aws
 	# -pip3 install --upgrade flake8											# lint python (ale)
