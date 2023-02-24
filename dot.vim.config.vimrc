@@ -1,5 +1,5 @@
 " =========================================================== custom vim config
-
+"
 " add/replace following lines to file as ~/.vimrc or $HOME/.vimrc
 " add the following lines to .vimrc
 
@@ -252,6 +252,7 @@ let g:ale_completion_enabled = 1
 " automatic imports from external modules
 let g:ale_completion_autoimport = 1
 
+" set to 1 for ale to disable language server protocol
 " let g:ale_disable_lsp = 1
 " --------------------------------------------------------------------- ale end
 
@@ -524,10 +525,16 @@ let g:lightline#ale#indicator_ok = "\uf00c"
 
 " =================================================================== ale start
 
-" enable completion where available.
+" setting ale to work with coc
+" https://github.com/dense-analysis/ale#faq-coc-nvim
+
+" enable completion where available
+" let g:ale_completion_enabled = 1 (defined above)
+
+" set diagnostic lint signs in gutter
 let g:ale_sign_column_always = 1
-let g:ale_sign_error = '>>'
-let g:ale_sign_warning = '--'
+let g:ale_sign_error = '!!'
+let g:ale_sign_warning = '??'
 
 " example - for vue files .. run vue and javascript linters
 let g:ale_linter_aliases = {
@@ -545,17 +552,17 @@ let g:ale_fixers = {
 " show 5 lines of errors (default: 10)
 let g:ale_list_window_size = 5
 
-" set this variable to 1 to fix files when you save them.
+" set this variable to 1 to autofix on save (see ale_fixers)
 " let g:ale_fix_on_save = 1
 
 " ===================================================================== ale end
 
 " ========================================================== asyncomplete start
 
-let g:asyncomplete_auto_completeopt = 1
-let g:asyncomplete_enable_for_all = 1
-let b:asyncomplete_enable = 1
-let g:asyncomplete_auto_popup = 1
+" let g:asyncomplete_auto_completeopt = 1
+" let g:asyncomplete_enable_for_all = 1
+" let b:asyncomplete_enable = 1
+" let g:asyncomplete_auto_popup = 1
 
 " ============================================================ asyncomplete end
 
@@ -889,15 +896,15 @@ command TrimWhiteSpace :call TrimWhiteSpace()
 " - g^x^]                       for tags (ctags) only global
 " - ^n                          for anything specified by complete
 
-function! OpenCompletion()
-  if !pumvisible() && ((v:char >= 'a' && v:char <= 'z') || (v:char >= 'A' && v:char <= 'Z'))
-    " call feedkeys("\<C-x>\<C-o>", "n")
-    call feedkeys("\<C-n>", "n")
-  endif
-  if !pumvisible() && (v:char == '/')
-    call feedkeys("\<C-x>\<C-f>", "n")
-  endif
-endfunction
+" function! OpenCompletion()
+"   if !pumvisible() && ((v:char >= 'a' && v:char <= 'z') || (v:char >= 'A' && v:char <= 'Z'))
+"     " call feedkeys("\<C-x>\<C-o>", "n")
+"     call feedkeys("\<C-n>", "n")
+"   endif
+"   if !pumvisible() && (v:char == '/')
+"     call feedkeys("\<C-x>\<C-f>", "n")
+"   endif
+" endfunction
 
 " uncomment line to enable omnicomplete
 " autocmd InsertCharPre * call OpenCompletion()
