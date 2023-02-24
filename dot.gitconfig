@@ -1,34 +1,68 @@
+# ================================================================ info ===== #
 # ~/.gitconfig
-# config recommended to be set via cmdline, for example
+#
+# git config is recommended to be set via cmdline
+# 
+# examples:
+#
+# set global name
 # git config --global user.name "Jimmy Lim"
+#
+# set global email
+# git config --global user.email "mirageglobe@gmail.com"
+
+# ============================================================== config ===== #
+
+[blame]
+	pager = delta                 # use delta for pretty terminal diff
 
 [core]
-	pager = delta
-[interactive]
-	diffFilter = delta --color-only
-[user]
-	name = change me
-	email = change.me@gmail.com
+	pager = delta                 # use delta for pretty terminal diff
+
 [credential]
 	helper = cache --timeout 7200
+
 [gpg]
 	program = gpg
-[includeIf "gitdir:~/apache/"]
-	path = ~/.gitconfig-apache
-[includeIf "gitdir:~/work/"]
-	path = ~/work/.gitconfig-work
-	name = change me
-	email = change.me@work.com
+
+[interactive]
+  diffFilter = delta --color-only         # use delta for interactive diff
+
+[merge]
+  conflictstyle = diff3         # delta merge conflict
+
+[user]
+	name = jimmy lim
+	email = mirageglobe@gmail.com
+
+# ---------------------------------------------------------- custom dir ----- #
+
+# [includeIf "gitdir:~/apache/"]
+# 	path = ~/.gitconfig-apache
+
+# [includeIf "gitdir:~/work/"]
+# 	path = ~/work/.gitconfig-work
+# 	name = change me
+# 	email = change.me@work.com
+
+# ---------------------------------------------------------- delta diff ----- #
+# https://github.com/dandavison/delta
+
 [delta]
-	features = side-by-side line-numbers decorations
+  navigate = true               # use n and N to move between diff sections
+  side-by-side = true
+  line-numbers = true
+	features = line-numbers decorations
 	syntax-theme = Dracula
 	plus-style = syntax "#003800"
 	minus-style = syntax "#3f0001"
+
 [delta "decorations"]
 	commit-decoration-style = yellow box ul
 	file-style = bold yellow
 	file-decoration-style = none
 	hunk-header-decoration-style = cyan box ul
+
 [delta "line-numbers"]
 	line-numbers-left-style = cyan
 	line-numbers-right-style = cyan
