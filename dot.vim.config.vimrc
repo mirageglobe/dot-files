@@ -1,4 +1,6 @@
-" =========================================================== custom vim config
+" # ======================================================== vim config ===== #
+
+
 "
 " add/replace following lines to file as ~/.vimrc or $HOME/.vimrc
 " add the following lines to .vimrc
@@ -12,12 +14,12 @@
 "   source ~/dot-case/dot.idr.vimrc
 " endif
 
-" ======================================================================= notes
+" # ========================================================= reference ===== #
 
 " - https://tbaggery.com/2011/08/08/effortless-ctags-with-git.html
 " - https://vimways.org/2018/you-should-be-using-tags-in-vim/
 
-" ================================================ fonts configuration (iterm2)
+" # ======================================== iterm2 fonts configuration ===== #
 
 " font -> FuraCode Nerd Font [Regular] [12]
 " use built-in Powerline glyphs -> true
@@ -25,15 +27,7 @@
 " use ligatures -> true
 " anti-aliased -> true
 
-" ==================================================================== toolings
-
-" lint                  ale
-" fixer                 ale
-" colorscheme           one dark (atom scheme)
-" explorer              ranger (leader r) / fzf (leader f) / vinegar (-)
-" popup complete        maralla completor
-
-" =============================================================== setting start
+" # ====================================================== config start ===== #
 
 set lazyredraw                  " do not redraw when executing macros;
                                 " buffer instead of constant redraws
@@ -61,7 +55,7 @@ set directory=~/.vim/.swp//     " set vim to use tmp directory for swp files
 set encoding=UTF-8              " The encoding displayed.
 set fileencoding=UTF-8          " The encoding written to file
 
-" ---------------------------------------------------------------- color colour
+" # ================================================ color ===== colour ===== #
 
 " if gui (macvim) or not gui (iterm/alacritty)
 if has('gui_running')
@@ -126,13 +120,14 @@ if has("clipboard")
   endif
 endif
 
-" ========================================================================= code
+" # ============================================================== code ===== #
 
-" ------------------------------------------------------------------- completion
+" # -------------------------------------------------------- completion ----- #
+
+" http://vimdoc.sourceforge.net/htmldoc/filetype.html
 
 filetype indent plugin on         " enables filetype - plugins,
                                   " indenting rules, syntax highlighting
-" http://vimdoc.sourceforge.net/htmldoc/filetype.html
 
 " toggle omnicomplete options
 set completeopt+=menuone,menu,longest,preview
@@ -151,7 +146,8 @@ set omnifunc=ale#completion#OmniFunc
 " set omnifunc=asyncomplete#sources#ale#get_source_options
 " this has error, check asyncomplete
 
-" ------------------------------------------------------------------ find files
+" # --------------------------------------------------------- find files----- #
+
 " :find *<tab>
 " :ls                           " show buffer
 
@@ -160,7 +156,7 @@ set wildmenu                    " show command line completion
                                 " use :b to find files, :ls for list buffer
 set wildmode=list:full          " show command options with double tab
 
-" ------------------------------------------------------------------- highlight
+" # ----------------------------------------------- syntax highlighting ----- #
 
 syntax on                       " set syntax highlighting in vim
                                 " required by onedark
@@ -168,12 +164,13 @@ set list listchars=tab:»·,trail:·
                                 " display tabs and trailing spaces visually
 " set nolist                    " breaks white space show
 
-" ------------------------------------------------------------------- numbering
+" # ------------------------------------------------------ line numbers ----- #
 
 set number                      " show line numbers
 " set relativenumber              " enable relative number
 
-" --------------------------------------------------------------------- folding
+" # ------------------------------------------------------ code folding ----- #
+
 " <leader>z for fold
 
 set nofoldenable
@@ -181,7 +178,7 @@ set foldmethod=indent
 set foldnestmax=10
 set foldlevel=2
 
-" ----------------------------------------------------------------- indentation
+" # ------------------------------------------------------- indentation ----- #
 
 " set autoindent
 set smartindent                 " does the right indent in most programs
@@ -190,7 +187,7 @@ set softtabstop=2
 set tabstop=2                   " tabs are at proper location
 set expandtab
 
-" -------------------------------------------------------------------- wrapping
+" # --------------------------------------------------------- line wrap ----- #
 
 set wrap                        " set soft wrap for text
 " set nowrap                      " turn off code wrap
@@ -198,7 +195,7 @@ set linebreak                   " set wrap at only
 set colorcolumn=80              " set a colour column length at 80
 set textwidth=80                " set text width to 80
 
-" -------------------------------------------------- mouse cursor and scrolling
+" # -------------------------------------- scrolling ----- mouse cursor ----- #
 
 set mouse=a                     " turn on terminal mouse
 set cursorline                  " highlight current line
@@ -208,31 +205,26 @@ set ttimeoutlen=0               " speed up scrolling
 set ttyfast                     " speed up loading+scrolling of vim (boolean)
 set ttyscroll=10                " set scrolling speed (1-999; 1 fastest)
 
-" ----------------------------------------------------------------- spell check
+" # ------------------------------------------------------- spell check ----- #
 
 " z= activate / zg add word to dict / zw mark incorrect to dict
 " / [s next / ]s prev
 
 set spell spelllang=en_gb       " turn on vims spell checker
 " set nospell                     " explicitly turn off spell check
-
-" misc
-
 " set splitright                  " auto split right for screens
-
-" ----------------------------------------------------------------- spell check
 
 " fixes maxmempattern error E363 when hitting [ in md files
 " https://github.com/vim/vim/issues/2049
-
 set mmp=8000                    " set maxmempattern. default is 1000
 
-" ================================================================= setting end
+" # ======================================================== config end ===== #
 
-" ========================================================== plug preload start
+" # ================================================ preload plug start ===== #
+
 " settings before plugins are loaded
 
-" ---------------------------------------------------------- vim polyglot start
+" # ----------------------------------------------------- polygot start ----- #
 
 " setting polygot terraform-vim
 " let g:terraform_fmt_on_save=1
@@ -240,13 +232,14 @@ set mmp=8000                    " set maxmempattern. default is 1000
 " disable language packs
 " let g:polyglot_disabled = ['htmldjango']
 
-" ------------------------------------------------------------ vim polyglot end
+" # ------------------------------------------------------- polygot end ----- #
 
-" --------------------------------------------------------------------ale start
-" enable completion where available.
+" # --------------------------------------------------------- ale start ----- #
+
 " this setting must be set before ale is loaded.
 " you should not turn this setting on if you wish to use ale as a completion
 " source for other completion plugins, like deoplete.
+" enable completion where available.
 let g:ale_completion_enabled = 1
 
 " automatic imports from external modules
@@ -254,11 +247,10 @@ let g:ale_completion_autoimport = 1
 
 " set to 1 for ale to disable language server protocol
 " let g:ale_disable_lsp = 1
-" --------------------------------------------------------------------- ale end
 
-" ============================================================ plug preload end
+" # ----------------------------------------------------------- ale end ----- #
 
-" ================================================================== plug start
+" # ======================================================== plug start ===== #
 
 " auto-install vim-plug
 
@@ -270,7 +262,7 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-" ---------------------------------------- colour schemes and IDE customisation
+" # ------------------------------ themes ----- ide ----- color schemes ----- #
 
 " Plug 'drewtempelmeyer/palenight.vim'
 " enables palenight color scheme
@@ -311,7 +303,7 @@ Plug 'tpope/vim-repeat'
 " Plug 'tpope/vim-surround'
 " enables quoting with cs[' to change quotes from [ to ' - cst to add quotes
 
-" ------------------------------------------------------------- file management
+" # --------------------------------------------------- file management ----- #
 
 Plug 'francoiscabrol/ranger.vim'
 " netrw alternative ranger - https://github.com/francoiscabrol/ranger.vim
@@ -331,7 +323,7 @@ Plug 'tpope/vim-vinegar'
 Plug 'jlanzarotta/bufexplorer'
 " buffer explorer
 
-" ------------------------------------------------------------------------- git
+" # --------------------------------------------------------------- git ----- #
 
 Plug 'airblade/vim-gitgutter'
 " shows git status in gutter
@@ -348,7 +340,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'itchyny/vim-gitbranch'
 " simple gitbranch name to replace fugitive
 
-" ----------------------------------------------------------- language / syntax
+" # --------------------------------------------- language ----- syntax ----- #
 
 " ctags
 Plug 'majutsushi/tagbar'
@@ -363,59 +355,57 @@ Plug 'ludovicchabant/vim-gutentags'
 
 " Plug 'scrooloose/syntastic'
 
-" ------------------------------------------------------------- code completion
+" # --------------------------------------------------- code completion ----- #
 
-" Plug 'maralla/completor.vim'
-" enables code completion - https://github.com/maralla/completor.vim
+" Plug 'maralla/completor.vim'                        " https://github.com/maralla/completor.vim
 
-" Plug 'prabirshrestha/asyncomplete.vim'
-" code completion with support for LSP
-
-" Plug 'prabirshrestha/asyncomplete-buffer.vim'
-" code completion with support for LSP
-
-" Plug 'prabirshrestha/vim-lsp'
+" Plug 'prabirshrestha/asyncomplete.vim'              " completion with LSP
+" Plug 'prabirshrestha/asyncomplete-buffer.vim'       " completion with LSP
 " Plug 'prabirshrestha/asyncomplete-lsp.vim'
+" Plug 'prabirshrestha/vim-lsp'
+
+" Plug 'lifepillar/vim-mucomplete'                      " completion with popup
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}       " enables code completion
-" Plug 'ervandew/supertab'                              " enables tab actions i.e. autocomplete by using <tab> insert mode
-" Plug 'lifepillar/vim-mucomplete'                      " enables code completion (popup)
-" Plug 'vim-vdebug/vdebug'                              " vim debugger that interfaces with xdebug
 
-" --------------------------------------------------------------------- snippet
+" Plug 'vim-vdebug/vdebug'                              " debugger with xdebug
 
-" Plug 'MarcWeber/vim-addon-mw-utils'                   " snippet tool
-" Plug 'tomtom/tlib_vim'                                " snippet tool
-" Plug 'garbas/vim-snipmate'                            " snippet tool
-" Plug 'honza/vim-snippets'                             " snippets - optional
+" # -------------------------------------------------------------- lint ----- #
 
-" Plug 'hashivim/vim-terraform'                         " enable syntax for hashicorp
-" Plug 'hashivim/vim-consul'                            " enable syntax for hashicorp
-" Plug 'hashivim/vim-vagrant'                           " enable syntax for hashicorp
-" Plug 'hashivim/vim-nomadproject'                      " enable syntax for hashicorp
-" Plug 'hashivim/vim-packer'                            " enable syntax for hashicorp
-" Plug 'posva/vim-vue'                                  " enable syntax for vue
+Plug 'dense-analysis/ale'                 " enables ale universal language linter
+Plug 'maximbaz/lightline-ale'             " enables ale in lightline
 
-" Plug 'groenewege/vim-less'
-" Plug 'vim-ruby/vim-ruby'
-" Plug 'tpope/vim-rails'
-" Plug 'tpope/vim-markdown'
+" Plug 'hashivim/vim-terraform'             " enable syntax for hashicorp
+" Plug 'hashivim/vim-consul'                " enable syntax for hashicorp
+" Plug 'hashivim/vim-vagrant'               " enable syntax for hashicorp
+" Plug 'hashivim/vim-nomadproject'          " enable syntax for hashicorp
+" Plug 'hashivim/vim-packer'                " enable syntax for hashicorp
+" Plug 'posva/vim-vue'                      " enable syntax for vue
+
 " Plug 'pangloss/vim-javascript'
+" Plug 'groenewege/vim-less'
+" Plug 'tpope/vim-markdown'
+" Plug 'tpope/vim-rails'
+" Plug 'vim-ruby/vim-ruby'
 
-" linters
-Plug 'dense-analysis/ale'                             " enables ale universal language linter
-Plug 'maximbaz/lightline-ale'                         " enables ale in lightline
+" # ----------------------------------------------------------- snippet ----- #
 
-" ------------------------------------------------------------------------ misc
+" Plug 'MarcWeber/vim-addon-mw-utils'       " snippet tool
+" Plug 'tomtom/tlib_vim'                    " snippet tool
+" Plug 'garbas/vim-snipmate'                " snippet tool
+" Plug 'honza/vim-snippets'                 " snippets - optional
+
+" # ------------------------------------------------------------- icons ----- #
 
 " must be at the end
-Plug 'ryanoasis/vim-devicons'                         " enables super fonts (nerd fonts for vim)
+Plug 'ryanoasis/vim-devicons'             " enables super fonts (nerd fonts for vim)
 
 call plug#end()
 
-" ==================================================================== plug end
+" # ========================================================== plug end ===== #
 
-" =========================================================== colorscheme start
+" # ================================================= colorscheme start ===== #
+
 " to select, :colorscheme then space followed by tab
 
 set background=dark
@@ -442,9 +432,9 @@ colorscheme onedark
 " palenight requires plugin
 " colorscheme palenight
 
-" ============================================================= colorscheme end
+" # =================================================== colorscheme end ===== #
 
-" ============================================================= lightline start
+" # =================================================== lightline start ===== #
 
 " scriptencoding utf-8            " (optional) unknown setting
 set laststatus=2                " (optional) fix for statusline not showing
@@ -464,9 +454,10 @@ let g:lightline = {
       \   }
       \ }
 
-" colorscheme for lightline
-"   powerline, wombat, jellybeans, solarized, PaperColor, seoul256, one, landscape
-"   solarized dark, solarized light, PaperColor dark, PaperColor light, one dark, one light
+" colorschemes available for lightline
+" powerline, wombat, jellybeans, solarized, PaperColor, seoul256, one, 
+" landscape solarized dark, solarized light, PaperColor dark,
+" PaperColor light, one dark, one light
 let g:lightline.colorscheme = 'powerline'
 
 let g:lightline.component = {
@@ -497,7 +488,7 @@ let g:lightline.active = {
       \   ]
       \ }
 
-" --------------------------------------------------------- lightline ale start
+" # ----------------------------------------------------- lightline ale ----- #
 
 let g:lightline.component_expand = {
       \   'linter_checking': 'lightline#ale#checking',
@@ -519,11 +510,9 @@ let g:lightline#ale#indicator_warnings = "\uf071"
 let g:lightline#ale#indicator_errors = "\uf05e"
 let g:lightline#ale#indicator_ok = "\uf00c"
 
-" ----------------------------------------------------------- lightline ale end
-
 " =============================================================== lightline end
 
-" =================================================================== ale start
+" # ========================================================= ale start ===== #
 
 " setting ale to work with coc
 " https://github.com/dense-analysis/ale#faq-coc-nvim
@@ -555,18 +544,18 @@ let g:ale_list_window_size = 5
 " set this variable to 1 to autofix on save (see ale_fixers)
 " let g:ale_fix_on_save = 1
 
-" ===================================================================== ale end
+" # =========================================================== ale end ===== #
 
-" ========================================================== asyncomplete start
+" # ================================================ asyncomplete start ===== #
 
 " let g:asyncomplete_auto_completeopt = 1
 " let g:asyncomplete_enable_for_all = 1
 " let b:asyncomplete_enable = 1
 " let g:asyncomplete_auto_popup = 1
 
-" ============================================================ asyncomplete end
+" # ================================================== asyncomplete end ===== #
 
-" =================================================================== coc start
+" # ========================================================= coc start ===== #
 
 " https://github.com/neoclide/coc.nvim/wiki/Language-servers#terraform
 let g:coc_global_extensions = [
@@ -629,15 +618,15 @@ endif
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-" ===================================================================== coc end
+" # =========================================================== coc end ===== #
 
-" ============================================================== fugitive start
+" # ==================================================== fugitive start ===== #
 
 " set statusline+=%{fugitive#statusline()}
 
-" ================================================================ fugitive end
+" # ====================================================== fugitive end ===== #
 
-" ============================================================ mucomplete start
+" # ================================================== mucomplete start ===== #
 
 " set shortmess+=c
 " shut off completion messages
@@ -651,22 +640,9 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 " imap <expr> <down> mucomplete#extend_fwd("\<down>")
 " expanding via context see mucomplete-extend-compl
 
-" ============================================================== mucomplete end
+" # ==================================================== mucomplete end ===== #
 
-" ============================================================== nerdtree start
-
-" let NERDTreeShowHidden=1
-
-" ================================================================ nerdtree end
-
-" ============================================================== supertab start
-
-" let g:SuperTabDefaultCompletionType = "context"
-" let g:SuperTabContextDefaultCompletionType = "<c-n>"
-
-" ================================================================ supertab end
-
-" ============================================================= syntastic start
+" # =================================================== syntastic start ===== #
 
 " set statusline+=%#warningmsg#
 " set statusline+=%{SyntasticStatuslineFlag()}
@@ -682,9 +658,10 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 " allow the use of 'local'
 " let g:syntastic_sh_shellcheck_args="-e SC2039"
 
-" =============================================================== syntastic end
+" # ===================================================== syntastic end ===== #
 
-" =========================================================== vim vinegar start
+" # ================================================= vim vinegar start ===== #
+
 " gh  - toggle hidden files
 " -   - toggle project drawer
 " .   - using on a file to populate in command view
@@ -708,10 +685,9 @@ let g:netrw_altv = 1
 "  autocmd VimEnter * :Vexplore
 "augroup END
 
-" ============================================================= vim vinegar end
+" # =================================================== vim vinegar end ===== #
 
-" =================================================================== fzf start
-" recommended by homebrew
+" # ========================================================= fzf start ===== #
 
 " fzf enable fuzzy completion, run following in terminal
 " /usr/local/opt/fzf/install
@@ -719,24 +695,25 @@ let g:netrw_altv = 1
 " to use fzf in vim
 set rtp+=/usr/local/opt/fzf
 
-" ===================================================================== fzf end
+" # =========================================================== fzf end ===== #
 
-" ============================================================== commands start
+" # ============================================= custom commands start ===== #
+
 " usage - :<command>
 
 " reload shell
 command ReloadShell :source ~/dot-files/dot.vimrc
 
-" fzf - overrides Files command
+" fzf - override Files command
 " usage :Files!
 " ref - https://github.com/junegunn/fzf.vim
 command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
 
-" ================================================================ commands end
+" # =============================================== custom commands end ===== #
 
-" =============================================================== aliases start
-"
+" # ======================================================= alias start ===== #
+
 " ref - http://learnvimscriptthehardway.stevelosh.com/chapters/03.html
 " ref - http://learnvimscriptthehardway.stevelosh.com/chapters/08.html
 
@@ -750,9 +727,11 @@ command! -bang -nargs=? -complete=dir Files
 " split horizontal (default) and launch terminal
 " cabbrev termh terminal
 
-" ================================================================= aliases end
+" # ========================================================= alias end ===== #
 
-" =============================================================== mapping start
+" # ======================================== leader ===== mapping start ===== #
+
+" https://stackoverflow.com/questions/3776117/what-is-the-difference-between-the-remap-noremap-nnoremap-and-vnoremap-mapping
 
 " map       all recursive map - normal and visual mode (same as remap)
 " remap     recursive map (default)
@@ -768,12 +747,10 @@ command! -bang -nargs=? -complete=dir Files
 
 " <C-d>   control + d
 
-" ref - https://stackoverflow.com/questions/3776117/what-is-the-difference-between-the-remap-noremap-nnoremap-and-vnoremap-mapping
-
 " maps base leader key from , to space
 let mapleader = "\<space>"
 
-" -------------------------------------------------------------------- key maps
+" # ----------------------------------------------------- file explorer ----- #
 
 " buffer explorer open buffer
 nnoremap <Leader>be :BufExplorer<CR>
@@ -784,13 +761,6 @@ nnoremap <Leader>bo :Buffers<CR>
 
 " buffer delete current opened buffer (does not delete file)
 nnoremap <Leader>bc :bdelete<CR>
-
-" clipboard copy/paste from clipboard
-" noremap <Leader>cc :.w !pbcopy<CR><CR>
-" noremap <Leader>cp :.r !pbpaste<CR>
-
-" code folding za / zc / zo
-nmap <Leader>cf za<ESC>
 
 " ctag tagbar - open ctag explorer
 nnoremap <Leader>ct :TagbarToggle<CR>
@@ -809,6 +779,22 @@ nnoremap <leader>ro :Ranger<CR>
 " file explorer via netrw tree
 " noremap <Leader>ff :Explore<CR>
 
+" # -------------------------------------------------------- copy paste ----- #
+
+" clipboard copy/paste from clipboard
+" noremap <Leader>cc :.w !pbcopy<CR><CR>
+" noremap <Leader>cp :.r !pbpaste<CR>
+
+" # --------------------------------------------------- code management ----- #
+
+" code folding za / zc / zo
+nmap <Leader>cf za<ESC>
+
+" search buffer via ripgrep
+nnoremap <leader>rg :Rg<CR>
+
+" # --------------------------------------------------------------- git ----- #
+
 " git browse and blame
 " https://jakobgm.com/posts/vim/git-integration/
 " show commits for every source line (git blame)
@@ -825,6 +811,8 @@ nnoremap <Leader>gca <ESC>ICo-authored-by: John Doe <johndoe@gmail.com><ESC>
 " open visual selection in the browser (github)
 " vnoremap <Leader>gh :GBrowse<CR>
 
+" # ------------------------------------------------------ common print ----- #
+
 " print template header
 " note uses gcc : timpopes auto commenter. method: move begin, prepend === , esc, comment line
 
@@ -835,44 +823,15 @@ nmap <Leader>ptt <ESC>O# =======================================================
 " nmap <Leader>ph1 <ESC>gcc<ESC>I===<ESC>gcc<ESC>0
 " nmap <Leader>ph2 <ESC>I===<space>section<space>start<ESC>gcc<ESC>0o===<space>section<space>end<ESC>gcc0
 
-" search buffer via ripgrep
-nnoremap <leader>rg :Rg<CR>
-
 " split navigations
 " nnoremap <C-J> <C-W><C-J>
 " nnoremap <C-K> <C-W><C-K>
 " nnoremap <C-L> <C-W><C-L>
 " nnoremap <C-H> <C-W><C-H>
 
-" filetype specific snippets
-" ref - http://vimdoc.sourceforge.net/htmldoc/autocmd.html
-" ref - http://learnvimscriptthehardway.stevelosh.com/chapters/13.html#autocommands-and-abbreviations
+" # ========================================== leader ===== mapping end ===== #
 
-" if exists("did_load_filetypes")
-"   finish
-" endif
-
-" if exists("did_load_filetypes")
-
-"   augroup idrtemplates
-
-"     " remove all autocommands for the current group
-"     autocmd!
-
-"     " markdown files
-"     if index(['markdown'], &filetype) != -1
-
-"       autocmd FileType vim nnoremap <Leader>idrhelp :IDRhelp
-
-"     endif
-
-"   augroup END
-
-" endif " exists("did_load_filetypes")
-
-" ================================================================= mapping end
-
-" =================================================== trimwhitespace trim start
+" # ============================================== trimwhitespace start ===== #
 
 function TrimWhiteSpace()
   echom "TTWS : trim trailing whitespace"
@@ -882,9 +841,10 @@ endfunction
 " toggle trim trailing whitespace
 command TrimWhiteSpace :call TrimWhiteSpace()
 
-" ========================================================== trimwhitespace end
+" # ================================================ trimwhitespace end ===== #
 
-" ========================================================== omnicomplete start
+" # ========================================== omnicomplete popup start ===== #
+
 " triggers completion without plugins
 " https://stackoverflow.com/questions/35837990/how-to-trigger-omnicomplete-auto-completion-on-keystrokes-in-insert-mode
 " autocomplete omnicomplete shortcuts:
@@ -896,8 +856,8 @@ command TrimWhiteSpace :call TrimWhiteSpace()
 
 " function! OpenCompletion()
 "   if !pumvisible() && ((v:char >= 'a' && v:char <= 'z') || (v:char >= 'A' && v:char <= 'Z'))
-"     " call feedkeys("\<C-x>\<C-o>", "n")
-"     call feedkeys("\<C-n>", "n")
+"     call feedkeys("\<C-x>\<C-o>", "n")  " use this for mapping multiple keys
+"     call feedkeys("\<C-n>", "n")        " use this for single key
 "   endif
 "   if !pumvisible() && (v:char == '/')
 "     call feedkeys("\<C-x>\<C-f>", "n")
@@ -907,4 +867,4 @@ command TrimWhiteSpace :call TrimWhiteSpace()
 " uncomment line to enable omnicomplete
 " autocmd InsertCharPre * call OpenCompletion()
 
-" ============================================================ omnicomplete end
+" # ============================================ omnicomplete popup end ===== #
