@@ -1,7 +1,5 @@
 " # ======================================================== vim config ===== #
 
-
-"
 " add/replace following lines to file as ~/.vimrc or $HOME/.vimrc
 " add the following lines to .vimrc
 
@@ -36,7 +34,6 @@ set noshowmode                  " speed up by turning off showing mode
 " set showmode                    " show current mode down the bottom
 set regexpengine=1              " speed up by using old regex engine
 
-" general
 set nocompatible                " required by vim for extra features
 set showcmd                     " noshowcmd / showcmd speed up turning off
                                 " display of cmds. need to be after nocompatible
@@ -48,14 +45,14 @@ set hidden                      " set current buffer to be hidden when
 
 set backupcopy=yes              " yes/no/auto when opening a file
                                 " vim makes a copy and overwrites
-set undodir=~/.vim/.undo//      " set vim to use tmp directory for undo files
 set backupdir=~/.vim/.backup//  " set vim to use tmp directory for backup files
 set directory=~/.vim/.swp//     " set vim to use tmp directory for swp files
+set undodir=~/.vim/.undo//      " set vim to use tmp directory for undo files
 
 set encoding=UTF-8              " The encoding displayed.
 set fileencoding=UTF-8          " The encoding written to file
 
-" # ================================================ color ===== colour ===== #
+" # ----------------------------------- colour ----- color ----- themes ----- #
 
 " if gui (macvim) or not gui (iterm/alacritty)
 if has('gui_running')
@@ -107,11 +104,12 @@ if (has("autocmd"))
   augroup END
 endif
 
-" clipboard
+" # --------------------------------------------------------- clipboard ----- #
+
+" <https://vim.fandom.com/wiki/Accessing_the_system_clipboard>
+" <https://stackoverflow.com/questions/677986/vim-copy-selection-to-os-x-clipboard>
 " - will not work if its -clipboard (not complied with vim)
 " - * and + is the same for macosx and windows
-" - <https://vim.fandom.com/wiki/Accessing_the_system_clipboard>
-" - <https://stackoverflow.com/questions/677986/vim-copy-selection-to-os-x-clipboard>
 
 if has("clipboard")
   set clipboard=unnamed         " copy to the system clipboard
@@ -119,8 +117,6 @@ if has("clipboard")
     set clipboard+=unnamedplus
   endif
 endif
-
-" # ============================================================== code ===== #
 
 " # -------------------------------------------------------- completion ----- #
 
@@ -146,7 +142,7 @@ set omnifunc=ale#completion#OmniFunc
 " set omnifunc=asyncomplete#sources#ale#get_source_options
 " this has error, check asyncomplete
 
-" # --------------------------------------------------------- find files----- #
+" # -------------------------------------------- buffer ----- find files----- #
 
 " :find *<tab>
 " :ls                           " show buffer
@@ -162,7 +158,7 @@ syntax on                       " set syntax highlighting in vim
                                 " required by onedark
 set list listchars=tab:»·,trail:·
                                 " display tabs and trailing spaces visually
-" set nolist                    " breaks white space show
+" set nolist                      " breaks white space show
 
 " # ------------------------------------------------------ line numbers ----- #
 
@@ -214,6 +210,8 @@ set spell spelllang=en_gb       " turn on vims spell checker
 " set nospell                     " explicitly turn off spell check
 " set splitright                  " auto split right for screens
 
+" # -------------------------------------------------- fix ----- issues ----- #
+
 " fixes maxmempattern error E363 when hitting [ in md files
 " https://github.com/vim/vim/issues/2049
 set mmp=8000                    " set maxmempattern. default is 1000
@@ -236,6 +234,8 @@ set mmp=8000                    " set maxmempattern. default is 1000
 
 " # --------------------------------------------------------- ale start ----- #
 
+" use ale only for linting (use Coc for code completion)
+
 " this setting must be set before ale is loaded.
 " you should not turn this setting on if you wish to use ale as a completion
 " source for other completion plugins, like deoplete.
@@ -245,8 +245,8 @@ let g:ale_completion_enabled = 1
 " automatic imports from external modules
 let g:ale_completion_autoimport = 1
 
-" set to 1 for ale to disable language server protocol
-" let g:ale_disable_lsp = 1
+" set to 1 for ale to disable language server protocol (use Coc instead)
+let g:ale_disable_lsp = 1
 
 " # ----------------------------------------------------------- ale end ----- #
 
@@ -262,13 +262,10 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-" # ------------------------------ themes ----- ide ----- color schemes ----- #
+" # ---------------------------------------- themes ----- color schemes ----- #
 
 " Plug 'drewtempelmeyer/palenight.vim'
 " enables palenight color scheme
-
-Plug 'itchyny/lightline.vim'
-" enables superlight status bar - https://github.com/itchyny/lightline.vim
 
 Plug 'rafi/awesome-vim-colorschemes'
 " enables package colorschemes (rafi)
@@ -277,13 +274,14 @@ Plug 'rafi/awesome-vim-colorschemes'
 " enables package colorschemes (flazz)
 
 " Plug 'dracula/vim'
-" enables gruvbox colorscheme
-
 " Plug 'lifepillar/vim-gruvbox8'
-" enables gruvbox colorscheme
-
 " Plug 'lifepillar/vim-solarized8'
-" enables gruvbox colorscheme
+
+" # --------------------------------------------------------------- ide ----- #
+
+Plug 'itchyny/lightline.vim'
+" enables superlight status bar
+" <https://github.com/itchyny/lightline.vim>
 
 Plug 'tpope/vim-sensible'
 " enables common standard settings for vim
@@ -302,6 +300,9 @@ Plug 'tpope/vim-repeat'
 
 " Plug 'tpope/vim-surround'
 " enables quoting with cs[' to change quotes from [ to ' - cst to add quotes
+
+" Plug 'vim-vdebug/vdebug'
+" debugger with xdebug
 
 " # --------------------------------------------------- file management ----- #
 
@@ -357,30 +358,30 @@ Plug 'ludovicchabant/vim-gutentags'
 
 " # --------------------------------------------------- code completion ----- #
 
-" Plug 'maralla/completor.vim'                        " https://github.com/maralla/completor.vim
+" Plug 'maralla/completor.vim'                        " <https://github.com/maralla/completor.vim>
 
-" Plug 'prabirshrestha/asyncomplete.vim'              " completion with LSP
-" Plug 'prabirshrestha/asyncomplete-buffer.vim'       " completion with LSP
+" Plug 'prabirshrestha/asyncomplete.vim'              " <https://github.com/prabirshrestha/vim-lsp>
+" Plug 'prabirshrestha/asyncomplete-buffer.vim'
 " Plug 'prabirshrestha/asyncomplete-lsp.vim'
 " Plug 'prabirshrestha/vim-lsp'
 
-" Plug 'lifepillar/vim-mucomplete'                      " completion with popup
+" Plug 'lifepillar/vim-mucomplete'                    " <https://github.com/lifepillar/vim-mucomplete>
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}       " enables code completion
-
-" Plug 'vim-vdebug/vdebug'                              " debugger with xdebug
+" use ale only for linting (use Coc for code completion)
+Plug 'neoclide/coc.nvim', {'branch': 'release'}     " <https://github.com/neoclide/coc.nvim>
 
 " # -------------------------------------------------------------- lint ----- #
 
-Plug 'dense-analysis/ale'                 " enables ale universal language linter
-Plug 'maximbaz/lightline-ale'             " enables ale in lightline
+" use ale only for linting (use Coc for code completion)
+Plug 'dense-analysis/ale'                 " universal language linter
+Plug 'maximbaz/lightline-ale'             " ale for lightline
 
-" Plug 'hashivim/vim-terraform'             " enable syntax for hashicorp
-" Plug 'hashivim/vim-consul'                " enable syntax for hashicorp
-" Plug 'hashivim/vim-vagrant'               " enable syntax for hashicorp
-" Plug 'hashivim/vim-nomadproject'          " enable syntax for hashicorp
-" Plug 'hashivim/vim-packer'                " enable syntax for hashicorp
-" Plug 'posva/vim-vue'                      " enable syntax for vue
+" Plug 'hashivim/vim-terraform'             " syntax for hashicorp
+" Plug 'hashivim/vim-consul'                " syntax for hashicorp
+" Plug 'hashivim/vim-vagrant'               " syntax for hashicorp
+" Plug 'hashivim/vim-nomadproject'          " syntax for hashicorp
+" Plug 'hashivim/vim-packer'                " syntax for hashicorp
+" Plug 'posva/vim-vue'                      " syntax for vue
 
 " Plug 'pangloss/vim-javascript'
 " Plug 'groenewege/vim-less'
@@ -515,13 +516,15 @@ let g:lightline#ale#indicator_ok = "\uf00c"
 " # ========================================================= ale start ===== #
 
 " setting ale to work with coc
-" https://github.com/dense-analysis/ale#faq-coc-nvim
+" <https://github.com/dense-analysis/ale#faq-coc-nvim>
 
 " enable completion where available
-" let g:ale_completion_enabled = 1 (defined above)
+" let g:ale_completion_enabled = 1 (defined in above setting block)
 
-" set diagnostic lint signs in gutter
+" keep sign gutter open
 let g:ale_sign_column_always = 1
+
+" set diagnostic signs to use
 let g:ale_sign_error = '!!'
 let g:ale_sign_warning = '??'
 
@@ -557,7 +560,12 @@ let g:ale_list_window_size = 5
 
 " # ========================================================= coc start ===== #
 
-" https://github.com/neoclide/coc.nvim/wiki/Language-servers#terraform
+" <https://github.com/neoclide/coc.nvim>
+
+" setup - run after installing coc or use global_extensions
+" :CocInstall coc-json coc-tsserver
+
+" <https://github.com/neoclide/coc.nvim/wiki/Language-servers#terraform>
 let g:coc_global_extensions = [
       \'coc-css',
       \'coc-git',
@@ -572,8 +580,6 @@ let g:coc_global_extensions = [
       \'coc-tsserver',
       \'coc-vetur'
       \]
-
-" <https://github.com/neoclide/coc.nvim>
 
 " some servers have issues with backup files, see #649.
 set nobackup
@@ -590,6 +596,7 @@ set signcolumn=yes
 " use tab for trigger completion with characters ahead and navigate.
 " note: use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
+" trigger completion
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1):
       \ CheckBackspace() ? "\<Tab>" :
@@ -598,6 +605,7 @@ inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
 " Make <CR> to accept selected completion item or notify coc.nvim to format
 " <C-g>u breaks current undo, please make your own choice.
+" trigger accept completion
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
@@ -607,16 +615,16 @@ function! CheckBackspace() abort
 endfunction
 
 " Use <c-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
+" if has('nvim')
+"   inoremap <silent><expr> <c-space> coc#refresh()
+" else
+"   inoremap <silent><expr> <c-@> coc#refresh()
+" endif
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+" nmap <silent> [g <Plug>(coc-diagnostic-prev)
+" nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " # =========================================================== coc end ===== #
 
@@ -625,6 +633,16 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 " set statusline+=%{fugitive#statusline()}
 
 " # ====================================================== fugitive end ===== #
+
+" # =================================================== gitgutter start ===== #
+
+" always show gutter
+set signcolumn=yes
+
+" set 1 to cobber other signs or 0 to preserve them
+let g:gitgutter_sign_allow_clobber = 0
+
+" # ===================================================== gitgutter end ===== #
 
 " # ================================================== mucomplete start ===== #
 
@@ -662,24 +680,34 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " # ================================================= vim vinegar start ===== #
 
-" gh  - toggle hidden files
-" -   - toggle project drawer
-" .   - using on a file to populate in command view
-" y.  - to yank absolute path for file cursor
-" ~   - to go home
+" -       - toggle default project drawer (see netrw)
+" I       - show help
+" .       - using on a file to populate in command view
+" y.      - to yank absolute path for file cursor
+" ~       - to go home
 
-" let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+" netrw settings (default project drawer for vim)
+" <https://vonheikemen.github.io/devlog/tools/using-netrw-vim-builtin-file-explorer/>
+" gh      - toggle hidden files
+" u       - go to previous directory in history
+" -       - go up to parent directory
+" enter   - opens a directory or file
+" p       - open preview window
+" R       - renames file
+" d       - creates directory
+" D       - deletes file or empty directory
+" I       - show help
+
 " activate default treeview for terminal
-" hide dot files - press gh to toggle hiding
-
-let g:netrw_liststyle = 3         " use tree view
-
+" :Lexplore to open netrw
 let g:netrw_altv = 1
-
 " let g:netrw_banner = 0          " remove top banner
 " let g:netrw_browse_split = 4    " open a new horizonal split for file
-" let g:netrw_winsize = 25        " set width of tree to 25%
+let g:netrw_liststyle = 3       " use tree view
+" let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'    " hide dot files by default - gh to toggle hiding
+let g:netrw_winsize = 25        " set width of tree to 25%
 
+" custom hotkey to show explorer (vim vinegar alternatve)
 "augroup ProjectDrawer
 "  autocmd!
 "  autocmd VimEnter * :Vexplore
@@ -846,7 +874,7 @@ command TrimWhiteSpace :call TrimWhiteSpace()
 " # ========================================== omnicomplete popup start ===== #
 
 " triggers completion without plugins
-" https://stackoverflow.com/questions/35837990/how-to-trigger-omnicomplete-auto-completion-on-keystrokes-in-insert-mode
+" <https://stackoverflow.com/questions/35837990/how-to-trigger-omnicomplete-auto-completion-on-keystrokes-in-insert-mode>
 " autocomplete omnicomplete shortcuts:
 " - ^x^n                        for just this file
 " - ^x^f                        for filenames
