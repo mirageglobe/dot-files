@@ -6,8 +6,6 @@
 # sensible dotfiles and bootstrap using makefile menu script
 # by jimmy mg lim ::  www.mirageglobe.com :: github.com/mirageglobe
 
-# ============================================================== config ===== #
-
 # ------------------------------------------------------------ settings ----- #
 
 # defaults
@@ -17,7 +15,7 @@ MENU := all clean test
 MENU += help readme
 
 # main
-MENU += setup-config
+MENU += setup-alacritty setup-git setup-tmux setup-vim
 
 # load phony
 .PHONY: $(MENU)
@@ -42,7 +40,7 @@ define func_print_arrow
 endef
 
 define func_print_header
-	# ============================================= ### $(1) ###
+	# ---------------------------------------------------- $(1) ----- #
 endef
 
 define func_check_command
@@ -66,19 +64,24 @@ readme:													## show information and notes
 
 ##@ Menu
 
-setup-config:										## setup config files and folders (vim, alacritty, gitconfig, gitignore, tmux)
-	$(call func_print_header,ensure common)
-	$(call func_print_arrow,setup vim - ensure vimrc and vim backup swap undo folders exist)
-	-mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
+setup-alacritty:								## setup alacritty config
 	$(call func_print_arrow,setup alacritty - skip)
-	# -mkdir -pv ~/.config/alacritty/
-	# -cp -i dot.alacritty.yml ~/.config/alacritty/alacritty.yml				# set alacritty config from template
+	-mkdir -pv ~/.config/alacritty/
+	-cp -i dot.alacritty.yml ~/.config/alacritty/alacritty.yml				# set alacritty config from template
+
+setup-git:											## setup gitconfig and gitignore
 	$(call func_print_arrow,setup git - config)
 	-touch ~/.gitignore
 	-touch ~/.gitconfig
 	$(call func_print_arrow,setup git - overwrite home .gitconfig and .gitignore)
 	-cp -i dot.gitconfig ~/.gitconfig
 	-cp -i dot.gitignore ~/.gitignore
-	# $(call func_print_arrow,setup tmux - config)
-	# $(call func_print_arrow,setup tmux - overwrite home .tmux.conf)
-	# -cp -i dot.tmux.conf ~/.tmux.conf
+
+setup-tmux:											## setup tmux config
+	$(call func_print_arrow,setup tmux - config)
+	$(call func_print_arrow,setup tmux - overwrite home .tmux.conf)
+	-cp -i dot.tmux.conf ~/.tmux.conf
+
+setup-vim:											## setup vim folders
+	$(call func_print_arrow,setup vim - ensure vimrc and vim backup swap undo folders exist)
+	-mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
