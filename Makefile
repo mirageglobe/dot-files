@@ -86,6 +86,12 @@ setup-git:											## setup gitconfig and gitignore
 	-cp -i dot.gitconfig ~/.gitconfig
 	-cp -i dot.gitignore ~/.gitignore
 
+setup-starship:									## setup starship config
+	$(call func_print_arrow,setup starship - config)
+	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
+	$(call func_print_arrow,setup starship - copy to config folder)
+	-cp -i starship.toml ~/.config/starship.toml
+
 setup-tmux:											## setup tmux config
 	$(call func_print_arrow,setup tmux - config)
 	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
