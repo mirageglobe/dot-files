@@ -17,6 +17,7 @@
 
 # alias (type: `alias` to show current aliases)
 
+# show load  status
 printf "%s" "[+] aliases "
 
 # ------------------------------------------------------------ override ----- #
