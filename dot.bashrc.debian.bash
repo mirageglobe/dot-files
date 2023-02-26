@@ -1,25 +1,42 @@
-# dot.bashrc.debian.bash
+# ================================================== bash config debian ===== #
 
-# === java
-export JAVA_HOME=$(/usr/libexec/java_home)
+# --------------------------------------------------------------- setup ----- #
 
-# === homebrew linux
+# default config file location are:
+#
+# - mac/linux         ~/.bashrc
+#                     ~/.bash_profile
+
+# touch ~/.bashrc
+# include the following in ~/.bashrc file
+# assuming the source script is in ~/dot-files
+#
+# [[ -f $HOME/dot-files/dot.bashrc.debian.bash ]] && source "$HOME/dot-files/dot.bashrc.debian.bash"
+
+# -------------------------------------------------------------- config ----- #
+
+# map escape key with caps lock
+setxkbmap -option "caps:swapescape"
+
+# or write to file (do not run using sudo)
+# dconf write /org/gnome/desktop/input-sources/xkb-options "['caps:swapescape']"
+
+# or edit "/etc/default/keyboard"
+# XKBOPTIONS="" to XKBOPTIONS="caps:swapescape"
+
+# bash completion
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+  source $(brew --prefix)/etc/bash_completion
+fi
+
+# homebrew linux
 export HOMEBREW_BUILD_FROM_SOURCE=1     # build from precompiled source via linux brew
 export PATH="$HOME/.linuxbrew/bin:$PATH"
 export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
 export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
 
-# === bash completion
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-  . $(brew --prefix)/etc/bash_completion
-fi
-
-# === homebrew github access
+# homebrew github token
 export HOMEBREW_GITHUB_API_TOKEN=<REPLACEME:xxxxxx>
 
-# === keymap swap escape key with caps lock
-setxkbmap -option "caps:swapescape"
-
-# do not run using sudo
-# dconf write /org/gnome/desktop/input-sources/xkb-options "['caps:swapescape']"
-# you can also edit this file cat /etc/default/keyboard  .. to change the XKBOPTIONS="" to XKBOPTIONS="caps:swapescape"
+# java
+export JAVA_HOME=$(/usr/libexec/java_home)
