@@ -1,20 +1,22 @@
-# === config file location
+# =========================================================== alacritty ===== #
 
-# config file location (default)
-# mac/linux :           ~/.config/alacritty/alacritty.yml
-# win location :        %APPDATA%/alacritty/alacritty.yml ( ~/appdata/roaming/alacritty/alacritty.yml)
+# https://github.com/alacritty/alacritty
 
-# === installation
+# --------------------------------------------------------------- setup ----- #
+
+# default config file location are:
 #
+# - mac/linux         ~/.config/alacritty/alacritty.yml
+# - windows           %APPDATA%/alacritty/alacritty.yml
+#                     ~/appdata/roaming/alacritty/alacritty.yml
+
 # mkdir -pv ~/.config/alacritty
-# cat ~/dot-files/dot.alacritty.yml >> ~/.config/alacritty/alacritty.yml
+# cp -i ~/dot-files/dot.alacritty.yml ~/.config/alacritty/alacritty.yml
 
-# === config basics
+# -------------------------------------------------------------- config ----- #
 #
-# alacritty uses defaults. if activated by setting a config file, it will load newer configuration
-
-
-# === alacritty configuration
+# alacritty uses defaults. if you have a config file, it will load it as the
+# newer configuration and override older set values
 #
 # Import additional configuration files
 #
