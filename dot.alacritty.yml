@@ -11,7 +11,7 @@
 #                     ~/appdata/roaming/alacritty/alacritty.yml
 
 # mkdir -pv ~/.config/alacritty
-# cp -i ~/dot-files/dot.alacritty.yml ~/.config/alacritty/alacritty.yml
+# cp -i dot.alacritty.yml ~/.config/alacritty/alacritty.yml
 
 # -------------------------------------------------------------- config ----- #
 #
