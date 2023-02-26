@@ -15,7 +15,7 @@
 
 # -------------------------------------------------------------- config ----- #
 
-# show load  status
+# show load status
 printf "%s" "[+] completion "
 
 # check if bash version
@@ -41,6 +41,20 @@ else
 fi
 
 # -------------------------------------------------- custom completions ----- #
+
+# fzf # path: file completion / dir: directory completion
+# _fzf_setup_completion path rg git kubectl rm cat
+# _fzf_setup_completion dir cd
+
+# kubectl
+# if command -V kubectl 1> /dev/null; then
+#   source <(kubectl completion bash)
+# fi
+
+# yq
+# if command -V yq 1> /dev/null; then
+#   source <(yq shell-completion bash)
+# fi
 
 # git completion - add following to .bashrc to enable
 # [ -f "$HOME/dot-files/dot.completion.git.bash" ] && source "$HOME/dot-files/dot.completion.git.bash"

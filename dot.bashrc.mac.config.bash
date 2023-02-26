@@ -1,8 +1,29 @@
-# dotfile config
-# [ -f ~/dot-files/dot.bashrc.mac.config.bash ] && source ~/dot-files/dot.bashrc.mac.config.bash
+# ===================================================== bash config git ===== #
 
-# --------------------------------------------------------------------- git ----
+# --------------------------------------------------------------- setup ----- #
 
+# default config file locations:
+#
+# - mac/linux         ~/.bashrc
+#                     ~/.bash_profile
+
+# touch ~/.bashrc
+# include the following in ~/.bashrc file
+# assuming the source script is in ~/dot-files
+
+# [ -f "$HOME/dot-files/dot.bashrc.mac.config.bash" ] && source "$HOME/dot-files/dot.bashrc.mac.config.bash"
+
+# -------------------------------------------------------------- config ----- #
+
+printf "%s" "[+] config "
+
+# mac key rate
+# for super fast key repeat rate (keyboard)
+# echo "defaults write NSGlobalDomain KeyRepeat -int 0"
+
+# ----------------------------------------------------------------- git ----- #
+
+# show load status
 printf "%s" "[+] git "
 
 # default push branch to remote
@@ -44,3 +65,28 @@ git config --global alias.ppp "push --force-with-lease"
 git config --global alias.s "status"
 git config --global alias.rim "rebase --interactive main"
 git config --global alias.rimm "rebase --interactive master"
+
+# ----------------------------------------------------------------- fzf ----- #
+
+# ensure install fzf via brew
+# to support terminal and keybindings, run : /usr/local/opt/fzf/install
+
+# use fd (https://github.com/sharkdp/fd) instead of the default find command for listing path candidates.
+# the first argument to the function ($1) is the base path to start traversal
+
+# see the source code (completion.{bash,zsh}) for the details.
+_fzf_compgen_path() {
+  fd --hidden --follow --exclude ".git" . "$1"
+}
+
+# use fd to generate the list for directory completion
+_fzf_compgen_dir() {
+  fd --type d --hidden --follow --exclude ".git" . "$1"
+}
+
+# - on bash, fuzzy completion is enabled only for a predefined set of commands (complete | grep _fzf to see the list). but you can enable it for other commands as well by using _fzf_setup_completion helper function. for example 'cd' is not in default list
+
+# - add following to bashrc
+# _fzf_setup_completion <type path/dir> <commands to hook on>
+# _fzf_setup_completion path cat rm ag git kubectl
+# _fzf_setup_completion dir cd
