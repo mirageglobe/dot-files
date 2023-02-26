@@ -4,7 +4,7 @@
 
 # --------------------------------------------------------------- setup ----- #
 
-# default config file location are:
+# default config file locations:
 #
 # - mac/linux         ~/.config/alacritty/alacritty.yml
 # - windows           %APPDATA%/alacritty/alacritty.yml

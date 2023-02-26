@@ -2,7 +2,7 @@
 
 # --------------------------------------------------------------- setup ----- #
 
-# default config file location are:
+# default config file locations:
 #
 # - mac/linux         ~/.bashrc
 #                     ~/.bash_profile
@@ -11,7 +11,7 @@
 # include the following in ~/.bashrc file
 # assuming the source script is in ~/dot-files
 #
-# [[ -f $HOME/dot-files/dot.bashrc.debian.bash ]] && source "$HOME/dot-files/dot.bashrc.debian.bash"
+# [ -f $HOME/dot-files/dot.bashrc.debian.bash ] && source "$HOME/dot-files/dot.bashrc.debian.bash"
 
 # -------------------------------------------------------------- config ----- #
 

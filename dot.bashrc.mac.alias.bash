@@ -1,35 +1,50 @@
-# dot.bashrc.mac.alias.bash
-# bash mac alias
-# [ -f ~/dot-files/dot.bash.mac.alias.bashrc ] && source ~/dot-files/dot.bash.mac.alias.bashrc
+# =================================================== bash config alias ===== #
+
+# --------------------------------------------------------------- setup ----- #
+
+# default config file locations:
+#
+# - mac/linux         ~/.bashrc
+#                     ~/.bash_profile
+
+# touch ~/.bashrc
+# include the following in ~/.bashrc file
+# assuming the source script is in ~/dot-files
+
+# [ -f "$HOME/dot-files/dot.bash.mac.alias.bashrc" ] && source "$HOME/dot-files/dot.bash.mac.alias.bashrc"
+
+# -------------------------------------------------------------- config ----- #
 
 # alias (type: `alias` to show current aliases)
+
 printf "%s" "[+] aliases "
 
-# ---------------------------------------------------------------- overrides ---
+# ------------------------------------------------------------ override ----- #
 
 alias cat='bat'
 alias catcat='\cat'
 alias ls='lsd'
 
-# -------------------------------------------------------------- new aliases ---
+# -------------------------------------------------------------- custom ----- #
 
 # alias _ls="ls -Gd .*"
 # alias _ll="ls -lhAG"
 # alias _tree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
 # alias _tree_verbose="find . | sed -e 's/[^-][^\/]*\// |/g' -e 's/|\([^ ]\)/|-\1/'"
 
+# bash
 alias _cp='cp -i'
 alias _mv='mv -i'
 alias _rm='rm -i'
 alias _rs="printf ':: reload shell :: \n';exec $SHELL -l;"
 
+# k8s
+alias kc='kubectl config view --minify --output "jsonpath={.current-context}"; echo ""; echo "------------------------"; kubectl cluster-info;'
+
 # lsd
 alias ll='lsd -la'
 alias lt='lsd --tree'
 alias tree='lsd --tree'
-
-# k8s
-alias kc='kubectl config view --minify --output "jsonpath={.current-context}"; echo ""; echo "------------------------"; kubectl cluster-info;'
 
 # homebrew
 alias brewi='arch -x86_64 /usr/local/bin/brew'
@@ -38,10 +53,3 @@ alias brewm='arch -arm64e /opt/homebrew/bin/brew'
 # postgresql
 alias pgstart='pg_ctl -D /usr/local/var/postgresql start'
 alias pgstop='pg_ctl -D /usr/local/var/postgresql stop'
-
-# === custom commands
-
-gitdiff() {
-    # use bat output with git diff
-    git diff --name-only --diff-filter=d | xargs bat --diff
-}
