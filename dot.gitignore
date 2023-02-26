@@ -1,5 +1,24 @@
-# ~/.gitignore
+# =========================================================== gitignore ===== #
+
+# https://github.com/github/gitignore
+# https://www.toptal.com/developers/gitignore/api/vim
+
+# common global gitignore settings
+
+# --------------------------------------------------------------- setup ----- #
+
+# default config file locations:
+#
+# - mac/linux         ~/.gitignore
+
+# touch ~/.gitignore
 # cp -i dot.gitignore ~/.gitignore
+
+# ----------------------------------------------------------------- vim ----- #
+
+# vim ctags
+tags.lock
+tags.temp
 
 # Created by https://www.toptal.com/developers/gitignore/api/vim
 # Edit at https://www.toptal.com/developers/gitignore?templates=vim
@@ -28,11 +47,7 @@ tags
 
 # End of https://www.toptal.com/developers/gitignore/api/vim
 
-# custom
-
-# vim ctags
-tags.lock
-tags.temp
+# ----------------------------------------------------------------- mac ----- #
 
 # mac
 .DS_Store

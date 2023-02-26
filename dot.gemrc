@@ -18,7 +18,7 @@ gemhome: ~/.gems
 # paths in which to look for gems
 gempath:
 - ~/.gems
-#- /Users/<user>/.gem/ruby/2.6.0
+#- /Users/<user>/.gem/ruby/2.6.0          # chruby (recommended) shims gems path
 
 :benchmark: false
 :bulk_threshold: 1000
@@ -36,4 +36,3 @@ gempath:
 - https://rubygems.org/
 - http://gems.rubyforge.org/
 - http://rubygems.org/
-
