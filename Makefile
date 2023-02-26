@@ -65,12 +65,21 @@ readme:													## show information and notes
 ##@ Menu
 
 setup-alacritty:								## setup alacritty config
-	$(call func_print_arrow,setup alacritty - skip)
+	$(call func_print_arrow,setup alacritty)
+	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
 	-mkdir -pv ~/.config/alacritty/
 	-cp -i dot.alacritty.yml ~/.config/alacritty/alacritty.yml				# set alacritty config from template
 
+setup-completion:								## setup bash completion (git)
+	$(call func_print_arrow,setup git-completion)
+	@echo "setup git completion to (default) /usr/local/etc/bash_completion.d ..";
+	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
+	# add git-completion
+	-curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash > /usr/local/etc/bash_completion.d/git-completion.bash
+
 setup-git:											## setup gitconfig and gitignore
 	$(call func_print_arrow,setup git - config)
+	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
 	-touch ~/.gitignore
 	-touch ~/.gitconfig
 	$(call func_print_arrow,setup git - overwrite home .gitconfig and .gitignore)
@@ -79,9 +88,11 @@ setup-git:											## setup gitconfig and gitignore
 
 setup-tmux:											## setup tmux config
 	$(call func_print_arrow,setup tmux - config)
+	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
 	$(call func_print_arrow,setup tmux - overwrite home .tmux.conf)
 	-cp -i dot.tmux.conf ~/.tmux.conf
 
 setup-vim:											## setup vim folders
-	$(call func_print_arrow,setup vim - ensure vimrc and vim backup swap undo folders exist)
+	$(call func_print_arrow,setup vim - create backup swap undo folders)
+	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
 	-mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
