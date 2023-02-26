@@ -142,12 +142,18 @@ set omnifunc=ale#completion#OmniFunc
 " set omnifunc=asyncomplete#sources#ale#get_source_options
 " this has error, check asyncomplete
 
-" # -------------------------------------------- buffer ----- find files----- #
+" # ----------------------------------------------------------- buffers ----- #
 
-" :find *<tab>
 " :ls                           " show buffer
 
+" # ------------------------------------ command ----- vim command line ----- #
+
+" :find *<tab>
 set path+=**                    " tab completion for file related tasks
+
+" wildmenu and wildmode are used for command line completion. i.e. :color <Tab>
+" this is not code completion menu such as ale or coc
+
 set wildmenu                    " show command line completion
                                 " use :b to find files, :ls for list buffer
 set wildmode=list:full          " show command options with double tab
@@ -185,8 +191,8 @@ set expandtab
 
 " # --------------------------------------------------------- line wrap ----- #
 
-set wrap                        " set soft wrap for text
-" set nowrap                      " turn off code wrap
+" set wrap                        " set soft wrap for text
+set nowrap                      " turn off code wrap
 set linebreak                   " set wrap at only
 set colorcolumn=80              " set a colour column length at 80
 set textwidth=80                " set text width to 80
@@ -195,10 +201,12 @@ set textwidth=80                " set text width to 80
 
 set mouse=a                     " turn on terminal mouse
 set cursorline                  " highlight current line
-set scrolloff=5                 " window to scroll when x lines at end of screen
+set scrolloff=5                 " set lines for vertical scroll to trigger
+set sidescroll=1                " enable horizontal scroll 1:on 0:off (set wrap off)
+set sidescrolloff=5             " set chars for horizontal scrolling to trigger
 set timeoutlen=1000             " speed up scrolling
 set ttimeoutlen=0               " speed up scrolling
-set ttyfast                     " speed up loading+scrolling of vim (boolean)
+set ttyfast                     " speed up loading and scrolling of vim (boolean)
 set ttyscroll=10                " set scrolling speed (1-999; 1 fastest)
 
 " # ------------------------------------------------------- spell check ----- #
@@ -702,7 +710,7 @@ let g:gitgutter_sign_allow_clobber = 0
 " :Lexplore to open netrw
 let g:netrw_altv = 1
 " let g:netrw_banner = 0          " remove top banner
-" let g:netrw_browse_split = 4    " open a new horizonal split for file
+" let g:netrw_browse_split = 4    " open a new horizontal split for file
 let g:netrw_liststyle = 3       " use tree view
 " let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'    " hide dot files by default - gh to toggle hiding
 let g:netrw_winsize = 25        " set width of tree to 25%
