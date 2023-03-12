@@ -2,13 +2,16 @@
 command_timeout = 3000
 
 [aws]
-symbol = " "
+symbol = ' '
 
 [kubernetes]
 disabled = false
 
 [nim]
-symbol = " "
+symbol = ' '
 
 [nodejs]
-format = "via [ $version](bold green) "
+format = 'via [ $version](bold green) '
+
+[terraform]
+format = 'via [ $version $workspace]($style) '
