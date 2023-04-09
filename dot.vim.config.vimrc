@@ -30,7 +30,6 @@
 set lazyredraw                  " do not redraw when executing macros;
                                 " buffer instead of constant redraws
 set noshowmode                  " speed up by turning off showing mode
-                                " on last line
 " set showmode                    " show current mode down the bottom
 set regexpengine=1              " speed up by using old regex engine
 
@@ -217,6 +216,7 @@ set ttyscroll=10                " set scrolling speed (1-999; 1 fastest)
 set spell spelllang=en_gb       " turn on vims spell checker
 " set nospell                     " explicitly turn off spell check
 " set splitright                  " auto split right for screens
+set splitbelow                  " auto split bottom for screens (for terminal)
 
 " # -------------------------------------------------- fix ----- issues ----- #
 
