@@ -27,7 +27,7 @@
 
 " # ====================================================== config start ===== #
 
-set lazyredraw                  " do not redraw when executing macros;
+" set lazyredraw                  " do not redraw when executing macros;
                                 " buffer instead of constant redraws
 set noshowmode                  " speed up by turning off showing mode
 " set showmode                    " show current mode down the bottom
