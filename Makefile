@@ -64,6 +64,15 @@ readme:													## show information and notes
 
 ##@ Menu
 
+get-osinfo:											## get os and ip
+	$(call func_print_arrow,get os information)
+	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
+	@echo "os and architecture"
+	uname -a
+	@echo "($$OSTYPE)"
+	@echo "ip"
+	curl ifconfig.me;
+
 setup-alacritty:								## setup alacritty config
 	$(call func_print_arrow,setup alacritty)
 	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
