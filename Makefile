@@ -15,7 +15,7 @@ MENU := all clean test
 MENU += help readme
 
 # main
-MENU += setup-alacritty setup-git setup-tmux setup-vim
+MENU += get-osinfo setup-alacritty setup-git setup-tmux setup-vim
 
 # load phony
 .PHONY: $(MENU)
