@@ -5,7 +5,7 @@ to quickly bootstrap a vanilla mac or debian based distros.
 
 ## to use
 
-```bash
+``` bash
 # check dependencies
 command -V git; command -V curl; command -V wget
 
@@ -18,16 +18,16 @@ ssh-keygen -b 4096 -t rsa -f ~/.ssh/id_rsa_standard -C "changeme@example.com"
 # clone the repo and run the make to see menu
 git clone https://github.com/mirageglobe/dot-files.git
 
-# only get the makefile
+# get makefile
 curl -D - https://raw.githubusercontent.com/mirageglobe/dot-files/master/Makefile > ~/Makefile
 
-# only get font
+# get font example
 curl -fLo "<FONT NAME> Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/<FONT_PATH>/complete/<FONT_NAME>%20Nerd%20Font%20Complete.otf
 ```
 
 bash completions
 
-```bash
+``` bash
 # include in ~/.bashrc
 
 # for git completion
@@ -39,8 +39,8 @@ bash completions
 
 ## to contribute
 
-- ensure nothing sensitive is committed to this repo
-- assume that homebrew is not available and setups are compiled binaries or scripts
+- ensure nothing sensitive committed to this repo
+- assume that homebrew is not available and setups compiled binaries or scripts
 
 ## to do
 
