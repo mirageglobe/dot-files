@@ -15,7 +15,7 @@ MENU := all clean test
 MENU += help readme
 
 # main
-MENU += get-osinfo setup-alacritty setup-git setup-tmux setup-vim
+MENU += get-osinfo setup-alacritty setup-git setup-ranger setup-starship setup-tmux setup-vim
 
 # load phony
 .PHONY: $(MENU)
@@ -77,7 +77,7 @@ setup-alacritty:								## setup alacritty config
 	$(call func_print_arrow,setup alacritty)
 	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
 	-mkdir -pv ~/.config/alacritty/
-	-cp -i dot.alacritty.yml ~/.config/alacritty/alacritty.yml				# set alacritty config from template
+	-cp -i ./dot.alacritty.yml ~/.config/alacritty/alacritty.yml				# set alacritty config from template
 
 setup-completion:								## setup bash completion (git)
 	$(call func_print_arrow,setup git-completion)
@@ -92,20 +92,26 @@ setup-git:											## setup gitconfig and gitignore
 	-touch ~/.gitignore
 	-touch ~/.gitconfig
 	$(call func_print_arrow,setup git - overwrite home .gitconfig and .gitignore)
-	-cp -i dot.gitconfig ~/.gitconfig
-	-cp -i dot.gitignore ~/.gitignore
+	-cp -i ./dot.gitconfig ~/.gitconfig
+	-cp -i ./dot.gitignore ~/.gitignore
+
+setup-ranger:										## setup ranger config
+	$(call func_print_arrow,setup ranger - config)
+	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
+	$(call func_print_arrow,setup ranger - copy to config folder)
+	-cp -i ./dot.rc.conf ~/.config/ranger/rc.conf
 
 setup-starship:									## setup starship config
 	$(call func_print_arrow,setup starship - config)
 	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
 	$(call func_print_arrow,setup starship - copy to config folder)
-	-cp -i starship.toml ~/.config/starship.toml
+	-cp -i ./dot.starship.toml ~/.config/starship.toml
 
 setup-tmux:											## setup tmux config
 	$(call func_print_arrow,setup tmux - config)
 	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
 	$(call func_print_arrow,setup tmux - overwrite home .tmux.conf)
-	-cp -i dot.tmux.conf ~/.tmux.conf
+	-cp -i ./dot.tmux.conf ~/.tmux.conf
 
 setup-vim:											## setup vim folders
 	$(call func_print_arrow,setup vim - create backup swap undo folders)
