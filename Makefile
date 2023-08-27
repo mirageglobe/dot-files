@@ -99,7 +99,7 @@ setup-ranger:										## setup ranger config
 	$(call func_print_arrow,setup ranger - config)
 	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
 	$(call func_print_arrow,setup ranger - copy to config folder)
-	-cp -i ./dot.rc.conf ~/.config/ranger/rc.conf
+	-cp -i ./dot.ranger.conf ~/.config/ranger/rc.conf
 
 setup-starship:									## setup starship config
 	$(call func_print_arrow,setup starship - config)
