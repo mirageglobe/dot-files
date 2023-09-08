@@ -97,6 +97,7 @@ setup-git:											## setup gitconfig and gitignore
 
 setup-ranger:										## setup ranger config
 	$(call func_print_arrow,setup ranger - config)
+	# to setup default config run > ranger --copy-config=all
 	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
 	$(call func_print_arrow,setup ranger - copy to config folder)
 	-cp -i ./dot.ranger.conf ~/.config/ranger/rc.conf
