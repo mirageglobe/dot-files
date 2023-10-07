@@ -83,8 +83,9 @@ setup-completion:								## setup bash completion (git)
 	$(call func_print_arrow,setup git-completion)
 	@echo "setup git completion to (default) /usr/local/etc/bash_completion.d ..";
 	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
-	# add git-completion
+	# add git-completion to both homebrew (intel / m1) locations
 	-curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash > /usr/local/etc/bash_completion.d/git-completion.bash
+	-curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash > /opt/homebrew/etc/bash_completion.d/git-completion.bash
 
 setup-git:											## setup gitconfig and gitignore
 	$(call func_print_arrow,setup git - config)
