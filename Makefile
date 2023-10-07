@@ -119,3 +119,4 @@ setup-vim:											## setup vim folders
 	$(call func_print_arrow,setup vim - create backup swap undo folders)
 	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
 	-mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
+	-cp -i dot.vimrc ~/.vimrc
