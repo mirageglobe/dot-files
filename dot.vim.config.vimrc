@@ -42,14 +42,12 @@ set hidden                      " set current buffer to be hidden when
                                 " opening a new file. use :ls to see all
                                 " buffers then :b[n] n=buffer number to select
 
+set backspace=indent,eol,start  " set backspace to go previous line etc
 set backupcopy=yes              " yes/no/auto when opening a file
                                 " vim makes a copy and overwrites
-set backupdir=~/.vim/.backup//  " set vim to use tmp directory for backup files
-set directory=~/.vim/.swp//     " set vim to use tmp directory for swp files
-set undodir=~/.vim/.undo//      " set vim to use tmp directory for undo files
 
-set encoding=UTF-8              " The encoding displayed.
-set fileencoding=UTF-8          " The encoding written to file
+set encoding=UTF-8              " the encoding displayed.
+set fileencoding=UTF-8          " the encoding written to file
 
 " # ----------------------------------- colour ----- color ----- themes ----- #
 
@@ -174,32 +172,32 @@ set number                      " show line numbers
 
 " <leader>z for fold
 
-set nofoldenable
 set foldmethod=indent
 set foldnestmax=10
 set foldlevel=2
+set nofoldenable
 
 " # ------------------------------------------------------- indentation ----- #
 
 " set autoindent
-set smartindent                 " does the right indent in most programs
+set expandtab
 set shiftwidth=2                " indenting at 2 spaces
+set smartindent                 " does the right indent in most programs
 set softtabstop=2
 set tabstop=2                   " tabs are at proper location
-set expandtab
 
 " # --------------------------------------------------------- line wrap ----- #
 
+set colorcolumn=80              " set a colour column length at 80
+set linebreak                   " set wrap at only
+set textwidth=80                " set text width to 80
 " set wrap                        " set soft wrap for text
 set nowrap                      " turn off code wrap
-set linebreak                   " set wrap at only
-set colorcolumn=80              " set a colour column length at 80
-set textwidth=80                " set text width to 80
 
 " # -------------------------------------- scrolling ----- mouse cursor ----- #
 
-set mouse=a                     " turn on terminal mouse
 set cursorline                  " highlight current line
+set mouse=a                     " turn on terminal mouse
 set scrolloff=5                 " set lines for vertical scroll to trigger
 set sidescroll=1                " enable horizontal scroll 1:on 0:off (set wrap off)
 set sidescrolloff=5             " set chars for horizontal scrolling to trigger
@@ -217,6 +215,13 @@ set spell spelllang=en_gb       " turn on vims spell checker
 " set nospell                     " explicitly turn off spell check
 " set splitright                  " auto split right for screens
 set splitbelow                  " auto split bottom for screens (for terminal)
+
+" # -------------------------------------------------------- swap files ----- #
+
+" set noswapfile                  " do not use swap files
+set backupdir=~/.vim/.backup//  " set vim to use tmp directory for backup files
+set directory=~/.vim/.swp//     " set vim to use tmp directory for swp files
+set undodir=~/.vim/.undo//      " set vim to use tmp directory for undo files
 
 " # -------------------------------------------------- fix ----- issues ----- #
 
@@ -464,7 +469,7 @@ let g:lightline = {
       \ }
 
 " colorschemes available for lightline
-" powerline, wombat, jellybeans, solarized, PaperColor, seoul256, one, 
+" powerline, wombat, jellybeans, solarized, PaperColor, seoul256, one,
 " landscape solarized dark, solarized light, PaperColor dark,
 " PaperColor light, one dark, one light
 let g:lightline.colorscheme = 'powerline'
