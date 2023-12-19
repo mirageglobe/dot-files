@@ -733,6 +733,10 @@ let g:netrw_winsize = 25        " set width of tree to 25%
 " fzf enable fuzzy completion, run following in terminal
 " /usr/local/opt/fzf/install
 
+" enable fzf to use find for hidden files
+" https://github.com/junegunn/fzf/issues/337
+" let $FZF_DEFAULT_COMMAND='find . \! \( -type d -path ./.git -prune \) \! -type d \! -name ''*.tags'' -printf ''%P\n'''
+
 " to use fzf in vim
 set rtp+=/usr/local/opt/fzf
 
