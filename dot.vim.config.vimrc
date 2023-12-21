@@ -372,22 +372,25 @@ Plug 'majutsushi/tagbar'
 Plug 'ludovicchabant/vim-gutentags'
 " auto ctag management
 
-" syntax highlight
 " Plug 'sheerun/vim-polyglot'
-" syntax fast loader 100 languages - https://github.com/sheerun/vim-polyglot
+" syntax highlighting - syntax fast loader 100 languages - https://github.com/sheerun/vim-polyglot
 
 " Plug 'scrooloose/syntastic'
 
 " # --------------------------------------------------- code completion ----- #
 
-" Plug 'maralla/completor.vim'                        " <https://github.com/maralla/completor.vim>
+" Plug 'maralla/completor.vim'
+" <https://github.com/maralla/completor.vim>
 
-" Plug 'prabirshrestha/asyncomplete.vim'              " <https://github.com/prabirshrestha/vim-lsp>
+" Plug 'prabirshrestha/asyncomplete.vim'
+" <https://github.com/prabirshrestha/vim-lsp>
+
 " Plug 'prabirshrestha/asyncomplete-buffer.vim'
 " Plug 'prabirshrestha/asyncomplete-lsp.vim'
 " Plug 'prabirshrestha/vim-lsp'
 
-" Plug 'lifepillar/vim-mucomplete'                    " <https://github.com/lifepillar/vim-mucomplete>
+" Plug 'lifepillar/vim-mucomplete'
+" <https://github.com/lifepillar/vim-mucomplete>
 
 " use ale only for linting (use Coc for code completion)
 Plug 'neoclide/coc.nvim', {'branch': 'release'}     " <https://github.com/neoclide/coc.nvim>
