@@ -322,6 +322,9 @@ Plug 'tpope/vim-repeat'
 Plug 'lambdalisue/fern.vim'
 " fern - nerdtree alternative - https://github.com/lambdalisue/fern.vim
 
+Plug 'lambdalisue/fern-renderer-nerdfont.vim'
+" fern - nerdfont plugin - https://github.com/lambdalisue/fern-renderer-nerdfont.vim
+
 Plug 'lambdalisue/nerdfont.vim'
 " fern - nerdfont plugin - https://github.com/lambdalisue/nerdfont.vim
 
