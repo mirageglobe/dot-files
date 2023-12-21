@@ -319,6 +319,9 @@ Plug 'tpope/vim-repeat'
 
 " # --------------------------------------------------- file management ----- #
 
+Plug 'lambdalisue/fern.vim'
+" nerdtree alternative - https://github.com/lambdalisue/fern.vim
+
 Plug 'francoiscabrol/ranger.vim'
 " netrw alternative ranger - https://github.com/francoiscabrol/ranger.vim
 
