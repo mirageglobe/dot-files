@@ -320,7 +320,10 @@ Plug 'tpope/vim-repeat'
 " # --------------------------------------------------- file management ----- #
 
 Plug 'lambdalisue/fern.vim'
-" nerdtree alternative - https://github.com/lambdalisue/fern.vim
+" fern - nerdtree alternative - https://github.com/lambdalisue/fern.vim
+
+Plug 'lambdalisue/nerdfont.vim'
+" fern - nerdfont plugin - https://github.com/lambdalisue/nerdfont.vim
 
 Plug 'francoiscabrol/ranger.vim'
 " netrw alternative ranger - https://github.com/francoiscabrol/ranger.vim
@@ -643,6 +646,12 @@ endfunction
 " nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " # =========================================================== coc end ===== #
+
+" # ======================================================== fern start ===== #
+
+let g:fern#renderer = "nerdfont"
+
+" # ========================================================== fern end ===== #
 
 " # ==================================================== fugitive start ===== #
 
