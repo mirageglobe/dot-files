@@ -67,17 +67,20 @@ readme:													## show information and notes
 get-osinfo:											## get os and ip
 	$(call func_print_arrow,get os information)
 	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
-	@echo "os and architecture"
-	uname -a
-	@echo "($$OSTYPE)"
-	@echo "ip"
-	curl ifconfig.me;
+	# os and architecture
+	-uname -a
+	@echo " "
+	# os type
+	-echo "($$OSTYPE)"
+	@echo ""
+	# ip
+	-curl ifconfig.me;
 
 setup-alacritty:								## setup alacritty config
 	$(call func_print_arrow,setup alacritty)
 	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
 	-mkdir -pv ~/.config/alacritty/
-	-cp -i ./dot.alacritty.yml ~/.config/alacritty/alacritty.yml				# set alacritty config from template
+	-cp -i ./dot.alacritty.yml ~/.config/alacritty/alacritty.yml				# apply default alacritty config template
 
 setup-completion:								## setup bash completion (git)
 	$(call func_print_arrow,setup git-completion)
@@ -88,35 +91,40 @@ setup-completion:								## setup bash completion (git)
 	-curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash > /opt/homebrew/etc/bash_completion.d/git-completion.bash
 
 setup-git:											## setup gitconfig and gitignore
-	$(call func_print_arrow,setup git - config)
+	$(call func_print_arrow,setup-git - config)
 	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
-	-touch ~/.gitignore
-	-touch ~/.gitconfig
-	$(call func_print_arrow,setup git - overwrite home .gitconfig and .gitignore)
+	touch ~/.gitignore
+	touch ~/.gitconfig
+	$(call func_print_arrow,setup-git - overwrite home .gitconfig and .gitignore)
 	-cp -i ./dot.gitconfig ~/.gitconfig
 	-cp -i ./dot.gitignore ~/.gitignore
 
 setup-ranger:										## setup ranger config
-	$(call func_print_arrow,setup ranger - config)
-	# to setup default config run > ranger --copy-config=all
+	$(call func_print_arrow,setup-ranger - config)
+	# to setup default config, run: ranger --copy-config=all
+	# copy to home / .config / ranger / rc.conf
 	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
-	$(call func_print_arrow,setup ranger - copy to config folder)
 	-cp -i ./dot.ranger.conf ~/.config/ranger/rc.conf
 
 setup-starship:									## setup starship config
-	$(call func_print_arrow,setup starship - config)
+	$(call func_print_arrow,setup-starship - config)
+	# copy to home / starship.toml
 	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
-	$(call func_print_arrow,setup starship - copy to config folder)
 	-cp -i ./dot.starship.toml ~/.config/starship.toml
 
 setup-tmux:											## setup tmux config
-	$(call func_print_arrow,setup tmux - config)
+	$(call func_print_arrow,setup-tmux - config)
+	# overwrite home / .tmux.conf
 	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
-	$(call func_print_arrow,setup tmux - overwrite home .tmux.conf)
 	-cp -i ./dot.tmux.conf ~/.tmux.conf
 
 setup-vim:											## setup vim folders
-	$(call func_print_arrow,setup vim - create backup swap undo folders)
+	$(call func_print_arrow,setup-vim - config)
+	# create home / .vim / .backup .swp .undo
+	# copy config to home / .vimrc
 	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
+	# create home / .vim / .backup .swp .undo
 	-mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
+	@echo ""
+	# copy config to home / .vimrc
 	-cp -i dot.vimrc ~/.vimrc

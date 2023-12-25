@@ -18,3 +18,9 @@
 if filereadable(expand("~/dot-files/dot.vimrc"))
   source ~/dot-files/dot.vim.config.vimrc
 endif
+
+" to include vim plugin idr(i dont remember), for example if installed in
+" dot-case folder, uncomment the following:
+" if filereadable(expand("~/dot-case/dot.idr.vimrc"))
+"   source ~/dot-case/dot.idr.vimrc
+" endif
