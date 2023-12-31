@@ -8,8 +8,8 @@
 " endif
 
 " if you have idr
-" if filereadable(expand("~/dot-case/dot.idr.vimrc"))
-"   source ~/dot-case/dot.idr.vimrc
+" if filereadable(expand("~/dot-case/idr/dot.idr.vimrc"))
+"   source ~/dot-case/idr/dot.idr.vimrc
 " endif
 
 " # ========================================================= reference ===== #
