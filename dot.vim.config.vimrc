@@ -536,7 +536,7 @@ let g:lightline#ale#indicator_warnings = "\uf071"
 let g:lightline#ale#indicator_errors = "\uf05e"
 let g:lightline#ale#indicator_ok = "\uf00c"
 
-" =============================================================== lightline end
+" # ===================================================== lightline end ===== #
 
 " # ========================================================= ale start ===== #
 
@@ -639,15 +639,15 @@ function! CheckBackspace() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" Use <c-space> to trigger completion.
+" <c-space> to trigger completion.
 " if has('nvim')
 "   inoremap <silent><expr> <c-space> coc#refresh()
 " else
 "   inoremap <silent><expr> <c-@> coc#refresh()
 " endif
 
-" Use `[g` and `]g` to navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+" `[g` and `]g` to navigate diagnostics
+" `:CocDiagnostics` to get all diagnostics of current buffer in location list.
 " nmap <silent> [g <Plug>(coc-diagnostic-prev)
 " nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
@@ -656,6 +656,9 @@ endfunction
 " # ======================================================== fern start ===== #
 
 let g:fern#renderer = "nerdfont"
+" to use :Fern . -drawer -toggle -reveal=% -keep
+" for root folder, -reveal=%
+" to prevent quit, -keep
 
 " # ========================================================== fern end ===== #
 
