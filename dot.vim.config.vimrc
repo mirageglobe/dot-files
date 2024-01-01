@@ -354,8 +354,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 " run git commands in vim
 
-" Plug 'tpope/vim-rhubarb'
-" git hub command plugin
+Plug 'tpope/vim-rhubarb'
+" git hub command plugin needed for fugitive to open line in github
 
 " Plug 'tommcdo/vim-fubitive'
 " git in vim for bitbucket
@@ -763,21 +763,6 @@ set rtp+=/usr/local/opt/fzf
 
 " # =========================================================== fzf end ===== #
 
-" # ============================================= custom commands start ===== #
-
-" usage - :<command>
-
-" reload shell
-command ReloadShell :source ~/dot-files/dot.vimrc
-
-" fzf - override Files command
-" usage :Files!
-" ref - https://github.com/junegunn/fzf.vim
-command! -bang -nargs=? -complete=dir Files
-    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
-
-" # =============================================== custom commands end ===== #
-
 " # ======================================================= alias start ===== #
 
 " ref - http://learnvimscriptthehardway.stevelosh.com/chapters/03.html
@@ -819,42 +804,50 @@ let mapleader = "\<space>"
 " # ----------------------------------------------------- file explorer ----- #
 
 " buffer explorer open buffer
-nnoremap <Leader>be :BufExplorer<CR>
+" nnoremap <Leader>be :BufExplorer<CR>
 " noremap <Leader><SPACE> :BufExplorer<CR>
 
 " buffer explorer via fzf
-nnoremap <Leader>bo :Buffers<CR>
+nnoremap <Leader>ob :Buffers<CR>
+
+" list all buffers
+nnoremap <Leader>lsb :ls<CR>
 
 " buffer delete current opened buffer (does not delete file)
-nnoremap <Leader>bc :bdelete<CR>
+" nnoremap <Leader>db :bdelete<CR>
 
 " ctag tagbar - open ctag explorer
-nnoremap <Leader>ct :TagbarToggle<CR>
+nnoremap <Leader>oct :TagbarToggle<CR>
 
 " file explorer open file
 " nnoremap <Leader>w <C-w><C-w>
 " noremap <Leader>nt :NERDTreeToggle<CR>
 
 " file explorer open file via FZF file explorer
-nnoremap <Leader>fo :Files!<CR>
+nnoremap <Leader>of :Files!<CR>
+
+" file explorer via fern
+" -reveal=%   show project root
+" -keep       keep sidebar when quit
+noremap <Leader>ofe :Fern . -drawer -toggle -reveal=% -keep<CR>
 
 " file explorer via ranger
-let g:ranger_map_keys = 0
-nnoremap <leader>ro :Ranger<CR>
+" let g:ranger_map_keys = 0
+" nnoremap <leader>ore :Ranger<CR>
 
 " file explorer via netrw tree
-" noremap <Leader>ff :Explore<CR>
+" noremap <Leader>ofe :Explore<CR>
 
 " # -------------------------------------------------------- copy paste ----- #
 
 " clipboard copy/paste from clipboard
-" noremap <Leader>cc :.w !pbcopy<CR><CR>
-" noremap <Leader>cp :.r !pbpaste<CR>
+" noremap <Leader>cp :.w !pbcopy<CR><CR>
+" noremap <Leader>p :.r !pbpaste<CR>
 
 " # --------------------------------------------------- code management ----- #
 
 " code folding za / zc / zo
-nmap <Leader>cf za<ESC>
+nmap <Leader>fc za<ESC>
 
 " search buffer via ripgrep
 nnoremap <leader>rg :Rg<CR>
@@ -872,19 +865,17 @@ nnoremap <Leader>gb :Git blame<CR>
 nnoremap <Leader>gca <ESC>ICo-authored-by: John Doe <johndoe@gmail.com><ESC>
 
 " open current line in the browser (github)
-" nnoremap <Leader>gh :.GBrowse<CR>
+nnoremap <Leader>ogh :.GBrowse<CR>
 
 " open visual selection in the browser (github)
-" vnoremap <Leader>gh :GBrowse<CR>
+" vnoremap <Leader>ogh :GBrowse<CR>
 
 " # ------------------------------------------------------ common print ----- #
 
-" print template header
+" print template header with 80 char width
 " note uses gcc : timpopes auto commenter. method: move begin, prepend === , esc, comment line
-
-" print template
-nmap <Leader>pt <ESC>O# ------------------------------------------------------------ CHANGEME ----- #<ESC>0
-nmap <Leader>ptt <ESC>O# ============================================================ CHANGEME ===== #<ESC>0
+nmap <Leader>ph <ESC>O# ------------------------------------------------------------ CHANGEME ----- #<ESC>0
+nmap <Leader>phh <ESC>O# ============================================================ CHANGEME ===== #<ESC>0
 
 " nmap <Leader>ph1 <ESC>gcc<ESC>I===<ESC>gcc<ESC>0
 " nmap <Leader>ph2 <ESC>I===<space>section<space>start<ESC>gcc<ESC>0o===<space>section<space>end<ESC>gcc0
@@ -897,17 +888,58 @@ nmap <Leader>ptt <ESC>O# =======================================================
 
 " # ========================================== leader ===== mapping end ===== #
 
-" # ============================================== trimwhitespace start ===== #
+" # ==================================================== commands start ===== #
+
+" to use, run <esc>:<command>
+
+" # ----------------------------------------- fzf file command override ----- #
+
+" fzf - override Files command - https://github.com/junegunn/fzf.vim
+" to use, :Files! or :Files
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
+
+" # ------------------------------------------------------ reloadshell ------ #
+
+" reload shell
+command ReloadShell :source ~/dot-files/dot.vimrc
+
+" # ---------------------------------------------------- showshortcuts ------ #
+
+function ShowShortcuts()
+  echom "# ---------------------------------------- show vim shortcuts ----- #"
+  echom " "
+  echom ":IDR                          shows IDR (i dont remember) snippets"
+  echom ":ReloadShell                  re-sources vim config"
+  echom ":ShowShortcuts                show helper shortcuts"
+  echom ":TrimWhiteSpace               trims white spaces"
+  echom " "
+  echom "<leader> of                   open file"
+  echom "<leader> ofe                  open/toggle file explore drawer"
+  echom "<leader> ob                   open buffer"
+  echom "<leader> lsb                  list opened buffer(s)"
+  echom "<leader> fc                   toggle fold code"
+  echom "<leader> gb                   git blame"
+  echom "<leader> gca                  add git co-author"
+  echom "<leader> ogh                  open file in github"
+  echom "<leader> ph                   print ----- header"
+  echom "<leader> phh                  print ===== header"
+endfunction
+
+" toggle trim trailing whitespace
+command ShowShortcuts :call ShowShortcuts()
+
+" # --------------------------------------------------- trimwhitespace ------ #
 
 function TrimWhiteSpace()
-  echom "TTWS : trim trailing whitespace"
+  echom "trim trailing white space"
   :%s/\s\+$//e
 endfunction
 
 " toggle trim trailing whitespace
 command TrimWhiteSpace :call TrimWhiteSpace()
 
-" # ================================================ trimwhitespace end ===== #
+" # ====================================================== commands end ===== #
 
 " # ========================================== omnicomplete popup start ===== #
 
