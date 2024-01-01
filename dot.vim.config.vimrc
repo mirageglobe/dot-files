@@ -660,6 +660,9 @@ let g:fern#renderer = "nerdfont"
 " for root folder, -reveal=%
 " to prevent quit, -keep
 
+let g:fern#default_hidden = 1
+" show hidden by default
+
 " # ========================================================== fern end ===== #
 
 " # ==================================================== fugitive start ===== #
