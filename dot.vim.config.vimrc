@@ -229,6 +229,10 @@ set undodir=~/.vim/.undo//      " set vim to use tmp directory for undo files
 " https://github.com/vim/vim/issues/2049
 set mmp=8000                    " set maxmempattern. default is 1000
 
+" # ---------------------------------------- tab spaces for file types  ----- #
+"
+" autocmd FileType python,doctest set ai ts=4 sw=4 sts=4 et
+
 " # ======================================================== config end ===== #
 
 " # ================================================ preload plug start ===== #
