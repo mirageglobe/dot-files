@@ -190,7 +190,7 @@ set tabstop=2                   " tabs are at proper location
 
 set colorcolumn=80              " set a colour column length at 80
 set linebreak                   " set wrap at only
-set textwidth=80                " set text width to 80
+" set textwidth=80                " set text width to 80 and autowrap
 " set wrap                        " set soft wrap for text
 set nowrap                      " turn off code wrap
 
@@ -222,6 +222,11 @@ set splitbelow                  " auto split bottom for screens (for terminal)
 set backupdir=~/.vim/.backup//  " set vim to use tmp directory for backup files
 set directory=~/.vim/.swp//     " set vim to use tmp directory for swp files
 set undodir=~/.vim/.undo//      " set vim to use tmp directory for undo files
+
+" # -------------------------------------------- file specific settings ----- #
+
+" markdown file set textwidth autowrap
+au BufRead,BufNewFile *.md setlocal textwidth=80
 
 " # -------------------------------------------------- fix ----- issues ----- #
 
