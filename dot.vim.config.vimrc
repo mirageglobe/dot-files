@@ -449,14 +449,16 @@ set background=dark
 " let g:solarized_visibility = "high"
 " let g:solarized_contrast = "high"
 
+" colorscheme apprentice
 colorscheme gruvbox
+" colorscheme onedark
+
 " colorscheme gruvbox8_hard
 " colorscheme gruvbox8_soft
 " colorscheme gruvbox8
 " colorscheme dracula
 " colorscheme lucius
 " colorscheme nord
-" colorscheme onedark
 " colorscheme OceanicNext
 " colorscheme PaperColor
 " colorscheme solarized
@@ -488,11 +490,12 @@ let g:lightline = {
       \   }
       \ }
 
-" colorschemes available for lightline
-" powerline, wombat, jellybeans, solarized, PaperColor, seoul256, one,
-" landscape solarized dark, solarized light, PaperColor dark,
-" PaperColor light, one dark, one light
-let g:lightline.colorscheme = 'powerline'
+" popular colorschemes available for lightline
+" powerline, apprentice, jellybeans, material, nord, OldHope, PaperColor
+" wombat
+" https://github.com/itchyny/lightline.vim/blob/master/colorscheme.md
+
+let g:lightline.colorscheme = 'material'
 
 let g:lightline.component = {
       \   'gitbranch': ' %{gitbranch#name()}',
