@@ -821,29 +821,29 @@ let mapleader = "\<space>"
 " nnoremap <Leader>be :BufExplorer<CR>
 " noremap <Leader><SPACE> :BufExplorer<CR>
 
-" buffer explorer via fzf
+" open buffer - buffer explorer via fzf
 nnoremap <Leader>ob :Buffers<CR>
 
-" list all buffers
-nnoremap <Leader>lsb :ls<CR>
+" list buffers - list all buffers
+nnoremap <Leader>lb :ls<CR>
 
 " buffer delete current opened buffer (does not delete file)
 " nnoremap <Leader>db :bdelete<CR>
 
-" ctag tagbar - open ctag explorer
-nnoremap <Leader>oct :TagbarToggle<CR>
+" open tag - ctag tagbar - open ctag explorer
+nnoremap <Leader>ot :TagbarToggle<CR>
 
 " file explorer open file
 " nnoremap <Leader>w <C-w><C-w>
 " noremap <Leader>nt :NERDTreeToggle<CR>
 
-" file explorer open file via FZF file explorer
+" open file - file explorer open file via FZF file explorer
 nnoremap <Leader>of :Files!<CR>
 
-" file explorer via fern
+" open explorer - file explorer via fern
 " -reveal=%   show project root
 " -keep       keep sidebar when quit
-noremap <Leader>ofe :Fern . -drawer -toggle -reveal=% -keep<CR>
+noremap <Leader>oe :Fern . -drawer -toggle -reveal=% -keep<CR>
 
 " file explorer via ranger
 " let g:ranger_map_keys = 0
@@ -873,13 +873,13 @@ nnoremap <leader>rg :Rg<CR>
 " show commits for every source line (git blame)
 nnoremap <Leader>gb :Git blame<CR>
 
-" git pr set co-author
+" git co-author - git pr set co-author
 " let @z='ICo-authored-by: y$A <@gmail.com>@Pgua<f x'
 " nmap <Leader>@ <ESC>VD <ESC>ICo-authored-by: <CR>
 nnoremap <Leader>gca <ESC>ICo-authored-by: John Doe <johndoe@gmail.com><ESC>
 
-" open current line in the browser (github)
-nnoremap <Leader>ogh :.GBrowse<CR>
+" github open - open current line in the browser (github)
+nnoremap <Leader>go :.GBrowse<CR>
 
 " open visual selection in the browser (github)
 " vnoremap <Leader>ogh :GBrowse<CR>
