@@ -696,6 +696,9 @@ let g:gitgutter_sign_allow_clobber = 0
 
 " https://www.reddit.com/r/vim/comments/d77t6j/guide_how_to_setup_ctags_with_gutentags_properly/
 
+let g:gutentags_add_default_project_roots = 0
+let g:gutentags_project_root = ['.git']
+
 let g:gutentags_cache_dir = expand('~/.cache/vim/ctags/')
 
 let g:gutentags_generate_on_new = 1
