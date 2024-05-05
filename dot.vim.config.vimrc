@@ -670,6 +670,7 @@ let g:fern#renderer = "nerdfont"
 " to use :Fern . -drawer -toggle -reveal=% -keep
 " for root folder, -reveal=%
 " to prevent quit, -keep
+" for width, -width (default 30)
 
 let g:fern#default_hidden = 1
 " show hidden by default
@@ -910,9 +911,11 @@ nnoremap <Leader>ot :TagbarToggle<CR>
 nnoremap <Leader>of :Files!<CR>
 
 " open explorer - file explorer via fern
-" -reveal=%   show project root
 " -keep       keep sidebar when quit
-noremap <Leader>oe :Fern . -drawer -toggle -reveal=% -keep<CR>
+" -reveal=%   show project root
+" -stay       stay focus on the origin window
+" -width=30   drawer width (default 30)
+noremap <Leader>oe :Fern . -drawer -toggle -keep -width=40 -stay -reveal=%<CR>
 
 " file explorer via ranger
 " let g:ranger_map_keys = 0
