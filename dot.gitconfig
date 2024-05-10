@@ -14,16 +14,16 @@
 # ============================================================== config ===== #
 
 [blame]
-	pager = delta                 # use delta for pretty terminal diff
+  pager = delta                 # use delta for pretty terminal diff
 
 [core]
-	pager = delta                 # use delta for pretty terminal diff
+  pager = delta                 # use delta for pretty terminal diff
 
 [credential]
-	helper = cache --timeout 7200
+  helper = cache --timeout 7200
 
 [gpg]
-	program = gpg
+  program = gpg
 
 [interactive]
   diffFilter = delta --color-only         # use delta for interactive diff
@@ -32,8 +32,8 @@
   conflictstyle = diff3         # delta merge conflict
 
 [user]
-	name = jimmy lim
-	email = mirageglobe@gmail.com
+  name = jimmy lim
+  email = mirageglobe@gmail.com
 
 # ---------------------------------------------------------- custom dir ----- #
 
@@ -52,19 +52,19 @@
   navigate = true               # use n and N to move between diff sections
   side-by-side = true
   line-numbers = true
-	features = line-numbers decorations
-	syntax-theme = Dracula
-	plus-style = syntax "#003800"
-	minus-style = syntax "#3f0001"
+  features = line-numbers decorations
+  syntax-theme = Dracula
+  plus-style = syntax "#003800"
+  minus-style = syntax "#3f0001"
 
 [delta "decorations"]
-	commit-decoration-style = yellow box ul
-	file-style = bold yellow
-	file-decoration-style = none
-	hunk-header-decoration-style = cyan box ul
+  commit-decoration-style = yellow box ul
+  file-style = bold yellow
+  file-decoration-style = none
+  hunk-header-decoration-style = cyan box ul
 
 [delta "line-numbers"]
-	line-numbers-left-style = cyan
-	line-numbers-right-style = cyan
-	line-numbers-minus-style = 124
-	line-numbers-plus-style = 28
+  line-numbers-left-style = cyan
+  line-numbers-right-style = cyan
+  line-numbers-minus-style = 124
+  line-numbers-plus-style = 28
