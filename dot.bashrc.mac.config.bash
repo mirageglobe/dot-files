@@ -26,8 +26,9 @@ printf "%s" "[+] config "
 # show load status
 printf "%s" "[+] git "
 
-# default push branch to remote
-git config --global push.default current
+# default push and pull config
+git config --global push.default simple
+git config --global push.autoSetupRemote true
 git config --global pull.rebase true
 
 # set include gitignore file
