@@ -127,4 +127,8 @@ setup-vim:											## setup vim folders
 	-mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
 	@echo ""
 	# copy config to home / .vimrc
-	-cp -i dot.vimrc ~/.vimrc
+	#		cp -i dot.vimrc ~/.vimrc
+	# ----- for neovim / lazy vim --------------------------------------------- #
+	# clone lazyvim for neovim setup
+	#		brew install neovim
+	#		git clone https://github.com/LazyVim/starter ~/.config/nvim
