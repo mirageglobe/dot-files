@@ -23,6 +23,9 @@ printf "%s" "[+] config "
 
 # ----------------------------------------------------------------- git ----- #
 
+# custom config for default git settings
+# additional settings are defined in .gitconfig template
+
 # show load status
 printf "%s" "[+] git "
 
@@ -51,7 +54,7 @@ git config --global alias.b "branch --all --verbose"
 git config --global alias.c "commit"
 git config --global alias.ca "commit --amend"
 git config --global alias.co "checkout"
-git config --global alias.cob "checkout -b"
+git config --global alias.cob "checkout -b --track"
 git config --global alias.com "checkout main"
 git config --global alias.comm "checkout master"
 git config --global alias.dm "diff main"
