@@ -707,6 +707,10 @@ let g:gutentags_generate_on_missing = 1
 let g:gutentags_generate_on_write = 1
 let g:gutentags_generate_on_empty_buffer = 0
 
+" fixing gutentags
+" let g:gutentags_trace = 1
+" let g:gutentags_ctags_executable = '/usr/local/bin/ctags'
+
 let g:gutentags_ctags_extra_args = [
       \ '--tag-relative=yes',
       \ '--fields=+ailmnS',
