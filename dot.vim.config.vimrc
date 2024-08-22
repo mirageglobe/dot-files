@@ -650,6 +650,8 @@ function! CheckBackspace() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+" try setup mypy https://github.com/python/mypy
+
 " <c-space> to trigger completion.
 " if has('nvim')
 "   inoremap <silent><expr> <c-space> coc#refresh()
