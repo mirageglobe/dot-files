@@ -1,0 +1,6 @@
+{
+  "_comment": "copy this file to ~/.config/coc/",
+  "signature.enable": false,
+  "inlayHint.enable": false,
+  "suggest.autoTrigger": "none"
+}
