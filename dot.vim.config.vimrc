@@ -258,11 +258,12 @@ set mmp=8000                    " set maxmempattern. default is 1000
 
 " use ale only for linting (use Coc for code completion)
 
-" this setting must be set before ale is loaded.
-" you should not turn this setting on if you wish to use ale as a completion
-" source for other completion plugins, like deoplete.
-" enable completion where available.
-let g:ale_completion_enabled = 1
+" this setting must be set before ale is loaded
+" enable completion where available
+"
+" to use ale as a completion source for other completion plugins (i.e deoplete)
+" do not turn this setting on
+let g:ale_completion_enabled = 0
 
 " automatic imports from external modules
 let g:ale_completion_autoimport = 1
@@ -600,6 +601,8 @@ let g:ale_list_window_size = 5
 
 " setup - run after installing coc or use global_extensions
 " :CocInstall coc-json coc-tsserver
+
+let g:coc_config_home = '~/.config/coc'
 
 " <https://github.com/neoclide/coc.nvim/wiki/Language-servers#terraform>
 let g:coc_global_extensions = [
