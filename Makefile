@@ -68,10 +68,10 @@ get-osinfo:											## get os and ip
 	$(call func_print_arrow,get os information)
 	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
 	# os and architecture
-	-uname -a
+	-uname -a;
 	@echo " "
 	# os type
-	-echo "($$OSTYPE)"
+	-echo "$$OSTYPE";
 	@echo ""
 	# ip
 	-curl ifconfig.me;
