@@ -405,6 +405,9 @@ Plug 'ludovicchabant/vim-gutentags'
 " use ale only for linting (use Coc for code completion)
 Plug 'neoclide/coc.nvim', {'branch': 'release'}     " <https://github.com/neoclide/coc.nvim>
 
+" codium <https://github.com/Exafunction/codeium.vim>
+Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
+
 " # -------------------------------------------------------------- lint ----- #
 
 " use ale only for linting (use Coc for code completion)
