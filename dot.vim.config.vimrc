@@ -287,14 +287,14 @@ call plug#begin('~/.vim/plugged')
 
 " # ---------------------------------------- themes ----- color schemes ----- #
 
-" Plug 'drewtempelmeyer/palenight.vim'
 " enables palenight color scheme
+" Plug 'drewtempelmeyer/palenight.vim'
 
-Plug 'rafi/awesome-vim-colorschemes'
 " enables package colorschemes (rafi)
+Plug 'rafi/awesome-vim-colorschemes'
 
-" Plug 'flazz/vim-colorschemes'
 " enables package colorschemes (flazz)
+" Plug 'flazz/vim-colorschemes'
 
 " Plug 'dracula/vim'
 " Plug 'lifepillar/vim-gruvbox8'
@@ -302,24 +302,23 @@ Plug 'rafi/awesome-vim-colorschemes'
 
 " # --------------------------------------------------------------- ide ----- #
 
+" enables superlight status bar - <https://github.com/itchyny/lightline.vim>
 Plug 'itchyny/lightline.vim'
-" enables superlight status bar
-" <https://github.com/itchyny/lightline.vim>
 
-Plug 'tpope/vim-sensible'
 " enables common standard settings for vim
+Plug 'tpope/vim-sensible'
 
-Plug 'editorconfig/editorconfig-vim'
 " enables .editorconfig file overrides - https://editorconfig.org/
+Plug 'editorconfig/editorconfig-vim'
 
-Plug 'mhinz/vim-startify'
 " enables fancy startup
+Plug 'mhinz/vim-startify'
 
-Plug 'tpope/vim-commentary'
 " enables commenting - gcc (to [un]comment line) - gc(to comment with motion)
+Plug 'tpope/vim-commentary'
 
-Plug 'tpope/vim-repeat'
 " enables repeating command or input with '.'
+Plug 'tpope/vim-repeat'
 
 " Plug 'tpope/vim-surround'
 " enables quoting with cs[' to change quotes from [ to ' - cst to add quotes
@@ -329,78 +328,84 @@ Plug 'tpope/vim-repeat'
 
 " # --------------------------------------------------- file management ----- #
 
-Plug 'lambdalisue/fern.vim'
+" netrw alternative - https://github.com/justinmk/vim-dirvish
+" Plug 'justinmk/vim-dirvish'
+
 " fern - nerdtree alternative - https://github.com/lambdalisue/fern.vim
+Plug 'lambdalisue/fern.vim'
 
-Plug 'lambdalisue/fern-renderer-nerdfont.vim'
+" fern git status
+" Plug 'lambdalisue/fern-git-status.vim'
+
 " fern - nerdfont plugin - https://github.com/lambdalisue/fern-renderer-nerdfont.vim
+Plug 'lambdalisue/fern-renderer-nerdfont.vim'
 
-Plug 'lambdalisue/nerdfont.vim'
 " fern - nerdfont plugin - https://github.com/lambdalisue/nerdfont.vim
+Plug 'lambdalisue/nerdfont.vim'
 
-Plug 'francoiscabrol/ranger.vim'
 " netrw alternative ranger - https://github.com/francoiscabrol/ranger.vim
+" Plug 'francoiscabrol/ranger.vim'
 
+" fzf - enables super fast fuzzy search with :FZF
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-" enables super fast fuzzy search with :FZF
 
-Plug 'junegunn/fzf.vim'
 " needs both lines
+Plug 'junegunn/fzf.vim'
 
 " Plug 'preservim/nerdtree'
 " netrw alternative drawer
 
-Plug 'tpope/vim-vinegar'
 " netrw alternative enables drawer with - key
+Plug 'tpope/vim-vinegar'
 
-Plug 'jlanzarotta/bufexplorer'
 " buffer explorer
+Plug 'jlanzarotta/bufexplorer'
 
 " # --------------------------------------------------------------- git ----- #
 
-Plug 'airblade/vim-gitgutter'
 " shows git status in gutter
+Plug 'airblade/vim-gitgutter'
 
-Plug 'tpope/vim-fugitive'
 " run git commands in vim
+Plug 'tpope/vim-fugitive'
 
-Plug 'tpope/vim-rhubarb'
 " git hub command plugin needed for fugitive to open line in github
+Plug 'tpope/vim-rhubarb'
 
-" Plug 'tommcdo/vim-fubitive'
 " git in vim for bitbucket
+" Plug 'tommcdo/vim-fubitive'
 
+" simple show gitbranch name used for lightline
 Plug 'itchyny/vim-gitbranch'
-" simple gitbranch name to replace fugitive
 
 " # --------------------------------------------- language ----- syntax ----- #
 
-" ctags
-Plug 'majutsushi/tagbar'
-" enables ctag sidebar (install ctag via brew)
+" ctags enables ctag sidebar (install ctag via brew)
+" Plug 'majutsushi/tagbar'
 
-Plug 'ludovicchabant/vim-gutentags'
 " auto ctag management
+" Plug 'ludovicchabant/vim-gutentags'
 
-" Plug 'sheerun/vim-polyglot'
 " syntax highlighting - syntax fast loader 100 languages - https://github.com/sheerun/vim-polyglot
+" Plug 'sheerun/vim-polyglot'
 
+" linting
 " Plug 'scrooloose/syntastic'
 
 " # --------------------------------------------------- code completion ----- #
 
-" Plug 'maralla/completor.vim'
 " <https://github.com/maralla/completor.vim>
+" Plug 'maralla/completor.vim'
 
-" Plug 'prabirshrestha/asyncomplete.vim'
 " <https://github.com/prabirshrestha/vim-lsp>
+" Plug 'prabirshrestha/asyncomplete.vim'
 
 " Plug 'prabirshrestha/asyncomplete-buffer.vim'
 " Plug 'prabirshrestha/asyncomplete-lsp.vim'
 " Plug 'prabirshrestha/vim-lsp'
 
-" Plug 'lifepillar/vim-mucomplete'
 " <https://github.com/lifepillar/vim-mucomplete>
+" Plug 'lifepillar/vim-mucomplete'
 
 " use ale only for linting (use Coc for code completion)
 Plug 'neoclide/coc.nvim', {'branch': 'release'}     " <https://github.com/neoclide/coc.nvim>
@@ -509,7 +514,7 @@ let g:lightline.component = {
       \   'readonly': '%{&filetype=="help"?"":&readonly?"":""}',
       \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
       \ }
-      " \     'fugitive': '%{exists("*fugitive#head")?"":""} %{exists("*fugitive#head")?fugitive#head():""}',
+      " \   'fugitive': '%{exists("*fugitive#head")?"":""} %{exists("*fugitive#head")?fugitive#head():""}',
 
 " let g:lightline.component_function = {
 "       \   'gitbranch': 'gitbranch#name'
@@ -684,8 +689,11 @@ let g:fern#renderer = "nerdfont"
 " to prevent quit, -keep
 " for width, -width (default 30)
 
+" show hidden files by default
 let g:fern#default_hidden = 1
-" show hidden by default
+
+" disable default mappings to customize your own
+let g:fern#disable_default_mappings = 1
 
 " # ========================================================== fern end ===== #
 
@@ -709,72 +717,72 @@ let g:gitgutter_sign_allow_clobber = 0
 
 " https://www.reddit.com/r/vim/comments/d77t6j/guide_how_to_setup_ctags_with_gutentags_properly/
 
-let g:gutentags_add_default_project_roots = 0
-let g:gutentags_project_root = ['.git']
+" let g:gutentags_add_default_project_roots = 0
+" let g:gutentags_project_root = ['.git']
 
-let g:gutentags_cache_dir = expand('~/.cache/vim/ctags/')
+" let g:gutentags_cache_dir = expand('~/.cache/vim/ctags/')
 
-let g:gutentags_generate_on_new = 1
-let g:gutentags_generate_on_missing = 1
-let g:gutentags_generate_on_write = 1
-let g:gutentags_generate_on_empty_buffer = 0
+" let g:gutentags_generate_on_new = 1
+" let g:gutentags_generate_on_missing = 1
+" let g:gutentags_generate_on_write = 1
+" let g:gutentags_generate_on_empty_buffer = 0
 
 " fixing gutentags
 " let g:gutentags_trace = 1
 " let g:gutentags_ctags_executable = '/usr/local/bin/ctags'
 
-let g:gutentags_ctags_extra_args = [
-      \ '--tag-relative=yes',
-      \ '--fields=+ailmnS',
-      \ ]
+" let g:gutentags_ctags_extra_args = [
+"       \ '--tag-relative=yes',
+"       \ '--fields=+ailmnS',
+"       \ ]
 
-let g:gutentags_ctags_exclude = [
-      \ '*.git', '*.svg', '*.hg',
-      \ '*/tests/*',
-      \ 'build',
-      \ 'dist',
-      \ '*sites/*/files/*',
-      \ 'bin',
-      \ 'node_modules',
-      \ 'bower_components',
-      \ 'cache',
-      \ 'compiled',
-      \ 'docs',
-      \ 'example',
-      \ 'bundle',
-      \ 'vendor',
-      \ '*.md',
-      \ '*-lock.json',
-      \ '*.lock',
-      \ '*bundle*.js',
-      \ '*build*.js',
-      \ '.*rc*',
-      \ '*.json',
-      \ '*.min.*',
-      \ '*.map',
-      \ '*.bak',
-      \ '*.zip',
-      \ '*.pyc',
-      \ '*.class',
-      \ '*.sln',
-      \ '*.Master',
-      \ '*.csproj',
-      \ '*.tmp',
-      \ '*.csproj.user',
-      \ '*.cache',
-      \ '*.pdb',
-      \ 'tags*',
-      \ 'cscope.*',
-      \ '*.css',
-      \ '*.less',
-      \ '*.scss',
-      \ '*.exe', '*.dll',
-      \ '*.mp3', '*.ogg', '*.flac',
-      \ '*.swp', '*.swo',
-      \ '*.bmp', '*.gif', '*.ico', '*.jpg', '*.png',
-      \ '*.rar', '*.zip', '*.tar', '*.tar.gz', '*.tar.xz', '*.tar.bz2',
-      \ '*.pdf', '*.doc', '*.docx', '*.ppt', '*.pptx',
-      \ ]
+" let g:gutentags_ctags_exclude = [
+"       \ '*.git', '*.svg', '*.hg',
+"       \ '*/tests/*',
+"       \ 'build',
+"       \ 'dist',
+"       \ '*sites/*/files/*',
+"       \ 'bin',
+"       \ 'node_modules',
+"       \ 'bower_components',
+"       \ 'cache',
+"       \ 'compiled',
+"       \ 'docs',
+"       \ 'example',
+"       \ 'bundle',
+"       \ 'vendor',
+"       \ '*.md',
+"       \ '*-lock.json',
+"       \ '*.lock',
+"       \ '*bundle*.js',
+"       \ '*build*.js',
+"       \ '.*rc*',
+"       \ '*.json',
+"       \ '*.min.*',
+"       \ '*.map',
+"       \ '*.bak',
+"       \ '*.zip',
+"       \ '*.pyc',
+"       \ '*.class',
+"       \ '*.sln',
+"       \ '*.Master',
+"       \ '*.csproj',
+"       \ '*.tmp',
+"       \ '*.csproj.user',
+"       \ '*.cache',
+"       \ '*.pdb',
+"       \ 'tags*',
+"       \ 'cscope.*',
+"       \ '*.css',
+"       \ '*.less',
+"       \ '*.scss',
+"       \ '*.exe', '*.dll',
+"       \ '*.mp3', '*.ogg', '*.flac',
+"       \ '*.swp', '*.swo',
+"       \ '*.bmp', '*.gif', '*.ico', '*.jpg', '*.png',
+"       \ '*.rar', '*.zip', '*.tar', '*.tar.gz', '*.tar.xz', '*.tar.bz2',
+"       \ '*.pdf', '*.doc', '*.docx', '*.ppt', '*.pptx',
+"       \ ]
 
 " # ===================================================== gutentags end ===== #
 
@@ -917,7 +925,7 @@ nnoremap <Leader>lb :ls<CR>
 " nnoremap <Leader>db :bdelete<CR>
 
 " open tag - ctag tagbar - open ctag explorer
-nnoremap <Leader>ot :TagbarToggle<CR>
+" nnoremap <Leader>ot :TagbarToggle<CR>
 
 " file explorer open file
 " nnoremap <Leader>w <C-w><C-w>
@@ -1004,7 +1012,7 @@ command! -bang -nargs=? -complete=dir Files
 " # ------------------------------------------------------ reloadshell ------ #
 
 " reload shell
-command ReloadShell :source ~/dot-files/dot.vimrc
+command FoxReloadShell :source ~/dot-files/dot.vimrc
 
 " # ---------------------------------------------------- showshortcuts ------ #
 
@@ -1028,8 +1036,8 @@ function ShowShortcuts()
   echom "<leader> phh                  print ===== header"
 endfunction
 
-" toggle trim trailing whitespace
-command ShowShortcuts :call ShowShortcuts()
+" show shortcuts
+command FoxShowShortcuts :call ShowShortcuts()
 
 " # --------------------------------------------------- trimwhitespace ------ #
 
@@ -1039,7 +1047,7 @@ function TrimWhiteSpace()
 endfunction
 
 " toggle trim trailing whitespace
-command TrimWhiteSpace :call TrimWhiteSpace()
+command FoxTrimWhiteSpace :call TrimWhiteSpace()
 
 " # ====================================================== commands end ===== #
 
