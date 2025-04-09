@@ -608,6 +608,9 @@ let g:ale_list_window_size = 5
 
 let g:coc_config_home = '~/.config/coc'
 
+" disable auto completion (clashes with windsurf autocomplete)
+let g:coc_enable_auto_complete = 0
+
 " <https://github.com/neoclide/coc.nvim/wiki/Language-servers#terraform>
 let g:coc_global_extensions = [
       \'coc-css',
