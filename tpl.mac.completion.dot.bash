@@ -24,9 +24,9 @@ printf "%s" "[+] completion "
 BASH_VERSION_3=false
 BASH_VERSION_5=false
 
-if echo "${BASH_VERSION}" | grep -q "3."; then
+if [[ "${BASH_VERSION}" == 3.* ]]; then
   BASH_VERSION_3=true
-elif echo "${BASH_VERSION}" | grep -q "5."; then
+elif [[ "${BASH_VERSION}" == 5.* ]]; then
   BASH_VERSION_5=true
 fi
 
@@ -46,8 +46,10 @@ fi
 
 # to add other completions, add to the following file
 
-# git completion - add following to .bashrc to enable
-# [ -f "$HOME/dot-files/tpl.completion.git.dot.bash" ] && source "$HOME/dot-files/tpl.completion.git.dot.bash"
+# git completion - add following to .bashrc or uncomment to enable
+printf "%s" "[+] git completion "
+[ -f "$HOME/dot-files/tpl.completion.git.dot.bash" ] && source "$HOME/dot-files/tpl.completion.git.dot.bash"
 
-# make completion - add following to .bashrc to enable
-# [ -f "$HOME/dot-files/tpl.completion.make.dot.bash" ] && source "$HOME/dot-files/tpl.completion.make.dot.bash"
+# make completion - add following to .bashrc or uncomment to enable
+printf "%s" "[+] make completion "
+[ -f "$HOME/dot-files/tpl.completion.make.dot.bash" ] && source "$HOME/dot-files/tpl.completion.make.dot.bash"
