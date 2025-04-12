@@ -2,18 +2,20 @@
 
 # --------------------------------------------------------------- setup ----- #
 
-# default config file locations:
-#
-# - mac/linux         ~/.bashrc
-#                     ~/.bash_profile
-
 # touch ~/.bashrc
-# include the following in ~/.bashrc file
-# assuming the source script is in ~/dot-files
 
-# [ -f "$HOME/dot-files/dot.bashrc.mac.completion.bash" ] && source "$HOME/dot-files/dot.bashrc.mac.completion.bash"
+# example for quick add to ~/.bashrc
+# include the following in ~/.bashrc file, assuming the source script is in ~/dot-files
+
+# bash completion common for mac/linux
+# [ -f "$HOME/dot-files/tpl.mac.completion.dot.bash" ] && source "$HOME/dot-files/tpl.mac.completion.dot.bash"
 
 # -------------------------------------------------------------- config ----- #
+
+# the following completion script checks for bash version and loads legacy bash
+# completion scripts.
+
+# requires bash version 3.2 or later and homebrew bash-completion@2
 
 # show load status
 printf "%s" "[+] completion "
@@ -42,22 +44,10 @@ fi
 
 # -------------------------------------------------- custom completions ----- #
 
-# fzf # path: file completion / dir: directory completion
-# _fzf_setup_completion path rg git kubectl rm cat
-# _fzf_setup_completion dir cd
-
-# kubectl
-# if command -V kubectl 1> /dev/null; then
-#   source <(kubectl completion bash)
-# fi
-
-# yq
-# if command -V yq 1> /dev/null; then
-#   source <(yq shell-completion bash)
-# fi
+# to add other completions, add to the following file
 
 # git completion - add following to .bashrc to enable
-# [ -f "$HOME/dot-files/dot.completion.git.bash" ] && source "$HOME/dot-files/dot.completion.git.bash"
+# [ -f "$HOME/dot-files/tpl.completion.git.dot.bash" ] && source "$HOME/dot-files/tpl.completion.git.dot.bash"
 
 # make completion - add following to .bashrc to enable
-# [ -f "$HOME/dot-files/dot.bash-completion.make-menu.bash" ] && source "$HOME/dot-files/dot.bash-completion.make-menu.bash"
+# [ -f "$HOME/dot-files/tpl.completion.make.dot.bash" ] && source "$HOME/dot-files/tpl.completion.make.dot.bash"

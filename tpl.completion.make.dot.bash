@@ -3,6 +3,7 @@
 # source "$HOME/dot-files/dot.bash-completion.make_type_a.bash"
 #
 # bash completion for GNU make                             -*- shell-script -*-
+# this is a bash completion script for GNU make.
 
 function _make_target_extract_script()
 {

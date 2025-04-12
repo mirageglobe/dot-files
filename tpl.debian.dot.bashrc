@@ -7,11 +7,15 @@
 # - mac/linux         ~/.bashrc
 #                     ~/.bash_profile
 
-# touch ~/.bashrc
-# include the following in ~/.bashrc file
-# assuming the source script is in ~/dot-files
-#
-# [ -f $HOME/dot-files/dot.bashrc.debian.bash ] && source "$HOME/dot-files/dot.bashrc.debian.bash"
+# - debian/ubuntu     ~/.bashrc
+#                     ~/.bash_profile
+
+# this file is a template for linux based os bashrc
+
+# -------------------------------------------------------- installation ----- #
+
+# install with copying this file to ~/.bashrc
+# cp -i tpl.dot.bashrc ~/.bashrc
 
 # -------------------------------------------------------------- config ----- #
 
@@ -36,7 +40,12 @@ export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
 export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
 
 # homebrew github token
-export HOMEBREW_GITHUB_API_TOKEN=<REPLACEME:xxxxxx>
+# export HOMEBREW_GITHUB_API_TOKEN=CHANGEME
 
 # java
-export JAVA_HOME=$(/usr/libexec/java_home)
+# use sdkman.io to install temurin (adoptopenjdk replacement)
+# example: sdk install java 17.0.0-tem
+# if [ -z $JAVA_HOME ]; then
+#   printf "%s" "[+] java "
+#   export JAVA_HOME=$(/usr/libexec/java_home)
+# fi

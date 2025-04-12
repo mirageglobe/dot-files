@@ -2,6 +2,7 @@
 # ~/.gitconfig
 #
 # git config is recommended to be set via cmdline
+# see tpl.mac.common.dot.bash
 # 
 # examples:
 #
@@ -14,10 +15,10 @@
 # ============================================================== config ===== #
 
 [blame]
-  pager = delta                 # use delta for pretty terminal diff
+  pager = delta                           # use delta for pretty terminal diff
 
 [core]
-  pager = delta                 # use delta for pretty terminal diff
+  pager = delta                           # use delta for pretty terminal diff
 
 [credential]
   helper = cache --timeout 7200
@@ -29,11 +30,7 @@
   diffFilter = delta --color-only         # use delta for interactive diff
 
 [merge]
-  conflictstyle = diff3         # delta merge conflict
-
-[user]
-  name = jimmy lim
-  email = mirageglobe@gmail.com
+  conflictstyle = diff3                   # delta merge conflict
 
 # ---------------------------------------------------------- custom dir ----- #
 

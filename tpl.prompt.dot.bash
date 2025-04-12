@@ -8,10 +8,10 @@
 #                     ~/.bash_profile
 
 # touch ~/.bashrc
-# include the following in ~/.bashrc file
-# assuming the source script is in ~/dot-files
+# include the following in ~/.bashrc file to add this prompt
 
-# [ -f "$HOME/dot-files/dot.bashrc.mac.prompt.bash" ] && source "$HOME/dot-files/dot.bashrc.mac.prompt.bash"
+# assuming the source script is in ~/dot-files
+# [ -f "$HOME/dot-files/tpl.prompt.dot.bash" ] && source "$HOME/dot-files/tpl.prompt.dot.bash"
 
 # -------------------------------------------------------------- config ----- #
 
@@ -83,11 +83,3 @@ ${C_PURPLEL} ${C_END} \
 # load prompt
 export PS1="\n ${PROMPT_EXTEND}\n ${C_PURPLEL}  ${C_END}"
 # export PS1="\u@\h \W\[\033[32m\]\$(fn_prompt_get_git_branch)\[\033[00m\] \$ "       # override with normal prompt
-
-# -------------------------------------------------------------- custom ----- #
-
-# starship.rs
-# eval "$(starship init bash)"
-
-# zoxide
-# eval "$(zoxide init bash)"
