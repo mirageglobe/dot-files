@@ -7,7 +7,7 @@
 # example for quick add to ~/.bashrc
 # include the following in ~/.bashrc file, assuming the source script is in ~/dot-files
 
-# bash completion common for mac/linux
+# bash completion common for mac
 # [ -f "$HOME/dot-files/tpl.mac.completion.dot.bash" ] && source "$HOME/dot-files/tpl.mac.completion.dot.bash"
 
 # -------------------------------------------------------------- config ----- #
