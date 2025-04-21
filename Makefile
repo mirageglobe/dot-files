@@ -115,6 +115,8 @@ setup-starship:									## setup starship config
 setup-tmux:											## setup tmux config
 	$(call func_print_arrow,setup-tmux - config)
 	# overwrite home / .tmux.conf
+	# when overwriting, make sure to uncomment the right location of bash
+	# i.e.bin/bash in ~/.tmux.conf
 	@echo "proceed? [enter to continue / ctrl-c to quit]"; read nirvana;
 	-cp -i ./dot.tmux.conf ~/.tmux.conf
 
