@@ -1,63 +1,67 @@
-# dot-files
+# 🚀 dot-files
 
-jimmys public dot-files and bootstrapper to make life easier. you can use this
-to quickly bootstrap a vanilla mac or debian based distros.
+Jimmy's public dot-files and bootstrapper to make life easier. Quickly bootstrap vanilla macOS or Debian-based distributions.
 
-## to use
+## ✨ Features
 
-``` bash
-# check dependencies
+- **Multi-platform support**: Tailored for macOS and Debian/Ubuntu.
+- **Vim Configuration**: Rich Vim/Neovim setup with `coc.nvim`, `ale`, and more.
+- **Modern CLI Tools**: Integrated with `bat`, `ripgrep`, `starship`, and `alacritty`.
+- **System Utilities**: Configuration for `tmux`, `ranger`, and shell completions.
+- **Python-ready**: Pre-configured `.python-version` and `.editorconfig`.
+
+## 🛠️ Usage
+
+### 1. Check Dependencies
+Make sure you have the basics installed:
+```bash
 command -V git; command -V curl; command -V wget
-
-# generate ssh key via ed25519 key pair ~/.ssh/id_ed25519 (recommended)
-ssh-keygen -o -a 100 -t ed25519 -f ~/.ssh/id_ed25519 -C "changeme@example.com"
-
-# generate RSA key pair ~/.ssh/id_rsa_standard (4096 bits)
-ssh-keygen -b 4096 -t rsa -f ~/.ssh/id_rsa_standard -C "changeme@example.com"
-
-# clone the repo and run the make to see menu
-git clone https://github.com/mirageglobe/dot-files.git
-
-# get makefile
-curl -D - https://raw.githubusercontent.com/mirageglobe/dot-files/master/Makefile > ~/Makefile
-
-# get font example
-curl -fLo "<FONT NAME> Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/<FONT_PATH>/complete/<FONT_NAME>%20Nerd%20Font%20Complete.otf
 ```
 
-bash completions
+### 2. Generate SSH Keys
+Choose the recommended ED25519 or standard RSA:
+```bash
+# Recommended: ED25519
+ssh-keygen -o -a 100 -t ed25519 -f ~/.ssh/id_ed25519 -C "your_email@example.com"
 
-``` bash
-# include in ~/.bashrc
+# Standard: RSA (4096 bits)
+ssh-keygen -b 4096 -t rsa -f ~/.ssh/id_rsa_standard -C "your_email@example.com"
+```
 
-# for git completion
+### 3. Bootstrap
+Clone the repo and use the `Makefile` to see the available setup targets:
+```bash
+# Clone the repository
+git clone https://github.com/mirageglobe/dot-files.git ~/dot-files
+
+# Or just grab the Makefile to get started
+curl -fLo ~/Makefile https://raw.githubusercontent.com/mirageglobe/dot-files/master/Makefile
+
+# Run make to see the menu
+make help
+```
+
+> [!TIP]
+> Use `make mac-common` or `make debian-common` to quickly install base dependencies and configurations.
+
+### 4. Bash Completions
+Add the following to your `~/.bashrc` or `~/.bash_profile`:
+```bash
+# Git completion
 [ -f ~/dot-files/dot.completion.git.bash ] && source ~/dot-files/dot.completion.git.bash
 
-# for make completion
+# Makefile menu completion
 [ -f ~/dot-files/dot.completion.make-menu.bash ] && source ~/dot-files/dot.completion.make-menu.bash
 ```
 
-## to contribute
+## 🤝 Contribution
 
-- ensure nothing sensitive committed to this repo
-- assume that homebrew is not available and setups compiled binaries or scripts
+- 🛡️ **Security**: Ensure NO sensitive data (keys, passwords) is ever committed.
+- 📦 **Independence**: Favor standalone scripts or setup binaries over heavy dependency managers where possible.
 
-## to do
+## 🔗 Reference
 
-- [x] use sdkman - for groovy/java ( curl -s get.sdkman.io | bash )
-- [x] vim fix ale - (<https://github.com/dense-analysis/ale#usage-completion>)
-- [x] fira source (<https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/FiraCode.zip>)
-- [x] noto source (<https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/Noto.zip>)
-- [x] use hawkeye scanner
-- [x] use homebrew - bat cat source (<https://github.com/sharkdp/bat/releases/latest>)
-- [x] use homebrew - rg grep source (<https://github.com/BurntSushi/ripgrep/releases/latest>)
-- [x] include path builder for tooling
-- [x] include tool copy to folder
-- [x] vim add coc (<https://github.com/neoclide/coc.nvim>)
-
-## reference
-
-- <https://www.ubuntupit.com/best-vim-plugins-for-programming/>
-- <https://github.com/tonsky/FiraCode>
-- <https://www.nerdfonts.com/font-downloads>
-- <https://gist.github.com/spicycode/1229612>
+- [Vim Plugins for Programming](https://www.ubuntupit.com/best-vim-plugins-for-programming/)
+- [Fira Code Font](https://github.com/tonsky/FiraCode)
+- [Nerd Fonts](https://www.nerdfonts.com/font-downloads)
+- [Tmux Cheat Sheet](https://gist.github.com/spicycode/1229612)
