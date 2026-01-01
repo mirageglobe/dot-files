@@ -40,8 +40,10 @@ os-info: ## Display OS and network information
 	$(call print_status,Getting OS information)
 	@uname -a
 	@printf "OSTYPE: $$OSTYPE\n"
-	@printf "Public IP: "
-	@curl -s ifconfig.me || echo "Unknown"
+	@printf "Public IP (v4): "
+	@curl -4 -s ifconfig.me || echo "Not available"
+	@printf "\nPublic IP (v6): "
+	@curl -6 -s ifconfig.me || echo "Not available"
 	@printf "\n"
 
 ##@ Setup
