@@ -27,6 +27,21 @@ tags
 
 # custom
 
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+.env
+.pytest_cache/
+.coverage
+htmlcov/
+
 # vim ctags
 tags.lock
 tags.temp
