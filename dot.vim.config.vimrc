@@ -74,12 +74,21 @@ if (has("termguicolors"))
   " defines how many colors should be used. (maximum: 256, minimum: 0)
   set t_Co=256
 
-  " turns on true terminal colors
+  " Restore original TrueColor overrides (needed for some themes)
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
-  " turns on 24-bit rgb color support
-  set termguicolors
+  " Disable TrueColor inside tmux + Terminal.app to prevent artifacts
+  if $TERM_PROGRAM == "Apple_Terminal" && exists("$TMUX")
+    set notermguicolors
+  else
+    set termguicolors
+  endif
+
+  " Fix background color erase
+  if exists("$TMUX")
+    set t_ut=
+  endif
 endif
 
 " onedark color scheme settings
