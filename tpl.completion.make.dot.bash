@@ -127,13 +127,14 @@ _make()
         prev=${cur%%=*}
         cur=${cur#*=}
         local diropt
-        [[ ${prev,,} == *dir?(ectory) ]] && diropt=-d
+        local prev_lower=$(echo "$prev" | tr '[:upper:]' '[:lower:]')
+        [[ $prev_lower == *dir* ]] && diropt=-d
         _filedir $diropt
     else
         # before we check for makefiles, see if a path was specified
         # with -C/--directory
         for (( i=0; i < ${#words[@]}; i++ )); do
-            if [[ ${words[i]} == -@(C|-directory) ]]; then
+            if [[ ${words[i]} == "-C" || ${words[i]} == "--directory" ]]; then
                 # eval for tilde expansion
                 eval makef_dir=( -C "${words[i+1]}" )
                 break
@@ -143,7 +144,7 @@ _make()
         # before we scan for targets, see if a Makefile name was
         # specified with -f/--file/--makefile
         for (( i=0; i < ${#words[@]}; i++ )); do
-            if [[ ${words[i]} == -@(f|-?(make)file) ]]; then
+            if [[ ${words[i]} == "-f" || ${words[i]} == "--file" || ${words[i]} == "--makefile" ]]; then
                 # eval for tilde expansion
                 eval makef=( -f "${words[i+1]}" )
                 break

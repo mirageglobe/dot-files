@@ -1,17 +1,127 @@
-# this config should exist in as ~/.config/starship.toml
+# Starship Configuration - Refactored and Enhanced
+# For: macOS and Linux
+# Requirements: A Nerd Font installed (e.g., JetBrainsMono Nerd Font)
+
+# Get editor completions for Starship's configuration schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+# Global Format
+# This defines the order and layout of the prompt.
+# Multi-line setup for better visibility in deep directories.
+format = """
+$directory\
+$git_branch\
+$git_status\
+$python\
+$nodejs\
+$rust\
+$golang\
+$nim\
+$terraform\
+$kubernetes\
+$aws\
+$line_break\
+$character"""
+
+# Timeout for slow commands (e.g. large git repos / slow file systems)
 command_timeout = 3000
 
+# ------------------------------------------------------------------------------
+# CORE MODULES
+# ------------------------------------------------------------------------------
+
+[character]
+success_symbol = "[➜](bold green)"
+error_symbol = "[✗](bold red)"
+
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+style = "bold cyan"
+# Symbols for common paths
+read_only = " 󰌾"
+
+[git_branch]
+symbol = " "
+style = "bold purple"
+
+[git_status]
+style = "bold red"
+# Shows count of staged, modified, etc.
+format = '([\[$all_status$ahead_behind\]]($style) )'
+conflicted = "="
+ahead = "⇡"
+behind = "⇣"
+diverged = "⇕"
+up_to_date = ""
+untracked = "?"
+stashed = "$"
+modified = "!"
+staged = "+"
+renamed = "»"
+deleted = "✘"
+
+[cmd_duration]
+min_time = 500
+show_milliseconds = false
+style = "bold yellow"
+format = "took [$duration]($style) "
+
+# ------------------------------------------------------------------------------
+# LANGUAGES & TOOLS
+# ------------------------------------------------------------------------------
+
+[nodejs]
+symbol = " "
+style = "bold green"
+format = "via [$symbol($version )]($style)"
+
+[rust]
+symbol = " "
+style = "bold orange"
+format = "via [$symbol($version )]($style)"
+
+[python]
+symbol = " "
+style = "bold yellow"
+# Includes virtualenv detection
+format = "via [${symbol}${pyenv_prefix}${version}( \\($virtualenv\\))]($style) "
+
+[golang]
+symbol = " "
+style = "bold cyan"
+format = "via [$symbol($version )]($style)"
+
+[nim]
+symbol = " "
+style = "bold yellow"
+format = "via [$symbol($version )]($style)"
+
+[terraform]
+symbol = "󱁢 "
+style = "bold 105"
+format = "via [$symbol($workspace )]($style)"
+
 [aws]
-symbol = ' '
+symbol = "󰸏 "
+style = "bold yellow"
+format = "on [$symbol($region )]($style)"
 
 [kubernetes]
 disabled = false
+symbol = "󱃾 "
+style = "bold blue"
+format = "at [$symbol($context )]($style)"
 
-[nim]
-symbol = ' '
+[docker_context]
+symbol = " "
+style = "bold blue"
+format = "on [$symbol$context]($style) "
 
-[nodejs]
-format = 'via [ $version](bold green) '
-
-[terraform]
-format = 'via [ $version $workspace]($style) '
+[package]
+symbol = "󰏗 "
+style = "bold 208"
+format = "is [$symbol$version]($style) "
