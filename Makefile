@@ -46,6 +46,10 @@ os-info: ## Display OS and network information
 	@curl -6 -s ifconfig.me || echo "Not available"
 	@printf "\n"
 
+setup-brew: ## Install dependencies from Brewfile
+	$(call print_status,Installing dependencies from Brewfile)
+	@brew bundle --file=./Brewfile
+
 ##@ Setup
 
 setup-all: setup-git setup-vim setup-tmux setup-starship ## Run all primary setups
@@ -90,4 +94,16 @@ setup-vim: ## Setup Vim folders and configuration
 	@mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
 	$(call copy_safe,./dot.vimrc,~/.vimrc)
 
-.PHONY: help os-info setup-all setup-alacritty setup-completion setup-git setup-ranger setup-starship setup-tmux setup-vim
+##@ Security
+
+scan-trivy: ## Run security scan with trivy (vulnerabilities, secrets, misconfig)
+	$(call print_status,Scanning with Trivy)
+	-@trivy fs --scanners vuln,secret,misconfig --severity HIGH,CRITICAL .
+
+scan-bearer: ## Run security scan with bearer (SAST and secrets)
+	$(call print_status,Scanning with Bearer)
+	-@bearer scan --scanner secrets,sast --severity high,critical .
+
+scan: scan-trivy scan-bearer ## Run all security scans
+
+.PHONY: help os-info setup-all setup-alacritty setup-completion setup-git setup-ranger setup-starship setup-tmux setup-vim scan-trivy scan-bearer scan setup-brew
