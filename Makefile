@@ -98,11 +98,11 @@ setup-vim: ## Setup Vim folders and configuration
 
 scan-trivy: ## Run security scan with trivy (vulnerabilities, secrets, misconfig)
 	$(call print_status,Scanning with Trivy)
-	-@trivy fs --scanners vuln,secret,misconfig --severity HIGH,CRITICAL .
+	-@trivy fs --scanners vuln,secret,misconfig --severity HIGH,CRITICAL --exit-code 0 .
 
 scan-bearer: ## Run security scan with bearer (SAST and secrets)
 	$(call print_status,Scanning with Bearer)
-	-@bearer scan --scanner secrets,sast --severity high,critical .
+	-@bearer scan --scanner secrets,sast --severity high,critical --exit-code 0 .
 
 scan: scan-trivy scan-bearer ## Run all security scans
 
