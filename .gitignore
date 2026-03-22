@@ -27,6 +27,10 @@ tags
 
 # custom
 
+# claude code
+CLAUDE.md
+agents.md
+
 # macOS
 .DS_Store
 
