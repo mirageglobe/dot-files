@@ -1,13 +1,15 @@
 " # ======================================================== vim config ===== #
 
-" add/replace following lines to file as ~/.vimrc or $HOME/.vimrc
-" add the following lines to .vimrc
+" note: this config is for vim (original vi improved). it is not for neovim.
+" for neovim, use init.lua or init.vim in ~/.config/nvim/ instead.
+
+" source this file from ~/.vimrc or $HOME/.vimrc using:
 
 " if filereadable(expand("~/dot-files/dot.vimrc"))
 "   source ~/dot-files/dot.vimrc
 " endif
 
-" if you have idr
+" optionally source a local override file (e.g. project-specific config):
 " if filereadable(expand("~/dot-case/idr/dot.idr.vimrc"))
 "   source ~/dot-case/idr/dot.idr.vimrc
 " endif
@@ -19,11 +21,12 @@
 
 " # ======================================== iterm2 fonts configuration ===== #
 
-" font -> FuraCode Nerd Font [Regular] [12]
-" use built-in Powerline glyphs -> true
-" enable subpixel anti-aliasing -> true
-" use ligatures -> true
-" anti-aliased -> true
+" recommended iTerm2 font settings to match the vim-devicons and lightline setup:
+" font                          FiraCode Nerd Font, Regular, size 12
+" use built-in powerline glyphs true
+" enable subpixel anti-aliasing true
+" use ligatures                 true
+" anti-aliased                  true
 
 " # ====================================================== config start ===== #
 
@@ -31,7 +34,6 @@
                                 " buffer instead of constant redraws
 set noshowmode                  " speed up by turning off showing mode
 " set showmode                    " show current mode down the bottom
-set regexpengine=1              " speed up by using old regex engine
 
 set nocompatible                " required by vim for extra features
 set showcmd                     " noshowcmd / showcmd speed up turning off
@@ -43,8 +45,6 @@ set hidden                      " set current buffer to be hidden when
                                 " buffers then :b[n] n=buffer number to select
 
 set backspace=indent,eol,start  " set backspace to go previous line etc
-set backupcopy=yes              " yes/no/auto when opening a file
-                                " vim makes a copy and overwrites
 
 set encoding=UTF-8              " the encoding displayed.
 set fileencoding=UTF-8          " the encoding written to file
@@ -57,19 +57,10 @@ if has('gui_running')
   " set guifont=Inconsolata\ Nerd\ Font\ Complete:h13
 endif
 
-" termguicolors (recommendation by onedark theme)
-" use 24-bit (true-color) mode in vim/neovim when outside tmux.
-" if you're using tmux version 2.2 or later, you can remove the outermost $tmux check and use tmux's 24-bit color support
-" (see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
+" enable 24-bit true-color mode. requires vim > patch 7.4.1799.
+" when inside tmux, tmux version 2.2+ is also required for true-color support.
 
-if (has("nvim"))
-  "for neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-endif
-
-"for neovim > 0.1.5 and vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
-"based on vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
-" < https://github.com/neovim/neovim/wiki/following-head#20160511 >
+" true-color support: vim patch 7.4.1799+
 if (has("termguicolors"))
   " defines how many colors should be used. (maximum: 256, minimum: 0)
   set t_Co=256
@@ -91,13 +82,13 @@ if (has("termguicolors"))
   endif
 endif
 
-" onedark color scheme settings
+" onedark color scheme settings (unused - kept as reference)
 " https://github.com/joshdick/onedark.vim
 
-" onedark explict declare 256
+" explicitly declare 256 color support for onedark
 " let g:onedark_termcolors=256
 
-" onedark color settings
+" override specific highlight groups for onedark
 " if (has("autocmd"))
 "   augroup colorextend
 "     autocmd!
@@ -114,8 +105,8 @@ endif
 
 " <https://vim.fandom.com/wiki/Accessing_the_system_clipboard>
 " <https://stackoverflow.com/questions/677986/vim-copy-selection-to-os-x-clipboard>
-" - will not work if its -clipboard (not complied with vim)
-" - * and + is the same for macosx and windows
+" - will not work if vim was compiled without +clipboard support (check :version)
+" - * and + registers are equivalent on macOS and Windows
 
 if has("clipboard")
   set clipboard=unnamed         " copy to the system clipboard
@@ -131,34 +122,21 @@ endif
 filetype indent plugin on         " enables filetype - plugins,
                                   " indenting rules, syntax highlighting
 
-" toggle omnicomplete options
-set completeopt+=menuone,menu,longest,preview
-" set completeopt=menuone,noinsert,noselect,preview
-
-" toggle default omnicomplete function
-" set omnifunc=syntaxcomplete#Complete
-
-" toggle omnicomplete via ALE
-set omnifunc=ale#completion#OmniFunc
-
-" toggle omnicomplete via completor
-" set omnifunc=completor#omnifunc
-
-" toggle omnicomplete via asyncomplete
-" set omnifunc=asyncomplete#sources#ale#get_source_options
-" this has error, check asyncomplete
+" completion popup: show menu, don't auto-insert or auto-select (coc recommended)
+set completeopt=menuone,noinsert,noselect
 
 " # ----------------------------------------------------------- buffers ----- #
 
-" :ls                           " show buffer
+" :ls     list open buffers
+" :b N    switch to buffer N
 
 " # ------------------------------------ command ----- vim command line ----- #
 
-" :find *<tab>
-set path+=**                    " tab completion for file related tasks
+" search downward into subdirectories with :find (e.g. :find *.py<tab>)
+set path+=**                    " include subdirectories in file search path
 
-" wildmenu and wildmode are used for command line completion. i.e. :color <Tab>
-" this is not code completion menu such as ale or coc
+" wildmenu/wildmode control command-line (: prompt) tab completion only.
+" this is separate from code completion (ale, coc) which works in insert mode.
 
 set wildmenu                    " show command line completion
                                 " use :b to find files, :ls for list buffer
@@ -166,8 +144,7 @@ set wildmode=list:full          " show command options with double tab
 
 " # ----------------------------------------------- syntax highlighting ----- #
 
-syntax on                       " set syntax highlighting in vim
-                                " required by onedark
+syntax on                       " enable syntax highlighting (must be on for colorschemes)
 set list listchars=tab:»·,trail:·
                                 " display tabs and trailing spaces visually
 " set nolist                      " breaks white space show
@@ -179,7 +156,7 @@ set number                      " show line numbers
 
 " # ------------------------------------------------------ code folding ----- #
 
-" <leader>z for fold
+" fold shortcuts: za (toggle) / zc (close) / zo (open) / <leader>fc (toggle via mapping)
 
 set foldmethod=indent
 set foldnestmax=10
@@ -197,8 +174,8 @@ set tabstop=2                   " tabs are at proper location
 
 " # --------------------------------------------------------- line wrap ----- #
 
-set colorcolumn=80              " set a colour column length at 80
-set linebreak                   " set wrap at only
+set colorcolumn=80              " show a vertical guide at column 80
+set linebreak                   " wrap lines at word boundaries, not mid-word
 " set textwidth=80                " set text width to 80 and autowrap
 " set wrap                        " set soft wrap for text
 set nowrap                      " turn off code wrap
@@ -210,15 +187,16 @@ set mouse=a                     " turn on terminal mouse
 set scrolloff=5                 " set lines for vertical scroll to trigger
 set sidescroll=1                " enable horizontal scroll 1:on 0:off (set wrap off)
 set sidescrolloff=5             " set chars for horizontal scrolling to trigger
-set timeoutlen=1000             " speed up scrolling
-set ttimeoutlen=0               " speed up scrolling
-set ttyfast                     " speed up loading and scrolling of vim (boolean)
-set ttyscroll=10                " set scrolling speed (1-999; 1 fastest)
+set timeoutlen=1000             " ms to wait for a mapped key sequence to complete
+set ttimeoutlen=0               " ms to wait for a terminal key code (0 = instant)
 
 " # ------------------------------------------------------- spell check ----- #
 
-" z= activate / zg add word to dict / zw mark incorrect to dict
-" / [s next / ]s prev
+" z=   suggest corrections for word under cursor
+" zg   add word to dictionary
+" zw   mark word as incorrect
+" [s   jump to previous spelling error
+" ]s   jump to next spelling error
 
 set spell spelllang=en_gb       " turn on vims spell checker
 " set nospell                     " explicitly turn off spell check
@@ -239,9 +217,9 @@ au BufRead,BufNewFile *.md setlocal textwidth=80
 
 " # -------------------------------------------------- fix ----- issues ----- #
 
-" fixes maxmempattern error E363 when hitting [ in md files
-" https://github.com/vim/vim/issues/2049
-set mmp=8000                    " set maxmempattern. default is 1000
+" increase maxmempattern to avoid E363 error when navigating markdown files
+" (triggered by complex patterns matching [ brackets in md)
+set mmp=8000                    " max memory (kb) for pattern matching. default: 1000
 
 " # ---------------------------------------- tab spaces for file types  ----- #
 "
@@ -253,38 +231,30 @@ set mmp=8000                    " set maxmempattern. default is 1000
 
 " settings before plugins are loaded
 
-" # ----------------------------------------------------- polygot start ----- #
+" # --------------------------------------------------- polyglot start ----- #
 
-" setting polygot terraform-vim
-" let g:terraform_fmt_on_save=1
+" polyglot is not active (plugin commented out), settings kept as reference
+" let g:terraform_fmt_on_save=1        " auto-format terraform on save
+" let g:polyglot_disabled = ['htmldjango']  " disable specific language packs
 
-" disable language packs
-" let g:polyglot_disabled = ['htmldjango']
-
-" # ------------------------------------------------------- polygot end ----- #
+" # ----------------------------------------------------- polyglot end ----- #
 
 " # --------------------------------------------------------- ale start ----- #
 
-" use ale only for linting (use Coc for code completion)
+" ale is used for linting only. coc handles LSP and code completion.
+" these settings must be defined before ale is loaded.
 
-" this setting must be set before ale is loaded
-" enable completion where available
-"
-" to use ale as a completion source for other completion plugins (i.e deoplete)
-" do not turn this setting on
+" disable ale's built-in completion (coc handles completion instead)
 let g:ale_completion_enabled = 0
 
-" automatic imports from external modules
-let g:ale_completion_autoimport = 1
-
-" set to 1 for ale to disable language server protocol (use Coc instead)
+" disable ale's LSP client (coc manages all LSP servers instead)
 let g:ale_disable_lsp = 1
 
 " # ----------------------------------------------------------- ale end ----- #
 
 " # ======================================================== plug start ===== #
 
-" auto-install vim-plug
+" auto-install vim-plug if not already present
 
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -299,160 +269,164 @@ call plug#begin('~/.vim/plugged')
 " enables palenight color scheme
 " Plug 'drewtempelmeyer/palenight.vim'
 
-" enables package colorschemes (rafi)
+" curated collection of colorschemes (includes gruvbox, onedark, nord, etc.)
 Plug 'rafi/awesome-vim-colorschemes'
 
-" enables package colorschemes (flazz)
+" alternative colorscheme pack (larger, less curated)
 " Plug 'flazz/vim-colorschemes'
 
+" individual colorscheme alternatives:
 " Plug 'dracula/vim'
 " Plug 'lifepillar/vim-gruvbox8'
 " Plug 'lifepillar/vim-solarized8'
 
 " # --------------------------------------------------------------- ide ----- #
 
-" enables superlight status bar - <https://github.com/itchyny/lightline.vim>
+" lightweight, configurable status bar
 Plug 'itchyny/lightline.vim'
 
-" enables common standard settings for vim
+" sensible default settings that most vim users would agree on
 Plug 'tpope/vim-sensible'
 
-" enables .editorconfig file overrides - https://editorconfig.org/
+" respect .editorconfig files for consistent style across editors
+" note: built-in to Vim 9+ (packadd editorconfig). only needed for Vim < 9.
 Plug 'editorconfig/editorconfig-vim'
 
-" enables fancy startup
+" fancy start screen showing recent files and sessions
 Plug 'mhinz/vim-startify'
 
-" enables commenting - gcc (to [un]comment line) - gc(to comment with motion)
+" toggle comments: gcc (line) / gc<motion> (range)
 Plug 'tpope/vim-commentary'
 
-" enables repeating command or input with '.'
+" make plugin maps repeatable with '.' (used by other tpope plugins)
 Plug 'tpope/vim-repeat'
 
+" surround text with quotes/brackets: cs[' (change), ds' (delete), ysiw' (add)
 " Plug 'tpope/vim-surround'
-" enables quoting with cs[' to change quotes from [ to ' - cst to add quotes
 
+" debugger integration via xdebug protocol
 " Plug 'vim-vdebug/vdebug'
-" debugger with xdebug
 
 " # --------------------------------------------------- file management ----- #
 
-" netrw alternative - https://github.com/justinmk/vim-dirvish
+" lightweight netrw replacement with fast directory browsing
 " Plug 'justinmk/vim-dirvish'
 
-" fern - nerdtree alternative - https://github.com/lambdalisue/fern.vim
+" file explorer with tree view, replaces NERDTree (use :Fern . -drawer)
 Plug 'lambdalisue/fern.vim'
 
-" fern git status
+" show git status icons in fern tree
 " Plug 'lambdalisue/fern-git-status.vim'
 
-" fern - nerdfont plugin - https://github.com/lambdalisue/fern-renderer-nerdfont.vim
+" render nerd font icons in fern (requires nerdfont.vim below)
 Plug 'lambdalisue/fern-renderer-nerdfont.vim'
 
-" fern - nerdfont plugin - https://github.com/lambdalisue/nerdfont.vim
+" nerd font glyph library used by fern-renderer-nerdfont
 Plug 'lambdalisue/nerdfont.vim'
 
-" netrw alternative ranger - https://github.com/francoiscabrol/ranger.vim
+" open ranger file manager inside vim
 " Plug 'francoiscabrol/ranger.vim'
 
-" fzf - enables super fast fuzzy search with :FZF
+" fuzzy finder core - install fzf binary and vim integration
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
-" needs both lines
+" fzf vim commands (:Files, :Buffers, :Rg, etc.) - requires junegunn/fzf above
 Plug 'junegunn/fzf.vim'
 
+" full-featured file tree explorer (heavier than fern)
 " Plug 'preservim/nerdtree'
-" netrw alternative drawer
 
-" netrw alternative enables drawer with - key
+" enhance netrw: press - to open the directory of the current file
 Plug 'tpope/vim-vinegar'
 
-" buffer explorer
-Plug 'jlanzarotta/bufexplorer'
+" redundant with fzf :Buffers (already mapped to <leader>ob) - disabled
+" Plug 'jlanzarotta/bufexplorer'
 
 " # --------------------------------------------------------------- git ----- #
 
-" shows git status in gutter
+" show git diff markers (+/-/~) in the sign column
 Plug 'airblade/vim-gitgutter'
 
-" run git commands in vim
+" full git client inside vim (:Git blame, :Git log, :Git diff, etc.)
 Plug 'tpope/vim-fugitive'
 
-" git hub command plugin needed for fugitive to open line in github
+" GitHub extension for fugitive - enables :GBrowse to open files on GitHub
 Plug 'tpope/vim-rhubarb'
 
-" git in vim for bitbucket
+" Bitbucket extension for fugitive - enables :GBrowse for Bitbucket URLs
 " Plug 'tommcdo/vim-fubitive'
 
-" simple show gitbranch name used for lightline
-Plug 'itchyny/vim-gitbranch'
+" redundant with vim-fugitive (FugitiveHead() provides the same branch name) - disabled
+" Plug 'itchyny/vim-gitbranch'
 
 " # --------------------------------------------- language ----- syntax ----- #
 
-" ctags enables ctag sidebar (install ctag via brew)
+" sidebar showing ctags for current file (requires ctags: brew install ctags)
 " Plug 'majutsushi/tagbar'
 
-" auto ctag management
+" automatic ctag generation on file save (requires gutentags config below)
 " Plug 'ludovicchabant/vim-gutentags'
 
-" syntax highlighting - syntax fast loader 100 languages - https://github.com/sheerun/vim-polyglot
+" syntax highlighting for 100+ languages in a single fast-loading pack
 " Plug 'sheerun/vim-polyglot'
 
-" linting
+" synchronous linting (older; ale is the async replacement used here)
 " Plug 'scrooloose/syntastic'
 
 " # --------------------------------------------------- code completion ----- #
 
-" <https://github.com/maralla/completor.vim>
+" lightweight async completion plugin (alternative to coc)
 " Plug 'maralla/completor.vim'
 
-" <https://github.com/prabirshrestha/vim-lsp>
+" async completion framework with LSP support (alternative to coc)
 " Plug 'prabirshrestha/asyncomplete.vim'
-
 " Plug 'prabirshrestha/asyncomplete-buffer.vim'
 " Plug 'prabirshrestha/asyncomplete-lsp.vim'
 " Plug 'prabirshrestha/vim-lsp'
 
-" <https://github.com/lifepillar/vim-mucomplete>
+" minimal completion plugin that uses vim's built-in sources (alternative to coc)
 " Plug 'lifepillar/vim-mucomplete'
 
-" use ale only for linting (use Coc for code completion)
-Plug 'neoclide/coc.nvim', {'branch': 'release'}     " <https://github.com/neoclide/coc.nvim>
+" full LSP client with extensions for most languages (active completion plugin)
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" codeium windsurf  <https://github.com/Exafunction/windsurf.vim>
-" to start, run :Codeium Auth
+" AI code completion via Windsurf/Codeium (run :Codeium Auth to activate)
 Plug 'Exafunction/windsurf.vim', { 'branch': 'main' }
 
 " # -------------------------------------------------------------- lint ----- #
 
-" use ale only for linting (use Coc for code completion)
-Plug 'dense-analysis/ale'                 " universal language linter
-Plug 'maximbaz/lightline-ale'             " ale for lightline
+" async linting engine - used for linting only (coc handles LSP/completion)
+Plug 'dense-analysis/ale'
+" show ale error/warning counts in lightline statusbar
+Plug 'maximbaz/lightline-ale'
 
-" Plug 'hashivim/vim-terraform'             " syntax for hashicorp
-" Plug 'hashivim/vim-consul'                " syntax for hashicorp
-" Plug 'hashivim/vim-vagrant'               " syntax for hashicorp
-" Plug 'hashivim/vim-nomadproject'          " syntax for hashicorp
-" Plug 'hashivim/vim-packer'                " syntax for hashicorp
-" Plug 'posva/vim-vue'                      " syntax for vue
+" hashicorp language support (uncomment as needed):
+" Plug 'hashivim/vim-terraform'             " terraform syntax and formatting
+" Plug 'hashivim/vim-consul'                " consul config syntax
+" Plug 'hashivim/vim-vagrant'               " vagrantfile syntax
+" Plug 'hashivim/vim-nomadproject'          " nomad job spec syntax
+" Plug 'hashivim/vim-packer'                " packer config syntax
 
-" Plug 'pangloss/vim-javascript'
-" Plug 'groenewege/vim-less'
-" Plug 'tpope/vim-markdown'
-" Plug 'tpope/vim-rails'
-" Plug 'vim-ruby/vim-ruby'
+" additional language support (uncomment as needed):
+" Plug 'posva/vim-vue'                      " vue single-file component syntax
+" Plug 'pangloss/vim-javascript'            " improved javascript syntax
+" Plug 'groenewege/vim-less'                " less css syntax
+" Plug 'tpope/vim-markdown'                 " markdown improvements
+" Plug 'tpope/vim-rails'                    " rails project navigation
+" Plug 'vim-ruby/vim-ruby'                  " ruby syntax and tools
 
 " # ----------------------------------------------------------- snippet ----- #
 
-" Plug 'MarcWeber/vim-addon-mw-utils'       " snippet tool
-" Plug 'tomtom/tlib_vim'                    " snippet tool
-" Plug 'garbas/vim-snipmate'                " snippet tool
-" Plug 'honza/vim-snippets'                 " snippets - optional
+" snipmate and its dependencies (alternative to coc snippet support):
+" Plug 'MarcWeber/vim-addon-mw-utils'       " snipmate dependency
+" Plug 'tomtom/tlib_vim'                    " snipmate dependency
+" Plug 'garbas/vim-snipmate'                " snippet expansion engine
+" Plug 'honza/vim-snippets'                 " community snippet library
 
 " # ------------------------------------------------------------- icons ----- #
 
-" must be at the end
-Plug 'ryanoasis/vim-devicons'             " enables super fonts (nerd fonts for vim)
+" nerd font icon support - must be loaded last so other plugins can register glyphs
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
@@ -489,14 +463,26 @@ colorscheme gruvbox
 
 " # =================================================== colorscheme end ===== #
 
+" # ==================================================== startify start ===== #
+
+" change working directory to the vcs root when opening a file from startify
+let g:startify_change_to_vcs_root = 1
+
+" auto-save and auto-load sessions named Session.vim in the project root
+let g:startify_session_autoload = 1
+let g:startify_session_persistence = 1
+
+" number of recent files shown on the start screen
+let g:startify_files_number = 10
+
+" # ====================================================== startify end ===== #
+
 " # =================================================== lightline start ===== #
 
-" scriptencoding utf-8            " (optional) unknown setting
-set laststatus=2                " (optional) fix for statusline not showing
-set noshowmode                  " hide status of mode (insert/visual)
-                                " as lightline is showing
+set laststatus=2                " always show statusline (required for lightline)
+" noshowmode already set at top of config
 
-" lightline init - needs to be first function
+" lightline configuration dict - must be defined before any lightline.* extensions
 
 let g:lightline = {
       \   'separator': {
@@ -517,29 +503,42 @@ let g:lightline = {
 let g:lightline.colorscheme = 'material'
 
 let g:lightline.component = {
-      \   'gitbranch': ' %{gitbranch#name()}',
       \   'lineinfo': ' %3l:%-2v',
       \   'filetype': '%{&filetype}',
       \   'readonly': '%{&filetype=="help"?"":&readonly?"":""}',
       \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
       \ }
-      " \   'fugitive': '%{exists("*fugitive#head")?"":""} %{exists("*fugitive#head")?fugitive#head():""}',
 
-" let g:lightline.component_function = {
-"       \   'gitbranch': 'gitbranch#name'
-"       \ }
+" component_function is called on every lightline redraw, so git branch updates
+" when switching buffers. component entries with %{} do not reliably refresh.
+let g:lightline.component_function = {
+      \   'gitbranch': 'LightlineFugitive',
+      \   'gitgutter': 'LightlineGitGutter'
+      \ }
+
+function! LightlineFugitive() abort
+  let branch = FugitiveHead()
+  return branch !=# '' ? ' ' . branch : ''
+endfunction
+
+function! LightlineGitGutter() abort
+  if !get(g:, 'gitgutter_enabled', 0) || winwidth(0) < 70
+    return ''
+  endif
+  let [a, m, r] = GitGutterGetHunkSummary()
+  return printf('+%d ~%d -%d', a, m, r)
+endfunction
 
 let g:lightline.component_visible_condition = {
       \   'readonly': '(&filetype!="help"&& &readonly)',
       \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
       \ }
-      " \     'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())',
 
-" lightline active
+" define what appears in the active statusline (left side segments)
 let g:lightline.active = {
       \   'left': [
       \     [ 'mode', 'paste' ],
-      \     [ 'gitbranch', 'readonly', 'filename', 'modified' ],
+      \     [ 'gitbranch', 'gitgutter', 'readonly', 'filename', 'modified' ],
       \     [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ]
       \   ]
       \ }
@@ -560,30 +559,27 @@ let g:lightline.component_type = {
       \   'linter_ok': 'left',
       \ }
 
-" change lightline ale plugin to use symbols
-let g:lightline#ale#indicator_checking = "\uf110"
-let g:lightline#ale#indicator_warnings = "\uf071"
-let g:lightline#ale#indicator_errors = "\uf05e"
-let g:lightline#ale#indicator_ok = "\uf00c"
+" nerd font icons for ale status in lightline (requires a nerd font in terminal)
+let g:lightline#ale#indicator_checking = "\uf110"  " spinning icon (checking)
+let g:lightline#ale#indicator_warnings = "\uf071"  " warning triangle
+let g:lightline#ale#indicator_errors = "\uf05e"    " error circle
+let g:lightline#ale#indicator_ok = "\uf00c"        " checkmark (all clear)
 
 " # ===================================================== lightline end ===== #
 
 " # ========================================================= ale start ===== #
 
-" setting ale to work with coc
-" <https://github.com/dense-analysis/ale#faq-coc-nvim>
+" ale configured to work alongside coc (ale lints, coc provides LSP/completion)
+" see: https://github.com/dense-analysis/ale#faq-coc-nvim
 
-" enable completion where available
-" let g:ale_completion_enabled = 1 (defined in above setting block)
-
-" keep sign gutter open
+" always show the sign column to prevent layout shifting when errors appear
 let g:ale_sign_column_always = 1
 
-" set diagnostic signs to use
+" symbols shown in the sign column for errors and warnings
 let g:ale_sign_error = '!!'
 let g:ale_sign_warning = '??'
 
-" example - for vue files .. run vue and javascript linters
+" run multiple linters for composite filetypes (e.g. vue uses both vue and js linters)
 let g:ale_linter_aliases = {
       \   'vue': ['vue', 'javascript'],
       \   'erb': ['erb', 'html'],
@@ -606,6 +602,7 @@ let g:ale_list_window_size = 5
 
 " # ================================================ asyncomplete start ===== #
 
+" asyncomplete is not active (plugin commented out), settings kept as reference
 " let g:asyncomplete_auto_completeopt = 1
 " let g:asyncomplete_enable_for_all = 1
 " let b:asyncomplete_enable = 1
@@ -615,20 +612,19 @@ let g:ale_list_window_size = 5
 
 " # ========================================================= coc start ===== #
 
-" <https://github.com/neoclide/coc.nvim>
+" coc.nvim: LSP client providing go-to-definition, hover docs, diagnostics, etc.
+" after first install, extensions are auto-installed via g:coc_global_extensions.
+" to install manually: :CocInstall coc-json coc-tsserver
 
-" setup - run after installing coc or use global_extensions
-" :CocInstall coc-json coc-tsserver
-
+" store coc settings and extension data in this directory
 let g:coc_config_home = '~/.config/coc'
 
-" disable auto completion (clashes with windsurf autocomplete)
-let g:coc_enable_auto_complete = 0
+" enable coc auto-popup; tab accepts windsurf suggestion, arrows+enter select coc item
+let g:coc_enable_auto_complete = 1
 
-" <https://github.com/neoclide/coc.nvim/wiki/Language-servers#terraform>
+" language server extensions to auto-install on startup
 let g:coc_global_extensions = [
       \'coc-css',
-      \'coc-git',
       \'coc-go',
       \'coc-html',
       \'coc-json',
@@ -638,92 +634,104 @@ let g:coc_global_extensions = [
       \'coc-solargraph',
       \'coc-texlab',
       \'coc-tsserver',
-      \'coc-vetur'
+      \'@yaegassy/coc-volar'
       \]
 
-" some servers have issues with backup files, see #649.
+" some coc language servers have issues with backup files being written mid-edit
 set nobackup
 set nowritebackup
 
-" having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
+" reduce updatetime so coc diagnostics and hover appear faster (default: 4000ms)
 set updatetime=300
 
-" always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
+" always show the sign column to prevent text shifting when diagnostics appear
 set signcolumn=yes
 
-" use tab for trigger completion with characters ahead and navigate.
-" note: use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-" trigger completion
-inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#pum#next(1):
-      \ CheckBackspace() ? "\<Tab>" :
-      \ coc#refresh()
+" tab: accept windsurf suggestion if active, otherwise insert a real tab
+" coc popup is navigated with arrow keys and confirmed with enter instead
+inoremap <silent><expr> <TAB> codeium#Accept()
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
-" Make <CR> to accept selected completion item or notify coc.nvim to format
-" <C-g>u breaks current undo, please make your own choice.
-" trigger accept completion
+" enter: confirm selected completion item, or insert a newline if no item selected
+" <C-g>u inserts an undo break point before the newline so it's independently undoable
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-function! CheckBackspace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
 
-" try setup mypy https://github.com/python/mypy
+" manually trigger completion popup
+inoremap <silent><expr> <c-@> coc#refresh()
 
-" <c-space> to trigger completion.
-" if has('nvim')
-"   inoremap <silent><expr> <c-space> coc#refresh()
-" else
-"   inoremap <silent><expr> <c-@> coc#refresh()
-" endif
+" navigate diagnostics (errors/warnings) forward and backward
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-" `[g` and `]g` to navigate diagnostics
-" `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-" nmap <silent> [g <Plug>(coc-diagnostic-prev)
-" nmap <silent> ]g <Plug>(coc-diagnostic-next)
+" LSP navigation - go to definition, type, implementation, references
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" show hover documentation for symbol under cursor
+nmap <silent> K :call CocActionAsync('doHover')<CR>
+
+" rename symbol under cursor across the project
+nmap <leader>rn <Plug>(coc-rename)
 
 " # =========================================================== coc end ===== #
 
 " # ======================================================== fern start ===== #
 
 let g:fern#renderer = "nerdfont"
-" to use :Fern . -drawer -toggle -reveal=% -keep
-" for root folder, -reveal=%
-" to prevent quit, -keep
-" for width, -width (default 30)
+" open fern drawer: :Fern . -drawer -toggle -reveal=% -keep
+" flags: -drawer (sidebar) / -toggle (open/close) / -reveal=% (show current file)
+"        -keep (don't close fern when opening a file) / -width=N (sidebar width, default 30)
 
 " show hidden files by default
 let g:fern#default_hidden = 1
 
-" disable default mappings to customize your own
+" disable default mappings to define our own below
 let g:fern#disable_default_mappings = 1
+
+" key mappings applied inside the fern buffer
+augroup FernKeymaps
+  autocmd!
+  autocmd FileType fern call s:FernKeymaps()
+augroup END
+
+function! s:FernKeymaps() abort
+  " open file or expand/collapse directory
+  nmap <buffer> <CR>  <Plug>(fern-action-open-or-expand)
+  nmap <buffer> l     <Plug>(fern-action-open-or-expand)
+  nmap <buffer> h     <Plug>(fern-action-collapse)
+  " file operations
+  nmap <buffer> N     <Plug>(fern-action-new-path)
+  nmap <buffer> D     <Plug>(fern-action-remove)
+  nmap <buffer> R     <Plug>(fern-action-rename)
+  nmap <buffer> c     <Plug>(fern-action-copy)
+  nmap <buffer> m     <Plug>(fern-action-move)
+  " toggle hidden files
+  nmap <buffer> zh    <Plug>(fern-action-hidden-toggle)
+  " reload tree
+  nmap <buffer> r     <Plug>(fern-action-reload)
+  " close fern
+  nmap <buffer> q     :<C-u>quit<CR>
+endfunction
 
 " # ========================================================== fern end ===== #
 
-" # ==================================================== fugitive start ===== #
-
-" set statusline+=%{fugitive#statusline()}
-
-" # ====================================================== fugitive end ===== #
 
 " # =================================================== gitgutter start ===== #
 
-" always show gutter
-set signcolumn=yes
+" signcolumn=yes already set in coc section above
 
-" set 1 to cobber other signs or 0 to preserve them
+" 0 = preserve other signs (e.g. ale) in the gutter; 1 = gitgutter overwrites them
 let g:gitgutter_sign_allow_clobber = 0
 
 " # ===================================================== gitgutter end ===== #
 
 " # =================================================== gutentags start ===== #
 
+" gutentags is not active (plugin commented out), config kept as reference
 " https://www.reddit.com/r/vim/comments/d77t6j/guide_how_to_setup_ctags_with_gutentags_properly/
 
 " let g:gutentags_add_default_project_roots = 0
@@ -736,9 +744,9 @@ let g:gitgutter_sign_allow_clobber = 0
 " let g:gutentags_generate_on_write = 1
 " let g:gutentags_generate_on_empty_buffer = 0
 
-" fixing gutentags
+" debug gutentags issues:
 " let g:gutentags_trace = 1
-" let g:gutentags_ctags_executable = '/usr/local/bin/ctags'
+" let g:gutentags_ctags_executable = '/usr/local/bin/ctags'  " set explicit ctags path
 
 " let g:gutentags_ctags_extra_args = [
 "       \ '--tag-relative=yes',
@@ -797,35 +805,23 @@ let g:gitgutter_sign_allow_clobber = 0
 
 " # ================================================== mucomplete start ===== #
 
-" set shortmess+=c
-" shut off completion messages
-
-" let g:mucomplete#enable_auto_at_startup = 1
-" auto startup mucomplete
-
-" let g:mucomplete#completion_delay = 1
-" makes mucomplete less interuptive by only activating on pause
-
-" imap <expr> <down> mucomplete#extend_fwd("\<down>")
-" expanding via context see mucomplete-extend-compl
+" mucomplete is not active (plugin commented out), config kept as reference
+" set shortmess+=c                          " suppress completion menu messages
+" let g:mucomplete#enable_auto_at_startup = 1   " auto-start on vim launch
+" let g:mucomplete#completion_delay = 1         " only activate after a pause in typing
+" imap <expr> <down> mucomplete#extend_fwd("\<down>")   " expand completion downward
 
 " # ==================================================== mucomplete end ===== #
 
 " # =================================================== syntastic start ===== #
 
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-
+" syntastic is not active (ale used instead), config kept as reference
 " let g:syntastic_always_populate_loc_list = 1
 " let g:syntastic_auto_loc_list = 1
 " let g:syntastic_check_on_open = 1
 " let g:syntastic_check_on_wq = 0
-
 " let g:syntastic_javascript_checkers = ['standard']
-
-" allow the use of 'local'
-" let g:syntastic_sh_shellcheck_args="-e SC2039"
+" let g:syntastic_sh_shellcheck_args="-e SC2039"   " allow 'local' in sh scripts
 
 " # ===================================================== syntastic end ===== #
 
@@ -849,8 +845,8 @@ let g:gitgutter_sign_allow_clobber = 0
 " D       - deletes file or empty directory
 " I       - show help
 
-" activate default treeview for terminal
-" :Lexplore to open netrw
+" netrw configuration (built-in vim file browser, enhanced by vim-vinegar)
+" open with :Lexplore (left split) or press - to open current file's directory
 let g:netrw_altv = 1
 " let g:netrw_banner = 0          " remove top banner
 " let g:netrw_browse_split = 4    " open a new horizontal split for file
@@ -858,7 +854,7 @@ let g:netrw_liststyle = 3       " use tree view
 " let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'    " hide dot files by default - gh to toggle hiding
 let g:netrw_winsize = 25        " set width of tree to 25%
 
-" custom hotkey to show explorer (vim vinegar alternatve)
+" auto-open netrw on startup (vim-vinegar alternative for project drawer)
 "augroup ProjectDrawer
 "  autocmd!
 "  autocmd VimEnter * :Vexplore
@@ -868,185 +864,224 @@ let g:netrw_winsize = 25        " set width of tree to 25%
 
 " # ========================================================= fzf start ===== #
 
-" fzf enable fuzzy completion, run following in terminal
-" /usr/local/opt/fzf/install
+" first-time fzf shell integration setup (run once in terminal, not in vim):
+" $(brew --prefix)/opt/fzf/install
 
-" enable fzf to use find for hidden files
-" https://github.com/junegunn/fzf/issues/337
+" override fzf default command to include hidden files (excludes .git):
 " let $FZF_DEFAULT_COMMAND='find . \! \( -type d -path ./.git -prune \) \! -type d \! -name ''*.tags'' -printf ''%P\n'''
 
-" to use fzf in vim
-set rtp+=/usr/local/opt/fzf
+" to use fzf in vim (supports both Intel and Apple Silicon homebrew paths)
+if isdirectory('/opt/homebrew/opt/fzf')
+  set rtp+=/opt/homebrew/opt/fzf
+elseif isdirectory('/usr/local/opt/fzf')
+  set rtp+=/usr/local/opt/fzf
+endif
 
 " # =========================================================== fzf end ===== #
 
 " # ======================================================= alias start ===== #
 
-" ref - http://learnvimscriptthehardway.stevelosh.com/chapters/03.html
-" ref - http://learnvimscriptthehardway.stevelosh.com/chapters/08.html
+" cabbrev creates command-line abbreviations (expanded when typed at : prompt).
+" note: do not add inline comments after cabbrev lines - they are read as part of the command.
 
-" i = insert / c = command / v = visual / n = normal
-" map = single key map / abbrev = statement map (alias)
-" note : do not use comments AFTER the cabbrev line as it reads in as command
-
-" split vertical and launch terminal
+" open a terminal in a vertical split
 " cabbrev termv vertical terminal
 
-" split horizontal (default) and launch terminal
+" open a terminal in a horizontal split (default split direction)
 " cabbrev termh terminal
 
 " # ========================================================= alias end ===== #
 
 " # ======================================== leader ===== mapping start ===== #
 
-" https://stackoverflow.com/questions/3776117/what-is-the-difference-between-the-remap-noremap-nnoremap-and-vnoremap-mapping
+" mapping mode prefixes:
+" n = normal / v = visual / i = insert / c = command
+"
+" map variants:
+" map / nmap / vmap / imap   recursive (can be remapped by other maps)
+" noremap / nnoremap / etc.  non-recursive (preferred - avoids infinite loops)
+"
+" example: <C-d> means control + d
 
-" map       all recursive map - normal and visual mode (same as remap)
-" remap     recursive map (default)
-" noremap   non recursive map
-
-" nmap      normal mode - recursive map
-" vmap      visual mode - recursive map
-" imap      insert mode - recursive map
-
-" nnoremap  normal mode - non recursive map
-" vnoremap  visual mode - non recursive map
-" inoremap  insert mode - non recursive map
-
-" <C-d>   control + d
-
-" maps base leader key from , to space
+" set leader key to space (default is backslash \)
 let mapleader = "\<space>"
 
 " # ----------------------------------------------------- file explorer ----- #
 
-" buffer explorer open buffer
+" open buffer switcher via bufexplorer (replaced by fzf :Buffers below)
 " nnoremap <Leader>be :BufExplorer<CR>
 " noremap <Leader><SPACE> :BufExplorer<CR>
 
-" open buffer - buffer explorer via fzf
+" open buffer switcher via fzf
 nnoremap <Leader>ob :Buffers<CR>
 
-" list buffers - list all buffers
+" list all open buffers in the command line
 nnoremap <Leader>lb :ls<CR>
 
-" buffer delete current opened buffer (does not delete file)
+" close current buffer without deleting the file
 " nnoremap <Leader>db :bdelete<CR>
 
-" open tag - ctag tagbar - open ctag explorer
+" open ctags sidebar (requires tagbar plugin)
 " nnoremap <Leader>ot :TagbarToggle<CR>
 
-" file explorer open file
-" nnoremap <Leader>w <C-w><C-w>
-" noremap <Leader>nt :NERDTreeToggle<CR>
-
-" open file - file explorer open file via FZF file explorer
+" open file picker via fzf (fullscreen with !)
 nnoremap <Leader>of :Files!<CR>
 
-" open explorer - file explorer via fern
+" toggle fern file explorer sidebar
 " -keep       keep sidebar when quit
 " -reveal=%   show project root
 " -stay       stay focus on the origin window
 " -width=30   drawer width (default 30)
 noremap <Leader>oe :Fern . -drawer -toggle -keep -width=40 -stay -reveal=%<CR>
 
-" file explorer via ranger
+" open ranger file manager (requires ranger plugin)
 " let g:ranger_map_keys = 0
 " nnoremap <leader>ore :Ranger<CR>
 
-" file explorer via netrw tree
+" open netrw in the current directory
 " noremap <Leader>ofe :Explore<CR>
 
 " # -------------------------------------------------------- copy paste ----- #
 
-" clipboard copy/paste from clipboard
+" copy current line to macOS clipboard / paste from clipboard (macOS only)
 " noremap <Leader>cp :.w !pbcopy<CR><CR>
 " noremap <Leader>p :.r !pbpaste<CR>
 
 " # --------------------------------------------------- code management ----- #
 
-" code folding za / zc / zo
+" toggle fold at cursor (za = toggle / zc = close / zo = open)
 nmap <Leader>fc za<ESC>
 
-" search buffer via ripgrep
+" live grep search across project using ripgrep (requires rg installed)
 nnoremap <leader>rg :Rg<CR>
 
 " # --------------------------------------------------------------- git ----- #
 
-" git browse and blame
-" https://jakobgm.com/posts/vim/git-integration/
-" show commits for every source line (git blame)
+" show git blame for the current file (who changed each line and when)
 nnoremap <Leader>gb :Git blame<CR>
 
-" git co-author - git pr set co-author
-" let @z='ICo-authored-by: y$A <@gmail.com>@Pgua<f x'
-" nmap <Leader>@ <ESC>VD <ESC>ICo-authored-by: <CR>
+" insert a co-author trailer on the current line (edit name/email as needed)
 nnoremap <Leader>gca <ESC>ICo-authored-by: John Doe <johndoe@gmail.com><ESC>
 
-" github open - open current line in the browser (github)
+" open current line on GitHub in the browser (requires vim-rhubarb)
 nnoremap <Leader>go :.GBrowse<CR>
 
-" open visual selection in the browser (github)
+" open visual selection on GitHub (uncomment to enable)
 " vnoremap <Leader>ogh :GBrowse<CR>
 
 " # ------------------------------------------------------ common print ----- #
 
-" print template header with 80 char width
-" note uses gcc : timpopes auto commenter. method: move begin, prepend === , esc, comment line
+" insert a section divider header above the current line (80 char width)
+" tip: use gcc (tpope/vim-commentary) to comment the inserted line if needed
 nmap <Leader>ph <ESC>O# ------------------------------------------------------------ CHANGEME ----- #<ESC>0
 nmap <Leader>phh <ESC>O# ============================================================ CHANGEME ===== #<ESC>0
 
 " nmap <Leader>ph1 <ESC>gcc<ESC>I===<ESC>gcc<ESC>0
 " nmap <Leader>ph2 <ESC>I===<space>section<space>start<ESC>gcc<ESC>0o===<space>section<space>end<ESC>gcc0
 
-" split navigations
-" nnoremap <C-J> <C-W><C-J>
-" nnoremap <C-K> <C-W><C-K>
-" nnoremap <C-L> <C-W><C-L>
-" nnoremap <C-H> <C-W><C-H>
+" navigate between splits with ctrl+direction (uncomment to enable)
+" nnoremap <C-J> <C-W><C-J>   " move to split below
+" nnoremap <C-K> <C-W><C-K>   " move to split above
+" nnoremap <C-L> <C-W><C-L>   " move to split right
+" nnoremap <C-H> <C-W><C-H>   " move to split left
 
 " # ========================================== leader ===== mapping end ===== #
 
 " # ==================================================== commands start ===== #
 
-" to use, run <esc>:<command>
-
 " # ----------------------------------------- fzf file command override ----- #
 
-" fzf - override Files command - https://github.com/junegunn/fzf.vim
-" to use, :Files! or :Files
+" override :Files to add preview window (use :Files or :Files! for fullscreen)
 command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
 
-" # ------------------------------------------------------ reloadshell ------ #
+" # ------------------------------------------------------- reloadrc ------ #
 
-" reload shell
-command FoxReloadShell :source ~/dot-files/dot.vimrc
+" reload the vimrc without restarting vim
+command FoxReloadRc :source ~/dot-files/dot.vimrc
 
 " # ---------------------------------------------------- showshortcuts ------ #
 
 function ShowShortcuts()
-  echom "# ---------------------------------------- show vim shortcuts ----- #"
-  echom " "
-  echom ":IDR                          shows IDR (i dont remember) snippets"
-  echom ":ReloadShell                  re-sources vim config"
-  echom ":ShowShortcuts                show helper shortcuts"
-  echom ":TrimWhiteSpace               trims white spaces"
-  echom " "
-  echom "<leader> of                   open file"
-  echom "<leader> ofe                  open/toggle file explore drawer"
-  echom "<leader> ob                   open buffer"
-  echom "<leader> lsb                  list opened buffer(s)"
-  echom "<leader> fc                   toggle fold code"
-  echom "<leader> gb                   git blame"
-  echom "<leader> gca                  add git co-author"
-  echom "<leader> ogh                  open file in github"
-  echom "<leader> ph                   print ----- header"
-  echom "<leader> phh                  print ===== header"
+  " open a temporary scratch buffer in a bottom split
+  botright new
+  setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile filetype=help
+  resize 30
+
+  " populate the buffer
+  call setline(1, [
+    \ '# ---------------------------------------- vim shortcuts ----- #',
+    \ '  press q to close  |  scroll with j/k or ctrl-f/ctrl-b',
+    \ '',
+    \ '  commands',
+    \ '  :FoxReloadRc                  re-source vim config',
+    \ '  :FoxShowShortcuts             show this shortcut list  (<leader>sc)',
+    \ '  :FoxTrimWhiteSpace            trim trailing whitespace',
+    \ '',
+    \ '  files / buffers',
+    \ '  <leader>of                    open file picker (fzf fullscreen)',
+    \ '  <leader>oe                    toggle fern file explorer sidebar',
+    \ '  <leader>ob                    open buffer switcher (fzf)',
+    \ '  <leader>lb                    list open buffers (:ls)',
+    \ '  <leader>rg                    live grep search (ripgrep)',
+    \ '  -                             open current file directory (netrw)',
+    \ '',
+    \ '  code',
+    \ '  <leader>fc                    toggle fold (za)',
+    \ '  <leader>rn                    rename symbol (coc)',
+    \ '  <leader>ph                    insert ----- section header',
+    \ '  <leader>phh                   insert ===== section header',
+    \ '  gcc                           toggle comment (line)',
+    \ '  gc<motion>                    toggle comment (range)',
+    \ '  za / zc / zo                  fold toggle / close / open',
+    \ '  <tab>                         accept windsurf ai suggestion',
+    \ '  <c-@>                         trigger coc completion manually',
+    \ '  <s-tab>                       prev coc completion item',
+    \ '  <enter>                       confirm coc completion item',
+    \ '',
+    \ '  git',
+    \ '  <leader>gb                    git blame current file',
+    \ '  <leader>go                    open current line on github',
+    \ '  <leader>gca                   insert co-authored-by trailer',
+    \ '  ]c / [c                       next / prev git hunk (gitgutter)',
+    \ '  <leader>hp                    preview hunk (gitgutter)',
+    \ '  <leader>hs                    stage hunk (gitgutter)',
+    \ '  <leader>hu                    undo hunk (gitgutter)',
+    \ '',
+    \ '  lsp (coc)',
+    \ '  gd                            go to definition',
+    \ '  gy                            go to type definition',
+    \ '  gi                            go to implementation',
+    \ '  gr                            go to references',
+    \ '  K                             hover documentation',
+    \ '  [g / ]g                       prev / next diagnostic',
+    \ '  :CocDiagnostics               list all diagnostics',
+    \ '',
+    \ '  fern explorer (inside sidebar)',
+    \ '  <enter> / l                   open file or expand directory',
+    \ '  h                             collapse directory',
+    \ '  N                             new file or directory',
+    \ '  R                             rename',
+    \ '  D                             delete',
+    \ '  c / m                         copy / move',
+    \ '  zh                            toggle hidden files',
+    \ '  r                             reload tree',
+    \ '  q                             close fern',
+    \ '',
+    \ '  spelling',
+    \ '  z=                            suggest corrections',
+    \ '  zg                            add word to dictionary',
+    \ '  zw                            mark word as incorrect',
+    \ '  ]s / [s                       next / prev spelling error',
+    \ ])
+
+  " make buffer read-only and close with q
+  setlocal nomodifiable
+  nnoremap <buffer> q :quit<CR>
 endfunction
 
-" show shortcuts
 command FoxShowShortcuts :call ShowShortcuts()
+nnoremap <Leader>sc :FoxShowShortcuts<CR>
 
 " # --------------------------------------------------- trimwhitespace ------ #
 
@@ -1055,21 +1090,19 @@ function TrimWhiteSpace()
   :%s/\s\+$//e
 endfunction
 
-" toggle trim trailing whitespace
+" remove trailing whitespace from all lines in the buffer
 command FoxTrimWhiteSpace :call TrimWhiteSpace()
 
 " # ====================================================== commands end ===== #
 
 " # ========================================== omnicomplete popup start ===== #
 
-" triggers completion without plugins
-" <https://stackoverflow.com/questions/35837990/how-to-trigger-omnicomplete-auto-completion-on-keystrokes-in-insert-mode>
-" autocomplete omnicomplete shortcuts:
-" - ^x^n                        for just this file
-" - ^x^f                        for filenames
-" - ^x^]                        for tags (ctags) only
-" - g^x^]                       for tags (ctags) only global
-" - ^n                          for anything specified by complete
+" vim built-in completion shortcuts (work without any plugins in insert mode):
+" ^x^n    complete from words in this file only
+" ^x^f    complete file paths
+" ^x^]    complete from ctags
+" g^x^]   complete from ctags (global scope)
+" ^n      complete from all sources defined by 'complete' option
 
 " function! OpenCompletion()
 "   if !pumvisible() && ((v:char >= 'a' && v:char <= 'z') || (v:char >= 'A' && v:char <= 'Z'))
@@ -1081,7 +1114,7 @@ command FoxTrimWhiteSpace :call TrimWhiteSpace()
 "   endif
 " endfunction
 
-" uncomment line to enable omnicomplete
+" uncomment to enable automatic omnicomplete popup on every keystroke
 " autocmd InsertCharPre * call OpenCompletion()
 
 " # ============================================ omnicomplete popup end ===== #
