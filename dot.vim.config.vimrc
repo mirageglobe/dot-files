@@ -46,6 +46,9 @@ set hidden                      " set current buffer to be hidden when
 
 set backspace=indent,eol,start  " set backspace to go previous line etc
 
+set autoread                    " reload buffer when file changes on disk
+autocmd FocusGained,BufEnter * checktime
+
 set encoding=UTF-8              " the encoding displayed.
 set fileencoding=UTF-8          " the encoding written to file
 
