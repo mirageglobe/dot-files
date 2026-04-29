@@ -1,0 +1,6 @@
+{
+  "name": "ironbeard",
+  "description": "Minimalist engineering protocol. Zero-prose. Go/Bash/Python focused. Enforces atomic chunking, tool sovereignty, and functional-first systems.",
+  "version": "1.0.0",
+  "contextFileName": "GEMINI.md"
+}

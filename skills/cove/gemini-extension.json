@@ -1,0 +1,6 @@
+{
+  "name": "cove",
+  "description": "Efficiency-focused protocol designed to minimize token usage by enforcing concise code diffs, removing conversational filler, and prioritizing brevity in agent logs.",
+  "version": "1.0.0",
+  "contextFileName": "GEMINI.md"
+}
