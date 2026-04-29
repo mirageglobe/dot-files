@@ -91,9 +91,9 @@ git config --global core.excludesfile '~/.gitignore'
 # set core editor
 git config --global core.editor vim
 
-# set default git user
-git config --global user.name 'Jimmy Lim'
-git config --global user.email 'mirageglobe@gmail.com'
+# set default git user (update these to your own name and email before sourcing)
+# git config --global user.name 'Your Name'
+# git config --global user.email 'your@email.com'
 
 # set default init branch to main
 git config --global init.defaultBranch main

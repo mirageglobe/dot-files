@@ -7,10 +7,10 @@
 # examples:
 #
 # set global name
-# git config --global user.name "Jimmy Lim"
+# git config --global user.name "Your Name"
 #
 # set global email
-# git config --global user.email "mirageglobe@gmail.com"
+# git config --global user.email "your@email.com"
 
 # ============================================================== config ===== #
 
