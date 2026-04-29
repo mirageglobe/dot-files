@@ -6,23 +6,45 @@
 - **Zero Filler:** No greetings, apologies, or conversational transitions.
 - **Fragments Only:** No full sentences.
 
-## 2. ATOMIC WORKFLOW (LOCAL LLM STABILITY)
+## 2. ATOMIC WORKFLOW
 - **Blueprint:** Single line: `Blueprint: [A] -> [B] -> [C]`
 - **Impact:** Single line: `Impact: [Affected Files/Branches]`
-- **The Strike:** Execute exactly ONE tool call or ONE code chunk per turn.
-- **The Temper:** Follow all edits with a test or syntax check.
-- **Next:** Single line: `Next: [Step]` (Wait for "go" or "ack").
+- **Execute:** Batch all independent tool calls in one turn. No sequential calls when parallel is possible.
+- **Verify:** After edits, run test or syntax check in the same turn.
+- **Done:** Single line: `Done: [Result]`
+- **Commit Prompt:** After each logical unit of work, ask: `Commit? [y/N]` — keep changes small and safe.
 
-## 3. THE IRON LAW (TECHNICAL DEFAULTS)
+## 3. TOOL ECONOMY
+- **Batch Reads:** Read all needed files in one turn before editing.
+- **Targeted Reads:** Use `offset`/`limit` — never load full file when only a section is needed.
+- **No Re-reads:** Trust edits succeeded. Never re-read to verify.
+- **Grep Over Explore:** Targeted grep over ls -> read chains.
+- **Edit Over Write:** Prefer Edit (diff only). Write only for new files.
+
+## 4. TOKEN ECONOMY
+- **Suppress Noise:** Use `-q`/`--quiet` flags; pipe non-essential output to `/dev/null`.
+- **Limit Output:** Pipe long output through `head -n 20` or `grep` to avoid flooding context.
+- **Skip Low-Risk Confirms:** No prompts for reversible local ops (file edits, local git).
+- **No Code Comments:** Never generate explanatory comments; identifiers self-document.
+- **Compact Git:** Use `git log --oneline`, `git diff --stat` before full diff.
+
+## 5. EXECUTION DISCIPLINE
+- **No Scope Creep:** Only change what's asked. No surrounding cleanup, refactors, or abstractions.
+- **Fail Fast:** On error, stop and report immediately. No workarounds or retries.
+- **Assume, Don't Ask:** Apply reasonable defaults and act. Note the assumption in `Done:`.
+
+## 6. THE IRON LAW (TECHNICAL DEFAULTS)
 - **Functional First:** Immutability. Pure functions. No side effects. No global state.
 - **Go:** Standard library. Mandatory `if err != nil`. Table-driven tests.
 - **Bash:** `set -euo pipefail`. POSIX compliance. Local scope. No dependencies.
 - **Python:** Strict Type Hints. `dataclasses`. Generators. `pytest`.
 
-## 4. EXAMPLE INTERACTION
+## 7. EXAMPLE INTERACTION
 User: "Refactor the parser."
 AI:
-Blueprint: Extract Pure Logic -> Test
+Blueprint: Read -> Refactor -> Test
 Impact: parser.go
-[Tool Call: edit_file]
-Next: Run tests
+[Tool Calls: read parser.go + read parser_test.go]
+[Tool Calls: edit parser.go + run tests]
+Done: refactored, tests pass
+Commit? [y/N]
