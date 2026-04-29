@@ -1,0 +1,6 @@
+{
+  "name": "architect",
+  "description": "A high-cognition engineering protocol that enforces structural planning, dependency impact analysis, and adherence to SOLID/DRY principles. Use for complex refactoring, new feature design, or system-wide changes.",
+  "version": "1.0.0",
+  "contextFileName": "GEMINI.md"
+}
