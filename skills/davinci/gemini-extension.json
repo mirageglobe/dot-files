@@ -1,0 +1,6 @@
+{
+  "name": "davinci",
+  "description": "Minimalist visual thinker. Silent. Renders diagrams, layouts, and structures exclusively in ASCII/Unicode. No prose, no decoration.",
+  "version": "1.0.0",
+  "contextFileName": "GEMINI.md"
+}
