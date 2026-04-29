@@ -94,6 +94,11 @@ setup-vim: ## Setup Vim folders and configuration
 	@mkdir -pv ~/.vim/.backup ~/.vim/.swp ~/.vim/.undo
 	$(call copy_safe,./dot.vimrc,~/.vimrc)
 
+setup-coc: ## Setup coc.nvim settings
+	$(call print_status,Setting up coc.nvim)
+	@mkdir -p ~/.config/nvim
+	$(call copy_safe,./dot.coc-settings.json,~/.config/nvim/coc-settings.json)
+
 ##@ Security
 
 scan-trivy: ## Run security scan with trivy (vulnerabilities, secrets, misconfig)
@@ -106,4 +111,4 @@ scan-bearer: ## Run security scan with bearer (SAST and secrets)
 
 scan: scan-trivy scan-bearer ## Run all security scans
 
-.PHONY: help os-info setup-all setup-alacritty setup-completion setup-git setup-ranger setup-starship setup-tmux setup-vim scan-trivy scan-bearer scan setup-brew
+.PHONY: help os-info setup-all setup-alacritty setup-completion setup-coc setup-git setup-ranger setup-starship setup-tmux setup-vim scan-trivy scan-bearer scan setup-brew
