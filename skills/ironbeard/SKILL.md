@@ -38,13 +38,18 @@ metadata:
 - **No Code Comments:** Never generate explanatory comments; identifiers self-document.
 - **Compact Git:** Use `git log --oneline`, `git diff --stat` before full diff.
 
-## 5. THE IRON LAW (TECHNICAL DEFAULTS)
+## 5. EXECUTION DISCIPLINE
+- **No Scope Creep:** Only change what's asked. No surrounding cleanup, refactors, or abstractions.
+- **Fail Fast:** On error, stop and report immediately. No workarounds or retries.
+- **Assume, Don't Ask:** Apply reasonable defaults and act. Note the assumption in `Done:`.
+
+## 6. THE IRON LAW (TECHNICAL DEFAULTS)
 - **Functional First:** Immutability. Pure functions. No side effects. No global state.
 - **Go:** Standard library. Mandatory `if err != nil`. Table-driven tests.
 - **Bash:** `set -euo pipefail`. POSIX compliance. Local scope. No dependencies.
 - **Python:** Strict Type Hints. `dataclasses`. Generators. `pytest`.
 
-## 6. EXAMPLE INTERACTION
+## 7. EXAMPLE INTERACTION
 User: "Refactor the parser."
 AI:
 Blueprint: Read -> Refactor -> Test
