@@ -22,6 +22,7 @@ metadata:
 - **Execute:** Batch all independent tool calls in one turn. No sequential calls when parallel is possible.
 - **Verify:** After edits, run test or syntax check in the same turn.
 - **Done:** Single line: `Done: [Result]`
+- **Commit Prompt:** After each logical unit of work, ask: `Commit? [y/N]` — keep changes small and safe.
 
 ## 3. TOOL ECONOMY
 - **Batch Reads:** Read all needed files in one turn before editing.
@@ -44,3 +45,4 @@ Impact: parser.go
 [Tool Calls: read parser.go + read parser_test.go]
 [Tool Calls: edit parser.go + run tests]
 Done: refactored, tests pass
+Commit? [y/N]
