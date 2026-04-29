@@ -964,7 +964,7 @@ nnoremap <leader>rg :Rg<CR>
 nnoremap <Leader>gb :Git blame<CR>
 
 " insert a co-author trailer on the current line (edit name/email as needed)
-nnoremap <Leader>gca <ESC>ICo-authored-by: John Doe <johndoe@gmail.com><ESC>
+nnoremap <Leader>gca <ESC>ICo-authored-by: Your Name <your@email.com><ESC>
 
 " open current line on GitHub in the browser (requires vim-rhubarb)
 nnoremap <Leader>go :.GBrowse<CR>

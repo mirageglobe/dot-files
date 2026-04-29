@@ -89,7 +89,7 @@ key_bindings:
   - { key: N,      mods: Command, action: SpawnNewInstance      }
   - { key: F,      mods: Command|Control, action: ToggleFullscreen }
   
-  # Option key support for Jimmy
+  # Option key character mappings (macOS)
   - { key: Key0,     mods: Alt,     chars: "º"                  }
   - { key: Key1,     mods: Alt,     chars: "¡"                  }
   - { key: Key2,     mods: Alt,     chars: "€"                  }
