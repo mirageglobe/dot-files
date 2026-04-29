@@ -42,7 +42,7 @@ make help
 ```
 
 > [!TIP]
-> Use `make mac-common` or `make debian-common` to quickly install base dependencies and configurations.
+> Use `make setup-all` to install all primary configurations, or run individual `make setup-<tool>` targets.
 
 ### 4. Bash Completions
 Add the following to your `~/.bashrc` or `~/.bash_profile`:

@@ -10,8 +10,7 @@ Dot-files repository containing shell configurations, editor settings, and tooli
 
 ```bash
 make help        # list available make targets
-make install     # install dot-files (symlinks)
-make lint        # run linting
+make setup-all   # run all primary setups
 make scan        # run security scans
 ```
 
@@ -24,7 +23,7 @@ make scan        # run security scans
 
 ## Repository Structure
 
-- `dot.*` — files intended to be symlinked into `$HOME`
+- `dot.*` — files intended to be copied/symlinked into `$HOME` (e.g. `dot.vimrc`, `dot.coc-settings.json`)
 - `tpl.*` — shell template/snippet files sourced into shell configs
 - `Makefile` — task runner for install, lint, and scan targets
 - `Brewfile` — Homebrew bundle for macOS dependencies
