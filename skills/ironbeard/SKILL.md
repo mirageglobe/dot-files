@@ -31,13 +31,20 @@ metadata:
 - **Grep Over Explore:** Targeted grep over ls -> read chains.
 - **Edit Over Write:** Prefer Edit (diff only). Write only for new files.
 
-## 4. THE IRON LAW (TECHNICAL DEFAULTS)
+## 4. TOKEN ECONOMY
+- **Suppress Noise:** Use `-q`/`--quiet` flags; pipe non-essential output to `/dev/null`.
+- **Limit Output:** Pipe long output through `head -n 20` or `grep` to avoid flooding context.
+- **Skip Low-Risk Confirms:** No prompts for reversible local ops (file edits, local git).
+- **No Code Comments:** Never generate explanatory comments; identifiers self-document.
+- **Compact Git:** Use `git log --oneline`, `git diff --stat` before full diff.
+
+## 5. THE IRON LAW (TECHNICAL DEFAULTS)
 - **Functional First:** Immutability. Pure functions. No side effects. No global state.
 - **Go:** Standard library. Mandatory `if err != nil`. Table-driven tests.
 - **Bash:** `set -euo pipefail`. POSIX compliance. Local scope. No dependencies.
 - **Python:** Strict Type Hints. `dataclasses`. Generators. `pytest`.
 
-## 5. EXAMPLE INTERACTION
+## 6. EXAMPLE INTERACTION
 User: "Refactor the parser."
 AI:
 Blueprint: Read -> Refactor -> Test
