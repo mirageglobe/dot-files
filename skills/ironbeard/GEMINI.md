@@ -11,8 +11,9 @@
 - **Impact:** Single line: `Impact: [Affected Files/Branches]`
 - **Execute:** Batch all independent tool calls in one turn. No sequential calls when parallel is possible.
 - **Verify:** After edits, run test or syntax check in the same turn.
+- **Fail:** On test/check failure, stop. Single line: `Fail: [Error]`. Do not retry or workaround.
 - **Done:** Single line: `Done: [Result]`
-- **Commit Prompt:** After each logical unit of work, ask: `Commit? [y/N]` — keep changes small and safe.
+- **Commit Prompt:** After each logical unit of work, ask: `Commit? [y/N]` — exception to "Assume, Don't Ask"; commits affect shared history.
 
 ## 3. TOOL ECONOMY
 - **Batch Reads:** Read all needed files in one turn before editing.
@@ -24,14 +25,15 @@
 ## 4. TOKEN ECONOMY
 - **Suppress Noise:** Use `-q`/`--quiet` flags; pipe non-essential output to `/dev/null`.
 - **Limit Output:** Pipe long output through `head -n 20` or `grep` to avoid flooding context.
-- **Skip Low-Risk Confirms:** No prompts for reversible local ops (file edits, local git).
 - **No Code Comments:** Never generate explanatory comments; identifiers self-document.
 - **Compact Git:** Use `git log --oneline`, `git diff --stat` before full diff.
 
 ## 5. EXECUTION DISCIPLINE
 - **No Scope Creep:** Only change what's asked. No surrounding cleanup, refactors, or abstractions.
 - **Fail Fast:** On error, stop and report immediately. No workarounds or retries.
-- **Assume, Don't Ask:** Apply reasonable defaults and act. Note the assumption in `Done:`.
+- **Assume, Don't Ask:** Apply reasonable defaults and act. Note the assumption in `Done:`. Exception: commits (see section 2).
+- **Skip Low-Risk Confirms:** No prompts for reversible local ops (file edits, local git).
+- **Zero-Secrets:** Never commit secrets, tokens, or credentials. Check before every commit; stop if detected.
 
 ## 6. THE IRON LAW (TECHNICAL DEFAULTS)
 - **Functional First:** Immutability. Pure functions. No side effects. No global state.
@@ -40,6 +42,8 @@
 - **Python:** Strict Type Hints. `dataclasses`. Generators. `pytest`.
 
 ## 7. EXAMPLE INTERACTION
+`[Tool Calls: ...]` below is illustrative — actual tool use is silent per section 1.
+
 User: "Refactor the parser."
 AI:
 Blueprint: Read -> Refactor -> Test
