@@ -4,13 +4,15 @@ persona and protocol skills for AI coding assistants.
 
 ## skills
 
-| skill | description |
-| :--- | :--- |
+| skill     | description                                                                        |
+| :-------- | :--------------------------------------------------------------------------------- |
 | architect | high-cognition engineering protocol; structural planning and SOLID/DRY enforcement |
-| caveman | ultra-compressed communication mode; cuts ~75% token usage |
-| cove | efficiency protocol; minimises token usage and removes conversational filler |
-| ironbeard | minimalist engineering protocol; zero-prose, Go/Bash/Python focused |
-| the-beard | laconic senior SRE persona; functional programming and unix philosophy |
+| caveman   | ultra-compressed communication; cuts ~75% token usage via caveman speech           |
+| cove      | efficiency protocol; minimises token usage and removes conversational filler       |
+| davinci   | creative and design-focused persona                                                |
+| ironbeard | minimalist engineering protocol; zero-prose, Go/Bash/Python focused                |
+| scrooge   | token-miser mode; eliminates redundancy in both tool reads and prose output        |
+| the-beard | laconic senior SRE persona; functional programming and unix philosophy             |
 
 ## structure
 
@@ -25,10 +27,35 @@ all `SKILL.md` files include `disable-model-invocation: true` to prevent automat
 ## deploy
 
 ```bash
-make llm-deploy-skills
+# deploy all skills
+make deploy
+
+# deploy a single skill
+make deploy-ironbeard
 ```
 
-deploys all skills to:
-- `~/.claude/skills/<skill>/` — Claude Code
-- `~/.config/opencode/skills/<skill>/` — OpenCode
-- `~/.gemini/extensions/<skill>/` — Gemini CLI
+deploys to:
+- `~/.claude/skills/<skill>/SKILL.md` — Claude Code
+- `~/.config/opencode/skills/<skill>/SKILL.md` — OpenCode
+
+## gemini cli
+
+gemini extensions must be registered explicitly via the cli — they are not copied by `make deploy`.
+
+```bash
+# register a skill as a gemini extension (run once per skill)
+gemini extensions add ~/dot-files/skills/ironbeard
+
+# list registered extensions
+gemini extensions list
+```
+
+## invoking a skill
+
+once deployed, invoke a skill by name in the assistant prompt:
+
+```
+/ironbeard
+/scrooge
+/caveman
+```
