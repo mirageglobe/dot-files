@@ -31,21 +31,15 @@ define deploy_skill
 	@cp -v ./$(1)/SKILL.md ~/.claude/skills/$(1)/SKILL.md
 	@mkdir -p ~/.config/opencode/skills/$(1)
 	@cp -v ./$(1)/SKILL.md ~/.config/opencode/skills/$(1)/SKILL.md
-	@mkdir -p ~/.gemini/extensions/$(1)
-	@cp -v ./$(1)/GEMINI.md ~/.gemini/extensions/$(1)/GEMINI.md
-	@cp -v ./$(1)/gemini-extension.json ~/.gemini/extensions/$(1)/gemini-extension.json
 endef
 
-deploy: ## deploy all skills to Claude, OpenCode, and Gemini global config directories
+deploy: ## deploy all skills to Claude and OpenCode global config directories
 	$(call print_status,Deploying all skills)
 	@for skill in $(SKILLS); do \
 		mkdir -p ~/.claude/skills/$$skill; \
 		cp -v ./$$skill/SKILL.md ~/.claude/skills/$$skill/SKILL.md; \
 		mkdir -p ~/.config/opencode/skills/$$skill; \
 		cp -v ./$$skill/SKILL.md ~/.config/opencode/skills/$$skill/SKILL.md; \
-		mkdir -p ~/.gemini/extensions/$$skill; \
-		cp -v ./$$skill/GEMINI.md ~/.gemini/extensions/$$skill/GEMINI.md; \
-		cp -v ./$$skill/gemini-extension.json ~/.gemini/extensions/$$skill/gemini-extension.json; \
 	done
 
 deploy-architect: ## deploy architect skill
