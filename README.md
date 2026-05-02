@@ -62,7 +62,7 @@ For Gemini CLI, skills are installed as extensions. You can also link a skill di
 gemini extensions link ~/dot-files/skills/cove
 ```
 
-Available skills: `architect`, `caveman`, `cove`, `davinci`, `ironbeard`, `the-beard`.
+Available skills: `architect`, `caveman`, `cove`, `davinci`, `ironbeard`, `scrooge`, `the-beard`.
 
 ### 5. Bash Completions
 Add the following to your `~/.bashrc` or `~/.bash_profile`:

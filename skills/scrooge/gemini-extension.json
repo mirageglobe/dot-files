@@ -1,0 +1,6 @@
+{
+  "name": "scrooge",
+  "description": "Token-miser mode. Minimises token consumption in every response by eliminating all redundancy while preserving full technical accuracy.",
+  "version": "1.0.0",
+  "contextFileName": "GEMINI.md"
+}
