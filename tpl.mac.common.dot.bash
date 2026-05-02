@@ -30,8 +30,7 @@ printf "%s" "[+] aliases "
 
 # ------------------------------------------------------------ override ----- #
 
-alias cat='bat'
-alias catcat='\cat'
+alias cab='bat'
 alias ls='lsd'
 
 # ---------------------------------------------------------------- bash ----- #
@@ -59,10 +58,6 @@ alias tree='lsd --tree'
 # homebrew
 alias brewi='arch -x86_64 /usr/local/bin/brew'
 alias brewm='arch -arm64e /opt/homebrew/bin/brew'
-
-# postgresql
-alias pgstart='pg_ctl -D /usr/local/var/postgresql start'
-alias pgstop='pg_ctl -D /usr/local/var/postgresql stop'
 
 # ----------------------------------------------------------------- mac ----- #
 
@@ -109,9 +104,9 @@ git config --global alias.cob "checkout -b"
 git config --global alias.cobt "checkout -b --track"
 git config --global alias.com "checkout main"
 git config --global alias.comm "checkout master"
+git config --global alias.dc "diff HEAD^"
 git config --global alias.dm "diff main"
 git config --global alias.dh "diff HEAD"
-git config --global alias.dhh "diff HEAD^"
 git config --global alias.f "fetch"
 git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 git config --global alias.ll "log --pretty='format:%C(yellow)%H%Creset - %Cgreen%>(12)%ad%Creset %C(bold blue)<%an>%Creset %s' --date=relative"
