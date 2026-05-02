@@ -44,7 +44,27 @@ make help
 > [!TIP]
 > Use `make setup-all` to install all primary configurations, or run individual `make setup-<tool>` targets.
 
-### 4. Bash Completions
+### 4. Skills (AI Extensions)
+
+Skills are reusable agent personas and workflows for Claude Code, Gemini CLI, and OpenCode.
+
+```bash
+# Deploy all skills to ~/.claude/skills, ~/.gemini/extensions, ~/.config/opencode/skills
+cd ~/dot-files/skills && make deploy
+
+# Deploy a single skill (e.g. ironbeard)
+cd ~/dot-files/skills && make deploy-ironbeard
+```
+
+For Gemini CLI, skills are installed as extensions. You can also link a skill directory directly:
+```bash
+# Link a single skill as a Gemini extension (dev/local workflow)
+gemini extensions link ~/dot-files/skills/cove
+```
+
+Available skills: `architect`, `caveman`, `cove`, `davinci`, `ironbeard`, `the-beard`.
+
+### 5. Bash Completions
 Add the following to your `~/.bashrc` or `~/.bash_profile`:
 ```bash
 # Git completion
