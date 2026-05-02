@@ -9,7 +9,7 @@ CYAN  := \033[36m
 RESET := \033[0m
 BOLD  := \033[1m
 
-SKILLS := architect caveman cove davinci ironbeard the-beard
+SKILLS := architect caveman cove davinci ironbeard scrooge the-beard
 
 # ------------------------------------------------------------ functions ----- #
 
@@ -63,7 +63,10 @@ deploy-davinci: ## deploy davinci skill
 deploy-ironbeard: ## deploy ironbeard skill
 	$(call deploy_skill,ironbeard)
 
+deploy-scrooge: ## deploy scrooge skill
+	$(call deploy_skill,scrooge)
+
 deploy-the-beard: ## deploy the-beard skill
 	$(call deploy_skill,the-beard)
 
-.PHONY: help deploy deploy-architect deploy-caveman deploy-cove deploy-davinci deploy-ironbeard deploy-the-beard
+.PHONY: help deploy deploy-architect deploy-caveman deploy-cove deploy-davinci deploy-ironbeard deploy-scrooge deploy-the-beard
