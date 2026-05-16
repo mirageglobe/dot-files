@@ -62,7 +62,17 @@ For Gemini CLI, skills are installed as extensions. You can also link a skill di
 gemini extensions link ~/dot-files/skills/cove
 ```
 
-Available skills: `architect`, `caveman`, `cove`, `davinci`, `ironbeard`, `scrooge`, `the-beard`.
+Available skills:
+
+| skill       | description                                                                                      |
+| :---------- | :----------------------------------------------------------------------------------------------- |
+| architect   | high-cognition engineering protocol for complex refactoring, feature design, and system changes  |
+| caveman     | ultra-compressed communication mode; cuts token usage ~75% while keeping full technical accuracy |
+| cove        | efficiency-focused protocol for OpenCode; minimises tokens via concise diffs and brief logs      |
+| davinci     | minimalist visual thinker; renders diagrams and layouts exclusively in ASCII/Unicode              |
+| ironbeard   | minimalist engineering protocol; zero-prose, Go/Bash/Python focused, functional-first            |
+| scrooge     | token-miser mode; eliminates all redundancy while preserving full technical accuracy              |
+| the-beard   | laconic senior SRE/systems persona; functional programming, zero-dependency, Unix philosophy      |
 
 ### 5. Bash Completions
 Add the following to your `~/.bashrc` or `~/.bash_profile`:
