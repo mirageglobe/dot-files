@@ -59,20 +59,25 @@ cd ~/dot-files/skills && make deploy-ironbeard
 For Gemini CLI, skills are installed as extensions. You can also link a skill directory directly:
 ```bash
 # Link a single skill as a Gemini extension (dev/local workflow)
-gemini extensions link ~/dot-files/skills/cove
+gemini extensions link ~/dot-files/skills/ironbeard
 ```
 
-Available skills:
+Available skills (this repo):
 
-| skill       | description                                                                                      |
-| :---------- | :----------------------------------------------------------------------------------------------- |
-| architect   | high-cognition engineering protocol for complex refactoring, feature design, and system changes  |
-| caveman     | ultra-compressed communication mode; cuts token usage ~75% while keeping full technical accuracy |
-| cove        | efficiency-focused protocol for OpenCode; minimises tokens via concise diffs and brief logs      |
-| davinci     | minimalist visual thinker; renders diagrams and layouts exclusively in ASCII/Unicode              |
-| ironbeard   | minimalist engineering protocol; zero-prose, Go/Bash/Python focused, functional-first            |
-| scrooge     | token-miser mode; eliminates all redundancy while preserving full technical accuracy              |
-| the-beard   | laconic senior SRE/systems persona; functional programming, zero-dependency, Unix philosophy      |
+| skill     | description                                                              |
+| :-------- | :----------------------------------------------------------------------- |
+| davinci   | minimalist visual thinker; renders diagrams and layouts in ASCII/Unicode  |
+| ironbeard | minimalist engineering protocol; zero-prose, Go/Bash/Python, functional   |
+| scrooge   | token-miser mode; eliminates all redundancy, full technical accuracy      |
+
+Popular community skills (search GitHub for `claude skill` or `claude SKILL.md`):
+
+| skill      | description                                                              |
+| :--------- | :----------------------------------------------------------------------- |
+| architect  | high-cognition engineering protocol for complex refactoring and design   |
+| caveman    | ultra-compressed mode; cuts token usage ~75%, full technical accuracy    |
+| cove       | efficiency-focused protocol for OpenCode; minimal tokens, concise diffs  |
+| the-beard  | laconic senior SRE persona; functional programming, Unix philosophy      |
 
 ### 5. Bash Completions
 Add the following to your `~/.bashrc` or `~/.bash_profile`:
