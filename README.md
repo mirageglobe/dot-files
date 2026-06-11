@@ -35,7 +35,7 @@ Clone the repo and use the `Makefile` to see the available setup targets:
 git clone https://github.com/mirageglobe/dot-files.git ~/dot-files
 
 # Or just grab the Makefile to get started
-curl -fLo ~/Makefile https://raw.githubusercontent.com/mirageglobe/dot-files/master/Makefile
+curl -fLo ~/Makefile https://raw.githubusercontent.com/mirageglobe/dot-files/main/Makefile
 
 # Run make to see the menu
 make help
@@ -83,10 +83,10 @@ Popular community skills (search GitHub for `claude skill` or `claude SKILL.md`)
 Add the following to your `~/.bashrc` or `~/.bash_profile`:
 ```bash
 # Git completion
-[ -f ~/dot-files/dot.completion.git.bash ] && source ~/dot-files/dot.completion.git.bash
+[ -f ~/dot-files/tpl.completion.git.dot.bash ] && source ~/dot-files/tpl.completion.git.dot.bash
 
 # Makefile menu completion
-[ -f ~/dot-files/dot.completion.make-menu.bash ] && source ~/dot-files/dot.completion.make-menu.bash
+[ -f ~/dot-files/tpl.completion.make.dot.bash ] && source ~/dot-files/tpl.completion.make.dot.bash
 ```
 
 ## 🤝 Contribution
