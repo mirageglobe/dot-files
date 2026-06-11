@@ -11,6 +11,9 @@ CYAN := \033[36m
 RESET := \033[0m
 BOLD := \033[1m
 
+# authored shell snippets to lint; excludes the vendored git completion
+LINT_FILES := $(filter-out tpl.completion.git.dot.bash,$(wildcard tpl.*.bash) $(wildcard tpl.*.bashrc) $(wildcard dot.*.bash))
+
 # ------------------------------------------------------------ functions ----- #
 
 define print_status
@@ -99,6 +102,15 @@ setup-coc: ## Setup coc.nvim settings
 	@mkdir -p ~/.config/nvim
 	$(call copy_safe,./dot.coc-settings.json,~/.config/nvim/coc-settings.json)
 
+##@ Quality
+
+lint: ## Lint authored shell snippets with shellcheck (report-only)
+	$(call print_status,Linting shell snippets with shellcheck)
+	-@shellcheck --shell=bash --exclude=SC1091,SC2148 $(LINT_FILES)
+
+test: lint ## Run the test suite (lint)
+	$(call print_status,All checks complete!)
+
 ##@ Security
 
 scan-trivy: ## Run security scan with trivy (vulnerabilities, secrets, misconfig)
@@ -111,4 +123,4 @@ scan-bearer: ## Run security scan with bearer (SAST and secrets)
 
 scan: scan-trivy scan-bearer ## Run all security scans
 
-.PHONY: help os-info setup-all setup-alacritty setup-completion setup-coc setup-git setup-ranger setup-starship setup-tmux setup-vim scan-trivy scan-bearer scan setup-brew
+.PHONY: help os-info setup-all setup-alacritty setup-completion setup-coc setup-git setup-ranger setup-starship setup-tmux setup-vim lint test scan-trivy scan-bearer scan setup-brew
