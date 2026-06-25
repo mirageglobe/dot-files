@@ -9,7 +9,6 @@ persona and protocol skills for AI coding assistants.
 | architect | high-cognition engineering protocol; structural planning and SOLID/DRY enforcement |
 | caveman   | ultra-compressed communication; cuts ~75% token usage via caveman speech           |
 | cove      | efficiency protocol; minimises token usage and removes conversational filler       |
-| davinci   | creative and design-focused persona                                                |
 | ironbeard | minimalist engineering protocol; zero-prose, Go/Bash/Python focused                |
 | scrooge   | token-miser mode; eliminates redundancy in both tool reads and prose output        |
 | the-beard | laconic senior SRE persona; functional programming and unix philosophy             |

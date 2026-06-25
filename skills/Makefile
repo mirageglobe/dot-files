@@ -9,7 +9,7 @@ CYAN  := \033[36m
 RESET := \033[0m
 BOLD  := \033[1m
 
-SKILLS := davinci ironbeard scrooge
+SKILLS := ironbeard scrooge
 
 # ------------------------------------------------------------ functions ----- #
 
@@ -42,19 +42,16 @@ deploy: ## deploy all skills to Claude and OpenCode global config directories
 		cp -v ./$$skill/SKILL.md ~/.config/opencode/skills/$$skill/SKILL.md; \
 	done
 
-clean: ## remove retired skills (architect, caveman, cove, the-beard) from deploy targets
-	@for skill in architect caveman cove the-beard; do \
+clean: ## remove retired skills (architect, caveman, cove, the-beard, davinci) from deploy targets
+	@for skill in architect caveman cove the-beard davinci; do \
 		rm -rf ~/.claude/skills/$$skill; \
 		rm -rf ~/.config/opencode/skills/$$skill; \
 	done
 
-deploy-davinci: ## deploy davinci skill
-	$(call deploy_skill,davinci)
-
-deploy-ironbeard: ## deploy ironbeard skill
+deploy-ironbeard: ## deploy ironbeard skill (includes visual mode)
 	$(call deploy_skill,ironbeard)
 
 deploy-scrooge: ## deploy scrooge skill
 	$(call deploy_skill,scrooge)
 
-.PHONY: help deploy clean deploy-davinci deploy-ironbeard deploy-scrooge
+.PHONY: help deploy clean deploy-ironbeard deploy-scrooge

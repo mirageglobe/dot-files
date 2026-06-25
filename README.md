@@ -64,11 +64,10 @@ gemini extensions link ~/dot-files/skills/ironbeard
 
 Available skills (this repo):
 
-| skill     | description                                                              |
-| :-------- | :----------------------------------------------------------------------- |
-| davinci   | minimalist visual thinker; renders diagrams and layouts in ASCII/Unicode  |
-| ironbeard | minimalist engineering protocol; zero-prose, Go/Bash/Python, functional   |
-| scrooge   | token-miser mode; eliminates all redundancy, full technical accuracy      |
+| skill     | description                                                                         |
+| :-------- | :---------------------------------------------------------------------------------- |
+| ironbeard | minimalist engineering protocol; zero-prose, functional; ascii/unicode visual mode |
+| scrooge   | token-miser mode; eliminates all redundancy, full technical accuracy                |
 
 Popular community skills (search GitHub for `claude skill` or `claude SKILL.md`):
 
