@@ -4,14 +4,9 @@ persona and protocol skills for AI coding assistants.
 
 ## skills
 
-| skill     | description                                                                        |
-| :-------- | :--------------------------------------------------------------------------------- |
-| architect | high-cognition engineering protocol; structural planning and SOLID/DRY enforcement |
-| caveman   | ultra-compressed communication; cuts ~75% token usage via caveman speech           |
-| cove      | efficiency protocol; minimises token usage and removes conversational filler       |
-| ironbeard | minimalist engineering protocol; zero-prose, Go/Bash/Python focused                |
-| scrooge   | token-miser mode; eliminates redundancy in both tool reads and prose output        |
-| the-beard | laconic senior SRE persona; functional programming and unix philosophy             |
+| skill     | description                                                                             |
+| :-------- | :-------------------------------------------------------------------------------------- |
+| ironbeard | minimalist engineering protocol; zero-prose, Go/Bash/Python; visual + token-miser modes |
 
 ## structure
 
@@ -55,6 +50,4 @@ once deployed, invoke a skill by name in the assistant prompt:
 
 ```
 /ironbeard
-/scrooge
-/caveman
 ```

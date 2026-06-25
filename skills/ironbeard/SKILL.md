@@ -91,3 +91,9 @@ Example:
 │ client │ ──→ │ api │ ──→ │ db │
 └────────┘     └─────┘     └────┘
 ```
+
+## 9. TOKEN MISER (SCROOGE MODE)
+Every token costs; spend none without return. Sections 1, 3, 4 already enforce terseness and tool/token economy; the rules below add the safety carve-outs.
+
+- **Auto-Suspend:** suspend terseness for security warnings, irreversible-action confirmations, and multi-step destructive sequences. Resume immediately after.
+- **Normal Where It Counts:** code, commit messages, and PR bodies are written normally, never abbreviated for token savings.
