@@ -5,7 +5,6 @@ Jimmy's public dot-files and bootstrapper to make life easier. Quickly bootstrap
 ## ✨ Features
 
 - **Multi-platform support**: Tailored for macOS and Debian/Ubuntu.
-- **Vim Configuration**: Rich Vim/Neovim setup with `coc.nvim`, `ale`, and more.
 - **Modern CLI Tools**: Integrated with `bat`, `ripgrep`, `starship`, and `alacritty`.
 - **System Utilities**: Configuration for `tmux`, `ranger`, and shell completions.
 - **Python-ready**: Pre-configured `.python-version` and `.editorconfig`.
