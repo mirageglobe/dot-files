@@ -5,7 +5,7 @@
 # touch ~/.bashrc
 
 # example for quick add to ~/.bashrc
-# [ -f "$HOME/dot-files/tpl.mac.dot.bashrc" ] && source "$HOME/dot-files/tpl.mac.dot.bashrc"
+# [ -f "$HOME/dot-files/tpl.public.mac.dot.bashrc" ] && source "$HOME/dot-files/tpl.public.mac.dot.bashrc"
 
 # ----------------------------------------------------- common env vars ----- #
 

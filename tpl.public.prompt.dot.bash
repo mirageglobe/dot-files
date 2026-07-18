@@ -11,7 +11,7 @@
 # include the following in ~/.bashrc file to add this prompt
 
 # assuming the source script is in ~/dot-files
-# [ -f "$HOME/dot-files/tpl.prompt.dot.bash" ] && source "$HOME/dot-files/tpl.prompt.dot.bash"
+# [ -f "$HOME/dot-files/tpl.public.prompt.dot.bash" ] && source "$HOME/dot-files/tpl.public.prompt.dot.bash"
 
 # -------------------------------------------------------------- config ----- #
 

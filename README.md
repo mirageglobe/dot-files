@@ -80,10 +80,10 @@ Popular community skills (search GitHub for `claude skill` or `claude SKILL.md`)
 Add the following to your `~/.bashrc` or `~/.bash_profile`:
 ```bash
 # Git completion
-[ -f ~/dot-files/tpl.completion.git.dot.bash ] && source ~/dot-files/tpl.completion.git.dot.bash
+[ -f ~/dot-files/tpl.public.completion.git.dot.bash ] && source ~/dot-files/tpl.public.completion.git.dot.bash
 
 # Makefile menu completion
-[ -f ~/dot-files/tpl.completion.make.dot.bash ] && source ~/dot-files/tpl.completion.make.dot.bash
+[ -f ~/dot-files/tpl.public.completion.make.dot.bash ] && source ~/dot-files/tpl.public.completion.make.dot.bash
 ```
 
 ## 🤝 Contribution

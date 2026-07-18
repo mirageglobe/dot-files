@@ -12,7 +12,7 @@ RESET := \033[0m
 BOLD := \033[1m
 
 # authored shell snippets to lint; excludes the vendored git completion
-LINT_FILES := $(filter-out tpl.completion.git.dot.bash,$(wildcard tpl.*.bash) $(wildcard tpl.*.bashrc) $(wildcard dot.*.bash))
+LINT_FILES := $(filter-out tpl.public.completion.git.dot.bash,$(wildcard tpl.*.bash) $(wildcard tpl.*.bashrc) $(wildcard dot.*.bash))
 
 # ------------------------------------------------------------ functions ----- #
 
