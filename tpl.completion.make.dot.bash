@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 
-# source "$HOME/dot-files/dot.bash-completion.make_type_a.bash"
-#
 # bash completion for GNU make                             -*- shell-script -*-
-# this is a bash completion script for GNU make.
+# vendored standalone version (uses the stable _init_completion API, no
+# external helper). the current bash-completion project version
+# (completions-core/make.bash) is intentionally NOT adopted: it is coupled
+# to the bash-completion 2.16+ _comp_* framework and a separate
+# make-extract-targets.awk helper, which is more fragile for a portable
+# self-contained dotfile. refresh only if that tradeoff changes.
 
 function _make_target_extract_script()
 {
